@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ForStudent</string>
+    <string name="title_home">Home</string>
+    <string name="title_timetable">Timetable</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_todo">Todo</string>
+    <string name="title_exam">Exam</string>
+</resources>
