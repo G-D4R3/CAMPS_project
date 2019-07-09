@@ -29,11 +29,8 @@ public class dateCount {
     Calendar tcalendar = Calendar.getInstance();
     Calendar dcalendar = Calendar.getInstance();
 
-    public dateCount(TextView Dday, TextView today){
-        this.Dday = Dday;
-        this.today = today;
+    public dateCount(){
         //현재 날짜
-
         tyear = tcalendar.get(Calendar.YEAR);
         tmonth = tcalendar.get(Calendar.MONTH);
         tday = tcalendar.get(Calendar.DAY_OF_MONTH);
@@ -45,7 +42,7 @@ public class dateCount {
         left = (setday - Today)/(24*60*60*1000);
         result = (int)left;
 
-        today.setText(String.format("오늘은 %d월 %d일", tmonth+1, tday));
+
     }
 
 
@@ -66,10 +63,17 @@ public class dateCount {
     }
 
 
-    public void resultion() { //여기서 캐시 접근해서 저장해놔야함
+    public void resultion() {
         dcalendar.set(dyear, dmonth, dday);
         setday = dcalendar.getTimeInMillis();
         left = (setday - Today)/(24*60*60*1000);
         this.result = (int)left;
+
+    }
+
+    void setView(TextView dday, TextView today) {
+        this.Dday = dday;
+        this.today = today;
+        today.setText(String.format("오늘은 %d월 %d일", tmonth+1, tday));
     }
 }

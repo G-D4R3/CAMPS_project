@@ -1,5 +1,6 @@
 package com.example.forstudent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -21,7 +22,14 @@ public class MainActivity extends AppCompatActivity {
     private TodoFragment todoFragment= new TodoFragment();
     private ExamFragment examFragment= new ExamFragment();
 
-    public Calendar dcalendar = Calendar.getInstance(); // d-day count
+    //for storage
+
+
+    //store things
+    //dday count
+    int year;
+    int month;
+    int day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss();
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+        this.loadData();
 
 
         //private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -63,6 +74,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        saveData();
+
+    }
+
+
+
+    protected void saveData(){
+        SharedPreferences store = getSharedPreferences("storage", MODE_PRIVATE);
+        SharedPreferences.Editor editor = store.edit();
+        editor.putInt("D-dayYear", year);
+        editor.putInt("D-dayMonth", month);
+        editor.putInt("D-dayDay", day);
+
+    }
+
+    protected void loadData(){
+        SharedPreferences store = getSharedPreferences("storage", MODE_PRIVATE);
+        year = store.getInt("D-dayYear", 2000);
+        month = store.getInt("D-dayMonth", 1);
+        day = store.getInt("D-dayDay", 1);
+    }
 }
