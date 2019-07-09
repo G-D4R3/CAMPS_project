@@ -17,9 +17,9 @@ public class dateCount {
     protected int tday;
 
     //dday 설정 날짜
-    protected int dyear=2019;
-    protected int dmonth=12;
-    protected int dday=31;
+    protected int dyear=2000;
+    protected int dmonth=1;
+    protected int dday=1;
 
     protected long Today;
     protected long setday;
@@ -56,7 +56,7 @@ public class dateCount {
             Dday.setText(new String("종강 D-day"));
         }
         else{
-            int temp = Math.abs(result);
+            int temp = (-1) * result;
             Dday.setText(String.format("종강하고 D+%d", temp));
         }
 
