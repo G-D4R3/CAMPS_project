@@ -26,9 +26,9 @@ public class HomeFragment extends Fragment {
     private int tday;
 
     //dday 설정 날짜
-    private int dyear;
-    private int dmonth;
-    private int dday;
+    private int dyear=2019;
+    private int dmonth=12;
+    private int dday=31;
 
     private long Today;
     private long setday;
@@ -55,9 +55,13 @@ public class HomeFragment extends Fragment {
         tyear = tcalendar.get(Calendar.YEAR);
         tmonth = tcalendar.get(Calendar.MONTH);
         tday = tcalendar.get(Calendar.DAY_OF_MONTH);
-
+        Today = tcalendar.getTimeInMillis();
 
         dcalendar.set(dyear, dmonth-1, dday);
+        setday = dcalendar.getTimeInMillis();
+        left = (setday - Today)/(24*60*60*1000);
+        result = (int)left;
+        refreshDate(result);
 
         //텍스트 터치 시 날짜 변경 가능
         Dday.setOnClickListener(new View.OnClickListener(){
@@ -72,36 +76,28 @@ public class HomeFragment extends Fragment {
                         dyear = year;
                         dmonth = month;
                         dday = dayOfMonth;
-                        dcalendar.set(dyear,dmonth,dday);
-                        refreshDate();
+                        dcalendar.set(dyear, dmonth, dday);
+                        setday = dcalendar.getTimeInMillis();
+                        left = (setday - Today)/(24*60*60*1000);
+                        result = (int)left;
+                        refreshDate(result);
                     }
-                },tyear, tmonth, tcalendar.get(Calendar.DATE));
+                },tyear, dmonth, dcalendar.get(Calendar.DATE));
                 datepick.show();
             }
         });
 
 
-
-
-
-
-        Today = tcalendar.getTimeInMillis();
-        setday = dcalendar.getTimeInMillis();
-
         //System.out.printf("today y: %d m : %d d : %d\nsetday y: %d m : %d d : %d\n",tyear,tmonth, tday, dyear, dmonth, dday);
 
-        result = (int)left;
 
-        refreshDate();
+
+
 
         return view;
     }
 
-    public void refreshDate(){
-
-        setday = dcalendar.getTimeInMillis();
-        left = (setday - Today)/(24*60*60*1000);
-        result = (int)left;
+    public void refreshDate(int result){
 
         today.setText(String.format("오늘은 %d월 %d일", tmonth+1, tday));
         if(result>0){
