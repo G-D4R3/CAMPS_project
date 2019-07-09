@@ -17,9 +17,9 @@ public class dateCount {
     protected int tday;
 
     //dday 설정 날짜
-    protected int dyear=2019;
-    protected int dmonth=12;
-    protected int dday=31;
+    protected int dyear;
+    protected int dmonth;
+    protected int dday;
 
     protected long Today;
     protected long setday;
@@ -29,20 +29,27 @@ public class dateCount {
     Calendar tcalendar = Calendar.getInstance();
     Calendar dcalendar = Calendar.getInstance();
 
-    public dateCount(TextView Dday, TextView today){
+    public dateCount(){
         this.Dday = Dday;
         this.today = today;
         //현재 날짜
+
         tyear = tcalendar.get(Calendar.YEAR);
         tmonth = tcalendar.get(Calendar.MONTH);
         tday = tcalendar.get(Calendar.DAY_OF_MONTH);
-        Today = tcalendar.getTimeInMillis();
 
-        dcalendar.set(dyear, dmonth-1, dday);
+        dyear = tcalendar.get(Calendar.YEAR);
+        dmonth = tcalendar.get(Calendar.MONTH);
+        dday = tcalendar.get(Calendar.DAY_OF_MONTH);
+
+        dcalendar.set(dyear, dmonth, dday);
+
+        Today = tcalendar.getTimeInMillis();
         setday = dcalendar.getTimeInMillis();
         left = (setday - Today)/(24*60*60*1000);
         result = (int)left;
-        this.refreshDate(result);
+
+        today.setText(String.format("오늘은 %d월 %d일", tmonth+1, tday));
     }
 
 
@@ -63,6 +70,15 @@ public class dateCount {
     }
 
 
+    public void calculateDate() { //여기서 캐시 접근해서 저장해놔야함
+        dcalendar.set(dyear, dmonth, dday);
+        setday = dcalendar.getTimeInMillis();
+        left = (setday - Today)/(24*60*60*1000);
+        this.result = (int)left;
+    }
 
-
+    public void setView(TextView Dday, TextView today){
+        this.Dday = Dday;
+        this.today = today;
+    }
 }

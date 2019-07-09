@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
         android:gravity="center"
-        android:text="dday"
+        android:text="D-day 설정하기"
         android:textSize="70px"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

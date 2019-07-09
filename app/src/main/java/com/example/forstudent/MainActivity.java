@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TodoFragment todoFragment= new TodoFragment();
     private ExamFragment examFragment= new ExamFragment();
 
-    public Calendar dcalendar = Calendar.getInstance();
+    public Calendar dcalendar = Calendar.getInstance(); // d-day count
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
