@@ -27,4 +27,6 @@
         android:text="Today"
         app:layout_constraintStart_toStartOf="@+id/Dday"
         app:layout_constraintTop_toBottomOf="@+id/Dday" />
+
 </android.support.constraint.ConstraintLayout>
+
