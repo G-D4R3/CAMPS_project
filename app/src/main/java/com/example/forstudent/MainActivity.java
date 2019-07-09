@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private FragmentManager fragmentManager = getSupportFragmentManager();
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private CalendarFragment calendarFragment= new CalendarFragment();
     private TodoFragment todoFragment= new TodoFragment();
     private ExamFragment examFragment= new ExamFragment();
+
+    public Calendar dcalendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

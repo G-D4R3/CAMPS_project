@@ -20,24 +20,6 @@ public class HomeFragment extends Fragment {
     private TextView Dday;
     private TextView today;
 
-    //오늘 날짜
-    private int tyear;
-    private int tmonth;
-    private int tday;
-
-    //dday 설정 날짜
-    private int dyear=2019;
-    private int dmonth=12;
-    private int dday=31;
-
-    private long Today;
-    private long setday;
-    private long left;
-    private int result=0;
-
-
-    final Calendar tcalendar = Calendar.getInstance();
-    final Calendar dcalendar = Calendar.getInstance();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,17 +33,8 @@ public class HomeFragment extends Fragment {
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
 
-        //현재 날짜
-        tyear = tcalendar.get(Calendar.YEAR);
-        tmonth = tcalendar.get(Calendar.MONTH);
-        tday = tcalendar.get(Calendar.DAY_OF_MONTH);
-        Today = tcalendar.getTimeInMillis();
+        final dateCount datecount = new dateCount(Dday, today);
 
-        dcalendar.set(dyear, dmonth-1, dday);
-        setday = dcalendar.getTimeInMillis();
-        left = (setday - Today)/(24*60*60*1000);
-        result = (int)left;
-        refreshDate(result);
 
         //텍스트 터치 시 날짜 변경 가능
         Dday.setOnClickListener(new View.OnClickListener(){
@@ -73,16 +46,12 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Toast toast = Toast.makeText(getContext(), "pick date", Toast.LENGTH_SHORT);
-                        dyear = year;
-                        dmonth = month;
-                        dday = dayOfMonth;
-                        dcalendar.set(dyear, dmonth, dday);
-                        setday = dcalendar.getTimeInMillis();
-                        left = (setday - Today)/(24*60*60*1000);
-                        result = (int)left;
-                        refreshDate(result);
+                        datecount.dyear = year;
+                        datecount.dmonth = month;
+                        datecount.dday = dayOfMonth;
+
                     }
-                },tyear, dmonth, dcalendar.get(Calendar.DATE));
+                },datecount.tyear, datecount.tmonth, datecount.tcalendar.get(Calendar.DATE));
                 datepick.show();
             }
         });
@@ -97,21 +66,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void refreshDate(int result){
 
-        today.setText(String.format("오늘은 %d월 %d일", tmonth+1, tday));
-        if(result>0){
-            Dday.setText(String.format("종강까지 D-%d", result));
-        }
-        else if(result==0){
-            Dday.setText(new String("종강 D-day"));
-        }
-        else{
-            int temp = Math.abs(result);
-            Dday.setText(String.format("종강하고 D+%d", temp));
-        }
-
-    }
 
 
 
