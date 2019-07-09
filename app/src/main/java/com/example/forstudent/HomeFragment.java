@@ -19,7 +19,6 @@ public class HomeFragment extends Fragment {
 
     private TextView Dday;
     private TextView today;
-    final dateCount datecount = new dateCount();
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,8 @@ public class HomeFragment extends Fragment {
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
 
-        datecount.setView(Dday,today);
+        final dateCount datecount = new dateCount(Dday, today);
+
         datecount.refreshDate(datecount.result);
 
 
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
                         datecount.dyear = year;
                         datecount.dmonth = month;
                         datecount.dday = dayOfMonth;
-                        datecount.calculateDate();
+                        datecount.resultion();
                         datecount.refreshDate(datecount.result);
 
                     }
@@ -62,6 +62,9 @@ public class HomeFragment extends Fragment {
 
 
         //System.out.printf("today y: %d m : %d d : %d\nsetday y: %d m : %d d : %d\n",tyear,tmonth, tday, dyear, dmonth, dday);
+
+
+
 
 
         return view;
