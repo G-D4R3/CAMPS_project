@@ -15,6 +15,14 @@ import org.w3c.dom.Text;
 
 import java.util.Objects;
 
+/*
+    과목을 직접 추가할 것인지 시간표에서 불러올 것인지
+ */
+
+
+
+
+
 public class AddExamSubjectDialog extends Dialog{
     private Button fromTimeTable;
     private Button makeNewOne;
