@@ -1,19 +1,13 @@
 package com.example.forstudent;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.view.View;
+import androidx.annotation.NonNull;
+
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.util.Objects;
 
 /*
     과목을 직접 추가할 것인지 시간표에서 불러올 것인지
