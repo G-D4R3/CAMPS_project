@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TodoFragment todoFragment= new TodoFragment();
     private ExamFragment examFragment= new ExamFragment();
 
+
     //for storage
 
 
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    //나중에 objectbox 구현하면 삭제해야할 부분
     protected void saveData(){
         SharedPreferences store = getSharedPreferences("storage", MODE_PRIVATE);
         SharedPreferences.Editor editor = store.edit();
@@ -96,10 +98,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //나중에 objectbox 구현하면 삭제해야할 부분
     protected void loadData(){
         SharedPreferences store = getSharedPreferences("storage", MODE_PRIVATE);
         year = store.getInt("D-dayYear", 2000);
         month = store.getInt("D-dayMonth", 1);
         day = store.getInt("D-dayDay", 1);
+    }
+
+
+
+
+    public void Fragmentchange(int index){
+
+        switch(index){
+            case 1: // exam/addDirectly
+                BasicDialogFragment basicDialogFragment = new BasicDialogFragment("직접추가");
+                getSupportFragmentManager().beginTransaction().replace(R.id.navigation_exam,basicDialogFragment);
+            case 2: // exam/add Complete
+                getSupportFragmentManager().beginTransaction().replace(R.id.navigation_exam, examFragment);
+            default:
+                return;
+        }
+
     }
 }

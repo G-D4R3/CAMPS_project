@@ -23,18 +23,18 @@
         app:layout_constraintVertical_bias="0.429">
 
         <TextView
-            android:id="@+id/editText"
+            android:id="@+id/dtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
             android:singleLine="false"
-            android:text="과목 추가"
+            android:text="title"
             android:layout_margin="10dp"
             android:textSize="30dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/dcontent"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

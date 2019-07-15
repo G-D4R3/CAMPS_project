@@ -4,7 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,16 +20,39 @@ import android.widget.TextView;
 
 
 
-public class AddExamSubjectDialog extends Dialog{
-    private Button fromTimeTable;
-    private Button makeNewOne;
-
+public class AddExamSubjectDialog extends DialogFragment {
+    private Button leftButton;
+    private Button rightButton;
+    private String leftText;
+    private String rightText;
     private Context context;
+    private int buttonset; //button 개수
+    private View.OnClickListener leftListener;
+    private View.OnClickListener rightListener;
+    private String Title;
+    private String Content;
 
 
-    public AddExamSubjectDialog(@NonNull Context context){
+    public AddExamSubjectDialog(@NonNull Context context, String 과목_추가, String title, String content, View.OnClickListener listener, String leftButton, View.OnClickListener leftListener){
         super(context);
+        this.Title = title;
+        this.Content = content;
         this.context = context;
+        this.leftText = leftButton;
+        this.leftListener =leftListener;
+        buttonset=1;
+    }
+
+    public AddExamSubjectDialog(@NonNull Context context, String title, String content,  String leftButton, String rightButton,  View.OnClickListener leftListener, View.OnClickListener rightListener){
+        super(context);
+        this.Title = title;
+        this.Content = content;
+        this.context = context;
+        this.leftText = leftButton;
+        this.leftListener = leftListener;
+        this.rightText = rightButton;
+        this.rightListener = rightListener;
+        buttonset = 2;
     }
 
 
@@ -40,12 +66,28 @@ public class AddExamSubjectDialog extends Dialog{
         lp.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         lp.dimAmount = 0.6f;
         getWindow().setAttributes(lp);
-        fromTimeTable = (Button) findViewById(R.id.button2);
-        makeNewOne = (Button) findViewById(R.id.button3);
-        TextView text = (TextView)findViewById(R.id.textView);
-        TextView text2 = (TextView)findViewById(R.id.editText);
+
+        switch(buttonset){
+            case 1:
+                leftButton = (Button) findViewById(R.id.button2);
+                leftButton.setOnClickListener(leftListener);
+            case 2:
+                leftButton = (Button) findViewById(R.id.button2);
+                rightButton = (Button) findViewById(R.id.button3);
+                leftButton.setOnClickListener(leftListener);
+                rightButton.setOnClickListener(rightListener);
+
+        }
+
+        TextView t_title = (TextView)findViewById(R.id.dtitle);
+        TextView t_text = (TextView)findViewById(R.id.dcontent);
+
+        t_title.setText(Title);
+        t_text.setText(Content);
 
         setContentView(R.layout.add_exam_sub_dialog);
+
+
 
 
 
