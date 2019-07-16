@@ -120,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 addNewExamSub mFrag = new addNewExamSub();
                 transaction.replace(R.id.frame_layout, mFrag,"AddDirectly");
                 transaction.commit();
+            case 2:
+                FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+                transaction2.replace(R.id.frame_layout, examFragment, "ExamFragment");
+                transaction2.commitAllowingStateLoss();
             default:
                 return;
         }
