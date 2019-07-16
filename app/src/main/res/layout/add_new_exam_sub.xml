@@ -27,5 +27,17 @@
             android:gravity="center"
             android:textSize="30dp"
             android:text="Text" />
+
+        <EditText
+            android:id="@+id/subName"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="20dp"
+            android:text="과목 이름" />
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

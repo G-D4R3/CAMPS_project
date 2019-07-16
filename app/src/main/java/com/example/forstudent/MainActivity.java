@@ -116,10 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch(index){
             case 1: // exam/addDirectly
-                BasicDialogFragment basicDialogFragment = new BasicDialogFragment("직접추가");
-                getSupportFragmentManager().beginTransaction().replace(R.id.navigation_exam,basicDialogFragment);
-            case 2: // exam/add Complete
-                getSupportFragmentManager().beginTransaction().replace(R.id.navigation_exam, examFragment);
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                addNewExamSub mFrag = new addNewExamSub();
+                transaction.replace(R.id.frame_layout, mFrag,"AddDirectly");
+                transaction.commit();
             default:
                 return;
         }
