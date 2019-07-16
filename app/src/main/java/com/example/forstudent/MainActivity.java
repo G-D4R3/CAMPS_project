@@ -52,26 +52,29 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss();
+                        transaction.replace(R.id.frame_layout, homeFragment,"Home Fragment").commitAllowingStateLoss();
                         break;
 
                     case R.id.navigation_timetable:
-                        transaction.replace(R.id.frame_layout, timetableFragment).commitAllowingStateLoss();
+                        transaction.replace(R.id.frame_layout, timetableFragment, "Time Table Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_calendar:
-                        transaction.replace(R.id.frame_layout, calendarFragment).commitAllowingStateLoss();
+                        transaction.replace(R.id.frame_layout, calendarFragment, "Calendar Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_todo:
-                        transaction.replace(R.id.frame_layout, todoFragment).commitAllowingStateLoss();
+                        transaction.replace(R.id.frame_layout, todoFragment, "Todo Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_exam:
-                        transaction.replace(R.id.frame_layout, examFragment).commitAllowingStateLoss();
+                        transaction.replace(R.id.frame_layout, examFragment, "ExamFragment");
+                        transaction.commitAllowingStateLoss();
                         break;
 
             }
                 return true;
             }
         });
+
+
 
 
 
