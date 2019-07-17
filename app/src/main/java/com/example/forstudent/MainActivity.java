@@ -13,9 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import io.objectbox.Box;
+
+public class MainActivity<notesBox> extends AppCompatActivity {
     private TextView mTextMessage;
     private FragmentManager fragmentManager = getSupportFragmentManager();
+
+    //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
+    private Box<UserData> userDataBox;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
@@ -37,12 +42,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ObjectBox.init(this);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         //mTextMessage = findViewById(R.id.message);
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss();
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        //박스를 가져오는 작업
+       userDataBox = ObjectBox.get().boxFor(UserData.class);
 
 
         this.loadData();
@@ -129,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
     }
-
+    public Box getUserDataBox(){
+        return userDataBox;
+    }
 
 }
+
