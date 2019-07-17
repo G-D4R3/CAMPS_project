@@ -14,6 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
+
+import io.objectbox.Box;
+
+import static com.example.forstudent.ObjectBox.boxStore;
 
 public class CalendarFragment extends Fragment {
 
@@ -24,6 +30,14 @@ public class CalendarFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = (View) inflater.inflate(R.layout.fragment_calendar,container,false);
+        Box<UserData> userBox = boxStore.boxFor(UserData.class);
+        MainActivity main = (MainActivity)getActivity();
+        UserData testUser = new UserData(0,"TESTUSER",new Date());
+        main.getUserDataBox().put(testUser);
+        long id = testUser.id;
+        String name = testUser.name;
+
+        System.out.println(id + name);
 
         return view;
     }
