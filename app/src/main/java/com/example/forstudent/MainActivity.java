@@ -3,11 +3,14 @@ package com.example.forstudent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private CalendarFragment calendarFragment= new CalendarFragment();
     private TodoFragment todoFragment= new TodoFragment();
     private ExamFragment examFragment= new ExamFragment();
+    private addNewExamSub addnewExamsub = new addNewExamSub();
 
 
     //for storage
@@ -112,21 +116,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void Fragmentchange(int index){
-
+    public void FragmentAdd(Fragment fragment, int index){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
         switch(index){
-            case 1: // exam/addDirectly
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                addNewExamSub mFrag = new addNewExamSub();
-                transaction.replace(R.id.frame_layout, mFrag,"AddDirectly");
+            case 1: //push fragment
+                transaction.replace(R.id.frame_layout, fragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
-            case 2:
-                FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
-                transaction2.replace(R.id.frame_layout, examFragment, "ExamFragment");
-                transaction2.commitAllowingStateLoss();
-            default:
-                return;
-        }
+            case 2: //pop fragment
 
+        }
     }
+
 }

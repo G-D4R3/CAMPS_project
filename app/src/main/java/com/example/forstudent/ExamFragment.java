@@ -14,6 +14,9 @@ public class ExamFragment extends Fragment{
 
     private Button addSubject;
 
+    public static ExamFragment newInstance() {
+        return new ExamFragment();
+    }
 
 
     @Nullable
@@ -43,7 +46,7 @@ public class ExamFragment extends Fragment{
                     public void onClick(View v) {
                         dialog.dismiss();
                         MainActivity main = (MainActivity)getActivity();
-                        main.Fragmentchange(1);
+                        main.FragmentAdd(addNewExamSub.newInstance(),1);
                     }
                 };
                 dialog.setListener(mMakeNew, mSetDirectly);

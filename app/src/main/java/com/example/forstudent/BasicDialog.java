@@ -51,7 +51,7 @@ public class BasicDialog extends DialogFragment{
         mLeft = (TextView)view.findViewById(R.id.leftText);
         mRight = (TextView)view.findViewById(R.id.rightText);
 
-        Toast toast = Toast.makeText(getContext(), "asdf", Toast.LENGTH_SHORT);
+
         mLeft.setOnClickListener(leftListener);
         mRight.setOnClickListener(rightListener);
         return view;

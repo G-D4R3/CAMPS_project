@@ -34,6 +34,10 @@ public class addNewExamSub extends Fragment {
     int mEHour = calendar.get(Calendar.HOUR_OF_DAY);
     int mEMinute = calendar.get(Calendar.MINUTE);
 
+    public static addNewExamSub newInstance(){
+        return new addNewExamSub();
+    }
+
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -142,7 +146,7 @@ public class addNewExamSub extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity main = (MainActivity)getActivity();
-                main.Fragmentchange(2);
+
             }
         });
 
