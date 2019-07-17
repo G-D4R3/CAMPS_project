@@ -20,6 +20,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +34,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
+                android:layout_gravity="center"
                 android:text="취소" />
+
+            <TextView
+                android:id="@+id/fragTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="직접 추가"
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/complete2"
@@ -40,18 +51,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
+                android:layout_gravity="center"
                 android:gravity="right"
                 android:text="완료" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/fragTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:text="직접 추가" />
 
         <EditText
             android:id="@+id/subName"
@@ -135,6 +138,30 @@
                 android:gravity="right"
                 android:text="" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="10dp"
+            android:text="시험 범위" />
+
+
+        <EditText
+            android:id="@+id/Range2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:ems="10"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="18dp"
+            android:hint="범위"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
 
 
     </LinearLayout>

@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
-    private HomeFragment homeFragment= new HomeFragment();
-    private TimetableFragment timetableFragment= new TimetableFragment();
-    private CalendarFragment calendarFragment= new CalendarFragment();
-    private TodoFragment todoFragment= new TodoFragment();
-    private ExamFragment examFragment= new ExamFragment();
-    private addNewExamSub addnewExamsub = new addNewExamSub();
+    public HomeFragment homeFragment= new HomeFragment();
+    public TimetableFragment timetableFragment= new TimetableFragment();
+    public CalendarFragment calendarFragment= new CalendarFragment();
+    public TodoFragment todoFragment= new TodoFragment();
+    public ExamFragment examFragment= new ExamFragment();
+    public addNewExamSub addnewExamsub = new addNewExamSub();
 
 
     //for storage
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         //mTextMessage = findViewById(R.id.message);
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss();
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -69,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.frame_layout, todoFragment, "Todo Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_exam:
-                        transaction.replace(R.id.frame_layout, examFragment, "ExamFragment");
-                        transaction.commitAllowingStateLoss();
+                        transaction.replace(R.id.frame_layout, examFragment, "ExamFragment").commitAllowingStateLoss();
                         break;
 
             }
@@ -116,17 +115,20 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void FragmentAdd(Fragment fragment, int index){
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        switch(index){
-            case 1: //push fragment
-                transaction.replace(R.id.frame_layout, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            case 2: //pop fragment
-
-        }
+    public void FragmentAdd(Fragment fragment){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frame_layout,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
+
+    public void FragmentRemove(Fragment fragment){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.remove(fragment);
+        fragmentManager.popBackStack();
+        transaction.commit();
+
+    }
+
 
 }

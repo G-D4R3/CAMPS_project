@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ExamFragment extends Fragment{
 
     private Button addSubject;
+    View view;
 
     public static ExamFragment newInstance() {
         return new ExamFragment();
@@ -22,22 +24,22 @@ public class ExamFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
+        view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
         addSubject = (Button) view.findViewById(R.id.addSubject);
         addSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final BasicDialog dialog = new BasicDialog();
-                dialog.show(getFragmentManager(),"Basic Dialog");
+                dialog.show(getFragmentManager(),"BasicDialog");
 
-                View.OnClickListener mMakeNew = new View.OnClickListener() {
+                View.OnClickListener mCallTable = new View.OnClickListener() {
                     @Override
 
                     public void onClick(View v) {
                         Toast toast = Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT);
                         toast.show();
+                        //timetable 변수 가져와서 해야함
                         dialog.dismiss();
                     }
                 };
@@ -45,14 +47,19 @@ public class ExamFragment extends Fragment{
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
+                        addNewExamSub add = addNewExamSub.newInstance();
                         MainActivity main = (MainActivity)getActivity();
-                        main.FragmentAdd(addNewExamSub.newInstance(),1);
+                        main.FragmentAdd(add);
                     }
                 };
-                dialog.setListener(mMakeNew, mSetDirectly);
+                dialog.setListener(mCallTable, mSetDirectly);
             }
         });
         return view;
+    }
+
+    public void addNewsub(TestSub sub){ //nullcheck 필요? rangd null일 수 있음
+
     }
 
 
