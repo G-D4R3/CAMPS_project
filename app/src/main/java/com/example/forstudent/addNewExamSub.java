@@ -184,14 +184,12 @@ public class addNewExamSub extends Fragment {
                 }
                 else{
                     MainActivity main = (MainActivity)getActivity();
-                    main.FragmentRemove(addNewExamSub.this);
                     main.examFragment.addNewsub(subject);
+                    main.FragmentRemove(addNewExamSub.this);
                 }
 
             }
         });
-
-
 
 
         return view;

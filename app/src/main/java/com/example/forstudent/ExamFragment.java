@@ -8,11 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class ExamFragment extends Fragment{
 
+    ArrayList<TestSub> ExamList=null;
+
+    ListView mlistView = null;
+    ExamListAdapter adapter;
     private Button addSubject;
     View view;
 
@@ -26,6 +33,13 @@ public class ExamFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
         addSubject = (Button) view.findViewById(R.id.addSubject);
+
+
+        //listvieww
+        mlistView = (ListView)view.findViewById(R.id.examlistView);
+        adapter = new ExamListAdapter(ExamList);
+
+
         addSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,11 +69,15 @@ public class ExamFragment extends Fragment{
                 dialog.setListener(mCallTable, mSetDirectly);
             }
         });
+
+
+
         return view;
     }
 
     public void addNewsub(TestSub sub){ //nullcheck 필요? rangd null일 수 있음
-
+        ExamList.add(sub);
+        adapter.notifyDataSetChanged();
     }
 
 
