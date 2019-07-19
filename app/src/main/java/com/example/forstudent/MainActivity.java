@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -105,7 +107,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     //나중에 objectbox 구현하면 삭제해야할 부분
     protected void saveData(){
-        SharedPreferences store = getSharedPreferences("storage", MODE_PRIVATE);
+        SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = store.edit();
         editor.putInt("D-dayYear", year);
         editor.putInt("D-dayMonth", month);
@@ -115,7 +117,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     //나중에 objectbox 구현하면 삭제해야할 부분
     protected void loadData(){
-        SharedPreferences store = getSharedPreferences("storage", MODE_PRIVATE);
+        SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
         year = store.getInt("D-dayYear", 2000);
         month = store.getInt("D-dayMonth", 1);
         day = store.getInt("D-dayDay", 1);

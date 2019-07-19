@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +39,12 @@ public class CalendarFragment extends Fragment {
         long id = testUser.id;
         String name = testUser.name;
 
-        System.out.println(id + name);
+        System.out.println(id+" "+testUser.getName());
+        testUser.setName("NEW TEST NAME");
+        main.getUserDataBox().put(testUser);
+        UserData getUser = (UserData) main.getUserDataBox().get(id);
 
+        System.out.println( getUser.id+" "+getUser.getName());
         return view;
     }
 }
