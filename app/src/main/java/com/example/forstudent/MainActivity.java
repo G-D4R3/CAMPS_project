@@ -24,6 +24,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
 
+    
+
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
     public CalendarFragment calendarFragment= new CalendarFragment();

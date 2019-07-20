@@ -34,7 +34,7 @@ public class CalendarFragment extends Fragment {
         View view = (View) inflater.inflate(R.layout.fragment_calendar,container,false);
         Box<UserData> userBox = boxStore.boxFor(UserData.class);
         MainActivity main = (MainActivity)getActivity();
-        UserData testUser = new UserData(0,"TESTUSER",new Date());
+        UserData testUser = new UserData(0,"TESTUSER",new Date(),999);
         main.getUserDataBox().put(testUser);
         long id = testUser.id;
         String name = testUser.name;
