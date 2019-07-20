@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class HomeFragment extends Fragment {
 
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment {
                         ((MainActivity)getActivity()).year = year;
                         ((MainActivity)getActivity()).month = month;
                         ((MainActivity)getActivity()).day = dayOfMonth;
-
+                        ((MainActivity)getActivity()).setLastDay(new GregorianCalendar(datecount.dyear, datecount.dmonth -1, datecount.dday).getTime());
                     }
                 },datecount.tyear, datecount.tmonth, datecount.tcalendar.get(Calendar.DATE));
                 datepick.show();

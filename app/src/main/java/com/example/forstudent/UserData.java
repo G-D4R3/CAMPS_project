@@ -18,7 +18,7 @@ import io.objectbox.annotation.NameInDb;
 
 @Entity
 public class UserData {
-    @Id
+    @Id(assignable = true)
     long id;
 
     @NameInDb("USERNAME")

@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import io.objectbox.Box;
 
 public class MainActivity<notesBox> extends AppCompatActivity {
@@ -24,7 +27,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
 
-    
+    //유저 선언
+    private UserData user;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
@@ -42,7 +46,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     int year;
     int month;
     int day;
+    Date lastDay;
 
+    long id=77;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +61,25 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //박스를 가져오는 작업
-       userDataBox = ObjectBox.get().boxFor(UserData.class);
+        userDataBox = ObjectBox.get().boxFor(UserData.class);
+        //test 유저 처음 저장 작업 (처음실행용)
+        if(userDataBox.isEmpty()) {
 
+            //user 생성
+            user = new UserData(id, "DEFAULT", new Date(), 99);
+            //박스에 user 객체 저장
+            userDataBox.put(user);
+
+            System.out.println("Initialize user "+id);
+        }
+
+        if(userDataBox.get(id).getName().equals("DEFAULT")){
+            System.out.println("Change Name");
+            //디폴트인 경우 이름 바꿈, 텍스트박스안 텍스트를 받아오거나 하는 경우로 사용하면됨.
+            user.setName("JIYOUNG");
+            userDataBox.put(user);
+
+        }
 
         this.loadData();
 
@@ -144,6 +167,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     }
     public Box getUserDataBox(){
         return userDataBox;
+    }
+    public void setLastDay(Date lastDay){
+        this.lastDay = lastDay;
     }
 
 }
