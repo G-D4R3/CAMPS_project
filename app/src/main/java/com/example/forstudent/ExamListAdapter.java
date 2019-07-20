@@ -55,7 +55,7 @@ public class ExamListAdapter extends BaseAdapter {
         TestSub sub = data.get(position);
         mSubname.setText(sub.getName());
         mStart.setText(sub.getStartHour()+"시 "+sub.getStartMinute()+"분");
-        mEnd.setText(sub.getEndHour()+"시 "+sub.getEndMinute()+"분");
+        mEnd.setText("~ "+sub.getEndHour()+"시 "+sub.getEndMinute()+"분");
 
 
         return convertView;
