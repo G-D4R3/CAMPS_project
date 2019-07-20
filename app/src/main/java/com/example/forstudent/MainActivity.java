@@ -15,6 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import io.objectbox.Box;
 
 public class MainActivity<notesBox> extends AppCompatActivity {
@@ -23,6 +27,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
+
+    //박스에 들어갈 객체 선언
+    private UserData user;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
@@ -40,7 +47,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     int year;
     int month;
     int day;
+    Date lastDay;
 
+    final long id=77;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +62,32 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //박스를 가져오는 작업
-       userDataBox = ObjectBox.get().boxFor(UserData.class);
+        userDataBox = ObjectBox.get().boxFor(UserData.class);
+        //test 유저 처음 저장 작업 (처음실행용)
+        if(userDataBox.isEmpty()) {
 
+            //user 생성
+            user = new UserData(id, "DEFAULT", new Date(), 99);
+            //박스에 user 객체 저장
+            userDataBox.put(user);
 
-        this.loadData();
+            System.out.println("Initialize user "+id);
+        }
+        else{
+            user = userDataBox.get(id);
+            System.out.println("DAY "+user.lastDay);
+        }
+
+        if(userDataBox.get(id).getName().equals("DEFAULT")){
+            System.out.println("Change Name");
+            //디폴트인 경우 이름 바꿈, 텍스트박스안 텍스트를 받아오거나 하는 경우로 사용하면됨.
+            user.setName("JIYOUNG");
+            userDataBox.put(user);
+
+        }
+
+        this.loadData(user);
+
 
 
         //private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -99,12 +130,12 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        saveData();
+        //saveData();
 
     }
 
 
-
+/*
     //나중에 objectbox 구현하면 삭제해야할 부분
     protected void saveData(){
         SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
@@ -113,14 +144,22 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         editor.putInt("D-dayMonth", month);
         editor.putInt("D-dayDay", day);
 
-    }
+    }*/
 
     //나중에 objectbox 구현하면 삭제해야할 부분
-    protected void loadData(){
+    protected void loadData(UserData user){
+
+        Calendar lastDay = Calendar.getInstance();
+        lastDay.setTime(user.lastDay);
+
+        year = lastDay.get(Calendar.YEAR);
+        month = lastDay.get(Calendar.MONTH);
+        day = lastDay.get(Calendar.DAY_OF_MONTH);
+        /*
         SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
         year = store.getInt("D-dayYear", 2000);
         month = store.getInt("D-dayMonth", 1);
-        day = store.getInt("D-dayDay", 1);
+        day = store.getInt("D-dayDay", 1);*/
     }
 
 
@@ -143,6 +182,30 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public Box getUserDataBox(){
         return userDataBox;
     }
+    public void setLastDay(Date lastDay){
+        this.lastDay = lastDay;
+    }
+    public UserData getUser(){
+        return user;
+    }
 
 }
+/*
+ObjectBox 사용 안내
 
+
+저장 하고자 하는 객체를 생성함 ( UserData 참고 : id 부분은 그대로 복사해서 사용하고 나머지 요소들은 원하는대로 추가)         {UserData}
+**모든 요소에 대해서 생성자가 있어야함**
+그 뒤 build를 한번 실행 ( Build -> Rebuild 해야 되는거 같음 ) ( 모델 파일을 생성하는 과정 )
+MainActivity 최상단에 박스 선언 하는 부분에 방금 생성했던 객체를 제네릭으로 Box 멤버를 하나 생성함.                     {private Box<UserData> userDataBox;}
+그 바로 아래 방금 작성한 객체를 담을 수 있는 변수를 하나 추가함.                                                   {private UserData user;}
+추가한 두가지 멤버에 대해 MainActivity 최하단에 getter를 생성함.                                               {getUserDataBox(),getUser()}
+onCreate 부분에 박스를 가져오는 과정 부분에 젤 위에서 만든 Box멤버에 ObjectBox.get().boxFor(객체.class);를 할당해줌.  {userDataBox = ObjectBox.get().boxFor(UserData.class);}
+해당 멤버를 isEmpty를 통해 첫 실행의 경우 디폴트값을 설정하는 과정을 거쳐야함.                                       {if(userDataBox.isEmpty())}
+윗 부분에서 생성함 객체를 담을 수 있는 변수를 instantiate해서 하나 생성해줌.                                       {user = new UserData(id, "DEFAULT", new Date(), 99);}
+그리고 가져온 박스 멤버에 .put(id)를 하면 박스에 객체가 저장됨. (id는 고정된 final 멤버로 통일할 것임.)                 {userDataBox.put(user);}
+만약 객체를 업데이트 하고 싶다면, 아까 생성한 객체 담는 멤버에 setter로 값을 바꿔주고 다시 .put(id)하면 됨.               {user.setName("JIYOUNG");userDataBox.put(user);}
+객체를 상자에서 받아오고 싶다면 Box변수.get(id)하면 됨.                                                        {user = userDataBox.get(id);}
+fragment에서 사용하고 싶은경우,((MainActivity)getActivity())를 통해 mainactivity를 받아온 뒤, 위에 생성한 박스    {user = (UserData) ((MainActivity)getActivity()).getUserDataBox().get(id);}
+getter를 통해, 박스를 가져온 뒤, 위와 동일하게 진행하면 됨.
+*/

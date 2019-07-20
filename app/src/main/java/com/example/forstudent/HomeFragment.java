@@ -13,26 +13,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class HomeFragment extends Fragment {
 
     private TextView Dday;
     private TextView today;
     static dateCount datecount = new dateCount();
-
+    private UserData user;
+    final long id = 77;
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = ((MainActivity)getActivity()).getUser();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
+
+        datecount.dyear = ((MainActivity)getActivity()).year;
+        datecount.dmonth = ((MainActivity)getActivity()).month;
+        datecount.dday = ((MainActivity)getActivity()).day;
+
+        datecount.calcDday();
         datecount.setView(Dday, today);
 
 
@@ -57,7 +67,11 @@ public class HomeFragment extends Fragment {
                         ((MainActivity)getActivity()).year = year;
                         ((MainActivity)getActivity()).month = month;
                         ((MainActivity)getActivity()).day = dayOfMonth;
-
+                        user.setLastDay(new GregorianCalendar(datecount.dyear, datecount.dmonth, datecount.dday).getTime());
+                        ((MainActivity)getActivity()).getUserDataBox().put(user);
+                        /*
+                        user = (UserData) ((MainActivity)getActivity()).getUserDataBox().get(id);
+                        System.out.println((user.lastDay));*/
                     }
                 },datecount.tyear, datecount.tmonth, datecount.tcalendar.get(Calendar.DATE));
                 datepick.show();
