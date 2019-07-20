@@ -13,10 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ExamFragment extends Fragment{
 
-    ArrayList<TestSub> ExamList=null;
+    ArrayList<TestSub> ExamList=new ArrayList<TestSub>();
 
     ListView mlistView = null;
     ExamListAdapter adapter;
@@ -34,10 +35,10 @@ public class ExamFragment extends Fragment{
         view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
         addSubject = (Button) view.findViewById(R.id.addSubject);
 
-
         //listvieww
-        mlistView = (ListView)view.findViewById(R.id.examlistView);
         adapter = new ExamListAdapter(ExamList);
+        mlistView = (ListView)view.findViewById(R.id.examlistView);
+        mlistView.setAdapter(adapter);
 
 
         addSubject.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +78,7 @@ public class ExamFragment extends Fragment{
 
     public void addNewsub(TestSub sub){ //nullcheck 필요? rangd null일 수 있음
         ExamList.add(sub);
+        Collections.sort(ExamList);
         adapter.notifyDataSetChanged();
     }
 

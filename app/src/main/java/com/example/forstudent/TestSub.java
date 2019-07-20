@@ -1,6 +1,6 @@
 package com.example.forstudent;
 
-public class TestSub {
+public class TestSub implements Comparable<TestSub>{
 
 
     //시험 정보 저장
@@ -20,6 +20,8 @@ public class TestSub {
 
     private String Range=null;
 
+    public int sorting;
+
     public TestSub(String name, int year, int month, int day, int starthour, int startminute, int endhour, int  endminute){
         this.Name=name;
         this.Year = year;
@@ -29,6 +31,7 @@ public class TestSub {
         this.startMinute = startminute;
         this.endHour = endhour;
         this.endMinute = endminute;
+        this.sorting = year*10000+Month*100+Day;
     }
 
     public TestSub(String name, int year, int month, int day, int starthour, int startminute, int endhour, int  endminute, String range){
@@ -68,7 +71,7 @@ public class TestSub {
     }
 
     public int getEndHour(){
-        return startHour;
+        return endHour;
     }
 
     public int getEndMinute(){
@@ -85,5 +88,19 @@ public class TestSub {
     }
 
 
-
+    @Override
+    public int compareTo(TestSub t) {
+        if(this.sorting<t.sorting){
+            return -1;
+        }
+        else if(this.sorting==t.sorting){
+            if(this.startHour<t.startHour){
+                return -1;
+            }
+            else{
+                return 1;
+            }
+        }
+        return 1;
+    }
 }
