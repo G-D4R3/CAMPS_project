@@ -44,7 +44,16 @@ public class dateCount {
 
 
     }
+    public void calcDday(){
+        //현재 날짜
 
+        dcalendar.set(dyear, dmonth, dday);
+
+        Today = tcalendar.getTimeInMillis();
+        setday = dcalendar.getTimeInMillis();
+        left = (setday - Today)/(24*60*60*1000);
+        result = (int)left;
+    }
 
     public void refreshDate(int result){
 

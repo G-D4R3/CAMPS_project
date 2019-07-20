@@ -37,10 +37,12 @@ public class HomeFragment extends Fragment {
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
+
         datecount.dyear = ((MainActivity)getActivity()).year;
         datecount.dmonth = ((MainActivity)getActivity()).month;
         datecount.dday = ((MainActivity)getActivity()).day;
 
+        datecount.calcDday();
         datecount.setView(Dday, today);
 
 
