@@ -32,7 +32,7 @@ public class CalendarFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = (View) inflater.inflate(R.layout.fragment_calendar,container,false);
-        Box<UserData> userBox = boxStore.boxFor(UserData.class);
+       /* Box<UserData> userBox = boxStore.boxFor(UserData.class);
         MainActivity main = (MainActivity)getActivity();
         UserData testUser = new UserData(0,"TESTUSER",new Date(),999);
         main.getUserDataBox().put(testUser);
@@ -44,7 +44,7 @@ public class CalendarFragment extends Fragment {
         main.getUserDataBox().put(testUser);
         UserData getUser = (UserData) main.getUserDataBox().get(id);
 
-        System.out.println( getUser.id+" "+getUser.getName());
+        System.out.println( getUser.id+" "+getUser.getName());*/
         return view;
     }
 }

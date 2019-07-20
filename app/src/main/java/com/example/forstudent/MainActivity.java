@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -72,6 +73,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
             System.out.println("Initialize user "+id);
         }
+        else{
+            user = userDataBox.get(id);
+            System.out.println("DAY "+user.lastDay);
+        }
 
         if(userDataBox.get(id).getName().equals("DEFAULT")){
             System.out.println("Change Name");
@@ -81,7 +86,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         }
 
-        this.loadData();
+        this.loadData(user);
+
 
 
         //private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -124,12 +130,12 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        saveData();
+        //saveData();
 
     }
 
 
-
+/*
     //나중에 objectbox 구현하면 삭제해야할 부분
     protected void saveData(){
         SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
@@ -138,14 +144,22 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         editor.putInt("D-dayMonth", month);
         editor.putInt("D-dayDay", day);
 
-    }
+    }*/
 
     //나중에 objectbox 구현하면 삭제해야할 부분
-    protected void loadData(){
+    protected void loadData(UserData user){
+
+        Calendar lastDay = Calendar.getInstance();
+        lastDay.setTime(user.lastDay);
+
+        year = lastDay.get(Calendar.YEAR);
+        month = lastDay.get(Calendar.MONTH);
+        day = lastDay.get(Calendar.DAY_OF_MONTH);
+        /*
         SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
         year = store.getInt("D-dayYear", 2000);
         month = store.getInt("D-dayMonth", 1);
-        day = store.getInt("D-dayDay", 1);
+        day = store.getInt("D-dayDay", 1);*/
     }
 
 
@@ -170,6 +184,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     }
     public void setLastDay(Date lastDay){
         this.lastDay = lastDay;
+    }
+    public UserData getUser(){
+        return user;
     }
 
 }
