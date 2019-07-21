@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="100dp">
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -23,24 +23,42 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-
-
-
-        <TextView
-            android:id="@+id/subname3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:textSize="24dp"
-            android:layout_marginLeft="15dp"
-            android:gravity="center_vertical"
-            android:text="컴퓨터 네트워크" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/examDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:text="7월 31일"
+                android:layout_marginTop="5dp"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/subname3"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_height="65dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:text="컴퓨터 네트워크"
+                android:textSize="24dp" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
             android:orientation="vertical">
 
             <TextView

@@ -131,7 +131,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 //        ObjectBox.get().close();
-        //saveData();
+        //
+        // saveData();
 
     }
 
