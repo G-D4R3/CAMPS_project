@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         datecount.dmonth = ((MainActivity)getActivity()).month;
         datecount.dday = ((MainActivity)getActivity()).day;
 
-        datecount.calcDday();
+ //       datecount.calcDday();
         datecount.setView(Dday, today);
 
 
@@ -68,7 +68,7 @@ public class HomeFragment extends Fragment {
                         ((MainActivity)getActivity()).month = month;
                         ((MainActivity)getActivity()).day = dayOfMonth;
                         user.setLastDay(new GregorianCalendar(datecount.dyear, datecount.dmonth, datecount.dday).getTime());
-                        ((MainActivity)getActivity()).getUserDataBox().put(user);
+//                        ((MainActivity)getActivity()).getUserDataBox().put(user);
                         /*
                         user = (UserData) ((MainActivity)getActivity()).getUserDataBox().get(id);
                         System.out.println((user.lastDay));*/

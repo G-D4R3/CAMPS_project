@@ -60,7 +60,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss();
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+/*
         //박스를 가져오는 작업
         userDataBox = ObjectBox.get().boxFor(UserData.class);
         //test 유저 처음 저장 작업 (처음실행용)
@@ -87,7 +87,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         }
 
         this.loadData(user);
-
+*/
 
 
         //private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -130,13 +130,13 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        ObjectBox.get().close();
+//        ObjectBox.get().close();
         //saveData();
 
     }
 
 
-/*
+
     //나중에 objectbox 구현하면 삭제해야할 부분
     protected void saveData(){
         SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
@@ -145,22 +145,22 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         editor.putInt("D-dayMonth", month);
         editor.putInt("D-dayDay", day);
 
-    }*/
+    }
 
     //나중에 objectbox 구현하면 삭제해야할 부분
     protected void loadData(UserData user){
-
+/*
         Calendar lastDay = Calendar.getInstance();
         lastDay.setTime(user.lastDay);
 
         year = lastDay.get(Calendar.YEAR);
         month = lastDay.get(Calendar.MONTH);
         day = lastDay.get(Calendar.DAY_OF_MONTH);
-        /*
+        */
         SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
         year = store.getInt("D-dayYear", 2000);
         month = store.getInt("D-dayMonth", 1);
-        day = store.getInt("D-dayDay", 1);*/
+        day = store.getInt("D-dayDay", 1);
     }
 
 
