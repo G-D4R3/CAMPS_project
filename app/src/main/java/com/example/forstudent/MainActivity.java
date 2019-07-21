@@ -130,7 +130,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
+        ObjectBox.get().close();
         //saveData();
 
     }
