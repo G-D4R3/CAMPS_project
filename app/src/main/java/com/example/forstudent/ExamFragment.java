@@ -16,12 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
 public class ExamFragment extends Fragment{
 
     ArrayList<TestSub> ExamList=new ArrayList<TestSub>();
-
+    public String titleDday="D-day";
     ListView mlistView = null;
     ExamListAdapter adapter;
     private Button addSubject;
@@ -45,6 +46,10 @@ public class ExamFragment extends Fragment{
         adapter = new ExamListAdapter(ExamList);
         mlistView = (ListView)view.findViewById(R.id.examlistView);
         mlistView.setAdapter(adapter);
+
+        dday.setText(titleDday);
+
+
 
         addSubject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +98,7 @@ public class ExamFragment extends Fragment{
                             case 0:
                                 Toast toast = Toast.makeText(getContext(), "수정", Toast.LENGTH_SHORT);
                                 toast.show();
+                                modifySub(adapter.data.get(pos));
                                 dialog.dismiss();
                                 break;
                             case 1:
@@ -103,6 +109,7 @@ public class ExamFragment extends Fragment{
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         removeSub(adapter.data.get(pos));
+                                        dday.setText(titleDday);
                                         dialog.dismiss();
                                     }
                                 });
@@ -134,14 +141,59 @@ public class ExamFragment extends Fragment{
         ExamList.add(sub);
         Collections.sort(ExamList);
         adapter.notifyDataSetChanged();
-        MainActivity main = (MainActivity)getActivity();
+        count.dyear = sub.getYear();
+        count.dmonth = sub.getMonth();
+        count.dday = sub.getDay();
+        count.calcDday();
+        count.resultion();
+        titleDday=String.format("%s D-%d",ExamList.get(0).getName(),count.result);
     }
 
     public void removeSub(TestSub sub){
         ExamList.remove(sub);
         Collections.sort(ExamList);
+        if(ExamList.isEmpty()==true){
+            titleDday="D-day";
+        }
+        else{
+            sub = ExamList.get(0);
+            count.dyear = sub.getYear();
+            count.dmonth = sub.getMonth();
+            count.dday = sub.getDay();
+            count.calcDday();
+            count.resultion();
+            titleDday=String.format("%s D-%d",ExamList.get(0).getName(),count.result);
+        }
         adapter.notifyDataSetChanged();
     }
+
+    public void modifySub(TestSub sub){
+        TestSub temp=null;
+        if(sub.getRange().length()==0){
+            temp = new TestSub(sub.getName(),sub.getYear(),sub.getMonth(),sub.getDay(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute());
+        }
+        else{
+            temp = new TestSub(sub.getName(),sub.getYear(),sub.getMonth(),sub.getDay(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute(),sub.getRange());
+        }
+        addNewExamSub mod = addNewExamSub.newInstance();
+        MainActivity main = (MainActivity)getActivity();
+        removeSub(sub);
+        mod.subject = temp;
+        mod.mYear = temp.getYear();
+        mod.mMonth = temp.getMonth();
+        mod.mDay = temp.getDay();
+        mod.mSHour = temp.getStartHour();
+        mod.mSMinute = temp.getStartMinute();
+        mod.mEHour = temp.getEndHour();
+        mod.mEMinute = temp.getEndMinute();
+        mod.MOD = true;
+        main.FragmentAdd(mod);
+        adapter.notifyDataSetChanged();
+    }
+
+
+
+
 
 
 

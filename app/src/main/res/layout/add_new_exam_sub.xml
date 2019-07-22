@@ -64,7 +64,8 @@
             android:editable="true"
             android:ems="10"
             android:hint="과목 이름"
-            android:inputType="textPersonName"
+            android:text=""
+            android:inputType="textShortMessage"
             android:textSize="20dp" />
 
         <LinearLayout

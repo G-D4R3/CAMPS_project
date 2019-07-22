@@ -69,7 +69,7 @@ public class dateCount {
             Dday.setText(String.format("종강하고 D+%d", temp));
         }
 
-    }
+    } //HomeFragment
 
 
     public void resultion() {
@@ -84,5 +84,5 @@ public class dateCount {
         this.Dday = dday;
         this.today = today;
         today.setText(String.format("오늘은 %d월 %d일", tmonth+1, tday));
-    }
+    } //HomeFragment
 }

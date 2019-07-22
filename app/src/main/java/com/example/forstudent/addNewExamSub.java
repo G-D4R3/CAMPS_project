@@ -25,8 +25,10 @@ import java.sql.Time;
 import java.util.Calendar;
 
 public class addNewExamSub extends Fragment {
+    public static boolean MOD = false;
     public String title;
     Calendar calendar = Calendar.getInstance();
+    String mName=null;
     int mYear = calendar.get(Calendar.YEAR);
     int mMonth = calendar.get(Calendar.MONTH);
     int mDay;
@@ -70,6 +72,21 @@ public class addNewExamSub extends Fragment {
         TextView mCancle = (TextView)view.findViewById(R.id.cancle2);
         TextView mComplete = (TextView)view.findViewById(R.id.complete2);
         final EditText mRange = (EditText)view.findViewById(R.id.Range2);
+
+
+        if(MOD==true){
+            mSubname.setText(subject.getName());
+            mDate.setText((mMonth+1)+"월 "+mDay+"일");
+            mStart.setText(mSHour+"시 "+mSMinute+"분");
+            mEnd.setText(mEHour+"시 "+mEMinute+"분");
+            if(subject.getRange()!=null){
+                mRange.setText(subject.getRange());
+            }
+            DATE_PICKED=true;
+            START_PICKED=true;
+            END_PICKED=true;
+        }
+
 
 
         mDate.setOnClickListener(new View.OnClickListener(){
@@ -172,21 +189,35 @@ public class addNewExamSub extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(mRange.getText().toString().length()==0){
-                    subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute);
-                }
-                else{
-                    subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
-                }
-
-                if(subject.getName()==null||DATE_PICKED==false||START_PICKED==false||END_PICKED==false){
-                    setYetDialog();
-                }
-                else{
+                if(MOD==true){
+                    if(mRange.getText().toString().length()==0){
+                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute);
+                    }
+                    else{
+                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
+                    }
                     MainActivity main = (MainActivity)getActivity();
                     main.examFragment.addNewsub(subject);
                     main.FragmentRemove(addNewExamSub.this);
                 }
+                else{
+                    if(mRange.getText().toString().length()==0){
+                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute);
+                    }
+                    else{
+                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
+                    }
+
+                    if(subject.getName()==null||DATE_PICKED==false||START_PICKED==false||END_PICKED==false){
+                        setYetDialog();
+                    }
+                    else{
+                        MainActivity main = (MainActivity)getActivity();
+                        main.examFragment.addNewsub(subject);
+                        main.FragmentRemove(addNewExamSub.this);
+                    }
+                }
+
 
             }
         });
