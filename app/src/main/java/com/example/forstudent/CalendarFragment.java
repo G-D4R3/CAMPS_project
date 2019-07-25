@@ -1,6 +1,10 @@
 package com.example.forstudent;
 
 import android.app.DatePickerDialog;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,8 +19,13 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.applandeo.materialcalendarview.EventDay;
+
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import io.objectbox.Box;
@@ -31,7 +40,18 @@ public class CalendarFragment extends Fragment {
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = (View) inflater.inflate(R.layout.fragment_calendar,container,false);
+
+        List<EventDay> events = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        events.add(new EventDay(calendar, R.drawable.ic_launcher_foreground));
+//or
+
+//or if you want to specify event label color
+
+       View view = (View) inflater.inflate(R.layout.fragment_calendar,container,false);
+
+
        /* Box<UserData> userBox = boxStore.boxFor(UserData.class);
         MainActivity main = (MainActivity)getActivity();
         UserData testUser = new UserData(0,"TESTUSER",new Date(),999);
