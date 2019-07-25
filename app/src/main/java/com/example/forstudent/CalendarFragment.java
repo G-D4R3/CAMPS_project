@@ -40,7 +40,7 @@ public class CalendarFragment extends Fragment {
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+//test
         List<EventDay> events = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
