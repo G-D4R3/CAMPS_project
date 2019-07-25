@@ -20,7 +20,7 @@ public class HomeFragment extends Fragment {
 
     private TextView Dday;
     private TextView today;
-    static DateCount datecount;
+    protected DateCount datecount;
     private UserData user;
     final long id = 77;
     int restDay=0;
