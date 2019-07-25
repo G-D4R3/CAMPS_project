@@ -27,7 +27,7 @@ public class ExamFragment extends Fragment{
     ExamListAdapter adapter;
     private Button addSubject;
     View view;
-    dateCount count = new dateCount();
+    DateCount count;
     public TextView dday;
 
     public static ExamFragment newInstance() {
@@ -42,12 +42,15 @@ public class ExamFragment extends Fragment{
         addSubject = (Button) view.findViewById(R.id.addSubject);
         dday = (TextView)view.findViewById(R.id.examTitle);
 
+        count = new DateCount();
+
         //listvieww
         adapter = new ExamListAdapter(ExamList);
         mlistView = (ListView)view.findViewById(R.id.examlistView);
         mlistView.setAdapter(adapter);
 
         dday.setText(titleDday);
+
 
 
 
@@ -141,12 +144,9 @@ public class ExamFragment extends Fragment{
         ExamList.add(sub);
         Collections.sort(ExamList);
         adapter.notifyDataSetChanged();
-        count.dyear = sub.getYear();
-        count.dmonth = sub.getMonth();
-        count.dday = sub.getDay();
-        count.calcDday();
-        count.resultion();
-        titleDday=String.format("%s D-%d",ExamList.get(0).getName(),count.result);
+        count.dcalendar.set(sub.getYear(),sub.getMonth(),sub.getDay());
+        int result = count.calcDday();
+        titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
     }
 
     public void removeSub(TestSub sub){
@@ -157,12 +157,9 @@ public class ExamFragment extends Fragment{
         }
         else{
             sub = ExamList.get(0);
-            count.dyear = sub.getYear();
-            count.dmonth = sub.getMonth();
-            count.dday = sub.getDay();
-            count.calcDday();
-            count.resultion();
-            titleDday=String.format("%s D-%d",ExamList.get(0).getName(),count.result);
+            count.dcalendar.set(sub.getYear(),sub.getMonth(),sub.getDay());
+            int result = count.calcDday();
+            titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
         }
         adapter.notifyDataSetChanged();
     }

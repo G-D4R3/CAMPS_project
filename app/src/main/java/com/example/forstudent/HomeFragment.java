@@ -13,15 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class HomeFragment extends Fragment {
 
     private TextView Dday;
     private TextView today;
-    static dateCount datecount = new dateCount();
+    static DateCount datecount;
     private UserData user;
     final long id = 77;
+    int restDay=0;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -38,16 +40,16 @@ public class HomeFragment extends Fragment {
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
 
-        datecount.dyear = ((MainActivity)getActivity()).year;
-        datecount.dmonth = ((MainActivity)getActivity()).month;
-        datecount.dday = ((MainActivity)getActivity()).day;
+        datecount = new DateCount(Calendar.getInstance());
+
+        /*objectBox에서 불러오기*/
+
+        datecount.dcalendar=user.getLastDay();
 
 
-        datecount.calcDday();
-        datecount.setView(Dday, today);
-
-
-        datecount.refreshDate(datecount.result);
+        restDay = datecount.calcDday();
+        today.setText(String.format("오늘은 %d월 %d일",(datecount.tcalendar.get(Calendar.MONTH)+1),datecount.tcalendar.get(Calendar.DAY_OF_MONTH)));
+        setDateView();
 
 
         //텍스트 터치 시 날짜 변경 가능
@@ -55,32 +57,44 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                DatePickerDialog datepick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
+                final DatePickerDialog datepick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Toast toast = Toast.makeText(getContext(), "pick date", Toast.LENGTH_SHORT);
-                        datecount.dyear = year;
-                        datecount.dmonth = month;
-                        datecount.dday = dayOfMonth;
-                        datecount.resultion();
-                        datecount.refreshDate(datecount.result);
-                        ((MainActivity)getActivity()).year = year;
-                        ((MainActivity)getActivity()).month = month;
-                        ((MainActivity)getActivity()).day = dayOfMonth;
-                        user.setLastDay(new GregorianCalendar(datecount.dyear, datecount.dmonth, datecount.dday).getTime());
+                        datecount.dcalendar.set(Calendar.YEAR,year);
+                        datecount.dcalendar.set(Calendar.MONTH,month);
+                        datecount.dcalendar.set(Calendar.DATE,dayOfMonth);
+                        restDay = datecount.calcDday();
+                        setDateView();
+                        user.setLastDay(new Date(datecount.dcalendar.getTimeInMillis()));
                         ((MainActivity)getActivity()).getUserDataBox().put(user);
 
                         user = (UserData) ((MainActivity)getActivity()).getUserDataBox().get(id);
-                        System.out.println(user);
-                        System.out.println((user.lastDay));
+                        //System.out.println(user);
+                        //System.out.println((user.lastDay));
                     }
-                },datecount.tyear, datecount.tmonth, datecount.tcalendar.get(Calendar.DATE));
+                },datecount.tcalendar.get(Calendar.YEAR), datecount.tcalendar.get(Calendar.MONTH), datecount.tcalendar.get(Calendar.DATE));
                 datepick.show();
             }
         });
         //System.out.printf("today y: %d m : %d d : %d\nsetday y: %d m : %d d : %d\n",tyear,tmonth, tday, dyear, dmonth, dday);
         return view;
+    }
+
+
+    public void setDateView(){
+        //D-day textview set
+        if(restDay>0){
+            Dday.setText(String.format("종강까지 D-%d",restDay));
+        }
+        else if(restDay==0){
+            Dday.setText("종강 D-day");
+        }
+        else{
+            int temp = restDay*(-1);
+            Dday.setText(String.format("종강하고 D+%d",temp));
+        }
     }
 
 

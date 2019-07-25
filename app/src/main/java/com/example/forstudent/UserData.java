@@ -1,5 +1,6 @@
 package com.example.forstudent;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import io.objectbox.annotation.Entity;
@@ -25,6 +26,7 @@ public class UserData {
     @Index(type = IndexType.VALUE)
     String name;
 
+
     Date lastDay;
 
     int hello;
@@ -44,5 +46,11 @@ public class UserData {
     }
     public void setLastDay(Date lastDay){
         this.lastDay = lastDay;
+    }
+
+    public Calendar getLastDay() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(lastDay);
+        return cal;
     }
 }
