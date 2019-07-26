@@ -3,10 +3,10 @@ package com.example.forstudent;
 import java.util.Calendar;
 
 public class Assignment implements Comparable<Assignment>{
-    private String Name;
+    private String Name=null;
     private Calendar Period;
     private String Sub; // 시간표 과목 class 생기면 대체할 것 & 생성자 오버로드
-    String Memo;
+    String Memo=null;
     long sorting;
 
 
@@ -36,6 +36,10 @@ public class Assignment implements Comparable<Assignment>{
 
     public Calendar getPeriod(){
         return Period;
+    }
+
+    public String getMemo(){
+        return Memo;
     }
 
 

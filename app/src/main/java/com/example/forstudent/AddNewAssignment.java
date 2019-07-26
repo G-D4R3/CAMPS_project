@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 
 public class AddNewAssignment extends Fragment {
@@ -22,6 +20,13 @@ public class AddNewAssignment extends Fragment {
     Calendar today = Calendar.getInstance();
     Calendar period = Calendar.getInstance();
     Assignment ass;
+    String Name;
+    String Date;
+    Boolean MOD = false;
+
+    public static AddNewAssignment newInstance(){
+        return new AddNewAssignment();
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +37,16 @@ public class AddNewAssignment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = (View)inflater.inflate(R.layout.add_new_assignment, container, false);
         TextView mTitle = (TextView)view.findViewById(R.id.assTitle);
-        final EditText mName = (EditText)view.findViewById(R.id.assName);
-        final TextView mDate = (TextView)view.findViewById(R.id.pdate2);
+        TextView mName = (EditText)view.findViewById(R.id.assName);
+        TextView mDate = (TextView)view.findViewById(R.id.pdate2);
         TextView mCancel = (TextView)view.findViewById(R.id.cancle4);
         TextView mComplete = (TextView)view.findViewById(R.id.complete4);
         final EditText mRange = (EditText)view.findViewById(R.id.Range3);
+
+        if(MOD==true){
+            mName.setText(Name);
+            mDate.setText(Date);
+        }
 
         mDate.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,22 +2,20 @@ package com.example.forstudent;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.preference.PreferenceManager;
+import android.view.MenuItem;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
 
-import android.preference.PreferenceManager;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import io.objectbox.Box;
 
@@ -37,6 +35,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public TodoFragment todoFragment= new TodoFragment();
     public ExamFragment examFragment= new ExamFragment();
     public addNewExamSub addnewExamsub = new addNewExamSub();
+    public AddNewAssignment addNewAssignment = new AddNewAssignment();
 
 
     //for storage
