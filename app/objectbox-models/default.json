@@ -27,9 +27,49 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:9041166958939199842",
+      "lastPropertyId": "8:9192137706107816959",
+      "name": "Assignment",
+      "properties": [
+        {
+          "id": "1:7427783359141296943",
+          "name": "id"
+        },
+        {
+          "id": "2:5343020655677014311",
+          "name": "subject"
+        },
+        {
+          "id": "3:944486448663220309",
+          "name": "deadLineYear"
+        },
+        {
+          "id": "4:7080098066043232569",
+          "name": "deadLineMonth"
+        },
+        {
+          "id": "5:269066643002390290",
+          "name": "deadLineDay"
+        },
+        {
+          "id": "6:8955108861080412535",
+          "name": "deadLineHour"
+        },
+        {
+          "id": "7:3469016447097553945",
+          "name": "deadLineMinute"
+        },
+        {
+          "id": "8:9192137706107816959",
+          "name": "memo"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:4581348918191666629",
+  "lastEntityId": "2:9041166958939199842",
   "lastIndexId": "1:2906433927278294280",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

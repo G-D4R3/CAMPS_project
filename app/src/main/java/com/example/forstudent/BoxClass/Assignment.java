@@ -20,6 +20,7 @@ public class Assignment {
     int deadLineHour;
     int deadLineMinute;
 
+
     String memo;
 
     public Assignment(long id, String subject, int deadLineYear, int deadLineMonth, int deadLineDay, int deadLineHour, int deadLineMinute, String memo) {
@@ -34,4 +35,63 @@ public class Assignment {
     }
 
 
+    public long getId() {
+        return id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public int getDeadLineYear() {
+        return deadLineYear;
+    }
+
+    public int getDeadLineMonth() {
+        return deadLineMonth;
+    }
+
+    public int getDeadLineDay() {
+        return deadLineDay;
+    }
+
+    public int getDeadLineHour() {
+        return deadLineHour;
+    }
+
+    public int getDeadLineMinute() {
+        return deadLineMinute;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setDeadLineYear(int deadLineYear) {
+        this.deadLineYear = deadLineYear;
+    }
+
+    public void setDeadLineMonth(int deadLineMonth) {
+        this.deadLineMonth = deadLineMonth;
+    }
+
+    public void setDeadLineDay(int deadLineDay) {
+        this.deadLineDay = deadLineDay;
+    }
+
+    public void setDeadLineHour(int deadLineHour) {
+        this.deadLineHour = deadLineHour;
+    }
+
+    public void setDeadLineMinute(int deadLineMinute) {
+        this.deadLineMinute = deadLineMinute;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 }
