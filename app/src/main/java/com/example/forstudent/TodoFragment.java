@@ -16,10 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.BoxHelperClass.AssignmentHelper;
+import com.example.forstudent.DataClass.Assignment;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-/*
+
 public class TodoFragment extends Fragment {
     ArrayList<Assignment> AssList = new ArrayList<Assignment>();
     ArrayList<Assignment> ImpList = new ArrayList<Assignment>();
@@ -35,6 +38,7 @@ public class TodoFragment extends Fragment {
     String title = "남은 과제 수";
     Boolean mIvisible=true;
     Boolean mDvisible=true;
+    long boxSize;
 
 
     @Nullable
@@ -50,6 +54,19 @@ public class TodoFragment extends Fragment {
         mAssSec = (TextView)view.findViewById(R.id.SectionHeader3);
         mIhide = (TextView)view.findViewById(R.id.hide2);
         mAhide = (TextView)view.findViewById(R.id.hide3);
+
+
+        MainActivity main = (MainActivity)getActivity();
+
+        boxSize = main.getAssignmentBox().count();
+        for(long i=0; i<boxSize; i++){
+            AssList.add(AssignmentHelper.getAssignment(i));
+        }
+
+        for(int i=0; i<AssList.size(); i++){
+            System.out.println(AssList.get(i).getName());
+        }
+        Collections.sort(AssList);
 
 
         mTitle.setText(title);
@@ -191,6 +208,16 @@ public class TodoFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity main = (MainActivity)getActivity();
+        main.getAssignmentBox().removeAll();
+        for(int i=0; i<AssList.size(); i++){
+            AssignmentHelper helper = new AssignmentHelper((long)i, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo());
+            AssignmentHelper.putAssignment(helper);
+        }
+    }
 
     public void AddNewAss(Assignment a){
         AssList.add(a);
@@ -252,4 +279,4 @@ public class TodoFragment extends Fragment {
         ImpList.add(temp);
         ImportantAdapter.notifyDataSetChanged();
     }
-}*/
+}

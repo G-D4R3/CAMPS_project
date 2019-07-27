@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.forstudent.BoxClass.Assignment;
+import com.example.forstudent.BoxClass.Assignment_Model;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
@@ -28,19 +28,19 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
-    private Box<Assignment> assignmentBox;
+    private Box<Assignment_Model> assignmentBox;
 
     //박스에 들어갈 객체 선언
     private UserData user;
-    private Assignment assignment;
+    private Assignment_Model assignment;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
     public CalendarFragment calendarFragment= new CalendarFragment();
-    //public TodoFragment todoFragment= new TodoFragment();
+    public TodoFragment todoFragment= new TodoFragment();
     public ExamFragment examFragment= new ExamFragment();
     public addNewExamSub addnewExamsub = new addNewExamSub();
-//    public AddNewAssignment addNewAssignment = new AddNewAssignment();
+    public AddNewAssignment addNewAssignment = new AddNewAssignment();
 
 
     //for storage
@@ -68,7 +68,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         //박스를 가져오는 작업
         userDataBox = ObjectBox.get().boxFor(UserData.class);
-        assignmentBox = ObjectBox.get().boxFor(Assignment.class);
+        assignmentBox = ObjectBox.get().boxFor(Assignment_Model.class);
 
         //test 유저 처음 저장 작업 (처음실행용)
         if(userDataBox.isEmpty()) {
@@ -115,7 +115,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                         transaction.replace(R.id.frame_layout, calendarFragment, "Calendar Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_todo:
-                    //    transaction.replace(R.id.frame_layout, todoFragment, "Todo Fragment").commitAllowingStateLoss();
+                        transaction.replace(R.id.frame_layout, todoFragment, "Todo Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_exam:
                         transaction.replace(R.id.frame_layout, examFragment, "ExamFragment").commitAllowingStateLoss();
@@ -138,6 +138,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         ObjectBox.get().close();
+
         //
         // saveData();
 
@@ -198,11 +199,11 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return user;
     }
 
-    public Box<Assignment> getAssignmentBox() {
+    public Box<Assignment_Model> getAssignmentBox() {
         return assignmentBox;
     }
 
-    public Assignment getAssignment() {
+    public Assignment_Model getAssignment() {
         return assignment;
     }
 

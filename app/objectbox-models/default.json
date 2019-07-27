@@ -29,55 +29,66 @@
       "relations": []
     },
     {
-      "id": "2:9041166958939199842",
-      "lastPropertyId": "8:9192137706107816959",
-      "name": "Assignment",
+      "id": "3:3173279165377449986",
+      "lastPropertyId": "8:866282650337954567",
+      "name": "Assignment_Model",
       "properties": [
         {
-          "id": "1:7427783359141296943",
+          "id": "1:4560645341838419802",
           "name": "id"
         },
         {
-          "id": "2:5343020655677014311",
+          "id": "2:8510494046851359011",
           "name": "subject"
         },
         {
-          "id": "3:944486448663220309",
+          "id": "3:5357790182414432575",
           "name": "deadLineYear"
         },
         {
-          "id": "4:7080098066043232569",
+          "id": "4:4326162623310324070",
           "name": "deadLineMonth"
         },
         {
-          "id": "5:269066643002390290",
+          "id": "5:8291968140402983370",
           "name": "deadLineDay"
         },
         {
-          "id": "6:8955108861080412535",
+          "id": "6:7518702346155089698",
           "name": "deadLineHour"
         },
         {
-          "id": "7:3469016447097553945",
+          "id": "7:8857923982141088604",
           "name": "deadLineMinute"
         },
         {
-          "id": "8:9192137706107816959",
+          "id": "8:866282650337954567",
           "name": "memo"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:9041166958939199842",
+  "lastEntityId": "3:3173279165377449986",
   "lastIndexId": "1:2906433927278294280",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    9041166958939199842
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    7427783359141296943,
+    5343020655677014311,
+    944486448663220309,
+    7080098066043232569,
+    269066643002390290,
+    8955108861080412535,
+    3469016447097553945,
+    9192137706107816959
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

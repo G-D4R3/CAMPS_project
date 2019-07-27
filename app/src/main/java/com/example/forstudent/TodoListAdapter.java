@@ -7,9 +7,11 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.example.forstudent.DataClass.Assignment;
+
 import java.util.ArrayList;
 import java.util.Calendar;
-/*
+
 public class TodoListAdapter extends BaseAdapter {
     ArrayList<Assignment> data = new ArrayList<>();
     TextView mHeader;
@@ -56,4 +58,3 @@ public class TodoListAdapter extends BaseAdapter {
         CheckBox Check;
     }
 }
-*/

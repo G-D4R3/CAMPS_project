@@ -1,4 +1,4 @@
-package com.example.forstudent;
+package com.example.forstudent.DataClass;
 
 public class TestSub implements Comparable<TestSub>{
 
