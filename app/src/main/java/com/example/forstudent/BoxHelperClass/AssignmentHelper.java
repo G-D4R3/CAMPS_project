@@ -1,22 +1,22 @@
-package com.example.forstudent;
+package com.example.forstudent.BoxHelperClass;
 
 import java.util.Calendar;
 
-public class Assignment implements Comparable<Assignment>{
-    private String Name=null;
+public class AssignmentHelper implements Comparable<AssignmentHelper>{
+    private String Name;
     private Calendar Period;
     private String Sub; // 시간표 과목 class 생기면 대체할 것 & 생성자 오버로드
-    String Memo=null;
+    String Memo;
     long sorting;
 
 
-    public Assignment(String name, Calendar period){
+    public AssignmentHelper(String name, Calendar period){
         this.Name = name;
         this.Period = period;
         this.sorting = period.getTimeInMillis();
     }
 
-    public Assignment(String name, Calendar period, String sub){
+    public AssignmentHelper(String name, Calendar period, String sub){
         this.Name = name;
         this.Period = period;
         this.Sub = sub;
@@ -38,13 +38,9 @@ public class Assignment implements Comparable<Assignment>{
         return Period;
     }
 
-    public String getMemo(){
-        return Memo;
-    }
-
 
     @Override
-    public int compareTo(Assignment a) {
+    public int compareTo(AssignmentHelper a) {
         if(this.sorting<a.sorting){
             return -1;
         }
