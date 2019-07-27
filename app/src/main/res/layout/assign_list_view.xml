@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
+    android:background="@color/cardview_light_background"
     android:layout_height="70dp">
 
 

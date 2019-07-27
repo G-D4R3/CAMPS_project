@@ -22,10 +22,19 @@ import java.util.Collections;
 
 public class TodoFragment extends Fragment {
     ArrayList<Assignment> AssList = new ArrayList<Assignment>();
+    ArrayList<Assignment> ImpList = new ArrayList<Assignment>();
     TodoListAdapter adapter;
+    TodoListAdapter ImportantAdapter;
     TextView mTitle;
     ListView mlistView;
+    ListView mImportant;
+    TextView mAssSec;
+    TextView mImpSec;
+    TextView mIhide;
+    TextView mAhide;
     String title = "남은 과제 수";
+    Boolean mIvisible=true;
+    Boolean mDvisible=true;
 
 
     @Nullable
@@ -35,12 +44,23 @@ public class TodoFragment extends Fragment {
 
         mTitle = (TextView)view.findViewById(R.id.restDo);
         mlistView = (ListView)view.findViewById(R.id.assignmentList);
+        mImportant = (ListView)view.findViewById(R.id.importantAssignment);
         Button mAdd = (Button)view.findViewById(R.id.addAss);
+        mImpSec = (TextView)view.findViewById(R.id.SectionHeader2);
+        mAssSec = (TextView)view.findViewById(R.id.SectionHeader3);
+        mIhide = (TextView)view.findViewById(R.id.hide2);
+        mAhide = (TextView)view.findViewById(R.id.hide3);
+
 
         mTitle.setText(title);
 
         adapter = new TodoListAdapter(AssList);
         mlistView.setAdapter(adapter);
+
+        ImportantAdapter = new TodoListAdapter(ImpList);
+        mImportant.setAdapter(ImportantAdapter);
+
+
 
 
 
@@ -58,7 +78,7 @@ public class TodoFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int pos = position;
                 String name = adapter.data.get(position).getName();
-                String[] menu = {"수정", "삭제"};
+                String[] menu = {"중요 표시","수정", "삭제"};
 
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
@@ -68,10 +88,14 @@ public class TodoFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
+                                Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
+                                setImportance(adapter.data.get(position));
+                                break;
+                            case 1:
                                 ModifyAss(adapter.data.get(pos));
                                 dialog.dismiss();
                                 break;
-                            case 1:
+                            case 2:
                                 AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
                                 remove.setTitle("삭제");
                                 remove.setMessage("할 일을 삭제 합니다.");
@@ -102,6 +126,38 @@ public class TodoFragment extends Fragment {
             }
         });
 
+        mIhide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mIvisible==true){
+                    mImportant.setVisibility(View.GONE);
+                    mIvisible=false;
+                    mIhide.setText("+");
+                }
+                else{
+                    mImportant.setVisibility(View.VISIBLE);
+                    mIvisible=true;
+                    mIhide.setText("-");
+                }
+            }
+        });
+
+        mAhide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mDvisible==true){
+                    mlistView.setVisibility(View.GONE);
+                    mDvisible=false;
+                    mAhide.setText("+");
+                }
+                else{
+                    mlistView.setVisibility(View.VISIBLE);
+                    mDvisible=true;
+                    mAhide.setText("-");
+                }
+            }
+        });
+
 
 
 
@@ -121,6 +177,7 @@ public class TodoFragment extends Fragment {
 
     public void RemoveAss(Assignment a){
         AssList.remove(a);
+        ImpList.remove(a);
         Collections.sort(AssList);
         if(AssList.size()==0){
             title = "남은 과제가 없습니다.";
@@ -163,5 +220,12 @@ public class TodoFragment extends Fragment {
         }
         Collections.sort(AssList);
         adapter.notifyDataSetChanged();
+    }
+
+    public void setImportance(Assignment a){
+        Assignment temp;
+        temp = a;
+        ImpList.add(temp);
+        ImportantAdapter.notifyDataSetChanged();
     }
 }

@@ -1,6 +1,8 @@
 package com.example.forstudent;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,8 @@ public class AddNewAssignment extends Fragment {
     String Name;
     String Date;
     Boolean MOD = false;
+    Boolean DATE_CHECKED=false;
+
 
     public static AddNewAssignment newInstance(){
         return new AddNewAssignment();
@@ -56,6 +60,7 @@ public class AddNewAssignment extends Fragment {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         mDate.setText((month+1)+"월 "+dayOfMonth+"일");
                         period.set(year,month,dayOfMonth);
+                        DATE_CHECKED=true;
 
                     }
                 },today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DATE));
@@ -74,15 +79,22 @@ public class AddNewAssignment extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mRange.getText().length()==0){
-                    ass = new Assignment(mName.getText().toString(),period);
+
+                if(mName.getText().length()==0 || DATE_CHECKED==false){
+                    setYetDialog();
                 }
                 else{
-                    ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString());
+                    if(mRange.getText().length()==0){
+                        ass = new Assignment(mName.getText().toString(),period);
+                    }
+                    else{
+                        ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString());
+                    }
+                    MainActivity main = (MainActivity)getActivity();
+                    main.todoFragment.AddNewAss(ass);
+                    main.FragmentRemove(AddNewAssignment.this);
                 }
-                MainActivity main = (MainActivity)getActivity();
-                main.todoFragment.AddNewAss(ass);
-                main.FragmentRemove(AddNewAssignment.this);
+
             }
         });
 
@@ -92,6 +104,20 @@ public class AddNewAssignment extends Fragment {
 
         return view;
 
+    }
+
+
+    public void setYetDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        dialog.setTitle("알림");
+        dialog.setMessage("설정이 완료되지 않았습니다.");
+        dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //
+            }
+        });
+        dialog.show();
     }
 
 }
