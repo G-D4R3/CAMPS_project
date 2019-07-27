@@ -78,7 +78,7 @@ public class TodoFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int pos = position;
                 String name = adapter.data.get(position).getName();
-                String[] menu = {"중요 표시","수정", "삭제"};
+                String[] menu = {"중요도 표시","수정", "삭제"};
 
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
@@ -89,7 +89,7 @@ public class TodoFragment extends Fragment {
                         switch (which) {
                             case 0:
                                 Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
-                                setImportance(adapter.data.get(position));
+                                setImportance(adapter.data.get(pos));
                                 break;
                             case 1:
                                 ModifyAss(adapter.data.get(pos));
@@ -122,7 +122,31 @@ public class TodoFragment extends Fragment {
                 });
                 dialog.create();
                 dialog.show();
+            }
+        });
 
+        mImportant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int pos = position;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("해제");
+                dialog.setMessage("중요도 표시를 해제합니다.");
+                dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ImpList.remove(ImportantAdapter.data.get(position));
+                        ImportantAdapter.notifyDataSetChanged();
+                    }
+                });
+                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.create();
+                dialog.show();
             }
         });
 
