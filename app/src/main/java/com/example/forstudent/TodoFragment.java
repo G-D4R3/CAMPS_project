@@ -59,7 +59,7 @@ public class TodoFragment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
 
         boxSize = main.getAssignmentBox().count();
-        for(long i=0; i<boxSize; i++){
+        for(long i=1; i<boxSize+1; i++){
             AssList.add(AssignmentHelper.getAssignment(i));
         }
 
@@ -209,12 +209,12 @@ public class TodoFragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
+        super.onDestroy();
         MainActivity main = (MainActivity)getActivity();
         main.getAssignmentBox().removeAll();
         for(int i=0; i<AssList.size(); i++){
-            AssignmentHelper helper = new AssignmentHelper((long)i, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo());
+            AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo());
             AssignmentHelper.putAssignment(helper);
         }
     }

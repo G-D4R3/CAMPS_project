@@ -23,6 +23,7 @@ public class CalendarFragment extends Fragment {
     @Nullable
     @Override
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //test
         MainActivity main = (MainActivity)getActivity();
@@ -51,5 +52,12 @@ public class CalendarFragment extends Fragment {
 
         System.out.println( getUser.id+" "+getUser.getName());*/
         return view;
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity main = (MainActivity)getActivity();
+        System.out.println("ONSTOP");
+
     }
 }

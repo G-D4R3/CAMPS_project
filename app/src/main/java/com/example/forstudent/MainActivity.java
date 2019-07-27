@@ -135,10 +135,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         ObjectBox.get().close();
-
+        //
+        //
+        //
+        //
+        // ObjectBox.boxStore.deleteAllFiles();
         //
         // saveData();
 
