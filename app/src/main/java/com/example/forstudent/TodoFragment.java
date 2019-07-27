@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-
+/*
 public class TodoFragment extends Fragment {
     ArrayList<Assignment> AssList = new ArrayList<Assignment>();
     ArrayList<Assignment> ImpList = new ArrayList<Assignment>();
@@ -252,4 +252,4 @@ public class TodoFragment extends Fragment {
         ImpList.add(temp);
         ImportantAdapter.notifyDataSetChanged();
     }
-}
+}*/

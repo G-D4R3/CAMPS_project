@@ -53,6 +53,7 @@ public class ExamListAdapter extends BaseAdapter {
         TextView mEnd = (TextView)convertView.findViewById(R.id.endTime3);
 
         TestSub sub = data.get(position);
+
         mSubname.setText(sub.getName());
         mDate.setText((sub.getMonth()+1)+"월 "+sub.getDay()+"일");
         mStart.setText(sub.getStartHour()+"시 "+sub.getStartMinute()+"분");

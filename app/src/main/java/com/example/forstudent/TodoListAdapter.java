@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
+/*
 public class TodoListAdapter extends BaseAdapter {
     ArrayList<Assignment> data = new ArrayList<>();
     TextView mHeader;
@@ -56,3 +56,4 @@ public class TodoListAdapter extends BaseAdapter {
         CheckBox Check;
     }
 }
+*/

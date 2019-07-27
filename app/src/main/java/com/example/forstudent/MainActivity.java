@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.forstudent.BoxClass.Assignment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
@@ -20,22 +21,26 @@ import java.util.Date;
 import io.objectbox.Box;
 
 public class MainActivity<notesBox> extends AppCompatActivity {
+    private static MainActivity instance;
+
     private TextView mTextMessage;
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
+    private Box<Assignment> assignmentBox;
 
     //박스에 들어갈 객체 선언
     private UserData user;
+    private Assignment assignment;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
     public CalendarFragment calendarFragment= new CalendarFragment();
-    public TodoFragment todoFragment= new TodoFragment();
+    //public TodoFragment todoFragment= new TodoFragment();
     public ExamFragment examFragment= new ExamFragment();
     public addNewExamSub addnewExamsub = new addNewExamSub();
-    public AddNewAssignment addNewAssignment = new AddNewAssignment();
+//    public AddNewAssignment addNewAssignment = new AddNewAssignment();
 
 
     //for storage
@@ -52,6 +57,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         ObjectBox.init(this);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -62,6 +68,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         //박스를 가져오는 작업
         userDataBox = ObjectBox.get().boxFor(UserData.class);
+        assignmentBox = ObjectBox.get().boxFor(Assignment.class);
+
         //test 유저 처음 저장 작업 (처음실행용)
         if(userDataBox.isEmpty()) {
 
@@ -107,7 +115,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                         transaction.replace(R.id.frame_layout, calendarFragment, "Calendar Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_todo:
-                        transaction.replace(R.id.frame_layout, todoFragment, "Todo Fragment").commitAllowingStateLoss();
+                    //    transaction.replace(R.id.frame_layout, todoFragment, "Todo Fragment").commitAllowingStateLoss();
                         break;
                     case R.id.navigation_exam:
                         transaction.replace(R.id.frame_layout, examFragment, "ExamFragment").commitAllowingStateLoss();
@@ -190,6 +198,18 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return user;
     }
 
+    public Box<Assignment> getAssignmentBox() {
+        return assignmentBox;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
 }
 /*
 ObjectBox 사용 안내

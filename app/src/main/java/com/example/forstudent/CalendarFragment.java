@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.EventDay;
+import com.example.forstudent.BoxClass.Assignment;
+import com.example.forstudent.BoxHelperClass.AssignmentHelper;
 
 
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ public class CalendarFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //test
+        MainActivity main = (MainActivity)getActivity();
         List<EventDay> events = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
@@ -49,9 +52,13 @@ public class CalendarFragment extends Fragment {
 
 //or if you want to specify event label color
 
-       View view = (View) inflater.inflate(R.layout.fragment_calendar,container,false);
+        View view = (View) inflater.inflate(R.layout.fragment_calendar,container,false);
 
-
+        AssignmentHelper testAssignmanet = new AssignmentHelper(0,"컴구","과제1 극혐;;;",Calendar.getInstance());
+        AssignmentHelper.putAssignment(testAssignmanet);
+        long id = testAssignmanet.getId();
+        Assignment tmp = (Assignment) main.getAssignmentBox().get(id);
+        System.out.println("ID : "+id+" 과목 : "+AssignmentHelper.getSubject(id)+" 메모 : "+AssignmentHelper.getMemo(id)+ " 기한 : " + AssignmentHelper.getPeriod(id));
        /* Box<UserData> userBox = boxStore.boxFor(UserData.class);
         MainActivity main = (MainActivity)getActivity();
         UserData testUser = new UserData(0,"TESTUSER",new Date(),999);

@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.Calendar;
-
+/*
 public class AddNewAssignment extends Fragment {
 
     Calendar today = Calendar.getInstance();
@@ -121,3 +121,4 @@ public class AddNewAssignment extends Fragment {
     }
 
 }
+*/

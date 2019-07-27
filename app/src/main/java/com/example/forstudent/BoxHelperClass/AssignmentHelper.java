@@ -7,6 +7,12 @@ import java.util.Calendar;
 
 public class  AssignmentHelper{
 
+    Assignment assignment;
+
+    public AssignmentHelper(long id,String subject,String memo,Calendar period){
+        assignment = new Assignment(id,subject,period.get(Calendar.YEAR),period.get(Calendar.MONTH)+1,period.get(Calendar.DATE),period.get(Calendar.HOUR),period.get(Calendar.MINUTE),memo);
+    }
+
     public static void setSubject(long id,String subject){
         Assignment assignment = (Assignment) MainActivity.getInstance().getAssignmentBox().get(id);
         assignment.setSubject(subject);
@@ -32,14 +38,12 @@ public class  AssignmentHelper{
         assignment.setDeadLineMinute(minute);
         MainActivity.getInstance().getAssignmentBox().put(assignment);
     }
-    public static void getSubject(long id,String subject){
-        Assignment assignment = (Assignment) MainActivity.getInstance().getAssignmentBox().get(id);
-        assignment.setSubject(subject);
-        MainActivity.getInstance().getAssignmentBox().put(assignment);
+
+    public static void putAssignment(AssignmentHelper assignment){
+        MainActivity main = MainActivity.getInstance();
+        MainActivity.getInstance().getAssignmentBox().put(assignment.assignment);
     }
-    public static void putAssignment(Assignment assignment){
-        MainActivity.getInstance().getAssignmentBox().put(assignment);
-    }
+
     public static String getSubject(long id){
         Assignment assignment = (Assignment) MainActivity.getInstance().getAssignmentBox().get(id);
         return assignment.getSubject();
@@ -67,6 +71,10 @@ public class  AssignmentHelper{
         Assignment assignment = (Assignment) MainActivity.getInstance().getAssignmentBox().get(id);
         period.set(assignment.getDeadLineYear(),assignment.getDeadLineMonth(),assignment.getDeadLineDay(),assignment.getDeadLineHour(),assignment.getDeadLineMinute());
         return period.getTimeInMillis();
+    }
+
+    public long getId(){
+        return assignment.getId();
     }
 
 }
