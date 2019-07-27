@@ -59,7 +59,7 @@ public class TodoFragment extends Fragment {
                 final int pos = position;
                 String name = adapter.data.get(position).getName();
                 String[] menu = {"수정", "삭제"};
-                Check();
+
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle(name);
