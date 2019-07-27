@@ -63,7 +63,7 @@ public class  AssignmentHelper{
         int minute;
         Calendar period = Calendar.getInstance();
         Assignment_Model assignmentModel = (Assignment_Model) MainActivity.getInstance().getAssignmentBox().get(id);
-        period.set(assignmentModel.getDeadLineYear(),assignmentModel.getDeadLineMonth(),assignmentModel.getDeadLineDay(),assignmentModel.getDeadLineHour(),assignmentModel.getDeadLineMinute());
+        period.set(assignmentModel.getDeadLineYear(),assignmentModel.getDeadLineMonth()-1,assignmentModel.getDeadLineDay(),assignmentModel.getDeadLineHour(),assignmentModel.getDeadLineMinute());
         return period;
     }
 
