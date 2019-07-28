@@ -87,10 +87,10 @@ public class AddNewAssignment extends Fragment {
                 }
                 else{
                     if(mRange.getText().length()==0){
-                        ass = new Assignment(mName.getText().toString(),period);
+                        ass = new Assignment(mName.getText().toString(),period,false);
                     }
                     else{
-                        ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString());
+                        ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString(),false);
                     }
                     MainActivity main = (MainActivity)getActivity();
                     main.todoFragment.AddNewAss(ass);

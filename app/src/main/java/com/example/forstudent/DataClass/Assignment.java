@@ -8,18 +8,21 @@ public class Assignment implements Comparable<Assignment>{
         private String Sub; // 시간표 과목 class 생기면 대체할 것 & 생성자 오버로드
         String Memo=null;
         long sorting;
+        boolean flag=false;
 
 
-        public Assignment(String name, Calendar period){
+        public Assignment(String name, Calendar period, boolean flag){
             this.Name = name;
             this.Period = period;
             this.sorting = period.getTimeInMillis();
+            this.flag = flag;
         }
 
-        public Assignment(String name, Calendar period, String sub){
+        public Assignment(String name, Calendar period, String sub, boolean flag){
             this.Name = name;
             this.Period = period;
             this.Sub = sub;
+            this.flag = flag;
         }
 
         public void setName(String name){
@@ -28,6 +31,10 @@ public class Assignment implements Comparable<Assignment>{
 
         public void setPeriod(Calendar per){
             this.Period = per;
+        }
+
+        public void setFlag(boolean flag){
+            this.flag = flag;
         }
 
         public String getName(){
@@ -40,6 +47,10 @@ public class Assignment implements Comparable<Assignment>{
 
         public String getMemo(){
             return Memo;
+        }
+
+        public boolean getFlag(){
+            return flag;
         }
 
 

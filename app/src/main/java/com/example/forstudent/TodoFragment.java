@@ -152,6 +152,11 @@ public class TodoFragment extends Fragment {
                 dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        for(int i=0; i<AssList.size(); i++){
+                            if(AssList.get(i)==ImpList.get(position)){
+                                AssList.get(i).setFlag(false);
+                            }
+                        }
                         ImpList.remove(ImportantAdapter.data.get(position));
                         ImportantAdapter.notifyDataSetChanged();
                     }
@@ -214,7 +219,7 @@ public class TodoFragment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
         main.getAssignmentBox().removeAll();
         for(int i=0; i<AssList.size(); i++){
-            AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo());
+            AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo(),AssList.get(i).getFlag());
             AssignmentHelper.putAssignment(helper);
         }
     }
@@ -244,10 +249,10 @@ public class TodoFragment extends Fragment {
         Assignment temp=null;
 
         if(a.getMemo()==null){
-            temp = new Assignment(a.getName(),a.getPeriod());
+            temp = new Assignment(a.getName(),a.getPeriod(),false);
         }
         else{
-            temp = new Assignment(a.getName(),a.getPeriod(),a.getMemo());
+            temp = new Assignment(a.getName(),a.getPeriod(),a.getMemo(),false);
         }
 
         RemoveAss(a);
@@ -274,6 +279,7 @@ public class TodoFragment extends Fragment {
     }
 
     public void setImportance(Assignment a){
+        a.setFlag(true);
         Assignment temp;
         temp = a;
         ImpList.add(temp);

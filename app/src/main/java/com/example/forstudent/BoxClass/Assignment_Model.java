@@ -23,7 +23,9 @@ public class Assignment_Model {
 
     String memo;
 
-    public Assignment_Model(long id, String subject, int deadLineYear, int deadLineMonth, int deadLineDay, int deadLineHour, int deadLineMinute) {
+    boolean flag; //중요도 표시 flag
+
+    public Assignment_Model(long id, String subject, int deadLineYear, int deadLineMonth, int deadLineDay, int deadLineHour, int deadLineMinute, boolean flag) {
         this.id = id;
         this.subject = subject;
         this.deadLineYear = deadLineYear;
@@ -31,9 +33,10 @@ public class Assignment_Model {
         this.deadLineDay = deadLineDay;
         this.deadLineHour = deadLineHour;
         this.deadLineMinute = deadLineMinute;
+        this.flag = flag;
     }
 
-    public Assignment_Model(long id, String subject, int deadLineYear, int deadLineMonth, int deadLineDay, int deadLineHour, int deadLineMinute, String memo) {
+    public Assignment_Model(long id, String subject, int deadLineYear, int deadLineMonth, int deadLineDay, int deadLineHour, int deadLineMinute, String memo, boolean flag) {
         this.id = id;
         this.subject = subject;
         this.deadLineYear = deadLineYear;
@@ -42,6 +45,7 @@ public class Assignment_Model {
         this.deadLineHour = deadLineHour;
         this.deadLineMinute = deadLineMinute;
         this.memo = memo;
+        this.flag = flag;
     }
 
 
@@ -77,6 +81,10 @@ public class Assignment_Model {
         return memo;
     }
 
+    public boolean getFlag(){
+        return flag;
+    }
+
     public void setSubject(String subject) {
         this.subject = subject;
     }
@@ -103,5 +111,9 @@ public class Assignment_Model {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public void setFlag(boolean flag){
+        this.flag = flag;
     }
 }

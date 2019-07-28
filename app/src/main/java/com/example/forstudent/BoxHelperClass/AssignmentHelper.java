@@ -10,8 +10,8 @@ public class  AssignmentHelper{
 
     public Assignment_Model assignmentModel;
 
-    public AssignmentHelper(long id,String name,Calendar period, String memo){
-        assignmentModel = new Assignment_Model(id,name,period.get(Calendar.YEAR),period.get(Calendar.MONTH)+1,period.get(Calendar.DATE),period.get(Calendar.HOUR),period.get(Calendar.MINUTE),memo);
+    public AssignmentHelper(long id,String name,Calendar period, String memo, boolean flag){
+        assignmentModel = new Assignment_Model(id,name,period.get(Calendar.YEAR),period.get(Calendar.MONTH)+1,period.get(Calendar.DATE),period.get(Calendar.HOUR),period.get(Calendar.MINUTE),memo,flag);
     }
 
     public static void setSubject(long id,String subject){
@@ -37,6 +37,12 @@ public class  AssignmentHelper{
         assignmentModel.setDeadLineDay(day);
         assignmentModel.setDeadLineHour(hour);
         assignmentModel.setDeadLineMinute(minute);
+        MainActivity.getInstance().getAssignmentBox().put(assignmentModel);
+    }
+
+    public static void setFlag(long id, boolean flag){
+        Assignment_Model assignmentModel = (Assignment_Model) MainActivity.getInstance().getAssignmentBox().get(id);
+        assignmentModel.setFlag(flag);
         MainActivity.getInstance().getAssignmentBox().put(assignmentModel);
     }
 
@@ -74,12 +80,17 @@ public class  AssignmentHelper{
         return period.getTimeInMillis();
     }
 
+    public static boolean getFlag(long id){
+        Assignment_Model assignmentModel = (Assignment_Model) MainActivity.getInstance().getAssignmentBox().get(id);
+        return assignmentModel.getFlag();
+    }
+
     public long getId(){
         return assignmentModel.getId();
     }
 
     public static Assignment getAssignment(long id){
-        Assignment assignment = new Assignment(getSubject(id),getPeriod(id),getMemo(id));
+        Assignment assignment = new Assignment(getSubject(id),getPeriod(id),getMemo(id),getFlag(id));
         return assignment;
     }
 

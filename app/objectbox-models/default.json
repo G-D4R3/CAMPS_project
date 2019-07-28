@@ -4,91 +4,84 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:4581348918191666629",
-      "lastPropertyId": "4:4684549856774653069",
-      "name": "UserData",
+      "id": "1:5948726450463328723",
+      "lastPropertyId": "9:6451408430455292841",
+      "name": "Assignment_Model",
       "properties": [
         {
-          "id": "1:3464492198573362388",
+          "id": "1:3887042924287366611",
           "name": "id"
         },
         {
-          "id": "2:1251786224008999611",
-          "indexId": "1:2906433927278294280",
-          "name": "USERNAME"
+          "id": "2:5151926301972533483",
+          "name": "subject"
         },
         {
-          "id": "3:2556872150025639318",
-          "name": "lastDay"
+          "id": "3:5363762382835498821",
+          "name": "deadLineYear"
         },
         {
-          "id": "4:4684549856774653069",
-          "name": "hello"
+          "id": "4:8683304519551870877",
+          "name": "deadLineMonth"
+        },
+        {
+          "id": "5:2237771873240599911",
+          "name": "deadLineDay"
+        },
+        {
+          "id": "6:8401163113725477856",
+          "name": "deadLineHour"
+        },
+        {
+          "id": "7:137759686475526738",
+          "name": "deadLineMinute"
+        },
+        {
+          "id": "8:2856094680985830784",
+          "name": "memo"
+        },
+        {
+          "id": "9:6451408430455292841",
+          "name": "flag"
         }
       ],
       "relations": []
     },
     {
-      "id": "3:3173279165377449986",
-      "lastPropertyId": "8:866282650337954567",
-      "name": "Assignment_Model",
+      "id": "2:2894809550555780120",
+      "lastPropertyId": "4:7400042844369661385",
+      "name": "UserData",
       "properties": [
         {
-          "id": "1:4560645341838419802",
+          "id": "1:7530362394864614633",
           "name": "id"
         },
         {
-          "id": "2:8510494046851359011",
-          "name": "subject"
+          "id": "2:8910636735676144977",
+          "indexId": "1:2359869168684455938",
+          "name": "USERNAME"
         },
         {
-          "id": "3:5357790182414432575",
-          "name": "deadLineYear"
+          "id": "3:1549174834137622156",
+          "name": "lastDay"
         },
         {
-          "id": "4:4326162623310324070",
-          "name": "deadLineMonth"
-        },
-        {
-          "id": "5:8291968140402983370",
-          "name": "deadLineDay"
-        },
-        {
-          "id": "6:7518702346155089698",
-          "name": "deadLineHour"
-        },
-        {
-          "id": "7:8857923982141088604",
-          "name": "deadLineMinute"
-        },
-        {
-          "id": "8:866282650337954567",
-          "name": "memo"
+          "id": "4:7400042844369661385",
+          "name": "hello"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "3:3173279165377449986",
-  "lastIndexId": "1:2906433927278294280",
+  "lastEntityId": "2:2894809550555780120",
+  "lastIndexId": "1:2359869168684455938",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [
-    9041166958939199842
-  ],
+  "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [
-    7427783359141296943,
-    5343020655677014311,
-    944486448663220309,
-    7080098066043232569,
-    269066643002390290,
-    8955108861080412535,
-    3469016447097553945,
-    9192137706107816959
-  ],
+  "retiredPropertyUids": [],
   "retiredRelationUids": [],
   "version": 1
 }
