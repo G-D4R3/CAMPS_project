@@ -13,8 +13,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.forstudent.BoxClass.Assignment_Model;
+import com.example.forstudent.BoxHelperClass.AssignmentHelper;
+import com.example.forstudent.DataClass.Assignment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -32,7 +35,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     //박스에 들어갈 객체 선언
     private UserData user;
-    private Assignment_Model assignment;
+    private Assignment_Model assignment_model;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
@@ -44,6 +47,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
     //for storage
+    ArrayList<Assignment> assignment = new ArrayList<>();
+    ArrayList<Assignment> important = new ArrayList<>();
 
 
     //store things
@@ -94,6 +99,17 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         }
 
         this.loadData(user);
+
+        //assignment data load
+        for(long i=1; i<=assignmentBox.count(); i++){
+            assignment.add(AssignmentHelper.getAssignment(i));
+        }
+        for(int i=0; i<assignment.size(); i++){
+            if(assignment.get(i).getFlag()==true){
+                important.add(assignment.get(i));
+            }
+        }
+
 
 
 
@@ -208,7 +224,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     }
 
     public Assignment_Model getAssignment() {
-        return assignment;
+        return assignment_model;
     }
 
 

@@ -55,19 +55,7 @@ public class TodoFragment extends Fragment {
         mIhide = (TextView)view.findViewById(R.id.hide2);
         mAhide = (TextView)view.findViewById(R.id.hide3);
 
-
-        MainActivity main = (MainActivity)getActivity();
-
-        boxSize = main.getAssignmentBox().count();
-        for(long i=1; i<boxSize+1; i++){
-            AssList.add(AssignmentHelper.getAssignment(i));
-        }
-
-        for(int i=0; i<AssList.size(); i++){
-            System.out.println(AssList.get(i).getName());
-        }
-        Collections.sort(AssList);
-
+        loadData();
 
         mTitle.setText(title);
 
@@ -153,7 +141,7 @@ public class TodoFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         for(int i=0; i<AssList.size(); i++){
-                            if(AssList.get(i)==ImpList.get(position)){
+                            if(AssList.get(i).equals(ImpList.get(position))){
                                 AssList.get(i).setFlag(false);
                             }
                         }
@@ -241,7 +229,6 @@ public class TodoFragment extends Fragment {
         else {
             title = String.format("남은 과제 : %d", AssList.size());
         }
-
         adapter.notifyDataSetChanged();
     }
 
@@ -280,9 +267,18 @@ public class TodoFragment extends Fragment {
 
     public void setImportance(Assignment a){
         a.setFlag(true);
-        Assignment temp;
-        temp = a;
-        ImpList.add(temp);
+        ImpList.add(a);
         ImportantAdapter.notifyDataSetChanged();
+    }
+
+    public void loadData(){
+        MainActivity main = (MainActivity)getActivity();
+
+        AssList = main.assignment;
+        ImpList = main.important;
+        Collections.sort(AssList);
+        Collections.sort(ImpList);
+
+        title = String.format("남은 과제 : %d", AssList.size());
     }
 }
