@@ -33,20 +33,7 @@ public class CalendarFragment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
 
 //or if you want to specify event label color
-        List<EventDay> events = new ArrayList<>();
 
-        Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.ic_arrow_left));
-        calendar.set(2019,8,14);
-        events.add(new EventDay(calendar, R.drawable.ic_launcher_foreground));
-        //EventDay event = new EventDay(calendar, R.drawable.ic_arrow_left);
-
-        View view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
-       /* main.setContentView(R.layout.fragment_calendar);
-        CalendarView calendarView = main.getCalendarView();
-
-        calendarView.setEvents(events);
-        main.setContentView(R.layout.fragment_calendar);*/
        //
         // main.setContentView(R.layout.fragment_calendar);
 
@@ -63,6 +50,29 @@ public class CalendarFragment extends Fragment {
         UserData getUser = (UserData) main.getUserDataBox().get(id);
 
         System.out.println( getUser.id+" "+getUser.getName());*/
+        View view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        MainActivity main = (MainActivity)getActivity();
+        List<EventDay> events = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        events.add(new EventDay(calendar, R.drawable.ic_arrow_left));
+        calendar.set(2019,8,14);
+        events.add(new EventDay(calendar, R.drawable.ic_launcher_foreground));
+        //EventDay event = new EventDay(calendar, R.drawable.ic_arrow_left);
+
+
+
+        CalendarView calendarView = main.getCalendarView();
+
+        calendarView.setEvents(events);
+
+
     }
 }
