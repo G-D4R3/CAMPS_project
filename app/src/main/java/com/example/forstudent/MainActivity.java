@@ -233,7 +233,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return instance;
     }
     public com.applandeo.materialcalendarview.CalendarView getCalendarView(){
-        setContentView(R.layout.fragment_calendar);
+
         CalendarView calendarView =  (CalendarView) findViewById(R.id.calendarView);
         return calendarView;
     }

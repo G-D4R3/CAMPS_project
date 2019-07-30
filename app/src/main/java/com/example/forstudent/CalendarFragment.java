@@ -38,14 +38,17 @@ public class CalendarFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         events.add(new EventDay(calendar, R.drawable.ic_arrow_left));
         calendar.set(2019,8,14);
-        events.add(new EventDay(calendar, R.drawable.ic_launcher_background));
+        events.add(new EventDay(calendar, R.drawable.ic_launcher_foreground));
         //EventDay event = new EventDay(calendar, R.drawable.ic_arrow_left);
 
         View view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
+       /* main.setContentView(R.layout.fragment_calendar);
         CalendarView calendarView = main.getCalendarView();
 
         calendarView.setEvents(events);
-       //main.setContentView(R.layout.fragment_calendar);
+        main.setContentView(R.layout.fragment_calendar);*/
+       //
+        // main.setContentView(R.layout.fragment_calendar);
 
        /* Box<UserData> userBox = boxStore.boxFor(UserData.class);
         MainActivity main = (MainActivity)getActivity();
