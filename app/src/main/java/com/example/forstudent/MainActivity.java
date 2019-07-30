@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.applandeo.materialcalendarview.CalendarView;
 import com.example.forstudent.BoxClass.Assignment_Model;
 import com.example.forstudent.BoxHelperClass.AssignmentHelper;
 import com.example.forstudent.DataClass.Assignment;
@@ -231,11 +230,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     public static MainActivity getInstance() {
         return instance;
-    }
-    public com.applandeo.materialcalendarview.CalendarView getCalendarView(){
-
-        CalendarView calendarView =  (CalendarView) findViewById(R.id.calendarView);
-        return calendarView;
     }
 }
 /*
