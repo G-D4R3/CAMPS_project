@@ -1,4 +1,4 @@
-package com.example.forstudent;
+package com.example.forstudent.ListViewAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,12 +7,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.forstudent.DataClass.TestSub;
+import com.example.forstudent.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ExamListAdapter extends BaseAdapter {
-    ArrayList<TestSub> data = null;
+    public ArrayList<TestSub> data = null;
     LayoutInflater inflater=null;
 
     public ExamListAdapter(ArrayList<TestSub> data){

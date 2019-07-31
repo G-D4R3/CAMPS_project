@@ -2,19 +2,26 @@ package com.example.forstudent;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.TestSub;
+import com.example.forstudent.ListViewAdapter.HomeAssignmentAdapter;
+import com.example.forstudent.ListViewAdapter.HomeExamAdapter;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class HomeFragment extends Fragment {
 
@@ -24,6 +31,12 @@ public class HomeFragment extends Fragment {
     private UserData user;
     final long id = 77;
     int restDay=0;
+
+    private ArrayList<Assignment> ass = new ArrayList<>();
+    private ArrayList<TestSub> tests = new ArrayList<>();
+
+    private ListView mAssignList;
+    private ListView mTestList;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -35,10 +48,38 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
+        //view 정의
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
+
+
+        //load data
+        MainActivity main = (MainActivity)getActivity();
+
+        ass = main.assignment;
+        tests = main.testSub;
+
+        for(int i=3; i<ass.size(); i++){
+            ass.remove(i);
+            tests.remove(i);
+        }
+
+        mAssignList = (ListView)view.findViewById(R.id.home_asslistview);
+        mTestList = (ListView)view.findViewById(R.id.home_examlistview);
+
+        HomeAssignmentAdapter assignmentAdapter = new HomeAssignmentAdapter(ass);
+        mAssignList.setAdapter(assignmentAdapter);
+
+        HomeExamAdapter examAdapter = new HomeExamAdapter(tests);
+        mTestList.setAdapter(examAdapter);
+
+
+
+
+
+
+
 
         datecount = new DateCount(Calendar.getInstance());
 

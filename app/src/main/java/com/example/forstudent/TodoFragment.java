@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.BoxHelperClass.AssignmentHelper;
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.ListViewAdapter.TodoListAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -256,11 +257,7 @@ public class TodoFragment extends Fragment {
     public void Check(){
         Toast toast = Toast.makeText(getContext(),"할 일 완료", Toast.LENGTH_LONG);
         toast.show();
-        for(int i=0; i<AssList.size(); i++){
-            if(adapter.viewHolder.Check.isChecked()==true){
-                RemoveAss(AssList.get(i));
-            }
-        }
+        //
         Collections.sort(AssList);
         adapter.notifyDataSetChanged();
     }

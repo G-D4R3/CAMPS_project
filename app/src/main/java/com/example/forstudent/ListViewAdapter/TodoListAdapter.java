@@ -1,4 +1,4 @@
-package com.example.forstudent;
+package com.example.forstudent.ListViewAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +8,13 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TodoListAdapter extends BaseAdapter {
-    ArrayList<Assignment> data = new ArrayList<>();
+    public ArrayList<Assignment> data = new ArrayList<>();
     TextView mHeader;
     ViewHolder viewHolder;
     int SectionHeader=1;
