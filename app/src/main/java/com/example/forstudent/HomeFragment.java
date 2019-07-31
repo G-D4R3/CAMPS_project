@@ -38,6 +38,9 @@ public class HomeFragment extends Fragment {
     private ListView mAssignList;
     private ListView mTestList;
 
+    public HomeAssignmentAdapter assignmentAdapter;
+    public HomeExamAdapter examAdapter;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +71,10 @@ public class HomeFragment extends Fragment {
         mAssignList = (ListView)view.findViewById(R.id.home_asslistview);
         mTestList = (ListView)view.findViewById(R.id.home_examlistview);
 
-        HomeAssignmentAdapter assignmentAdapter = new HomeAssignmentAdapter(ass);
+        assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
 
-        HomeExamAdapter examAdapter = new HomeExamAdapter(tests);
+        examAdapter = new HomeExamAdapter(tests);
         mTestList.setAdapter(examAdapter);
 
 
@@ -123,6 +126,12 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        assignmentAdapter.notifyDataSetChanged();
+        examAdapter.notifyDataSetChanged();
+    }
 
     public void setDateView(){
         //D-day textview set

@@ -23,6 +23,7 @@ public class Assignment implements Comparable<Assignment>{
             this.Period = period;
             this.Sub = sub;
             this.flag = flag;
+            this.sorting = period.getTimeInMillis();
         }
 
         public void setName(String name){

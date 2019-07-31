@@ -203,10 +203,18 @@ public class TodoFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Collections.sort(AssList);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         MainActivity main = (MainActivity)getActivity();
         main.getAssignmentBox().removeAll();
+        Collections.sort(AssList);
         for(int i=0; i<AssList.size(); i++){
             AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo(),AssList.get(i).getFlag());
             AssignmentHelper.putAssignment(helper);
