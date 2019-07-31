@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.forstudent.DataClass.TestSub;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ExamListAdapter extends BaseAdapter {
     ArrayList<TestSub> data = null;
@@ -53,7 +54,7 @@ public class ExamListAdapter extends BaseAdapter {
         TestSub sub = data.get(position);
 
         mSubname.setText(sub.getName());
-        mDate.setText((sub.getMonth()+1)+"월 "+sub.getDay()+"일");
+        mDate.setText(String.format("%d월 %d일", sub.getTestDate().get(Calendar.MONTH)+1, sub.getTestDate().get(Calendar.DAY_OF_MONTH)));
         mStart.setText(sub.getStartHour()+"시 "+sub.getStartMinute()+"분");
         mEnd.setText("~ "+sub.getEndHour()+"시 "+sub.getEndMinute()+"분");
 

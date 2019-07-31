@@ -13,8 +13,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.forstudent.BoxClass.Assignment_Model;
+import com.example.forstudent.BoxClass.TestSub_Model;
 import com.example.forstudent.BoxHelperClass.AssignmentHelper;
+import com.example.forstudent.BoxHelperClass.TestSubHelper;
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.TestSub;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -32,10 +35,12 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
     private Box<Assignment_Model> assignmentBox;
+    private Box<TestSub_Model> testBox;
 
     //박스에 들어갈 객체 선언
     private UserData user;
     private Assignment_Model assignment_model;
+    private TestSub_Model testSub_model;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
@@ -49,6 +54,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     //for storage
     ArrayList<Assignment> assignment = new ArrayList<>();
     ArrayList<Assignment> important = new ArrayList<>();
+    ArrayList<TestSub> testSub = new ArrayList<>();
 
 
     //store things
@@ -74,6 +80,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //박스를 가져오는 작업
         userDataBox = ObjectBox.get().boxFor(UserData.class);
         assignmentBox = ObjectBox.get().boxFor(Assignment_Model.class);
+        testBox = ObjectBox.get().boxFor(TestSub_Model.class);
 
         //test 유저 처음 저장 작업 (처음실행용)
         if(userDataBox.isEmpty()) {
@@ -108,6 +115,11 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             if(assignment.get(i).getFlag()==true){
                 important.add(assignment.get(i));
             }
+        }
+
+        //Exam data load
+        for(long i=1; i<=testBox.count(); i++){
+            testSub.add(TestSubHelper.getTestSub(i));
         }
 
 
@@ -225,6 +237,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     public Assignment_Model getAssignment() {
         return assignment_model;
+    }
+
+    public Box<TestSub_Model> getTestSubBox(){
+        return testBox;
+    }
+
+    public TestSub_Model getTestSub(){
+        return testSub_model;
     }
 
 

@@ -3,9 +3,6 @@ package com.example.forstudent;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +12,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.forstudent.BoxHelperClass.TestSubHelper;
 import com.example.forstudent.DataClass.TestSub;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
 public class ExamFragment extends Fragment{
@@ -44,6 +47,10 @@ public class ExamFragment extends Fragment{
         dday = (TextView)view.findViewById(R.id.examTitle);
 
         count = new DateCount();
+
+
+        MainActivity main = (MainActivity)getActivity();
+        ExamList = main.testSub;
 
         //listvieww
         adapter = new ExamListAdapter(ExamList);
@@ -141,11 +148,22 @@ public class ExamFragment extends Fragment{
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity main = (MainActivity)getActivity();
+        main.getTestSubBox().removeAll();
+        for(int i=0; i<ExamList.size(); i++){
+            TestSubHelper helper = new TestSubHelper((long)i+1, ExamList.get(i).getName(), ExamList.get(i).getTestDate(), ExamList.get(i).getStartHour(), ExamList.get(i).getStartMinute(), ExamList.get(i).getEndHour(), ExamList.get(i).getEndMinute(), ExamList.get(i).getRange());
+            TestSubHelper.putTestSub(helper);
+        }
+    }
+
     public void addNewsub(TestSub sub){ //nullcheck 필요? rangd null일 수 있음
         ExamList.add(sub);
         Collections.sort(ExamList);
         adapter.notifyDataSetChanged();
-        count.dcalendar.set(sub.getYear(),sub.getMonth(),sub.getDay());
+        count.dcalendar=sub.getTestDate();
         int result = count.calcDday();
         titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
     }
@@ -158,7 +176,7 @@ public class ExamFragment extends Fragment{
         }
         else{
             sub = ExamList.get(0);
-            count.dcalendar.set(sub.getYear(),sub.getMonth(),sub.getDay());
+            count.dcalendar=sub.getTestDate();
             int result = count.calcDday();
             titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
         }
@@ -168,18 +186,18 @@ public class ExamFragment extends Fragment{
     public void modifySub(TestSub sub){
         TestSub temp=null;
         if(sub.getRange().length()==0){
-            temp = new TestSub(sub.getName(),sub.getYear(),sub.getMonth(),sub.getDay(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute());
+            temp = new TestSub(sub.getName(),sub.getTestDate(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute(),null);
         }
         else{
-            temp = new TestSub(sub.getName(),sub.getYear(),sub.getMonth(),sub.getDay(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute(),sub.getRange());
+            temp = new TestSub(sub.getName(),sub.getTestDate(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute(),sub.getRange());
         }
         addNewExamSub mod = addNewExamSub.newInstance();
         MainActivity main = (MainActivity)getActivity();
         removeSub(sub);
         mod.subject = temp;
-        mod.mYear = temp.getYear();
-        mod.mMonth = temp.getMonth();
-        mod.mDay = temp.getDay();
+        mod.mYear = temp.getTestDate().get(Calendar.YEAR);
+        mod.mMonth = temp.getTestDate().get(Calendar.MONTH);
+        mod.mDay = temp.getTestDate().get(Calendar.DAY_OF_MONTH);
         mod.mSHour = temp.getStartHour();
         mod.mSMinute = temp.getStartMinute();
         mod.mEHour = temp.getEndHour();

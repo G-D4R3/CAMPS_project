@@ -185,13 +185,15 @@ public class addNewExamSub extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(mYear,mMonth,mDay);
 
                 if(MOD==true){
                     if(mRange.getText().toString().length()==0){
-                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute);
+                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,null);
                     }
                     else{
-                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
+                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
                     }
                     MainActivity main = (MainActivity)getActivity();
                     main.examFragment.addNewsub(subject);
@@ -199,10 +201,10 @@ public class addNewExamSub extends Fragment {
                 }
                 else{
                     if(mRange.getText().toString().length()==0){
-                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute);
+                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,null);
                     }
-                    else{
-                        subject = new TestSub(mSubname.getText().toString(),mYear,mMonth,mDay,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
+                    else {
+                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
                     }
 
                     if(subject.getName()==null||DATE_PICKED==false||START_PICKED==false||END_PICKED==false){

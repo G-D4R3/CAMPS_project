@@ -1,5 +1,7 @@
 package com.example.forstudent.DataClass;
 
+import java.util.Calendar;
+
 public class TestSub implements Comparable<TestSub>{
 
 
@@ -8,9 +10,7 @@ public class TestSub implements Comparable<TestSub>{
 
     private String Name=null;
 
-    private int Year=-1;
-    private int Month;
-    private int Day;
+    private Calendar TestDate=Calendar.getInstance();
 
     private int startHour=-1;
     private int startMinute;
@@ -22,44 +22,23 @@ public class TestSub implements Comparable<TestSub>{
 
     public int sorting;
 
-    public TestSub(String name, int year, int month, int day, int starthour, int startminute, int endhour, int  endminute){
+    public TestSub(String name, Calendar calendar, int starthour, int startminute, int endhour, int  endminute, String range){
         this.Name=name;
-        this.Year = year;
-        this.Month = month;
-        this.Day = day;
+        TestDate.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
         this.startHour = starthour;
         this.startMinute = startminute;
         this.endHour = endhour;
         this.endMinute = endminute;
-        this.sorting = year*10000+Month*100+Day;
+        this.sorting = calendar.get(Calendar.YEAR)*10000+calendar.get(Calendar.MONTH)*100+calendar.get(Calendar.DAY_OF_MONTH);
     }
 
-    public TestSub(String name, int year, int month, int day, int starthour, int startminute, int endhour, int  endminute, String range){
-        this.Name=name;
-        this.Year = year;
-        this.Month = month;
-        this.Day = day;
-        this.startHour = starthour;
-        this.startMinute = startminute;
-        this.endHour = endhour;
-        this.endMinute = endminute;
-        this.Range = range;
-    }
 
     public String getName(){
         return Name;
     }
 
-    public int getYear(){
-        return Year;
-    }
-
-    public int getMonth(){
-        return Month;
-    }
-
-    public int getDay(){
-        return Day;
+    public Calendar getTestDate(){
+        return TestDate;
     }
 
     public int getStartHour(){
