@@ -7,9 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,13 +31,19 @@ public class HomeFragment extends Fragment {
     private UserData user;
     final long id = 77;
     int restDay=0;
-    boolean[] layoutset;
+    boolean[] layoutset={true,true,true,true};
+    TextView mSchedule;
+    TextView mClass;
+    TextView mAssignment;
+    TextView mExam;
+    GridView mScheduleList;
+    GridView mClassList;
+    GridView mAssignList;
+    GridView mTestList;
 
     private ArrayList<Assignment> ass = new ArrayList<>();
     private ArrayList<TestSub> tests = new ArrayList<>();
 
-    private ListView mAssignList;
-    private ListView mTestList;
 
     public HomeAssignmentAdapter assignmentAdapter;
     public HomeExamAdapter examAdapter;
@@ -59,6 +64,15 @@ public class HomeFragment extends Fragment {
         today = (TextView)view.findViewById(R.id.Today);
         Button mSetup = (Button)view.findViewById(R.id.setup);
 
+        mSchedule = (TextView)view.findViewById(R.id.home_schedule);
+        mClass = (TextView)view.findViewById(R.id.home_class);
+        mAssignment = (TextView)view.findViewById(R.id.home_ass);
+        mExam = (TextView)view.findViewById(R.id.home_exam);
+        mScheduleList = (GridView)view.findViewById(R.id.home_schedulelistview);
+        mClassList = (GridView)view.findViewById(R.id.home_classlistview);
+        mAssignList = (GridView)view.findViewById(R.id.home_asslistview);
+        mTestList = (GridView)view.findViewById(R.id.home_examlistview);
+
 
         //load data
         MainActivity main = (MainActivity)getActivity();
@@ -71,8 +85,7 @@ public class HomeFragment extends Fragment {
             tests.remove(i);
         }
 
-        mAssignList = (ListView)view.findViewById(R.id.home_asslistview);
-        mTestList = (ListView)view.findViewById(R.id.home_examlistview);
+
 
         assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
@@ -108,6 +121,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        setListView(layoutset);
+
 
         //텍스트 터치 시 날짜 변경 가능
         Dday.setOnClickListener(new View.OnClickListener(){
@@ -118,7 +133,6 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        Toast toast = Toast.makeText(getContext(), "pick date", Toast.LENGTH_SHORT);
                         datecount.dcalendar.set(Calendar.YEAR,year);
                         datecount.dcalendar.set(Calendar.MONTH,month);
                         datecount.dcalendar.set(Calendar.DATE,dayOfMonth);
@@ -135,8 +149,50 @@ public class HomeFragment extends Fragment {
                 datepick.show();
             }
         });
-        //System.out.printf("today y: %d m : %d d : %d\nsetday y: %d m : %d d : %d\n",tyear,tmonth, tday, dyear, dmonth, dday);
+
+
+
+
+
         return view;
+    }
+
+    private void setListView(boolean[] layoutset) {
+
+        if(layoutset[0]==true){
+            mSchedule.setVisibility(View.VISIBLE);
+            mScheduleList.setVisibility(View.VISIBLE);
+        }
+        else{
+            mSchedule.setVisibility(View.GONE);
+            mScheduleList.setVisibility(View.GONE);
+        }
+        if(layoutset[1]==true){
+            mClass.setVisibility(View.VISIBLE);
+            mClassList.setVisibility(View.VISIBLE);
+        }
+        else{
+            mClass.setVisibility(View.GONE);
+            mClassList.setVisibility(View.GONE);
+        }
+        if(layoutset[2]==true){
+            mAssignment.setVisibility(View.VISIBLE);
+            mAssignList.setVisibility(View.VISIBLE);
+        }
+        else{
+            mAssignment.setVisibility(View.GONE);
+            mAssignList.setVisibility(View.GONE);
+        }
+        if(layoutset[3]==true){
+            mExam.setVisibility(View.VISIBLE);
+            mTestList.setVisibility(View.VISIBLE);
+        }
+        else{
+            mExam.setVisibility(View.GONE);
+            mTestList.setVisibility(View.GONE);
+        }
+
+
     }
 
     @Override

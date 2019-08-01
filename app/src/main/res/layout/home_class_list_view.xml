@@ -7,36 +7,34 @@
     android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
     android:background="@color/cardview_light_background"
-    android:layout_height="50dp">
+    android:layout_height="110dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="20dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/period4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textSize="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
+            android:textSize="25dp"
+            android:gravity="center_vertical"
             android:text="시간" />
 
         <TextView
             android:id="@+id/assign4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textSize="18dp"
-            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="25dp"
+            android:layout_marginHorizontal="30dp"
+            android:gravity="center_vertical"
             android:text="수업" />
 
     </LinearLayout>

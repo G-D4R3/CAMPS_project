@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragmentSetup extends Fragment {
-    public boolean[] select = {false, false, false, false};
+    public boolean[] select = {true, true, true, true};
 
     public static HomeFragmentSetup newInstance(){
         return new HomeFragmentSetup();
@@ -35,24 +36,9 @@ public class HomeFragmentSetup extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("설정 적용");
-                dialog.setMessage("설정을 적용 하시겠습니까?");
-                dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        MainActivity main = (MainActivity)getActivity();
-                        main.FragmentRemove(main.homeFragmentSetup);
-                    }
-                });
-                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.create();
-                dialog.show();
+                MainActivity main = (MainActivity)getActivity();
+                main.FragmentRemove(main.homeFragmentSetup);
+                Toast.makeText(getContext(), "설정이 적용됩니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -65,6 +51,7 @@ public class HomeFragmentSetup extends Fragment {
                 dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //설정 원래대로 초기화
                         MainActivity main = (MainActivity)getActivity();
                         main.FragmentRemove(main.homeFragmentSetup);
                     }
@@ -94,15 +81,16 @@ public class HomeFragmentSetup extends Fragment {
                         dialog.dismiss();
                     }
                 });
-                dialog.setMultiChoiceItems(menu, null, new DialogInterface.OnMultiChoiceClickListener() {
+                dialog.setMultiChoiceItems(menu, select, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        if(isChecked){
+                        if(isChecked==true){
                             select[which]=true;
                         }
-                        else if(!isChecked){
+                        else if(isChecked==false){
                             select[which]=false;
                         }
+                        System.out.println(which);
                     }
                 });
                 dialog.create();
