@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,7 +58,7 @@ public class addNewExamSub extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = (View)inflater.inflate(R.layout.add_new_exam_sub, container, false);
+        View view = (View)inflater.inflate(R.layout.add_new_exam_sub, container, false);
         TextView Title = (TextView)view.findViewById(R.id.fragTitle);
         final EditText mSubname = (EditText) view.findViewById(R.id.subName);
         TextView Date = (TextView)view.findViewById(R.id.Tdate);
@@ -69,6 +70,16 @@ public class addNewExamSub extends Fragment {
         TextView mCancle = (TextView)view.findViewById(R.id.cancle2);
         TextView mComplete = (TextView)view.findViewById(R.id.complete2);
         final EditText mRange = (EditText)view.findViewById(R.id.Range2);
+
+        MainActivity main = (MainActivity)getActivity();
+        InputMethodManager input = main.keypad;
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
+            }
+        });
 
 
         if(MOD==true){
@@ -89,6 +100,7 @@ public class addNewExamSub extends Fragment {
         mDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 DatePickerDialog datepick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -107,6 +119,7 @@ public class addNewExamSub extends Fragment {
         Date.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 DatePickerDialog datepick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -126,6 +139,7 @@ public class addNewExamSub extends Fragment {
 
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 TimePickerDialog timepick = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -143,6 +157,7 @@ public class addNewExamSub extends Fragment {
 
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 TimePickerDialog timepick = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -160,6 +175,7 @@ public class addNewExamSub extends Fragment {
 
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 TimePickerDialog timepick = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -177,6 +193,7 @@ public class addNewExamSub extends Fragment {
 
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 MainActivity main = (MainActivity)getActivity();
                 main.FragmentRemove(addNewExamSub.this);
             }
@@ -185,6 +202,7 @@ public class addNewExamSub extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(mYear,mMonth,mDay);
 

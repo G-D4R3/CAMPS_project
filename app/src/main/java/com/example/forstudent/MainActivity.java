@@ -1,9 +1,11 @@
 package com.example.forstudent;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,6 +58,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<Assignment> assignment = new ArrayList<>();
     ArrayList<Assignment> important = new ArrayList<>();
     ArrayList<TestSub> testSub = new ArrayList<>();
+
+    InputMethodManager keypad;
 
 
     //store things
@@ -153,12 +157,11 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             }
                 return true;
             }
+
         });
 
 
-
-
-
+        keypad = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
     }

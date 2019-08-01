@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +29,9 @@ public class AddNewAssignment extends Fragment {
     String Date;
     Boolean MOD = false;
     Boolean DATE_CHECKED=false;
+    InputMethodManager input;
+    EditText mName;
+    EditText mRange;
 
 
     public static AddNewAssignment newInstance(){
@@ -43,11 +47,20 @@ public class AddNewAssignment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = (View)inflater.inflate(R.layout.add_new_assignment, container, false);
         TextView mTitle = (TextView)view.findViewById(R.id.assTitle);
-        TextView mName = (EditText)view.findViewById(R.id.assName);
+        mName = (EditText)view.findViewById(R.id.assName);
         TextView mDate = (TextView)view.findViewById(R.id.pdate2);
         TextView mCancel = (TextView)view.findViewById(R.id.cancle4);
         TextView mComplete = (TextView)view.findViewById(R.id.complete4);
-        final EditText mRange = (EditText)view.findViewById(R.id.Range3);
+        mRange = (EditText)view.findViewById(R.id.Range3);
+        MainActivity main = (MainActivity)getActivity();
+        input = main.keypad;
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
+            }
+        });
 
         if(MOD==true){
             mName.setText(Name);
@@ -55,8 +68,10 @@ public class AddNewAssignment extends Fragment {
         }
 
         mDate.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -104,6 +119,8 @@ public class AddNewAssignment extends Fragment {
 
 
 
+
+
         return view;
 
     }
@@ -121,5 +138,6 @@ public class AddNewAssignment extends Fragment {
         });
         dialog.show();
     }
+
 
 }
