@@ -15,13 +15,14 @@ import androidx.fragment.app.Fragment;
 import com.example.forstudent.DataClass.Assignment;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
-public class CalendarFragment extends Fragment {
+public class CalendarFragment extends Fragment{
     ArrayList<Assignment> assignmentList;
     private TextView Dday;
     private TextView today;
@@ -32,7 +33,7 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //test
         CalendarDay calendarDay;
-        Collection<CalendarDay> calendarsList= new ArrayList<>();
+        Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
         MainActivity main = (MainActivity)getActivity();
         View view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         assignmentList = main.assignment;
@@ -43,8 +44,10 @@ public class CalendarFragment extends Fragment {
             int month = calendar.get(Calendar.MONTH)+1;
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             calendarDay = CalendarDay.from(year,month,day);
-            calendarsList.add(calendarDay);
+            assignmentDaysList.add(calendarDay);
         }
+
+
         /*
         calendarDay = CalendarDay.from(2019,8,14);
 
@@ -52,8 +55,13 @@ public class CalendarFragment extends Fragment {
         calendarDay = calendarDay.today();
         calendarsList.add(calendarDay);*/
         MaterialCalendarView calendarView = (MaterialCalendarView)view.findViewById(R.id.calendarView);
-        calendarView.addDecorator(new EventDecorator(Color.RED,calendarsList));
-
+        calendarView.addDecorator(new EventDecorator(Color.RED,assignmentDaysList));
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                System.out.println(date.toString());
+            }
+        });
 //or if you want to specify event label color
     /*    List<EventDay> events = new ArrayList<>();
 
@@ -84,4 +92,5 @@ public class CalendarFragment extends Fragment {
         System.out.println( getUser.id+" "+getUser.getName());*/
         return view;
     }
+
 }
