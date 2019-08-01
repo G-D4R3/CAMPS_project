@@ -49,6 +49,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public ExamFragment examFragment= new ExamFragment();
     public addNewExamSub addnewExamsub = new addNewExamSub();
     public AddNewAssignment addNewAssignment = new AddNewAssignment();
+    public HomeFragmentSetup homeFragmentSetup = new HomeFragmentSetup();
 
 
     //for storage

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class HomeFragment extends Fragment {
     private UserData user;
     final long id = 77;
     int restDay=0;
+    boolean[] layoutset;
 
     private ArrayList<Assignment> ass = new ArrayList<>();
     private ArrayList<TestSub> tests = new ArrayList<>();
@@ -55,12 +57,13 @@ public class HomeFragment extends Fragment {
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
+        Button mSetup = (Button)view.findViewById(R.id.setup);
 
 
         //load data
         MainActivity main = (MainActivity)getActivity();
 
-        ass = main.assignment;
+        ass = main.important;
         tests = main.testSub;
 
         for(int i=3; i<ass.size(); i++){
@@ -94,6 +97,16 @@ public class HomeFragment extends Fragment {
         restDay = datecount.calcDday();
         today.setText(String.format("오늘은 %d월 %d일",(datecount.tcalendar.get(Calendar.MONTH)+1),datecount.tcalendar.get(Calendar.DAY_OF_MONTH)));
         setDateView();
+
+
+        mSetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity main = (MainActivity)getActivity();
+                main.FragmentAdd(main.homeFragmentSetup);
+                layoutset = main.homeFragmentSetup.select;
+            }
+        });
 
 
         //텍스트 터치 시 날짜 변경 가능
