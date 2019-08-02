@@ -40,6 +40,8 @@ public class TodoFragment extends Fragment {
     Boolean mIvisible=true;
     Boolean mDvisible=true;
     long boxSize;
+    protected static boolean MOD = false;
+    static int mod_index;
 
 
     @Nullable
@@ -57,6 +59,7 @@ public class TodoFragment extends Fragment {
         mAhide = (TextView)view.findViewById(R.id.hide3);
 
         loadData();
+        System.out.println(AssList.size());
 
         mTitle.setText(title);
 
@@ -66,16 +69,14 @@ public class TodoFragment extends Fragment {
         ImportantAdapter = new TodoListAdapter(ImpList);
         mImportant.setAdapter(ImportantAdapter);
 
-
+        ModifyCheck();
 
 
 
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity main = (MainActivity)getActivity();
-                main.FragmentAdd(new AddNewAssignment());
-                mTitle.setText(title);
+                AddNewAss();
             }
         });
 
@@ -83,51 +84,57 @@ public class TodoFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int pos = position;
-                String name = adapter.data.get(position).getName();
-                String[] menu = {"중요도 표시","수정", "삭제"};
+                try{
+                    String name = adapter.data.get(position).getName();
+                    String[] menu = {"중요도 표시","수정", "삭제"};
 
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle(name);
-                dialog.setItems(menu, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
-                                setImportance(adapter.data.get(pos));
-                                break;
-                            case 1:
-                                ModifyAss(adapter.data.get(pos));
-                                dialog.dismiss();
-                                break;
-                            case 2:
-                                AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
-                                remove.setTitle("삭제");
-                                remove.setMessage("할 일을 삭제 합니다.");
-                                remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        RemoveAss(adapter.data.get(pos));
-                                        mTitle.setText(title);
-                                        dialog.dismiss();
-                                    }
-                                });
-                                remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    dialog.setTitle(name);
+                    dialog.setItems(menu, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case 0:
+                                    Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
+                                    setImportance(adapter.data.get(pos));
+                                    break;
+                                case 1:
+                                    dialog.dismiss();
+                                    ModifyAss(adapter.data.get(pos));
+                                    break;
+                                case 2:
+                                    AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
+                                    remove.setTitle("삭제");
+                                    remove.setMessage("할 일을 삭제 합니다.");
+                                    remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            RemoveAss(adapter.data.get(pos));
+                                            mTitle.setText(title);
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
 
-                                    }
-                                });
-                                remove.show();
-                                break;
+                                        }
+                                    });
+                                    remove.show();
+                                    break;
 
+                            }
                         }
-                    }
-                });
-                dialog.create();
-                dialog.show();
+                    });
+                    dialog.create();
+                    dialog.show();
+                }
+                catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -202,6 +209,13 @@ public class TodoFragment extends Fragment {
         return view;
     }
 
+    private void ModifyCheck() {
+        if(MOD==true){
+            AssList.remove(AssList.size()-2);
+            MOD=false;
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -214,15 +228,21 @@ public class TodoFragment extends Fragment {
         super.onDestroy();
         MainActivity main = (MainActivity)getActivity();
         main.getAssignmentBox().removeAll();
-        Collections.sort(AssList);
-        for(int i=0; i<AssList.size(); i++){
-            AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo(),AssList.get(i).getFlag());
-            AssignmentHelper.putAssignment(helper);
+        if(AssList.size()!=0){
+            for(int i=0; i<AssList.size(); i++){
+                AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo(),AssList.get(i).getFlag());
+                AssignmentHelper.putAssignment(helper);
+            }
         }
     }
 
-    public void AddNewAss(Assignment a){
-        AssList.add(a);
+    public void AddNewAss(){
+
+
+        MainActivity main = (MainActivity)getActivity();
+        AddNewAssignment fragment = AddNewAssignment.newInstance();
+        main.FragmentAdd(fragment);
+
         Collections.sort(AssList);
         adapter.notifyDataSetChanged();
         title = String.format("남은 과제 : %d",AssList.size());
@@ -242,24 +262,17 @@ public class TodoFragment extends Fragment {
     }
 
     public void ModifyAss(Assignment a){
-        Assignment temp=null;
 
-        if(a.getMemo()==null){
-            temp = new Assignment(a.getName(),a.getPeriod(),false);
-        }
-        else{
-            temp = new Assignment(a.getName(),a.getPeriod(),a.getMemo(),false);
-        }
-
-        RemoveAss(a);
         MainActivity main = (MainActivity)getActivity();
         AddNewAssignment fragment = AddNewAssignment.newInstance();
-        fragment.ass = a;
+        fragment.setAss(a);
         fragment.MOD=true;
         fragment.Name=a.getName();
+        fragment.range = a.getMemo();
         fragment.Date = String.format((a.getPeriod().get(Calendar.MONTH)+1)+"월 "+a.getPeriod().get(Calendar.DAY_OF_MONTH)+"일");
         main.FragmentAdd(fragment);
         adapter.notifyDataSetChanged();
+
     }
 
     public void Check(){

@@ -17,8 +17,6 @@ public class TodoListAdapter extends BaseAdapter {
     public ArrayList<Assignment> data = new ArrayList<>();
     TextView mHeader;
     ViewHolder viewHolder;
-    int SectionHeader=1;
-    int DATA=2;
 
     public TodoListAdapter(ArrayList<Assignment> input){
         this.data = input;
@@ -47,9 +45,15 @@ public class TodoListAdapter extends BaseAdapter {
         TextView mName = (TextView)convertView.findViewById(R.id.assign);
         CheckBox mCheck = (CheckBox)convertView.findViewById(R.id.checkBox);
 
-        Assignment ass = (Assignment)data.get(position);
-        mPeriod.setText(String.format("%d.%2d",(ass.getPeriod().get(Calendar.MONTH)+1),ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
-        mName.setText(ass.getName());
+        try{
+            Assignment ass = (Assignment)data.get(position);
+            mPeriod.setText(String.format("%d.%2d",(ass.getPeriod().get(Calendar.MONTH)+1),ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
+            mName.setText(ass.getName());
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
 
 
         return convertView;

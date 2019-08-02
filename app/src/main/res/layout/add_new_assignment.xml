@@ -113,8 +113,7 @@
             android:layout_marginRight="20dp"
             android:textSize="18dp"
             android:hint="memo"
-            android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:gravity="start|top" />
 
 
     </LinearLayout>

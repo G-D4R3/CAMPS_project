@@ -27,11 +27,13 @@ public class AddNewAssignment extends Fragment {
     Assignment ass;
     String Name;
     String Date;
+    String range;
     Boolean MOD = false;
     Boolean DATE_CHECKED=false;
     InputMethodManager input;
     EditText mName;
     EditText mRange;
+    static boolean iscanceled;
 
 
     public static AddNewAssignment newInstance(){
@@ -63,8 +65,11 @@ public class AddNewAssignment extends Fragment {
         });
 
         if(MOD==true){
-            mName.setText(Name);
-            mDate.setText(Date);
+            DATE_CHECKED=true;
+            mName.setText(ass.getName());
+            mDate.setText(String.format("%d월 %d일",ass.getPeriod().get(Calendar.MONTH)+1,ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
+            //System.out.println(ass.getMemo());
+            mRange.setText(ass.getMemo());
         }
 
         mDate.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +93,8 @@ public class AddNewAssignment extends Fragment {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                iscanceled=true;
+                ass=null;
                 MainActivity main = (MainActivity)getActivity();
                 main.FragmentRemove(AddNewAssignment.this);
             }
@@ -96,23 +103,21 @@ public class AddNewAssignment extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                iscanceled=false;
+                main.todoFragment.AssList.remove(ass);
                 if(mName.getText().length()==0 || DATE_CHECKED==false){
                     setYetDialog();
                 }
                 else{
-                    if(mRange.getText().length()==0){
-                        ass = new Assignment(mName.getText().toString(),period,false);
-                    }
-                    else{
-                        ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString(),false);
-                    }
-                    MainActivity main = (MainActivity)getActivity();
-                    main.todoFragment.AddNewAss(ass);
-                    main.FragmentRemove(AddNewAssignment.this);
+                    ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString(),false);
                 }
 
+                MainActivity main = (MainActivity)getActivity();
+                main.todoFragment.AssList.add(ass);
+                main.FragmentRemove(AddNewAssignment.this);
+
             }
+
         });
 
 
@@ -133,10 +138,14 @@ public class AddNewAssignment extends Fragment {
         dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //
+                dialog.dismiss();
             }
         });
         dialog.show();
+    }
+
+    public void setAss(Assignment a){
+        this.ass = a;
     }
 
 

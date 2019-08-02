@@ -25,17 +25,6 @@ public class Assignment_Model {
 
     boolean flag; //중요도 표시 flag
 
-    public Assignment_Model(long id, String subject, int deadLineYear, int deadLineMonth, int deadLineDay, int deadLineHour, int deadLineMinute, boolean flag) {
-        this.id = id;
-        this.subject = subject;
-        this.deadLineYear = deadLineYear;
-        this.deadLineMonth = deadLineMonth;
-        this.deadLineDay = deadLineDay;
-        this.deadLineHour = deadLineHour;
-        this.deadLineMinute = deadLineMinute;
-        this.flag = flag;
-    }
-
     public Assignment_Model(long id, String subject, int deadLineYear, int deadLineMonth, int deadLineDay, int deadLineHour, int deadLineMinute, String memo, boolean flag) {
         this.id = id;
         this.subject = subject;

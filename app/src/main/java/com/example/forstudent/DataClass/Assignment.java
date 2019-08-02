@@ -5,23 +5,15 @@ import java.util.Calendar;
 public class Assignment implements Comparable<Assignment>{
         private String Name=null;
         private Calendar Period;
-        private String Sub; // 시간표 과목 class 생기면 대체할 것 & 생성자 오버로드
-        String Memo=null;
+        String Memo;
         long sorting;
         boolean flag=false;
 
 
-        public Assignment(String name, Calendar period, boolean flag){
+        public Assignment(String name, Calendar period, String memo, boolean flag){
             this.Name = name;
             this.Period = period;
-            this.sorting = period.getTimeInMillis();
-            this.flag = flag;
-        }
-
-        public Assignment(String name, Calendar period, String sub, boolean flag){
-            this.Name = name;
-            this.Period = period;
-            this.Sub = sub;
+            this.Memo = memo;
             this.flag = flag;
             this.sorting = period.getTimeInMillis();
         }
