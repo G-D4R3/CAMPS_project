@@ -38,23 +38,11 @@ public class CalendarFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //test
-        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCc");
-        CalendarDay calendarDay;
-        Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
 
         main = (MainActivity)getActivity();
         schedules = main.schedules;
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         assignmentList = main.assignment;
-        for(Assignment tmp : assignmentList){
-            System.out.println(tmp.getPeriod());
-            Calendar calendar = tmp.getPeriod();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH)+1;
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            calendarDay = CalendarDay.from(year,month,day);
-            assignmentDaysList.add(calendarDay);
-        }
 
 
         /*
@@ -64,7 +52,7 @@ public class CalendarFragment extends Fragment{
         calendarDay = calendarDay.today();
         calendarsList.add(calendarDay);*/
         calendarView = (MaterialCalendarView)view.findViewById(R.id.calendarView);
-        calendarView.addDecorator(new EventDecorator(Color.RED,assignmentDaysList));
+
 
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
@@ -86,51 +74,36 @@ public class CalendarFragment extends Fragment{
             }
         });
 
-
-    /*    List<EventDay> events = new ArrayList<>();
-
-        Calendar calendar = Calendar.getInstance();
-        events.add(new EventDay(calendar, R.drawable.three_icons));
-        calendar.set(2019,8,14);
-        events.add(new EventDay(calendar, R.drawable.three_icons));
-        //EventDay event = new EventDay(calendar, R.drawable.ic_arrow_left);
-
-
-        CalendarView calendarView = (CalendarView)view.findViewById(R.id.calendarView);
-
-        calendarView.setEvents(events);*/
-       //main.setContentView(R.layout.fragment_calendar);
-
-       /* Box<UserData> userBox = boxStore.boxFor(UserData.class);
-        MainActivity main = (MainActivity)getActivity();
-        UserData testUser = new UserData(0,"TESTUSER",new Date(),999);
-        main.getUserDataBox().put(testUser);
-        long id = testUser.id;
-        String name = testUser.name;
-
-        System.out.println(id+" "+testUser.getName());
-        testUser.setName("NEW TEST NAME");
-        main.getUserDataBox().put(testUser);
-        UserData getUser = (UserData) main.getUserDataBox().get(id);
-
-        System.out.println( getUser.id+" "+getUser.getName());*/
         return view;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPp");
+    public void onStart() {
+        super.onStart();
+
+
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+    public void dotAssignment(){
+        CalendarDay calendarDay;
+        Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
+
+        for(Assignment tmp : assignmentList){
+            System.out.println(tmp.getPeriod());
+            Calendar calendar = tmp.getPeriod();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH)+1;
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            calendarDay = CalendarDay.from(year,month,day);
+            assignmentDaysList.add(calendarDay);
+        }
+        calendarView.addDecorator(new EventDecorator(Color.RED,assignmentDaysList));
     }
+
     public void dotSchedule(){
         Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
         CalendarDay calendarDay;
+
         for(Schedule tmp : schedules){
             System.out.println(tmp.getDate());
             Calendar calendar = tmp.getDate();

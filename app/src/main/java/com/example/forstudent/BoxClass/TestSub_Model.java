@@ -1,5 +1,7 @@
 package com.example.forstudent.BoxClass;
 
+import com.example.forstudent.DataClass.TestSub;
+
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 
@@ -35,6 +37,7 @@ public class TestSub_Model {
         this.endMinute = endminute;
         this.Range = range;
     }
+    public TestSub_Model(){}
     public void setName(String name){
         this.Name = name;
     }
