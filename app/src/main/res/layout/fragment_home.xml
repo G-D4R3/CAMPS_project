@@ -35,7 +35,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/barun"
                 android:text="D-day 설정하기"
-                android:textSize="80px"
+                android:textSize="30dp"
                 android:textColor="#3F3F3F"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="238dp" />
@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/barun"
                 android:text="Today"
-                android:textSize="50px"
+                android:textSize="20dp"
                 android:textColor="#707070"
                 app:layout_constraintStart_toStartOf="@+id/Dday"
                 app:layout_constraintTop_toBottomOf="@+id/Dday" />

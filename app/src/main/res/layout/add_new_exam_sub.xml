@@ -100,6 +100,7 @@
                     android:layout_weight="1"
                     android:textSize="20dp"
                     android:gravity="right"
+                    android:hint="설정하기"
                     android:text="" />
             </LinearLayout>
 
@@ -124,6 +125,7 @@
                     android:layout_weight="1"
                     android:textSize="20dp"
                     android:gravity="right"
+                    android:hint="설정하기"
                     android:text="" />
             </LinearLayout>
 
@@ -148,6 +150,7 @@
                     android:layout_weight="1"
                     android:textSize="20dp"
                     android:gravity="right"
+                    android:hint="설정하기"
                     android:text="" />
             </LinearLayout>
 
