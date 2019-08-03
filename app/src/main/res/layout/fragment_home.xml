@@ -17,13 +17,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
+            <ImageButton
                 android:id="@+id/setup"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:layout_gravity="right"
-                android:fontFamily="@font/barun"
-                android:text="설정" />
+                android:src="@drawable/setup"
+                />
 
             <TextView
                 android:id="@+id/Dday"

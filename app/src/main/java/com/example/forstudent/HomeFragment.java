@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
-        Button mSetup = (Button)view.findViewById(R.id.setup);
+        ImageButton mSetup = (ImageButton)view.findViewById(R.id.setup);
 
         mSchedule = (TextView)view.findViewById(R.id.home_schedule);
         mClass = (TextView)view.findViewById(R.id.home_class);
