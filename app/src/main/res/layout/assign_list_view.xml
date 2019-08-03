@@ -44,6 +44,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="right" />
+            android:gravity="right"
+            android:focusable="false"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

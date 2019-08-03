@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.Collections;
 
 public class TodoFragment extends Fragment {
-    ArrayList<Assignment> AssList = new ArrayList<Assignment>();
+    public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
     ArrayList<Assignment> ImpList = new ArrayList<Assignment>();
     TodoListAdapter adapter;
     TodoListAdapter ImportantAdapter;
@@ -83,6 +83,7 @@ public class TodoFragment extends Fragment {
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 final int pos = position;
                 try{
                     String name = adapter.data.get(position).getName();

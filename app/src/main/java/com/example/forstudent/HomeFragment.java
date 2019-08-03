@@ -74,18 +74,12 @@ public class HomeFragment extends Fragment {
         mTestList = (GridView)view.findViewById(R.id.home_examlistview);
 
 
+        datecount = new DateCount(Calendar.getInstance());
+
         //load data
         MainActivity main = (MainActivity)getActivity();
-
         ass = main.important;
         tests = main.testSub;
-
-        for(int i=3; i<ass.size(); i++){
-            ass.remove(i);
-            tests.remove(i);
-        }
-
-
 
         assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
@@ -95,12 +89,6 @@ public class HomeFragment extends Fragment {
 
 
 
-
-
-
-
-
-        datecount = new DateCount(Calendar.getInstance());
 
         /*objectBox에서 불러오기*/
 
@@ -156,7 +144,6 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
     private void setListView(boolean[] layoutset) {
 
         if(layoutset[0]==true){
@@ -215,6 +202,8 @@ public class HomeFragment extends Fragment {
             Dday.setText(String.format("종강하고 D+%d",temp));
         }
     }
+
+
 
 
 
