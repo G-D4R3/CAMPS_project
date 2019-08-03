@@ -100,8 +100,6 @@ public class AddNewAssignment extends Fragment {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iscanceled=true;
-                ass=null;
                 MainActivity main = (MainActivity)getActivity();
                 main.FragmentRemove(AddNewAssignment.this);
             }
@@ -110,7 +108,6 @@ public class AddNewAssignment extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iscanceled=false;
                 main.todoFragment.AssList.remove(ass);
                 if(mName.getText().length()==0 || DATE_CHECKED==false){
                     setYetDialog();

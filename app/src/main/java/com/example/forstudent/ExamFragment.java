@@ -84,9 +84,7 @@ public class ExamFragment extends Fragment{
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        addNewExamSub add = addNewExamSub.newInstance();
-                        MainActivity main = (MainActivity)getActivity();
-                        main.FragmentAdd(add);
+                        addNewsub();
 
                     }
                 };
@@ -160,13 +158,20 @@ public class ExamFragment extends Fragment{
         }
     }
 
-    public void addNewsub(TestSub sub){ //nullcheck 필요? rangd null일 수 있음
-        ExamList.add(sub);
-        Collections.sort(ExamList);
-        adapter.notifyDataSetChanged();
-        count.dcalendar=sub.getTestDate();
-        int result = count.calcDday();
-        titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
+    public void addNewsub(){ //nullcheck 필요? rangd null일 수 있음
+
+        addNewExamSub add = addNewExamSub.newInstance();
+        MainActivity main = (MainActivity)getActivity();
+        main.FragmentAdd(add);
+
+        if (ExamList.size() > 0) {
+
+            Collections.sort(ExamList);
+            adapter.notifyDataSetChanged();
+            count.dcalendar=ExamList.get(0).getTestDate();
+            int result = count.calcDday();
+            titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
+        }
     }
 
     public void removeSub(TestSub sub){
@@ -185,26 +190,20 @@ public class ExamFragment extends Fragment{
     }
 
     public void modifySub(TestSub sub){
-        TestSub temp=null;
-        if(sub.getRange().length()==0){
-            temp = new TestSub(sub.getName(),sub.getTestDate(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute(),null);
-        }
-        else{
-            temp = new TestSub(sub.getName(),sub.getTestDate(),sub.getStartHour(),sub.getStartMinute(),sub.getEndHour(),sub.getEndMinute(),sub.getRange());
-        }
+
         addNewExamSub mod = addNewExamSub.newInstance();
         MainActivity main = (MainActivity)getActivity();
-        removeSub(sub);
-        mod.subject = temp;
-        mod.mYear = temp.getTestDate().get(Calendar.YEAR);
-        mod.mMonth = temp.getTestDate().get(Calendar.MONTH);
-        mod.mDay = temp.getTestDate().get(Calendar.DAY_OF_MONTH);
-        mod.mSHour = temp.getStartHour();
-        mod.mSMinute = temp.getStartMinute();
-        mod.mEHour = temp.getEndHour();
-        mod.mEMinute = temp.getEndMinute();
+        mod.subject = sub;
+        mod.mYear = sub.getTestDate().get(Calendar.YEAR);
+        mod.mMonth = sub.getTestDate().get(Calendar.MONTH);
+        mod.mDay = sub.getTestDate().get(Calendar.DAY_OF_MONTH);
+        mod.mSHour = sub.getStartHour();
+        mod.mSMinute = sub.getStartMinute();
+        mod.mEHour = sub.getEndHour();
+        mod.mEMinute = sub.getEndMinute();
         mod.MOD = true;
         main.FragmentAdd(mod);
+
         adapter.notifyDataSetChanged();
     }
 

@@ -94,9 +94,6 @@ public class addNewExamSub extends Fragment {
             mDate.setText((mMonth+1)+"월 "+mDay+"일");
             mStart.setText(mSHour+"시 "+mSMinute+"분");
             mEnd.setText(mEHour+"시 "+mEMinute+"분");
-            if(subject.getRange()!=null){
-                mRange.setText(subject.getRange());
-            }
             DATE_PICKED=true;
             START_PICKED=true;
             END_PICKED=true;
@@ -164,6 +161,7 @@ public class addNewExamSub extends Fragment {
 
             @Override
             public void onClick(View v) {
+                hideKey();
                 MainActivity main = (MainActivity)getActivity();
                 main.FragmentRemove(addNewExamSub.this);
             }
@@ -172,10 +170,12 @@ public class addNewExamSub extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKey();
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(mYear,mMonth,mDay);
 
                 if(MOD==true){
+                    main.examFragment.ExamList.remove(subject);
                     if(mRange.getText().toString().length()==0){
                         subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,null);
                     }
@@ -183,7 +183,7 @@ public class addNewExamSub extends Fragment {
                         subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
                     }
                     MainActivity main = (MainActivity)getActivity();
-                    main.examFragment.addNewsub(subject);
+                    main.examFragment.ExamList.add(subject);
                     main.FragmentRemove(addNewExamSub.this);
                 }
                 else{
@@ -199,7 +199,7 @@ public class addNewExamSub extends Fragment {
                     }
                     else{
                         MainActivity main = (MainActivity)getActivity();
-                        main.examFragment.addNewsub(subject);
+                        main.examFragment.ExamList.add(subject);
                         main.FragmentRemove(addNewExamSub.this);
                     }
                 }
