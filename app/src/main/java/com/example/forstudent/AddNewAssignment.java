@@ -118,6 +118,7 @@ public class AddNewAssignment extends Fragment {
 
                 MainActivity main = (MainActivity)getActivity();
                 main.todoFragment.AssList.add(ass);
+                main.calendarFragment.dotAssignment();
                 main.FragmentRemove(AddNewAssignment.this);
 
             }
