@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.Schedule;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
@@ -27,6 +28,7 @@ public class CalendarFragment extends Fragment{
     ArrayList<Assignment> assignmentList;
     private TextView Dday;
     private TextView today;
+    ArrayList<Schedule> schedules;
     @Nullable
     @Override
 
@@ -35,7 +37,9 @@ public class CalendarFragment extends Fragment{
 //test
         CalendarDay calendarDay;
         Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
+
         MainActivity main = (MainActivity)getActivity();
+        schedules = main.schedules;
         View view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         assignmentList = main.assignment;
         for(Assignment tmp : assignmentList){

@@ -77,7 +77,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/assName"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -95,7 +95,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/pdate"
+                    android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -103,7 +103,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/pdate2"
+                    android:id="@+id/timeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -125,7 +125,7 @@
 
 
             <EditText
-                android:id="@+id/Range3"
+                android:id="@+id/memo"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"

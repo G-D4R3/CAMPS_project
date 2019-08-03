@@ -31,12 +31,15 @@ public class UserData {
 
     int hello;
 
+
+
     //생성자에 모든 요소들을 넣어줘야함. 당장 쓰지 않더라도 디폴트 값이라도 넣어줄 것.
     public UserData(long id,String name,Date lastDay,int hello){
         this.id = id;
         this.name = name;
         this.lastDay = lastDay;
         this.hello  =hello;
+
     }
     public void setName(String name){
         this.name = name;
@@ -53,4 +56,5 @@ public class UserData {
         cal.setTime(lastDay);
         return cal;
     }
+
 }

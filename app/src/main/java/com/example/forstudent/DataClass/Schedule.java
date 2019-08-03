@@ -16,6 +16,12 @@ public class Schedule {
         this.important = important;
     }
 
+    public Schedule(String title, Calendar date, boolean important) {
+        this.title = title;
+        this.date = date;
+        this.important = important;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -46,5 +52,15 @@ public class Schedule {
 
     public void setImportant(boolean important) {
         this.important = important;
+    }
+
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "title='" + title + '\'' +
+                ", date=" + date +
+                ", memo='" + memo + '\'' +
+                ", important=" + important +
+                '}';
     }
 }
