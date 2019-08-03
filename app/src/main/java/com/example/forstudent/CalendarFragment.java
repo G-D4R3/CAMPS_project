@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.forstudent.DataClass.Assignment;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.time.LocalDate;
@@ -60,6 +61,19 @@ public class CalendarFragment extends Fragment{
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 System.out.println(date.toString());
+            }
+        });
+        calendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
+            @Override
+            public void onDateLongClick(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date) {
+                System.out.println("Long" + date.toString());
+                AddNewSchedule addFragment = AddNewSchedule.newInstance();
+                MainActivity main = (MainActivity)getActivity();
+                addFragment.year = date.getYear();
+                addFragment.month = date.getMonth();
+                addFragment.day = date.getDay();
+
+                main.FragmentAdd(addFragment);
             }
         });
 //or if you want to specify event label color

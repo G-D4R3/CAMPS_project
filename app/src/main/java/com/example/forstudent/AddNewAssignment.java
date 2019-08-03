@@ -52,8 +52,8 @@ public class AddNewAssignment extends Fragment {
         TextView mTitle = (TextView)view.findViewById(R.id.assTitle);
         mName = (EditText)view.findViewById(R.id.assName);
         TextView mDate = (TextView)view.findViewById(R.id.pdate2);
-        TextView mCancel = (TextView)view.findViewById(R.id.cancle4);
-        TextView mComplete = (TextView)view.findViewById(R.id.complete4);
+        TextView mCancel = (TextView)view.findViewById(R.id.cancle_add_schedule);
+        TextView mComplete = (TextView)view.findViewById(R.id.complete_add_schedule);
         mRange = (EditText)view.findViewById(R.id.Range3);
         MainActivity main = (MainActivity)getActivity();
         input = main.keypad;

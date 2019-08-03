@@ -15,10 +15,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.forstudent.BoxClass.Assignment_Model;
+import com.example.forstudent.BoxClass.Schedule_Model;
 import com.example.forstudent.BoxClass.TestSub_Model;
 import com.example.forstudent.BoxHelperClass.AssignmentHelper;
+import com.example.forstudent.BoxHelperClass.ScheduleHelper;
 import com.example.forstudent.BoxHelperClass.TestSubHelper;
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -38,11 +41,13 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private Box<UserData> userDataBox;
     private Box<Assignment_Model> assignmentBox;
     private Box<TestSub_Model> testBox;
+    private Box<Schedule_Model> scheduleBox;
 
     //박스에 들어갈 객체 선언
     private UserData user;
     private Assignment_Model assignment_model;
     private TestSub_Model testSub_model;
+    private Schedule_Model schedule_model;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
@@ -58,6 +63,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<Assignment> assignment = new ArrayList<>();
     ArrayList<Assignment> important = new ArrayList<>();
     ArrayList<TestSub> testSub = new ArrayList<>();
+    ArrayList<Schedule> schedules = new ArrayList<>();
 
     InputMethodManager keypad;
 
@@ -73,6 +79,21 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //
+        Calendar b = Calendar.getInstance();
+        b.set(2019,8,14);
+        TestSubClass testSubClass = new TestSubClass("컴네",Calendar.getInstance(),"aaah",b);
+        System.out.println(testSubClass);
+        TestSuper testSuper = testSubClass;
+        TestSubClass output = (TestSubClass)testSuper;
+        System.out.println(output);
+
+
+        //
+
+
+
         instance = this;
         ObjectBox.init(this);
         setContentView(R.layout.activity_main);
@@ -86,6 +107,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         userDataBox = ObjectBox.get().boxFor(UserData.class);
         assignmentBox = ObjectBox.get().boxFor(Assignment_Model.class);
         testBox = ObjectBox.get().boxFor(TestSub_Model.class);
+        scheduleBox = ObjectBox.get().boxFor(Schedule_Model.class);
 
         //test 유저 처음 저장 작업 (처음실행용)
         if(userDataBox.isEmpty()) {
@@ -111,6 +133,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         }
 
         this.loadData(user);
+        //schedule data load
+        for(long i=1; i<=scheduleBox.count(); i++){
+            schedules.add(ScheduleHelper.getSchedule(i));
+        }
 
         //assignment data load
         for(long i=1; i<=assignmentBox.count(); i++){
@@ -228,6 +254,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public Box getUserDataBox(){
         return userDataBox;
     }
+    public Box getScheduleBox(){return scheduleBox;}
     public void setLastDay(Date lastDay){
         this.lastDay = lastDay;
     }
