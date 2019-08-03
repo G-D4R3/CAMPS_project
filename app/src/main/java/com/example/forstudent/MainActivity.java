@@ -80,15 +80,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //
-        Calendar b = Calendar.getInstance();
-        b.set(2019,8,14);
-        TestSubClass testSubClass = new TestSubClass("컴네",Calendar.getInstance(),"aaah",b);
-        System.out.println(testSubClass);
-        TestSuper testSuper = testSubClass;
-        TestSubClass output = (TestSubClass)testSuper;
-        System.out.println(output);
-
 
         //
 
