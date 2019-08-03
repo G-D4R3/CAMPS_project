@@ -69,7 +69,6 @@ public class TodoFragment extends Fragment {
         ImportantAdapter = new TodoListAdapter(ImpList);
         mImportant.setAdapter(ImportantAdapter);
 
-        ModifyCheck();
 
 
 
@@ -99,6 +98,7 @@ public class TodoFragment extends Fragment {
                                 case 0:
                                     Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
                                     setImportance(adapter.data.get(pos));
+                                    mImportant.setVisibility(View.VISIBLE);
                                     break;
                                 case 1:
                                     dialog.dismiss();
@@ -156,6 +156,9 @@ public class TodoFragment extends Fragment {
                         }
                         ImpList.remove(ImportantAdapter.data.get(position));
                         ImportantAdapter.notifyDataSetChanged();
+                        if(ImpList.size()==0){
+                            mImportant.setVisibility(View.GONE);
+                        }
                     }
                 });
                 dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -210,12 +213,7 @@ public class TodoFragment extends Fragment {
         return view;
     }
 
-    private void ModifyCheck() {
-        if(MOD==true){
-            AssList.remove(AssList.size()-2);
-            MOD=false;
-        }
-    }
+
 
     @Override
     public void onStart() {

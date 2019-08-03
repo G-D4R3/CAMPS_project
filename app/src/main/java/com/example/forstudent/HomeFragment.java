@@ -102,7 +102,6 @@ public class HomeFragment extends Fragment {
 
 
 
-
         /*objectBox에서 불러오기*/
 
         datecount.dcalendar=user.getLastDay();
@@ -161,21 +160,21 @@ public class HomeFragment extends Fragment {
     }
 
     private void setExist() {
-        if(ass.size()>0){
-            mAssignList.setVisibility(View.VISIBLE);
-            mNoAssignment.setVisibility(View.GONE);
+        if(layoutset[2]==true){
+            if(ass.size()>0){
+                mNoAssignment.setVisibility(View.GONE);
+            }
+            else{
+                mNoAssignment.setVisibility(View.VISIBLE);
+            }
         }
-        else{
-            mAssignList.setVisibility(View.GONE);
-            mNoAssignment.setVisibility(View.VISIBLE);
-        }
-        if(tests.size()>0){
-            mTestList.setVisibility(View.VISIBLE);
-            mNoExam.setVisibility(View.GONE);
-        }
-        else{
-            mTestList.setVisibility(View.GONE);
-            mNoExam.setVisibility(View.VISIBLE);
+        if(layoutset[3]==true){
+            if(tests.size()>0){
+                mNoExam.setVisibility(View.GONE);
+            }
+            else{
+                mNoExam.setVisibility(View.VISIBLE);
+            }
         }
     }
 

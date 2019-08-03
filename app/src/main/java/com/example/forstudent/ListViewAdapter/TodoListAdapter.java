@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.MainActivity;
@@ -55,6 +56,7 @@ public class TodoListAdapter extends BaseAdapter {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) { //나중에 애니메이션 추가
                     MainActivity main = MainActivity.getInstance();
+                    Toast.makeText(main.todoFragment.getContext(),"완료",Toast.LENGTH_SHORT).show();
                     main.todoFragment.RemoveAss(main.todoFragment.AssList.get(position));
                 }
             }

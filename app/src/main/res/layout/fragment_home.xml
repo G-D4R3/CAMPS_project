@@ -150,10 +150,10 @@
                     android:id="@+id/noassignment"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:fontFamily="@font/barun"
                     android:gravity="center"
-                    android:fontFamily="@font/round_regular"
-                    android:textColor="#6F6F6F"
-                    android:text="과제가 없습니다." />
+                    android:text="일정이 없습니다."
+                    android:textColor="#6F6F6F" />
 
                 <GridView
                     android:id="@+id/home_asslistview"
