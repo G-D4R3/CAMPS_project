@@ -196,6 +196,7 @@ public class ExamFragment extends Fragment{
         mod.mEHour = sub.getEndHour();
         mod.mEMinute = sub.getEndMinute();
         mod.MOD = true;
+        mod.range = sub.getRange();
         main.FragmentAdd(mod);
         Collections.sort(ExamList);
 

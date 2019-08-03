@@ -26,6 +26,7 @@ import java.util.Calendar;
 public class addNewExamSub extends Fragment {
     public boolean MOD = false;
     public String title;
+    public String range;
     Calendar calendar = Calendar.getInstance();
     String mName=null;
     int mYear = calendar.get(Calendar.YEAR);
@@ -94,6 +95,7 @@ public class addNewExamSub extends Fragment {
             mDate.setText((mMonth+1)+"월 "+mDay+"일");
             mStart.setText(mSHour+"시 "+mSMinute+"분");
             mEnd.setText(mEHour+"시 "+mEMinute+"분");
+            mRange.setText(range);
             DATE_PICKED=true;
             START_PICKED=true;
             END_PICKED=true;

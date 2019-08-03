@@ -18,7 +18,7 @@ public class TestSub implements Comparable<TestSub>{
     private int endHour=-1;
     private int endMinute;
 
-    private String Range=null;
+    private String range=null;
 
     public int sorting;
 
@@ -30,6 +30,7 @@ public class TestSub implements Comparable<TestSub>{
         this.endHour = endhour;
         this.endMinute = endminute;
         this.sorting = calendar.get(Calendar.YEAR)*10000+calendar.get(Calendar.MONTH)*100+calendar.get(Calendar.DAY_OF_MONTH);
+        this.range = range;
     }
 
 
@@ -58,12 +59,7 @@ public class TestSub implements Comparable<TestSub>{
     }
 
     public String getRange(){
-        if(Range!=null){
-            return Range;
-        }
-        else{
-            return "";
-        }
+        return range;
     }
 
 
