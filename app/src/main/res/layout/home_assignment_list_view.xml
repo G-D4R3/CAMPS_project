@@ -4,10 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:layout_width="200dp"
+    android:layout_width="180dp"
     android:descendantFocusability="blocksDescendants"
     android:layout_height="80dp"
-    android:background="#FFFFFF">
+    android:background="@drawable/listview_border"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,8 +24,8 @@
             android:id="@+id/period2"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="18dp"
             android:textSize="15dp"
             android:fontFamily="@font/barun"
             android:gravity="center_vertical"
@@ -33,10 +34,8 @@
         <TextView
             android:id="@+id/assign2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:gravity="center_vertical"
             android:text="제목"
