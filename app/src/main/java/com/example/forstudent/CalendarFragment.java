@@ -37,7 +37,7 @@ public class CalendarFragment extends Fragment{
 //test
         CalendarDay calendarDay;
         Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
-
+        Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
         MainActivity main = (MainActivity)getActivity();
         schedules = main.schedules;
         View view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
@@ -51,6 +51,15 @@ public class CalendarFragment extends Fragment{
             calendarDay = CalendarDay.from(year,month,day);
             assignmentDaysList.add(calendarDay);
         }
+        for(Schedule tmp : schedules){
+            System.out.println(tmp.getDate());
+            Calendar calendar = tmp.getDate();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            calendarDay = CalendarDay.from(year,month,day);
+            scheduleDaysList.add(calendarDay);
+        }
 
 
         /*
@@ -61,6 +70,7 @@ public class CalendarFragment extends Fragment{
         calendarsList.add(calendarDay);*/
         MaterialCalendarView calendarView = (MaterialCalendarView)view.findViewById(R.id.calendarView);
         calendarView.addDecorator(new EventDecorator(Color.RED,assignmentDaysList));
+        calendarView.addDecorator(new EventDecorator(Color.BLUE,scheduleDaysList));
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -70,7 +80,7 @@ public class CalendarFragment extends Fragment{
         calendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date) {
-                System.out.println("Long" + date.toString());
+                //System.out.println("Long" + date.toString());
                 AddNewSchedule addFragment = AddNewSchedule.newInstance();
                 MainActivity main = (MainActivity)getActivity();
                 addFragment.year = date.getYear();
@@ -80,7 +90,8 @@ public class CalendarFragment extends Fragment{
                 main.FragmentAdd(addFragment);
             }
         });
-//or if you want to specify event label color
+
+
     /*    List<EventDay> events = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
