@@ -41,7 +41,7 @@ public class CalendarFragment extends Fragment{
         System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCc");
         CalendarDay calendarDay;
         Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
-        Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
+
         main = (MainActivity)getActivity();
         schedules = main.schedules;
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
@@ -55,15 +55,6 @@ public class CalendarFragment extends Fragment{
             calendarDay = CalendarDay.from(year,month,day);
             assignmentDaysList.add(calendarDay);
         }
-        for(Schedule tmp : schedules){
-            System.out.println(tmp.getDate());
-            Calendar calendar = tmp.getDate();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            calendarDay = CalendarDay.from(year,month,day);
-            scheduleDaysList.add(calendarDay);
-        }
 
 
         /*
@@ -74,7 +65,7 @@ public class CalendarFragment extends Fragment{
         calendarsList.add(calendarDay);*/
         calendarView = (MaterialCalendarView)view.findViewById(R.id.calendarView);
         calendarView.addDecorator(new EventDecorator(Color.RED,assignmentDaysList));
-        calendarView.addDecorator(new EventDecorator(Color.BLUE,scheduleDaysList));
+
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -138,7 +129,19 @@ public class CalendarFragment extends Fragment{
         System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
     }
     public void dotSchedule(){
+        Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
+        CalendarDay calendarDay;
+        for(Schedule tmp : schedules){
+            System.out.println(tmp.getDate());
+            Calendar calendar = tmp.getDate();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            calendarDay = CalendarDay.from(year,month,day);
+            scheduleDaysList.add(calendarDay);
+        }
 
+        calendarView.addDecorator(new EventDecorator(Color.BLUE,scheduleDaysList));
     }
 
     public MaterialCalendarView getCalendarView() {

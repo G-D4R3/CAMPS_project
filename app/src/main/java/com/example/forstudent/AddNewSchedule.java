@@ -106,6 +106,7 @@ public class AddNewSchedule extends Fragment {
                 }
                 else{
                     main.calendarFragment.schedules.add(schedule);
+                    main.calendarFragment.dotSchedule();
                     main.FragmentRemove(AddNewSchedule.this);
                 }
             }
