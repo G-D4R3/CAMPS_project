@@ -230,15 +230,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     public void FragmentAdd(Fragment fragment){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.popup,0);
-        transaction.replace(R.id.frame_layout,fragment);
+        transaction.setCustomAnimations(R.anim.popup,R.anim.slide_down,R.anim.popup,R.anim.slide_down);
+        transaction.add(R.id.frame_layout,fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void FragmentRemove(Fragment fragment){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_down,0);
         transaction.remove(fragment);
         fragmentManager.popBackStack();
         transaction.commit();

@@ -6,8 +6,8 @@
     android:orientation="horizontal"
     android:layout_width="200dp"
     android:descendantFocusability="blocksDescendants"
-    android:background="@color/cardview_light_background"
-    android:layout_height="80dp">
+    android:layout_height="80dp"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
