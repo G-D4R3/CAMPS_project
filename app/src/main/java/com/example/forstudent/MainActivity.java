@@ -35,7 +35,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private static MainActivity instance;
 
     private TextView mTextMessage;
-    private FragmentManager fragmentManager = getSupportFragmentManager();
+    public FragmentManager fragmentManager = getSupportFragmentManager();
 
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
@@ -230,6 +230,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     public void FragmentAdd(Fragment fragment){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.popup,0);
         transaction.replace(R.id.frame_layout,fragment);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -237,6 +238,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     public void FragmentRemove(Fragment fragment){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_down,0);
         transaction.remove(fragment);
         fragmentManager.popBackStack();
         transaction.commit();

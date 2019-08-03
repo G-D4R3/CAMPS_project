@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
 
 
         restDay = datecount.calcDday();
-        today.setText(String.format("종강 : %d월 %d일",(datecount.dcalendar.get(Calendar.MONTH)+1),datecount.dcalendar.get(Calendar.DAY_OF_MONTH)));
+        today.setText(String.format("종강 %d월 %d일",(datecount.dcalendar.get(Calendar.MONTH)+1),datecount.dcalendar.get(Calendar.DAY_OF_MONTH)));
         setDateView();
 
 
@@ -122,6 +122,8 @@ public class HomeFragment extends Fragment {
                 setListView(layoutset);
             }
         });
+
+
 
 
 

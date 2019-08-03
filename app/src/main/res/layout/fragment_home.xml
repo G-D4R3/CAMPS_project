@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,6 +22,7 @@
                 android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_gravity="right"
+                android:fontFamily="@font/barun"
                 android:text="설정" />
 
             <TextView
@@ -29,8 +31,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:gravity="center"
+                android:fontFamily="@font/barun"
                 android:text="D-day 설정하기"
-                android:textSize="70px"
+                android:textSize="80px"
+                android:textColor="#3F3F3F"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="238dp" />
 
@@ -40,8 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:gravity="center"
+                android:fontFamily="@font/barun"
                 android:text="Today"
-                android:textSize="40px"
+                android:textSize="50px"
+                android:textColor="#707070"
                 app:layout_constraintStart_toStartOf="@+id/Dday"
                 app:layout_constraintTop_toBottomOf="@+id/Dday" />
 
@@ -56,9 +62,13 @@
                     android:id="@+id/home_schedule"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:layout_marginLeft="15dp"
+                    android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
-                    android:textSize="20dp"
+                    android:fontFamily="@font/barun"
+                    android:textColor="#3F3F3F"
+                    android:textSize="23dp"
                     android:text="일정"/>
 
 
@@ -66,8 +76,10 @@
                     android:id="@+id/noschedule"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:fontFamily="@font/barun"
                     android:gravity="center"
-                    android:text="일정이 없습니다." />
+                    android:text="일정이 없습니다."
+                    android:textColor="#6F6F6F" />
 
                 <GridView
                     android:id="@+id/home_schedulelistview"
@@ -91,7 +103,9 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="20dp"
+                    android:textSize="23dp"
+                    android:fontFamily="@font/barun"
+                    android:textColor="#3F3F3F"
                     android:text="수업"/>
 
                 <TextView
@@ -99,6 +113,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
+                    android:fontFamily="@font/barun"
+                    android:textColor="#6F6F6F"
                     android:text="수업이 없습니다." />
 
                 <GridView
@@ -121,7 +137,9 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="20dp"
+                    android:textSize="23dp"
+                    android:fontFamily="@font/barun"
+                    android:textColor="#3F3F3F"
                     android:text="과제"/>
 
                 <TextView
@@ -129,6 +147,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
+                    android:fontFamily="@font/round_regular"
+                    android:textColor="#6F6F6F"
                     android:text="과제가 없습니다." />
 
                 <GridView
@@ -153,7 +173,9 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="20dp"
+                    android:textSize="23dp"
+                    android:fontFamily="@font/barun"
+                    android:textColor="#3F3F3F"
                     android:text="시험"/>
 
                 <TextView
@@ -161,6 +183,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
+                    android:fontFamily="@font/barun"
+                    android:textColor="#6F6F6F"
                     android:text="시험이 없습니다." />
 
                 <GridView
