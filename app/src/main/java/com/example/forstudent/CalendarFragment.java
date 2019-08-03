@@ -28,6 +28,9 @@ public class CalendarFragment extends Fragment{
     ArrayList<Assignment> assignmentList;
     private TextView Dday;
     private TextView today;
+    MainActivity main;
+    View view;
+    MaterialCalendarView calendarView;
     ArrayList<Schedule> schedules;
     @Nullable
     @Override
@@ -35,12 +38,13 @@ public class CalendarFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //test
+        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCc");
         CalendarDay calendarDay;
         Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
         Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
-        MainActivity main = (MainActivity)getActivity();
+        main = (MainActivity)getActivity();
         schedules = main.schedules;
-        View view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
+        view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         assignmentList = main.assignment;
         for(Assignment tmp : assignmentList){
             System.out.println(tmp.getPeriod());
@@ -68,7 +72,7 @@ public class CalendarFragment extends Fragment{
         calendarsList.add(calendarDay);
         calendarDay = calendarDay.today();
         calendarsList.add(calendarDay);*/
-        MaterialCalendarView calendarView = (MaterialCalendarView)view.findViewById(R.id.calendarView);
+        calendarView = (MaterialCalendarView)view.findViewById(R.id.calendarView);
         calendarView.addDecorator(new EventDecorator(Color.RED,assignmentDaysList));
         calendarView.addDecorator(new EventDecorator(Color.BLUE,scheduleDaysList));
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
@@ -122,4 +126,22 @@ public class CalendarFragment extends Fragment{
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPp");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+    }
+    public void dotSchedule(){
+
+    }
+
+    public MaterialCalendarView getCalendarView() {
+        return calendarView;
+    }
 }
