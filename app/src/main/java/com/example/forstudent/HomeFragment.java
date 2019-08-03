@@ -36,6 +36,10 @@ public class HomeFragment extends Fragment {
     TextView mClass;
     TextView mAssignment;
     TextView mExam;
+    TextView mNoSchedule;
+    TextView mNoClass;
+    TextView mNoAssignment;
+    TextView mNoExam;
     GridView mScheduleList;
     GridView mClassList;
     GridView mAssignList;
@@ -68,6 +72,12 @@ public class HomeFragment extends Fragment {
         mClass = (TextView)view.findViewById(R.id.home_class);
         mAssignment = (TextView)view.findViewById(R.id.home_ass);
         mExam = (TextView)view.findViewById(R.id.home_exam);
+
+        mNoSchedule = (TextView)view.findViewById(R.id.noschedule);
+        mNoClass = (TextView)view.findViewById(R.id.noclass);
+        mNoAssignment = (TextView)view.findViewById(R.id.noassignment);
+        mNoExam = (TextView)view.findViewById(R.id.noexam);
+
         mScheduleList = (GridView)view.findViewById(R.id.home_schedulelistview);
         mClassList = (GridView)view.findViewById(R.id.home_classlistview);
         mAssignList = (GridView)view.findViewById(R.id.home_asslistview);
@@ -86,6 +96,9 @@ public class HomeFragment extends Fragment {
 
         examAdapter = new HomeExamAdapter(tests);
         mTestList.setAdapter(examAdapter);
+
+        setListView(layoutset);
+        setExist();
 
 
 
@@ -106,10 +119,10 @@ public class HomeFragment extends Fragment {
                 MainActivity main = (MainActivity)getActivity();
                 main.FragmentAdd(main.homeFragmentSetup);
                 layoutset = main.homeFragmentSetup.select;
+                setListView(layoutset);
             }
         });
 
-        setListView(layoutset);
 
 
         //텍스트 터치 시 날짜 변경 가능
@@ -144,7 +157,27 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-    private void setListView(boolean[] layoutset) {
+
+    private void setExist() {
+        if(ass.size()>0){
+            mAssignList.setVisibility(View.VISIBLE);
+            mNoAssignment.setVisibility(View.GONE);
+        }
+        else{
+            mAssignList.setVisibility(View.GONE);
+            mNoAssignment.setVisibility(View.VISIBLE);
+        }
+        if(tests.size()>0){
+            mTestList.setVisibility(View.VISIBLE);
+            mNoExam.setVisibility(View.GONE);
+        }
+        else{
+            mTestList.setVisibility(View.GONE);
+            mNoExam.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setListView(boolean[] layoutset) { //설정한 레이아웃 적용
 
         if(layoutset[0]==true){
             mSchedule.setVisibility(View.VISIBLE);
@@ -152,6 +185,7 @@ public class HomeFragment extends Fragment {
         }
         else{
             mSchedule.setVisibility(View.GONE);
+            mNoSchedule.setVisibility(View.GONE);
             mScheduleList.setVisibility(View.GONE);
         }
         if(layoutset[1]==true){
@@ -160,6 +194,7 @@ public class HomeFragment extends Fragment {
         }
         else{
             mClass.setVisibility(View.GONE);
+            mNoClass.setVisibility(View.GONE);
             mClassList.setVisibility(View.GONE);
         }
         if(layoutset[2]==true){
@@ -168,6 +203,7 @@ public class HomeFragment extends Fragment {
         }
         else{
             mAssignment.setVisibility(View.GONE);
+            mNoAssignment.setVisibility(View.GONE);
             mAssignList.setVisibility(View.GONE);
         }
         if(layoutset[3]==true){
@@ -176,6 +212,7 @@ public class HomeFragment extends Fragment {
         }
         else{
             mExam.setVisibility(View.GONE);
+            mNoExam.setVisibility(View.GONE);
             mTestList.setVisibility(View.GONE);
         }
 
