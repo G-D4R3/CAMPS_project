@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -35,6 +36,10 @@ public class addNewExamSub extends Fragment {
     int mEHour = calendar.get(Calendar.HOUR_OF_DAY);
     int mEMinute = calendar.get(Calendar.MINUTE);
     public TestSub subject=null;
+    InputMethodManager imm;
+
+    EditText mSubname;
+    EditText mRange;
 
 
     Boolean DATE_PICKED = false;
@@ -60,26 +65,28 @@ public class addNewExamSub extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = (View)inflater.inflate(R.layout.add_new_exam_sub, container, false);
         TextView Title = (TextView)view.findViewById(R.id.fragTitle);
-        final EditText mSubname = (EditText) view.findViewById(R.id.subName);
-        TextView Date = (TextView)view.findViewById(R.id.Tdate);
+        mSubname = (EditText) view.findViewById(R.id.subName);
         final TextView mDate = (TextView)view.findViewById(R.id.date2);
-        TextView Start = (TextView)view.findViewById(R.id.Tstart);
         final TextView mStart = (TextView)view.findViewById(R.id.time2);
-        final TextView End = (TextView)view.findViewById(R.id.Tend);
         final TextView mEnd = (TextView)view.findViewById(R.id.time2_1);
         TextView mCancle = (TextView)view.findViewById(R.id.cancle2);
         TextView mComplete = (TextView)view.findViewById(R.id.complete2);
-        final EditText mRange = (EditText)view.findViewById(R.id.Range2);
+        mRange = (EditText)view.findViewById(R.id.Range2);
+        LinearLayout layout = (LinearLayout)view.findViewById(R.id.examlayout);
 
         MainActivity main = (MainActivity)getActivity();
-        InputMethodManager input = main.keypad;
+        imm = main.keypad;
 
-        view.setOnClickListener(new View.OnClickListener() {
+
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
+                hideKey();
             }
         });
+
+
+
 
 
         if(MOD==true){
@@ -100,26 +107,7 @@ public class addNewExamSub extends Fragment {
         mDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
-                DatePickerDialog datepick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mDate.setText((month+1)+"월 "+dayOfMonth+"일");
-                        mYear = year;
-                        mMonth = month;
-                        mDay = dayOfMonth;
-                        DATE_PICKED=true;
-                    }
-                },mYear, mMonth, calendar.get(Calendar.DATE));
-                calendar.set(mYear,mMonth,calendar.get(Calendar.DATE));
-                datepick.show();
-            }
-        });
-
-        Date.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
+                hideKey();
                 DatePickerDialog datepick = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -139,7 +127,7 @@ public class addNewExamSub extends Fragment {
 
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
+                hideKey();
                 TimePickerDialog timepick = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -157,7 +145,7 @@ public class addNewExamSub extends Fragment {
 
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
+                hideKey();
                 TimePickerDialog timepick = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -171,29 +159,11 @@ public class addNewExamSub extends Fragment {
             }
         });
 
-        End.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
-                TimePickerDialog timepick = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        mEnd.setText(hourOfDay+"시 "+minute+"분");
-                        mEHour = hourOfDay;
-                        mEMinute = minute;
-                    }
-                },mEHour,mEMinute,true);
-                timepick.show();
-            }
-        });
-
 
         mCancle.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 MainActivity main = (MainActivity)getActivity();
                 main.FragmentRemove(addNewExamSub.this);
             }
@@ -202,7 +172,6 @@ public class addNewExamSub extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(mYear,mMonth,mDay);
 
@@ -242,6 +211,11 @@ public class addNewExamSub extends Fragment {
 
         return view;
 
+    }
+
+    private void hideKey() {
+        imm.hideSoftInputFromWindow(mSubname.getWindowToken(),0);
+        imm.hideSoftInputFromWindow(mRange.getWindowToken(),0);
     }
 
     public void setYetDialog(){

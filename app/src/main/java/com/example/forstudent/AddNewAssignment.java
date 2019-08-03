@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,12 +58,19 @@ public class AddNewAssignment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
         input = main.keypad;
 
-        view.setOnClickListener(new View.OnClickListener() {
+        LinearLayout layout = (LinearLayout)view.findViewById(R.id.asslayout);
+
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
+                input.hideSoftInputFromWindow(mName.getWindowToken(),0);
+                input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
             }
         });
+
+
+
+
 
         if(MOD==true){
             DATE_CHECKED=true;
@@ -76,7 +84,6 @@ public class AddNewAssignment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                input.hideSoftInputFromWindow(view.getWindowToken(),0);
                 DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -126,6 +133,8 @@ public class AddNewAssignment extends Fragment {
 
 
 
+
+
         return view;
 
     }
@@ -147,6 +156,13 @@ public class AddNewAssignment extends Fragment {
     public void setAss(Assignment a){
         this.ass = a;
     }
+
+    public void hideKeyBoard(View v){
+        input.hideSoftInputFromWindow(mName.getWindowToken(),0);
+        input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
+    }
+
+
 
 
 }
