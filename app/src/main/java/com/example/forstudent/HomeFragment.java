@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
 
 
         restDay = datecount.calcDday();
-        today.setText(String.format("오늘은 %d월 %d일",(datecount.tcalendar.get(Calendar.MONTH)+1),datecount.tcalendar.get(Calendar.DAY_OF_MONTH)));
+        today.setText(String.format("종강 : %d월 %d일",(datecount.dcalendar.get(Calendar.MONTH)+1),datecount.dcalendar.get(Calendar.DAY_OF_MONTH)));
         setDateView();
 
 

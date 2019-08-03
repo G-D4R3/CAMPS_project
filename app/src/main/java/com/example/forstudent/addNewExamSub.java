@@ -24,7 +24,7 @@ import com.example.forstudent.DataClass.TestSub;
 import java.util.Calendar;
 
 public class addNewExamSub extends Fragment {
-    public static boolean MOD = false;
+    public boolean MOD = false;
     public String title;
     Calendar calendar = Calendar.getInstance();
     String mName=null;
@@ -174,7 +174,7 @@ public class addNewExamSub extends Fragment {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(mYear,mMonth,mDay);
 
-                if(MOD==true){
+                if(MOD==true){ //if this fragment is modify, then remove original object and add new one
                     main.examFragment.ExamList.remove(subject);
                     if(mRange.getText().toString().length()==0){
                         subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,null);

@@ -49,7 +49,7 @@ public class ExamFragment extends Fragment{
 
         count = new DateCount();
 
-
+        Collections.sort(ExamList);
         MainActivity main = (MainActivity)getActivity();
         ExamList = main.testSub;
 
@@ -58,6 +58,7 @@ public class ExamFragment extends Fragment{
         mlistView = (ListView)view.findViewById(R.id.examlistView);
         mlistView.setAdapter(adapter);
 
+        DateSet();
         dday.setText(titleDday);
 
 
@@ -163,14 +164,10 @@ public class ExamFragment extends Fragment{
         addNewExamSub add = addNewExamSub.newInstance();
         MainActivity main = (MainActivity)getActivity();
         main.FragmentAdd(add);
+        Collections.sort(ExamList);
 
         if (ExamList.size() > 0) {
-
-            Collections.sort(ExamList);
-            adapter.notifyDataSetChanged();
-            count.dcalendar=ExamList.get(0).getTestDate();
-            int result = count.calcDday();
-            titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
+            DateSet();
         }
     }
 
@@ -181,10 +178,7 @@ public class ExamFragment extends Fragment{
             titleDday="D-day";
         }
         else{
-            sub = ExamList.get(0);
-            count.dcalendar=sub.getTestDate();
-            int result = count.calcDday();
-            titleDday=String.format("%s D-%d",ExamList.get(0).getName(),result);
+            DateSet();
         }
         adapter.notifyDataSetChanged();
     }
@@ -203,11 +197,42 @@ public class ExamFragment extends Fragment{
         mod.mEMinute = sub.getEndMinute();
         mod.MOD = true;
         main.FragmentAdd(mod);
+        Collections.sort(ExamList);
 
         adapter.notifyDataSetChanged();
+        DateSet();
     }
 
+    public void DateSet(){
+        if(ExamList.size()<=0){
+            titleDday = "디데이";
+        }
+        else{
+            TestSub e=null;
+            boolean flag = true; //모두 날짜가 지난 시험인지 체크
+            for(int i=0; i<ExamList.size(); i++){
+                e = ExamList.get(i);
+                count.dcalendar = e.getTestDate();
+                count.calcDday();
+                if(count.result>=0){ //나중에 D-day일 경우 시간 계산 추가해야함
+                    flag = false;
+                    break;
 
+                }
+            }
+            if(flag==false){
+                if(count.result == 0){
+                    titleDday = String.format("%s D-Day", e.getName());
+                }
+                else{
+                    titleDday = String.format("%s D-%d", e.getName(), count.result);
+                }
+            }
+            else{
+                titleDday = "모든 시험이 끝났습니다.";
+            }
+        }
+    }
 
 
 
