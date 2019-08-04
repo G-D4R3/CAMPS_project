@@ -27,8 +27,8 @@
 
             <TextView
                 android:id="@+id/cancel5"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="20dp"
@@ -41,20 +41,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
+                android:layout_marginRight="60dp"
                 android:layout_weight="1"
                 android:text="설정"
                 android:fontFamily="@font/barun"
                 android:textSize="25dp" />
-
-            <TextView
-                android:id="@+id/complete5"
-                android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textSize="20dp"
-                android:fontFamily="@font/barun"
-                android:text="완료" />
         </LinearLayout>
 
         <TextView

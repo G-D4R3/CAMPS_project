@@ -153,6 +153,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+                //transaction.setCustomAnimations(R.anim.replace_in,R.anim.replace_out,R.anim.replace_in,R.anim.replace_out);
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         transaction.replace(R.id.frame_layout, homeFragment,"Home Fragment").commitAllowingStateLoss();

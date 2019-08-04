@@ -31,9 +31,9 @@ public class UserData {
 
     int hello;
     boolean homeScheduleCheck;
+    boolean homeClassCheck;
     boolean homeAssignmentCheck;
     boolean homeExamCheck;
-    boolean homeCalendarCheck;
 
     public UserData(){
 
@@ -45,7 +45,7 @@ public class UserData {
         this.lastDay = lastDay;
         this.hello  =hello;
         this.homeAssignmentCheck=true;
-        this.homeCalendarCheck=true;
+        this.homeClassCheck=true;
         this.homeExamCheck=true;
         this.homeScheduleCheck=true;
     }
@@ -89,11 +89,11 @@ public class UserData {
         this.homeExamCheck = homeExamCheck;
     }
 
-    public boolean isHomeCalendarCheck() {
-        return homeCalendarCheck;
+    public boolean isHomeClassCheck() {
+        return homeClassCheck;
     }
 
-    public void setHomeCalendarCheck(boolean homeCalendarCheck) {
-        this.homeCalendarCheck = homeCalendarCheck;
+    public void setHomeClassCheck(boolean homeCalendarCheck) {
+        this.homeClassCheck = homeCalendarCheck;
     }
 }
