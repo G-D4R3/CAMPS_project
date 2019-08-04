@@ -29,6 +29,7 @@ public class AddNewAssignment extends Fragment {
     String Name;
     String Date;
     String range;
+    Boolean Flag=false;  //중요도
     Boolean MOD = false;
     Boolean DATE_CHECKED=false;
     InputMethodManager input;
@@ -75,6 +76,7 @@ public class AddNewAssignment extends Fragment {
         if(MOD==true){
             DATE_CHECKED=true;
             mName.setText(ass.getName());
+            Flag = ass.getFlag();
             mDate.setText(String.format("%d월 %d일",ass.getPeriod().get(Calendar.MONTH)+1,ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
             //System.out.println(ass.getMemo());
             mRange.setText(ass.getMemo());
@@ -109,15 +111,23 @@ public class AddNewAssignment extends Fragment {
             @Override
             public void onClick(View v) {
                 main.todoFragment.AssList.remove(ass);
+                if(Flag==true){
+                    main.todoFragment.ImpList.remove(ass);
+                }
+
+
                 if(mName.getText().length()==0 || DATE_CHECKED==false){
                     setYetDialog();
                 }
                 else{
-                    ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString(),false);
+                    ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString(),Flag);
                 }
 
                 MainActivity main = (MainActivity)getActivity();
                 main.todoFragment.AssList.add(ass);
+                if(Flag==true){
+                    main.todoFragment.ImpList.add(ass);
+                }
                // main.calendarFragment.dotAssignment();
                 main.FragmentRemove(AddNewAssignment.this);
 
