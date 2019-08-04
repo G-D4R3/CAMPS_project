@@ -30,7 +30,7 @@ public class CalendarFragment extends Fragment{
     private TextView today;
     MainActivity main;
     View view;
-    MaterialCalendarView calendarView;
+    MaterialCalendarView calendarView = null;
     ArrayList<Schedule> schedules;
     @Nullable
     @Override
@@ -39,20 +39,14 @@ public class CalendarFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //test
 
+        /*점 안찍히는데 왠지 모르겟음 수정요망 */
         main = (MainActivity)getActivity();
         schedules = main.schedules;
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         assignmentList = main.assignment;
-
-
-        /*
-        calendarDay = CalendarDay.from(2019,8,14);
-
-        calendarsList.add(calendarDay);
-        calendarDay = calendarDay.today();
-        calendarsList.add(calendarDay);*/
-        calendarView = (MaterialCalendarView)view.findViewById(R.id.calendarView);
-
+        if(calendarView == null) {
+            calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
+        }
 
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
@@ -105,7 +99,7 @@ public class CalendarFragment extends Fragment{
         CalendarDay calendarDay;
 
         for(Schedule tmp : schedules){
-            System.out.println(tmp.getDate());
+            System.out.println(tmp.getDate().toString());
             Calendar calendar = tmp.getDate();
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
