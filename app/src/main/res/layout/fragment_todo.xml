@@ -30,6 +30,7 @@
             android:layout_margin="30dp"
             android:gravity="center"
             android:text="남은 과제 수"
+            android:fontFamily="@font/barun"
             android:textSize="20dp" />
 
         <Button
@@ -37,6 +38,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:fontFamily="@font/barun"
             android:text="+" />
 
         <LinearLayout
@@ -51,6 +53,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="   중요"
+                android:fontFamily="@font/barun"
                 android:textSize="20dp" />
 
             <TextView
@@ -59,6 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:gravity="center"
+                android:fontFamily="@font/barun"
                 android:textSize="20dp"
                 android:text="-" />
 
@@ -85,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/barun"
                 android:text="   과제"
                 android:textSize="20dp" />
 
@@ -95,6 +100,7 @@
                 android:layout_weight="8"
                 android:gravity="center"
                 android:textSize="20dp"
+                android:fontFamily="@font/barun"
                 android:text="-" />
 
 

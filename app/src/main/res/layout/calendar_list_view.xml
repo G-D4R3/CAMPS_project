@@ -30,6 +30,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="18dp"
+            android:fontFamily="@font/barun"
             android:text="아이콘" />
 
         <TextView
@@ -38,6 +39,7 @@
             android:layout_height="match_parent"
             android:layout_weight="8"
             android:gravity="center"
+            android:fontFamily="@font/barun"
             android:textSize="20dp"
             android:text="제목" />
     </LinearLayout>
