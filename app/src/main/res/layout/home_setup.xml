@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="20dp"
+                android:fontFamily="@font/barun"
                 android:text="뒤로"   />
 
             <TextView
@@ -42,6 +43,7 @@
                 android:gravity="center"
                 android:layout_weight="1"
                 android:text="설정"
+                android:fontFamily="@font/barun"
                 android:textSize="25dp" />
 
             <TextView
@@ -51,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textSize="20dp"
+                android:fontFamily="@font/barun"
                 android:text="완료" />
         </LinearLayout>
 
@@ -62,6 +65,7 @@
             android:layout_height="40dp"
             android:gravity="center_vertical"
             android:textSize="20dp"
+            android:fontFamily="@font/barun"
             android:text="홈 화면 구성" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
