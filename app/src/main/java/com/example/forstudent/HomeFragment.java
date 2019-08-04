@@ -45,8 +45,8 @@ public class HomeFragment extends Fragment {
     GridView mAssignList;
     GridView mTestList;
 
-    private ArrayList<Assignment> ass = new ArrayList<>();
-    private ArrayList<TestSub> tests = new ArrayList<>();
+    public ArrayList<Assignment> ass = new ArrayList<>();
+    public ArrayList<TestSub> tests = new ArrayList<>();
 
 
     public HomeAssignmentAdapter assignmentAdapter;
@@ -88,7 +88,6 @@ public class HomeFragment extends Fragment {
 
         //load data
         MainActivity main = (MainActivity)getActivity();
-        ass = main.important;
         tests = main.testSub;
 
         assignmentAdapter = new HomeAssignmentAdapter(ass);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class HomeFragmentSetup extends Fragment {
         TextView mCancel = (TextView)view.findViewById(R.id.cancel5);
         TextView mLayout = (TextView)view.findViewById(R.id.layoutset);
         MainActivity main = (MainActivity)getActivity();
-
+        RadioGroup mAssignmentView = (RadioGroup)view.findViewById(R.id.AssignmentView);
         select[0]=main.getUser().homeScheduleCheck;
         select[1]=main.getUser().homeClassCheck;
         select[2]=main.getUser().homeAssignmentCheck;
@@ -91,6 +92,22 @@ public class HomeFragmentSetup extends Fragment {
                 });
                 dialog.create();
                 dialog.show();
+            }
+        });
+
+        mAssignmentView.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.ImpOnly:
+                        main.homeFragment.ass =  main.important;
+                        main.homeFragment.assignmentAdapter.notifyDataSetChanged();
+                        break;
+                    case R.id.viewAllAssign:
+                        main.homeFragment.ass = main.assignment;
+                        main.homeFragment.assignmentAdapter.notifyDataSetChanged();
+                        break;
+                }
             }
         });
 
