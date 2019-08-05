@@ -2,7 +2,7 @@ package com.example.forstudent.DataClass;
 
 import java.util.Calendar;
 
-public class Schedule {
+public class Schedule extends Event{
 
     String title;
     Calendar date;

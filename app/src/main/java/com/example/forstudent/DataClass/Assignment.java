@@ -2,7 +2,7 @@ package com.example.forstudent.DataClass;
 
 import java.util.Calendar;
 
-public class Assignment implements Comparable<Assignment>{
+public class Assignment extends Event implements Comparable<Assignment>{
         private String Name=null;
         private Calendar Period;
         String Memo;

@@ -2,7 +2,7 @@ package com.example.forstudent.DataClass;
 
 import java.util.Calendar;
 
-public class TestSub implements Comparable<TestSub>{
+public class TestSub extends Event implements Comparable<TestSub>{
 
 
     //시험 정보 저장

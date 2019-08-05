@@ -36,16 +36,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <ListView
+                    android:id="@+id/calendarListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="243dp">
+
+                </ListView>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:fontFamily="@font/barun"
-                    android:text="asdfasdf"/>
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </ListView>
+                    android:text="asdfasdf" />
             </LinearLayout>
         </ScrollView>
 

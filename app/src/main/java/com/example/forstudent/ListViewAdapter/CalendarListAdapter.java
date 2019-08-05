@@ -6,20 +6,78 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.Event;
+import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
 import com.example.forstudent.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-/*
-public class CalendarListAdapter extends BaseAdapter {
-    public ArrayList<> data = null;
-    LayoutInflater inflater=null;
+public class CalendarListAdapter extends BaseAdapter{
+    public ArrayList<Event> eventList = null;
+    LayoutInflater inflater = null;
 
-    public CalendarListAdapter(ArrayList<TestSub> data){
-        this.data = data;
+    public CalendarListAdapter(ArrayList<Event> eventList) {
+        this.eventList = eventList;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(getItem(position) instanceof TestSub){
+            return 1;
+        }
+        return 0;
+    }
+
+    @Override
+    public int getCount() {
+        return eventList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return eventList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.calendar_list_view,parent, false);
+        TextView title = (TextView)convertView.findViewById(R.id.calendar_title);
+        TextView icon = (TextView)convertView.findViewById(R.id.calendar_icon);
+        TextView time = (TextView)convertView.findViewById(R.id.calendar_time);
+        int typeFlag=0;
+        Event event = eventList.get(position);
+        if( event instanceof Assignment) typeFlag = 1;
+        if( event instanceof Schedule) typeFlag = 2;
+        if( event instanceof TestSub) typeFlag = 3;
+        title.setText(event.getTitle());
+        time.setText(event.getHour()+"시 "+event.getMinute()+"분");
+        switch (typeFlag){
+            case 1:
+                icon.setText("과제");
+                break;
+            case 2:
+                icon.setText("일정");
+                time.setText(event.getMemo());
+                break;
+            case 3:
+                icon.setText("시험");
+                break;
+            default:
+                icon.setText("에러");
+        }
+        return convertView;
+    }
+}
+/*
+public class CalendarListAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         return data.size();

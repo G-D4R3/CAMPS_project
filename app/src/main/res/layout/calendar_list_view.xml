@@ -24,17 +24,27 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/calendar_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.3"
             android:gravity="center"
             android:textSize="18dp"
             android:fontFamily="@font/barun"
             android:text="아이콘" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/calendar_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:fontFamily="@font/barun"
+            android:textSize="20dp"
+            android:text="시간" />
+
+        <TextView
+            android:id="@+id/calendar_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="8"
