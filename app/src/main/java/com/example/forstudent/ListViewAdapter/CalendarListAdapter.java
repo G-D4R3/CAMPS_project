@@ -54,14 +54,13 @@ public class CalendarListAdapter extends BaseAdapter{
         TextView time = (TextView)convertView.findViewById(R.id.calendar_time);
         int typeFlag=0;
         Event event = eventList.get(position);
-        if( event instanceof Assignment) typeFlag = 1;
-        if( event instanceof Schedule) typeFlag = 2;
-        if( event instanceof TestSub) typeFlag = 3;
+        typeFlag = event.getType();
         title.setText(event.getTitle());
         time.setText(event.getHour()+"시 "+event.getMinute()+"분");
         switch (typeFlag){
             case 1:
                 icon.setText("과제");
+                time.setText(event.getMemo());
                 break;
             case 2:
                 icon.setText("일정");

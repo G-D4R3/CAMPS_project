@@ -5,15 +5,21 @@ public class Event {
     int hour;
     int minute;
     String memo;
+    int type;
+    // TYPE :
+    // 1 Assignment
+    // 2 Schedule
+    // 3 Test
 
     public Event() {
     }
 
-    public Event(String title, int hour, int minute, String memo) {
+    public Event(String title, int hour, int minute, String memo,int type) {
         this.title = title;
         this.hour = hour;
         this.minute = minute;
         this.memo = memo;
+        this.type = type;
     }
 
     public String getTitle() {
@@ -46,5 +52,13 @@ public class Event {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

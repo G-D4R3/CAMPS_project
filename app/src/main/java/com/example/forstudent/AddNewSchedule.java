@@ -30,6 +30,7 @@ public class AddNewSchedule extends Fragment {
     int day;
     int hour;
     int minute;
+    CalendarFragment calendarFragment;
     Boolean TIME_PICKED = false;
     InputMethodManager inputMethodManager;
     EditText titleText;
@@ -106,10 +107,9 @@ public class AddNewSchedule extends Fragment {
                 }
                 else{
                     main.calendarFragment.schedules.add(schedule);
-                    //main.calendarFragment.dotSchedule();
+
                     main.FragmentRemove(AddNewSchedule.this);
 
-                    return;
                 }
             }
         });

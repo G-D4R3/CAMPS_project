@@ -56,4 +56,15 @@ public class Assignment extends Event implements Comparable<Assignment>{
             }
             return 1;
         }
+
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "Name='" + Name + '\'' +
+                ", Period=" + Period +
+                ", Memo='" + Memo + '\'' +
+                ", sorting=" + sorting +
+                ", flag=" + flag +
+                '}';
+    }
 }
