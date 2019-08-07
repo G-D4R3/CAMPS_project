@@ -56,9 +56,8 @@ public class CalendarFragment extends Fragment{
         testList = main.testSub;
 
 
-        if(calendarView == null) {
-            calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
-        }
+        calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
+
         for(Schedule tmp:schedules){
             //Event event = new Event(tmp.getTitle(),tmp.getDate().get(Calendar.HOUR),tmp.getDate().get(Calendar.MINUTE),tmp.getMemo(),2);
             tmp.setHour(tmp.getDate().get(Calendar.HOUR));
@@ -108,7 +107,7 @@ public class CalendarFragment extends Fragment{
                         case 2:
                             Schedule schedule = (Schedule)tmp;
                             if(schedule.getDate().get(Calendar.YEAR)!=date.getYear()) break;
-                            if(schedule.getDate().get(Calendar.MONTH)+1!=date.getMonth()) break;
+                            if(schedule.getDate().get(Calendar.MONTH)!=date.getMonth()) break;
                             if(schedule.getDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             dayEvent.add(tmp);
                             //System.out.println(tmp.toString());
@@ -146,7 +145,9 @@ public class CalendarFragment extends Fragment{
         return view;
     }
 
-
+    public CalendarFragment getInstance(){
+        return this;
+    }
 
     public void dotAssignment(){
         CalendarDay calendarDay;
@@ -162,10 +163,6 @@ public class CalendarFragment extends Fragment{
         }
         calendarView.addDecorators(new EventDecorator(Color.RED,assignmentDaysList));
     }
-    public CalendarFragment getInstance(){
-        return this;
-    }
-
     public void dotSchedule(){
         Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
         CalendarDay calendarDay;
