@@ -30,6 +30,7 @@ import java.util.Collection;
 public class CalendarFragment extends Fragment{
     ArrayList<Assignment> assignmentList;
     Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
+
     private TextView Dday;
     private TextView today;
     MainActivity main;
@@ -85,7 +86,7 @@ public class CalendarFragment extends Fragment{
 
         dotAssignment();
         dotSchedule();
-
+        dotTest();
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
@@ -147,8 +148,23 @@ public class CalendarFragment extends Fragment{
     public CalendarFragment getInstance(){
         return this;
     }
+    public void dotTest(){
+        Collection<CalendarDay> testDaysList = new ArrayList<>();
+        CalendarDay calendarDay;
 
+        for(TestSub tmp : testList){
+            //System.out.println(tmp.getPeriod());
+            Calendar calendar = tmp.getTestDate();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH)+1;
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            calendarDay = CalendarDay.from(year,month,day);
+            testDaysList.add(calendarDay);
+        }
+        calendarView.addDecorators(new EventDecorator(Color.GREEN,testDaysList));
+    }
     public void dotAssignment(){
+
         CalendarDay calendarDay;
 
         for(Assignment tmp : assignmentList){
@@ -164,6 +180,7 @@ public class CalendarFragment extends Fragment{
     }
     public void dotSchedule(){
         Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
+
         CalendarDay calendarDay;
 
         for(Schedule tmp : schedules){
