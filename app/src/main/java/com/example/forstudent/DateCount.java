@@ -1,9 +1,5 @@
 package com.example.forstudent;
 
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 
 public class DateCount {
@@ -29,8 +25,6 @@ public class DateCount {
 
         Today = tcalendar.getTimeInMillis()/(24*60*60*1000);
         setday = dcalendar.getTimeInMillis()/(24*60*60*1000);
-
-        System.out.println(tcalendar.get(Calendar.DATE)+" "+tcalendar.get(Calendar.DATE));
 
         left = (setday - Today);
         result = (int)left;
