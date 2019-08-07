@@ -274,12 +274,17 @@ public class CalendarFragment extends Fragment{
             ScheduleHelper.putSchedule(helper);
         }
     }
+    public void addTransparent(){
+        TransparentFragment addFragment = TransparentFragment.newInstance();
+        MainActivity main = (MainActivity)getActivity();
+        main.FragmentAdd(addFragment);
+    }
     public void removeSchedule(Event event,CalendarListAdapter adapter){
         schedules.remove((Schedule)event);
         scheduleDayEvent.remove(event);
         events.remove(event);
+        addTransparent();
         adapter.notifyDataSetChanged();
-
     }
     public void modifySchedule(Event event,CalendarListAdapter adapter){
         MainActivity main = (MainActivity)getActivity();
@@ -291,7 +296,7 @@ public class CalendarFragment extends Fragment{
         addFragment.removeTarget = event;
         main.FragmentAdd(addFragment);
         adapter.notifyDataSetChanged();
-
+        addTransparent();
 
     }
     public MaterialCalendarView getCalendarView() {
