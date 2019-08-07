@@ -1,12 +1,16 @@
 package com.example.forstudent;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,13 +39,17 @@ public class CalendarFragment extends Fragment{
     private TextView today;
     MainActivity main;
     View view;
+    TextView mTitle;
     MaterialCalendarView calendarView;
     ArrayList<Schedule> schedules = new ArrayList<>();
     ArrayList<TestSub> testList = new ArrayList<>();
     ArrayList<Event> events = new ArrayList<>();
     ArrayList<Event> dayEvent;
-    CalendarListAdapter adapter;
-    ListView listView;
+    ArrayList<Event> scheduleDayEvent;
+    CalendarListAdapter upperAdapter;
+    CalendarListAdapter lowerAdapter;
+    ListView upperListView;
+    ListView lowerListView;
     @Nullable
     @Override
 
@@ -54,8 +62,8 @@ public class CalendarFragment extends Fragment{
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         assignmentList = main.assignment;
         testList = main.testSub;
-
-
+        upperListView = view.findViewById(R.id.upperCalendarListView);
+        lowerListView = view.findViewById(R.id.lowerCalendarListView);
         calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
 
         for(Schedule tmp:schedules){
@@ -92,6 +100,7 @@ public class CalendarFragment extends Fragment{
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 //System.out.println(date.toString());
                 dayEvent = new ArrayList<>();
+                scheduleDayEvent = new ArrayList<>();
                 for(Event tmp:events){
 
                     switch(tmp.getType()){
@@ -109,7 +118,7 @@ public class CalendarFragment extends Fragment{
                             if(schedule.getDate().get(Calendar.YEAR)!=date.getYear()) break;
                             if(schedule.getDate().get(Calendar.MONTH)!=date.getMonth()) break;
                             if(schedule.getDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
-                            dayEvent.add(tmp);
+                            scheduleDayEvent.add(tmp);
                             //System.out.println(tmp.toString());
                             break;
                         case 3:
@@ -121,13 +130,71 @@ public class CalendarFragment extends Fragment{
                             //System.out.println(tmp.toString());
                             break;
                     }
-                    adapter = new CalendarListAdapter(dayEvent);
-                    listView = view.findViewById(R.id.calendarListView);
-                    listView.setAdapter(adapter);
+                    upperAdapter = new CalendarListAdapter(dayEvent);
+                    lowerAdapter = new CalendarListAdapter(scheduleDayEvent);
+                    //listView = view.findViewById(R.id.upperCalendarListView);
+                    upperListView.setAdapter(upperAdapter);
+                    lowerListView.setAdapter(lowerAdapter);
                 }
 
             }
         });
+
+        lowerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final int pos = position;
+                try{
+                    String name = lowerAdapter.eventList.get(position).getTitle();
+                    String[] menu = {"수정", "삭제"};
+
+
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    dialog.setTitle(name);
+                    dialog.setItems(menu, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case 0:
+                                    dialog.dismiss();
+                                    //ModifyAss(adapter.eventList.get(pos));
+                                    break;
+                                case 1:
+                                    AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
+                                    remove.setTitle("삭제");
+                                    remove.setMessage("일정을 삭제 합니다.");
+                                    remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            removeSchedule(lowerAdapter.eventList.get(pos),lowerAdapter);
+                                            //mTitle.setText(name);
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+
+                                        }
+                                    });
+                                    remove.show();
+                                    break;
+
+                            }
+                        }
+                    });
+                    dialog.create();
+                    dialog.show();
+                }
+                catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
         calendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date) {
@@ -205,6 +272,11 @@ public class CalendarFragment extends Fragment{
             ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),false);
             ScheduleHelper.putSchedule(helper);
         }
+    }
+    public void removeSchedule(Event event,CalendarListAdapter adapter){
+        schedules.remove(event);
+
+        adapter.notifyDataSetChanged();
     }
 
     public MaterialCalendarView getCalendarView() {

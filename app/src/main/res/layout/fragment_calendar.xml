@@ -38,9 +38,16 @@
                 android:orientation="vertical">
 
                 <ListView
-                    android:id="@+id/calendarListView"
+                    android:id="@+id/upperCalendarListView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <ListView
+                    android:id="@+id/lowerCalendarListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                 </ListView>
 
