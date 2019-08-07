@@ -22,6 +22,18 @@ public class Schedule_Model {
 
     String memo;
 
+    public Schedule_Model(long id, String title, int year, int month, int day, int hour, int minute, String memo, boolean important) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+        this.memo = memo;
+        this.important = important;
+    }
+
     boolean important; //중요도 표시 flag
 
     public long getId() {

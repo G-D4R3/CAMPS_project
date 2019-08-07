@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.BoxHelperClass.ScheduleHelper;
+import com.example.forstudent.BoxHelperClass.TestSubHelper;
 import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Event;
 import com.example.forstudent.DataClass.Schedule;
@@ -61,6 +63,7 @@ public class CalendarFragment extends Fragment{
             tmp.setHour(tmp.getDate().get(Calendar.HOUR));
             tmp.setMinute(tmp.getDate().get(Calendar.MINUTE));
             tmp.setType(2);
+            System.out.println(tmp.toString());
             events.add(tmp);
         }
         for(Assignment tmp:assignmentList){
@@ -107,7 +110,7 @@ public class CalendarFragment extends Fragment{
                             if(schedule.getDate().get(Calendar.MONTH)+1!=date.getMonth()) break;
                             if(schedule.getDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             dayEvent.add(tmp);
-                            System.out.println(tmp.toString());
+                            //System.out.println(tmp.toString());
                             break;
                         case 3:
                             TestSub testSub = (TestSub)tmp;
@@ -115,7 +118,7 @@ public class CalendarFragment extends Fragment{
                             if(testSub.getTestDate().get(Calendar.MONTH)+1!=date.getMonth()) break;
                             if(testSub.getTestDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             dayEvent.add(tmp);
-                            System.out.println(tmp.toString());
+                            //System.out.println(tmp.toString());
                             break;
                     }
 
@@ -178,6 +181,17 @@ public class CalendarFragment extends Fragment{
         }
 
         calendarView.addDecorators(new EventDecorator(Color.BLUE,scheduleDaysList));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MainActivity main = (MainActivity)getActivity();
+        main.getScheduleBox().removeAll();
+        for(int i=0; i<schedules.size(); i++){
+            ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),false);
+            ScheduleHelper.putSchedule(helper);
+        }
     }
 
     public MaterialCalendarView getCalendarView() {

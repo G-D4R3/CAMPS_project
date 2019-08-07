@@ -8,8 +8,12 @@ import java.util.Calendar;
 
 public class ScheduleHelper {
     public Schedule schedule;
+    public Schedule_Model schedule_model;
     public ScheduleHelper(String title, Calendar date, String memo ,Boolean important){
         schedule = new Schedule(title,date,memo,important);
+    }
+    public ScheduleHelper(long id,String title, Calendar date, String memo ,Boolean important){
+        schedule_model = new Schedule_Model(id,title,date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH),date.get(Calendar.HOUR),date.get(Calendar.MINUTE),memo,important);
     }
     static String getTitle(long id){
         Schedule_Model schedule_model = (Schedule_Model) MainActivity.getInstance().getScheduleBox().get(id);
@@ -42,5 +46,9 @@ public class ScheduleHelper {
     public static Schedule getSchedule(long id){
         Schedule schedule = new Schedule(ScheduleHelper.getTitle(id),ScheduleHelper.getDate(id),ScheduleHelper.getMemo(id),ScheduleHelper.getImportant(id));
         return schedule;
+    }
+    public static void putSchedule(ScheduleHelper helper){
+        MainActivity main = MainActivity.getInstance();
+        MainActivity.getInstance().getScheduleBox().put(helper.schedule_model);
     }
 }
