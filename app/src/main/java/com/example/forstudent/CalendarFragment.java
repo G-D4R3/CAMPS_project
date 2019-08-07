@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
-import com.example.forstudent.BoxHelperClass.TestSubHelper;
 import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Event;
 import com.example.forstudent.DataClass.Schedule;
@@ -30,16 +29,18 @@ import java.util.Collection;
 
 public class CalendarFragment extends Fragment{
     ArrayList<Assignment> assignmentList;
+    Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
     private TextView Dday;
     private TextView today;
     MainActivity main;
     View view;
-    MaterialCalendarView calendarView = null;
-    ArrayList<Schedule> schedules;
-    ArrayList<TestSub> testList;
-    ArrayList<Event> events;
+    MaterialCalendarView calendarView;
+    ArrayList<Schedule> schedules = new ArrayList<>();
+    ArrayList<TestSub> testList = new ArrayList<>();
+    ArrayList<Event> events = new ArrayList<>();
+    ArrayList<Event> dayEvent = new ArrayList<>();
     CalendarListAdapter adapter;
-    ListView listView=null;
+    ListView listView;
     @Nullable
     @Override
 
@@ -53,7 +54,7 @@ public class CalendarFragment extends Fragment{
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
         assignmentList = main.assignment;
         testList = main.testSub;
-        events = new ArrayList<>();
+
 
         if(calendarView == null) {
             calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
@@ -86,12 +87,12 @@ public class CalendarFragment extends Fragment{
 
         dotAssignment();
         dotSchedule();
+
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 //System.out.println(date.toString());
 
-                ArrayList<Event> dayEvent = new ArrayList<>();
                 for(Event tmp:events){
 
                     switch(tmp.getType()){
@@ -121,11 +122,11 @@ public class CalendarFragment extends Fragment{
                             //System.out.println(tmp.toString());
                             break;
                     }
-
+                    adapter = new CalendarListAdapter(dayEvent);
+                    listView = view.findViewById(R.id.calendarListView);
+                    listView.setAdapter(adapter);
                 }
-                adapter = new CalendarListAdapter(dayEvent);
-                listView = view.findViewById(R.id.calendarListView);
-                listView.setAdapter(adapter);
+
             }
         });
         calendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
@@ -149,7 +150,6 @@ public class CalendarFragment extends Fragment{
 
     public void dotAssignment(){
         CalendarDay calendarDay;
-        Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
 
         for(Assignment tmp : assignmentList){
             System.out.println(tmp.getPeriod());
@@ -184,8 +184,8 @@ public class CalendarFragment extends Fragment{
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         MainActivity main = (MainActivity)getActivity();
         main.getScheduleBox().removeAll();
         for(int i=0; i<schedules.size(); i++){
