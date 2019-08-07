@@ -8,7 +8,9 @@
     tools:context=".MainActivity">
 
 
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -19,34 +21,40 @@
             android:id="@+id/save_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="저장"
+            android:fontFamily="@font/barun"
             />
         <Button
             android:id="@+id/load_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Load"
+            android:text="불러오기"
+            android:fontFamily="@font/barun"
             />
         <Button
             android:id="@+id/add_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="추가"
+            android:fontFamily="@font/barun"
             />
         <Button
             android:id="@+id/clear_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear"
+            android:text="전체삭제"
+            android:fontFamily="@font/barun"
             />
 
     </LinearLayout>
 
-    <com.github.tlaabs.timetableview.TimetableView
+    <com.example.forstudent.Timetable.TimetableView
         android:id="@+id/timetable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:header_title="@array/header_title"
         />
+
+
 
 </LinearLayout>

@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.github.tlaabs.timetableview.Schedule;
-import com.github.tlaabs.timetableview.TimetableView;
+import com.example.forstudent.Timetable.Schedule;
+import com.example.forstudent.Timetable.TimetableView;
 
 import java.util.ArrayList;
 
@@ -105,13 +105,13 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
             case REQUEST_EDIT:
-                /** Edit -> Submit */
+                /* Edit -> Submit */
                 if(resultCode == EditActivity.RESULT_OK_EDIT){
                     int idx = data.getIntExtra("idx",-1);
                     ArrayList<Schedule> item = (ArrayList<Schedule>)data.getSerializableExtra("schedules");
                     timetable.edit(idx,item);
                 }
-                /** Edit -> Delete */
+                /* Edit -> Delete */
                 else if(resultCode == EditActivity.RESULT_OK_DELETE){
                     int idx = data.getIntExtra("idx",-1);
                     timetable.remove(idx);
@@ -120,7 +120,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    /** save timetableView's data to SharedPreferences in json format */
+
     private void saveByPreference(String data){
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = mPref.edit();
@@ -129,7 +129,6 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         Toast.makeText(getActivity(),"saved!",Toast.LENGTH_SHORT).show();
     }
 
-    /** get json data from SharedPreferences and then restore the timetable */
     private void loadSavedData(){
         timetable.removeAll();
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(getActivity());

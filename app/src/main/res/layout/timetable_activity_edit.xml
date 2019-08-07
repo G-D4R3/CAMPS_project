@@ -18,19 +18,23 @@
             android:id="@+id/subject_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Subject" />
+            android:hint="과목명"
+            android:fontFamily="@font/barun"
+            />
 
         <EditText
             android:id="@+id/classroom_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Classroom" />
+            android:hint="강의실"
+            android:fontFamily="@font/barun"/>
 
         <EditText
             android:id="@+id/professor_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Professor" />
+            android:hint="교수"
+            android:fontFamily="@font/barun"/>
 
         <include layout="@layout/timetable_timebox"/>
 
