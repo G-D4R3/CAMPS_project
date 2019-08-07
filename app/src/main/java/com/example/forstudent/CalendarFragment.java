@@ -38,7 +38,7 @@ public class CalendarFragment extends Fragment{
     ArrayList<Schedule> schedules = new ArrayList<>();
     ArrayList<TestSub> testList = new ArrayList<>();
     ArrayList<Event> events = new ArrayList<>();
-    ArrayList<Event> dayEvent = new ArrayList<>();
+    ArrayList<Event> dayEvent;
     CalendarListAdapter adapter;
     ListView listView;
     @Nullable
@@ -46,9 +46,8 @@ public class CalendarFragment extends Fragment{
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//test
 
-        /*점 안찍히는데 왠지 모르겟음 수정요망 */
+        ArrayList<Event> events = new ArrayList<>();
         main = (MainActivity)getActivity();
         schedules = main.schedules;
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
@@ -91,7 +90,7 @@ public class CalendarFragment extends Fragment{
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 //System.out.println(date.toString());
-
+                dayEvent = new ArrayList<>();
                 for(Event tmp:events){
 
                     switch(tmp.getType()){
