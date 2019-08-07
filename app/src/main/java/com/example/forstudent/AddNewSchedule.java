@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.DataClass.Event;
 import com.example.forstudent.DataClass.Schedule;
 
 import java.util.Calendar;
@@ -34,6 +35,7 @@ public class AddNewSchedule extends Fragment {
     EditText titleText;
     EditText memoText;
     Schedule schedule;
+    Event removeTarget = null;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -105,6 +107,7 @@ public class AddNewSchedule extends Fragment {
                 }
                 else{
                     main.calendarFragment.schedules.add(schedule);
+                    if(removeTarget != null) main.calendarFragment.schedules.remove(removeTarget);
                     main.FragmentRemove(AddNewSchedule.this);
 
                 }
