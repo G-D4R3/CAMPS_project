@@ -1,61 +1,142 @@
 package com.example.forstudent;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
 import com.github.tlaabs.timetableview.Schedule;
-import com.github.tlaabs.timetableview.Time;
 import com.github.tlaabs.timetableview.TimetableView;
 
 import java.util.ArrayList;
 
+public class TimetableFragment extends Fragment implements View.OnClickListener{
 
-public class TimetableFragment extends Fragment {
+    private Context context;
+    public static final int REQUEST_ADD = 1;
+    public static final int REQUEST_EDIT = 2;
 
-    ArrayList<Schedule> classes = new ArrayList<>();
+    private Button addBtn;
+    private Button clearBtn;
+    private Button saveBtn;
+    private Button loadBtn;
 
+    private TimetableView timetable;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_timetable, container, false);
-        TimetableView timetable = (TimetableView)view.findViewById(R.id.timetable);
-        TextView mAdd = (TextView)view.findViewById(R.id.addClass);
-
-        Schedule mClass = new Schedule();
-        mClass.setClassTitle("현대 암호 이론");
-        mClass.setClassPlace("팔410");
-        mClass.setProfessorName("예홍진");
-        mClass.setStartTime(new Time(12,0));
-        mClass.setEndTime(new Time(13,15));
-        mClass.setDay(0);
-        classes.add(mClass);
-        timetable.add(classes);
+        View view = inflater.inflate(R.layout.fragment_timetable, container, false);
+        init(view);
+        return view;
+    }
 
 
-        mAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void init(View v){
+        this.context = getActivity();
+        addBtn = v.findViewById(R.id.add_btn);
+        clearBtn = v.findViewById(R.id.clear_btn);
+        saveBtn = v.findViewById(R.id.save_btn);
+        loadBtn = v.findViewById(R.id.load_btn);
 
-            }
-        });
+        timetable = v.findViewById(R.id.timetable);
+        timetable.setHeaderHighlight(2);
+        initView();
+    }
 
+    private void initView(){
+        addBtn.setOnClickListener(this);
+        clearBtn.setOnClickListener(this);
+        saveBtn.setOnClickListener(this);
+        loadBtn.setOnClickListener(this);
 
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
-            public void OnStickerSelected(int idx, ArrayList<Schedule> classes) {
-
+            public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
+                Intent i = new Intent(context, EditActivity.class);
+                i.putExtra("mode",REQUEST_EDIT);
+                i.putExtra("idx", idx);
+                i.putExtra("schedules", schedules);
+                startActivityForResult(i,REQUEST_EDIT);
             }
         });
-
-
-
-        return view;
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.add_btn:
+                Intent i = new Intent(getActivity(),EditActivity.class);
+                i.putExtra("mode",REQUEST_ADD);
+                startActivityForResult(i,REQUEST_ADD);
+                break;
+            case R.id.clear_btn:
+                timetable.removeAll();
+                break;
+            case R.id.save_btn:
+                saveByPreference(timetable.createSaveData());
+                break;
+            case R.id.load_btn:
+                loadSavedData();
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+            case REQUEST_ADD:
+                if(resultCode == EditActivity.RESULT_OK_ADD){
+                    ArrayList<Schedule> item = (ArrayList<Schedule>)data.getSerializableExtra("schedules");
+                    timetable.add(item);
+                }
+                break;
+            case REQUEST_EDIT:
+                /** Edit -> Submit */
+                if(resultCode == EditActivity.RESULT_OK_EDIT){
+                    int idx = data.getIntExtra("idx",-1);
+                    ArrayList<Schedule> item = (ArrayList<Schedule>)data.getSerializableExtra("schedules");
+                    timetable.edit(idx,item);
+                }
+                /** Edit -> Delete */
+                else if(resultCode == EditActivity.RESULT_OK_DELETE){
+                    int idx = data.getIntExtra("idx",-1);
+                    timetable.remove(idx);
+                }
+                break;
+        }
+    }
+
+    /** save timetableView's data to SharedPreferences in json format */
+    private void saveByPreference(String data){
+        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences.Editor editor = mPref.edit();
+        editor.putString("timetable_demo",data);
+        editor.commit();
+        Toast.makeText(getActivity(),"saved!",Toast.LENGTH_SHORT).show();
+    }
+
+    /** get json data from SharedPreferences and then restore the timetable */
+    private void loadSavedData(){
+        timetable.removeAll();
+        SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String savedData = mPref.getString("timetable_demo","");
+        if(savedData == null && savedData.equals("")) return;
+        timetable.load(savedData);
+        Toast.makeText(getActivity(),"loaded!",Toast.LENGTH_SHORT).show();
+    }
+
 }

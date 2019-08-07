@@ -3,4 +3,22 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#000000</color>
+
+    <string-array name="timetable_color">
+        <item>#F15F4F</item>
+        <item>#FFC44E</item>
+        <item>#ACDD60</item>
+        <item>#6AD6BF</item>
+        <item>#529CEB</item>
+        <item>#A463FF</item>
+        <item>#DD72EE</item>
+        <item>#4AA04B</item>
+        <item>#4859B3</item>
+    </string-array>
+
+    <color name="default_side_header_font_color">#7d7d7d</color>
+    <color name="default_header_font_color">#7d7d7d</color>
+    <color name="default_header_highlight_font_color">#ffffff</color>
+    <color name="default_header_highlight_color">#74a4f3</color>
+    <color name="default_sticker_font_color">#ffffff</color>
 </resources>
