@@ -100,12 +100,10 @@ public class HomeFragmentSetup extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.ImpOnly:
-                        main.homeFragment.ass =  main.important;
-                        main.homeFragment.assignmentAdapter.notifyDataSetChanged();
+                        main.homeFragment.mSetAssignment = false;
                         break;
                     case R.id.viewAllAssign:
-                        main.homeFragment.ass = main.assignment;
-                        main.homeFragment.assignmentAdapter.notifyDataSetChanged();
+                        main.homeFragment.mSetAssignment = true;
                         break;
                 }
             }

@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     GridView mClassList;
     GridView mAssignList;
     GridView mTestList;
+    boolean mSetAssignment=true; //true면 전부,  false면 중요한 과제만 표시
 
     public ArrayList<Assignment> ass = new ArrayList<>();
     public ArrayList<TestSub> tests = new ArrayList<>();
@@ -90,6 +91,13 @@ public class HomeFragment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
         tests = main.testSub;
 
+        if(mSetAssignment==true){
+            ass = main.assignment;
+        }
+        else{
+            ass = main.important;
+        }
+
         assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
 
@@ -98,6 +106,8 @@ public class HomeFragment extends Fragment {
 
         setListView(layoutset);
         setExist();
+
+
 
 
 

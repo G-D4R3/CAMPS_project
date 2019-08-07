@@ -152,7 +152,7 @@
                     android:layout_height="50dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center"
-                    android:text="일정이 없습니다."
+                    android:text="과제가 없습니다."
                     android:textColor="#6F6F6F" />
 
                 <GridView

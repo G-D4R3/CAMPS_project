@@ -3,6 +3,8 @@ package com.example.forstudent.ListViewAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -46,6 +48,10 @@ public class TodoListAdapter extends BaseAdapter {
         TextView mPeriod = (TextView)convertView.findViewById(R.id.period);
         TextView mName = (TextView)convertView.findViewById(R.id.assign);
         CheckBox mCheck = (CheckBox)convertView.findViewById(R.id.checkBox);
+        MainActivity main = MainActivity.getInstance();
+
+        Animation animation = AnimationUtils.loadAnimation(main.todoFragment.getContext(), R.anim.replace_in);
+        convertView.setAnimation(animation);
 
         Assignment ass = (Assignment)data.get(position);
         mPeriod.setText(String.format("%d.%2d",(ass.getPeriod().get(Calendar.MONTH)+1),ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
@@ -55,7 +61,6 @@ public class TodoListAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) { //나중에 애니메이션 추가
-                    MainActivity main = MainActivity.getInstance();
                     Toast.makeText(main.todoFragment.getContext(),"완료",Toast.LENGTH_SHORT).show();
                     main.todoFragment.RemoveAss(main.todoFragment.AssList.get(position));
                 }
