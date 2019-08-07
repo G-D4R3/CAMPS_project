@@ -19,8 +19,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Schedule;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 
 public class AddNewSchedule extends Fragment {
@@ -107,7 +105,6 @@ public class AddNewSchedule extends Fragment {
                 }
                 else{
                     main.calendarFragment.schedules.add(schedule);
-
                     main.FragmentRemove(AddNewSchedule.this);
 
                 }
@@ -132,7 +129,7 @@ public class AddNewSchedule extends Fragment {
         dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //
+                dialog.dismiss();
             }
         });
         dialog.show();
