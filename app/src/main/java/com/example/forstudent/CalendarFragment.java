@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
 import com.example.forstudent.DataClass.Assignment;
@@ -56,7 +57,7 @@ public class CalendarFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ArrayList<Event> events = new ArrayList<>();
+        //ArrayList<Event> events = new ArrayList<>();
         main = (MainActivity)getActivity();
         schedules = main.schedules;
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
@@ -72,7 +73,7 @@ public class CalendarFragment extends Fragment{
             tmp.setMinute(tmp.getDate().get(Calendar.MINUTE));
             tmp.setType(2);
             System.out.println(tmp.toString());
-            events.add(tmp);
+            if(!events.contains(tmp)) events.add(tmp);
         }
         for(Assignment tmp:assignmentList){
             //Event event = new Event(tmp.getName(),tmp.getPeriod().get(Calendar.HOUR),tmp.getPeriod().get(Calendar.MINUTE),tmp.getMemo(),1);
@@ -80,7 +81,7 @@ public class CalendarFragment extends Fragment{
             tmp.setHour(tmp.getPeriod().get(Calendar.HOUR));
             tmp.setMinute(tmp.getPeriod().get(Calendar.MINUTE));
             tmp.setType(1);
-            events.add(tmp);
+            if(!events.contains(tmp)) events.add(tmp);
         }
         for(TestSub tmp:testList){
             //Event event = new Event(tmp.getName(),tmp.getStartHour(),tmp.getStartMinute(),tmp.getRange(),3);
@@ -89,7 +90,7 @@ public class CalendarFragment extends Fragment{
             tmp.setMinute(tmp.getStartMinute());
             tmp.setMemo(tmp.getRange());
             tmp.setType(3);
-            events.add(tmp);
+            if(!events.contains(tmp)) events.add(tmp);
         }
 
         dotAssignment();
@@ -158,7 +159,7 @@ public class CalendarFragment extends Fragment{
                             switch (which) {
                                 case 0:
                                     dialog.dismiss();
-                                    //ModifyAss(adapter.eventList.get(pos));
+                                    modifySchedule(lowerAdapter.eventList.get(pos),lowerAdapter);
                                     break;
                                 case 1:
                                     AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
@@ -273,13 +274,35 @@ public class CalendarFragment extends Fragment{
             ScheduleHelper.putSchedule(helper);
         }
     }
+    public void addTransparent(){
+        TransparentFragment addFragment = TransparentFragment.newInstance();
+        MainActivity main = (MainActivity)getActivity();
+        main.FragmentAdd(addFragment);
+    }
     public void removeSchedule(Event event,CalendarListAdapter adapter){
-        schedules.remove(event);
-
+        schedules.remove((Schedule)event);
+        scheduleDayEvent.remove(event);
+        events.remove(event);
+        addTransparent();
         adapter.notifyDataSetChanged();
     }
+    public void modifySchedule(Event event,CalendarListAdapter adapter){
+        MainActivity main = (MainActivity)getActivity();
+        AddNewSchedule addFragment = AddNewSchedule.newInstance();
+        Schedule schedule = (Schedule)event;
+        addFragment.year = schedule.getDate().get(Calendar.YEAR);
+        addFragment.month = schedule.getDate().get(Calendar.MONTH);
+        addFragment.day = schedule.getDate().get(Calendar.DAY_OF_MONTH);
+        addFragment.removeTarget = event;
+        main.FragmentAdd(addFragment);
+        adapter.notifyDataSetChanged();
+        addTransparent();
 
+    }
     public MaterialCalendarView getCalendarView() {
         return calendarView;
     }
+
+
+
 }
