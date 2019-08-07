@@ -70,7 +70,7 @@
                     android:gravity="center_vertical"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:text="일정"/>
 
 
@@ -106,7 +106,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
                     android:text="수업"/>
@@ -141,7 +141,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
                     android:text="과제"/>
@@ -177,7 +177,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="23dp"
+                    android:textSize="20dp"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
                     android:text="시험"/>

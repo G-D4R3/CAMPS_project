@@ -15,14 +15,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:fontFamily="@font/barun"
-            android:gravity="center_vertical"
-            android:textSize="20dp"
-            android:text="2019-2"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/barun"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:text="2019-2"/>
+
+            <TextView
+                android:id="@+id/addClass"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="8"
+                android:gravity="center"
+                android:fontFamily="@font/barun"
+                android:textSize="15dp"
+                android:text="추가"/>
+        </LinearLayout>
+
+
 
 
         <ScrollView
@@ -43,10 +61,12 @@
                 app:layout_constraintTop_toTopOf="parent" >
 
                 <com.github.tlaabs.timetableview.TimetableView
+                    android:id="@+id/timetable"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    app:cell_height="60dp"
                     app:column_count="6"
-                    app:row_count="15"
+                    app:row_count="13"
 
                     ></com.github.tlaabs.timetableview.TimetableView>
 
