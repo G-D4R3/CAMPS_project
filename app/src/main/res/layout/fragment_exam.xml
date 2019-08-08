@@ -32,15 +32,17 @@
             android:fontFamily="@font/barun"
             android:text="D-Day" />
 
-        <Button
+        <ImageButton
             android:id="@+id/addSubject"
             android:layout_marginTop="20dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:layout_marginRight="15dp"
-            android:fontFamily="@font/barun"
-            android:text="+" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:background="#FFFFFF"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/add_icon"/>
 
         <ListView
             android:id="@+id/examlistView"

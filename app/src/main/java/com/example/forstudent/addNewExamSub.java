@@ -45,7 +45,6 @@ public class addNewExamSub extends Fragment {
 
     Boolean DATE_PICKED = false;
     Boolean START_PICKED = false;
-    Boolean END_PICKED = false;
 
 
 
@@ -98,7 +97,6 @@ public class addNewExamSub extends Fragment {
             mRange.setText(range);
             DATE_PICKED=true;
             START_PICKED=true;
-            END_PICKED=true;
         }
 
 
@@ -151,7 +149,6 @@ public class addNewExamSub extends Fragment {
                         mEnd.setText(hourOfDay+"시 "+minute+"분");
                         mEHour = hourOfDay;
                         mEMinute = minute;
-                        END_PICKED=true;
                     }
                 },mEHour,mEMinute,true);
                 timepick.show();
@@ -196,7 +193,7 @@ public class addNewExamSub extends Fragment {
                         subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
                     }
 
-                    if(subject.getName()==null||DATE_PICKED==false||START_PICKED==false||END_PICKED==false){
+                    if(subject.getName()==null||DATE_PICKED==false||START_PICKED==false){
                         setYetDialog();
                     }
                     else{

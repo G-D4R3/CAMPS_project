@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +30,7 @@ public class ExamFragment extends Fragment{
     public String titleDday="D-day";
     ListView mlistView = null;
     ExamListAdapter adapter;
-    private Button addSubject;
+    private ImageButton addSubject;
     View view;
     DateCount count;
     public TextView dday;
@@ -44,7 +44,7 @@ public class ExamFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
-        addSubject = (Button) view.findViewById(R.id.addSubject);
+        addSubject = (ImageButton) view.findViewById(R.id.addSubject);
         dday = (TextView)view.findViewById(R.id.examTitle);
 
         count = new DateCount();
@@ -67,32 +67,26 @@ public class ExamFragment extends Fragment{
         addSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                final BasicDialog dialog = new BasicDialog();
-                dialog.show(getFragmentManager(),"BasicDialog");
-
-                View.OnClickListener mCallTable = new View.OnClickListener() {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("과목 추가");
+                dialog.setMessage("시험 추가");
+                dialog.setNegativeButton("불러오기", new DialogInterface.OnClickListener() {
                     @Override
-
-                    public void onClick(View v) {
-                        Toast toast = Toast.makeText(getContext(), "left", Toast.LENGTH_SHORT);
-                        toast.show();
-                        //timetable 변수 가져와서 해야함
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
-                };
-                View.OnClickListener mSetDirectly = new View.OnClickListener() {
+                });
+                dialog.setPositiveButton("직접추가", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         addNewsub();
-
                     }
-                };
-                dialog.setListener(mCallTable, mSetDirectly);
+                });
+                dialog.create();
+                dialog.show();
             }
         });
-
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

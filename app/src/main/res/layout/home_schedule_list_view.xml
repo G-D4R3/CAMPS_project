@@ -6,15 +6,14 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
-    android:background="@drawable/listview_border"
     android:layout_margin="10dp"
-    android:layout_height="80dp">
+    android:layout_height="45dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,24 +22,28 @@
         <TextView
             android:id="@+id/period5"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginVertical="8dp"
+            android:layout_weight="4"
+            android:gravity="center_vertical"
             android:textSize="15dp"
             android:textColor="#505050"
             android:fontFamily="@font/barun"
-            android:gravity="center_vertical"
-            android:text="월.일" />
+            android:text="월.일"/>
 
         <TextView
             android:id="@+id/assign5"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginVertical="8dp"
+            android:layout_weight="1"
             android:text="시험"
+            android:gravity="center_vertical"
             android:textColor="#505050"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,13 +20,13 @@ public class ListViewSetter {
         for(int i=0; i<adapter.getCount(); i++){
             View item = adapter.getView(i, null, listview);
             item.measure(0,0);
-            totalheight+=item.getMeasuredHeight();
+            totalheight+=item.getMeasuredHeight()+20;
         }
 
-        int divider = listview.getDividerHeight() * (adapter.getCount()-1);
+        int divider = listview.getDividerHeight() *( adapter.getCount()-1);
 
         ViewGroup.LayoutParams params = listview.getLayoutParams();
-        params.height = totalheight;
+        params.height = totalheight+divider;
         listview.setLayoutParams(params);
         listview.requestLayout();
     }

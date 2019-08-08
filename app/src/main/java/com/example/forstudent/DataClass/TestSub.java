@@ -7,7 +7,6 @@ public class TestSub extends Event implements Comparable<TestSub>{
 
     //시험 정보 저장
 
-
     private String Name=null;
 
     private Calendar TestDate=Calendar.getInstance();

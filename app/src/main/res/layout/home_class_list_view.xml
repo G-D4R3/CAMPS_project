@@ -6,8 +6,7 @@
     android:orientation="horizontal"
     android:layout_margin="10dp"
     android:layout_width="match_parent"
-    android:background="@drawable/listview_border"
-    android:layout_height="40dp">
+    android:layout_height="45dp">
 
 
     <LinearLayout
@@ -25,8 +24,8 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginVertical="8dp"
-            android:gravity="center"
-            android:layout_weight="8"
+            android:gravity="center_vertical"
+            android:layout_weight="4"
             android:textSize="15dp"
             android:textColor="#505050"
             android:fontFamily="@font/barun"
@@ -36,12 +35,13 @@
             android:id="@+id/assign4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
             android:layout_marginVertical="6dp"
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:text="수업"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

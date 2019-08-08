@@ -36,7 +36,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/barun"
                 android:text="D-day 설정하기"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:textColor="#12373F"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="238dp" />
@@ -66,7 +66,7 @@
                 <TextView
                     android:id="@+id/home_schedule"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
@@ -74,14 +74,14 @@
                     android:gravity="center_vertical"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:text="일정"/>
 
 
                 <TextView
                     android:id="@+id/noschedule"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center"
                     android:text="일정이 없습니다."
@@ -89,9 +89,13 @@
 
                 <ListView
                     android:id="@+id/home_schedulelistview"
+                    android:layout_gravity="center"
+                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"/>
+                    android:divider="@null"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"/>
 
 
             </LinearLayout>
@@ -108,11 +112,11 @@
                 <TextView
                     android:id="@+id/home_class"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
                     android:text="수업"/>
@@ -120,7 +124,7 @@
                 <TextView
                     android:id="@+id/noclass"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:gravity="center"
                     android:fontFamily="@font/barun"
                     android:textColor="#6F6F6F"
@@ -128,9 +132,13 @@
 
                 <ListView
                     android:id="@+id/home_classlistview"
+                    android:layout_gravity="center"
+                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"/>
+                    android:divider="@null"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"/>
 
             </LinearLayout>
 
@@ -145,11 +153,11 @@
                 <TextView
                     android:id="@+id/home_ass"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
                     android:text="과제"/>
@@ -157,7 +165,7 @@
                 <TextView
                     android:id="@+id/noassignment"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center"
                     android:text="과제가 없습니다."
@@ -166,8 +174,10 @@
                 <ListView
                     android:id="@+id/home_asslistview"
                     android:layout_gravity="center"
+                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:divider="@null"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="10dp"/>
 
@@ -185,19 +195,19 @@
                 <TextView
                     android:id="@+id/home_exam"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="15dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center_vertical"
                     android:text="시험"
                     android:textColor="#3F3F3F"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/noexam"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:gravity="center"
                     android:fontFamily="@font/barun"
                     android:textColor="#6F6F6F"
@@ -206,9 +216,12 @@
                 <ListView
                     android:id="@+id/home_examlistview"
                     android:layout_gravity="center"
+                    android:scrollbars="none"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"/>
+                    android:layout_height="wrap_content"
+                    android:divider="@null"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"/>
 
             </LinearLayout>
 

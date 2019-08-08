@@ -15,9 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
 import com.example.forstudent.ListViewAdapter.HomeAssignmentAdapter;
 import com.example.forstudent.ListViewAdapter.HomeExamAdapter;
+import com.example.forstudent.ListViewAdapter.HomeScheduleAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,10 +50,12 @@ public class HomeFragment extends Fragment {
 
     public ArrayList<Assignment> ass = new ArrayList<>();
     public ArrayList<TestSub> tests = new ArrayList<>();
+    public ArrayList<Schedule> schedules = new ArrayList<>();
 
 
     public HomeAssignmentAdapter assignmentAdapter;
     public HomeExamAdapter examAdapter;
+    public HomeScheduleAdapter scheduleAdapter;
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +103,15 @@ public class HomeFragment extends Fragment {
             ass = main.important;
         }
 
+        schedules = main.schedules;
+
+
+        scheduleAdapter = new HomeScheduleAdapter(schedules);
+        mScheduleList.setAdapter(scheduleAdapter);
+        listViewSetter.setListViewHeight(mScheduleList);
+
+
+
         assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
         listViewSetter.setListViewHeight(mAssignList);
@@ -120,7 +133,6 @@ public class HomeFragment extends Fragment {
 
 
         restDay = datecount.calcDday();
-        today.setText(String.format("종강 %d월 %d일",(datecount.dcalendar.get(Calendar.MONTH)+1),datecount.dcalendar.get(Calendar.DAY_OF_MONTH)));
         setDateView();
 
 
@@ -159,7 +171,7 @@ public class HomeFragment extends Fragment {
                         //System.out.println(user);
                         //System.out.println((user.lastDay));
                     }
-                },datecount.tcalendar.get(Calendar.YEAR), datecount.tcalendar.get(Calendar.MONTH), datecount.tcalendar.get(Calendar.DATE));
+                },datecount.dcalendar.get(Calendar.YEAR), datecount.dcalendar.get(Calendar.MONTH), datecount.dcalendar.get(Calendar.DATE));
                 datepick.show();
             }
         });
@@ -172,6 +184,14 @@ public class HomeFragment extends Fragment {
     }
 
     private void setExist() {
+        if(layoutset[0]==true){
+            if(schedules.size()>0){
+                mNoSchedule.setVisibility(View.GONE);
+            }
+            else{
+                mNoSchedule.setVisibility(View.VISIBLE);
+            }
+        }
         if(layoutset[2]==true){
             if(ass.size()>0){
                 mNoAssignment.setVisibility(View.GONE);
@@ -241,6 +261,7 @@ public class HomeFragment extends Fragment {
 
     public void setDateView(){
         //D-day textview set
+        today.setText(String.format("종강 %d월 %d일",(datecount.dcalendar.get(Calendar.MONTH)+1),datecount.dcalendar.get(Calendar.DAY_OF_MONTH)));
         if(restDay>0){
             Dday.setText(String.format("종강까지 D-%d",restDay));
         }

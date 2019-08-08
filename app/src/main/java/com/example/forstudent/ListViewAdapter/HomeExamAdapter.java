@@ -40,10 +40,13 @@ public class HomeExamAdapter extends BaseAdapter {
 
         TextView mDate = (TextView)convertView.findViewById(R.id.period3);
         TextView mExam = (TextView)convertView.findViewById(R.id.assign3);
+        TextView mTime = (TextView)convertView.findViewById(R.id.time4);
 
         TestSub sub = testSubs.get(position);
 
         mDate.setText(String.format("%d.%2d",sub.getTestDate().get(Calendar.MONTH)+1,sub.getTestDate().get(Calendar.DAY_OF_MONTH)));
+        mTime.setText(String.format("%d시 %d분", sub.getStartHour(), sub.getStartMinute()));
+        System.out.println(sub.getStartHour()+sub.getStartMinute());
         mExam.setText(sub.getName());
 
 
