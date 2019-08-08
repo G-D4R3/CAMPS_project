@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,10 +40,10 @@ public class HomeFragment extends Fragment {
     TextView mNoClass;
     TextView mNoAssignment;
     TextView mNoExam;
-    GridView mScheduleList;
-    GridView mClassList;
-    GridView mAssignList;
-    GridView mTestList;
+    ListView mScheduleList;
+    ListView mClassList;
+    ListView mAssignList;
+    ListView mTestList;
     boolean mSetAssignment=true; //true면 전부,  false면 중요한 과제만 표시
 
     public ArrayList<Assignment> ass = new ArrayList<>();
@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ListViewSetter listViewSetter = new ListViewSetter();
 
         //view 정의
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
@@ -79,10 +80,10 @@ public class HomeFragment extends Fragment {
         mNoAssignment = (TextView)view.findViewById(R.id.noassignment);
         mNoExam = (TextView)view.findViewById(R.id.noexam);
 
-        mScheduleList = (GridView)view.findViewById(R.id.home_schedulelistview);
-        mClassList = (GridView)view.findViewById(R.id.home_classlistview);
-        mAssignList = (GridView)view.findViewById(R.id.home_asslistview);
-        mTestList = (GridView)view.findViewById(R.id.home_examlistview);
+        mScheduleList = (ListView)view.findViewById(R.id.home_schedulelistview);
+        mClassList = (ListView)view.findViewById(R.id.home_classlistview);
+        mAssignList = (ListView)view.findViewById(R.id.home_asslistview);
+        mTestList = (ListView)view.findViewById(R.id.home_examlistview);
 
 
         datecount = new DateCount(Calendar.getInstance());
@@ -100,9 +101,11 @@ public class HomeFragment extends Fragment {
 
         assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
+        listViewSetter.setListViewHeight(mAssignList);
 
         examAdapter = new HomeExamAdapter(tests);
         mTestList.setAdapter(examAdapter);
+        listViewSetter.setListViewHeight(mTestList);
 
         setListView(layoutset);
         setExist();
