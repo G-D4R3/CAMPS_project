@@ -20,7 +20,7 @@
         <item>#4859B3</item>
     </string-array>
 
-    <color name="status_bar">#3a707c</color>
+    <color name="base_color">#3a707c</color>
     <color name="main_color">#245b66</color>
     <color name="sub_color">#ec525b</color>
 
