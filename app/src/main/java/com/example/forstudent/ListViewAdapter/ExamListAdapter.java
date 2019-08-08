@@ -3,8 +3,6 @@ package com.example.forstudent.ListViewAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -58,9 +56,6 @@ public class ExamListAdapter extends BaseAdapter {
         TestSub sub = data.get(position);
 
         MainActivity main = MainActivity.getInstance();
-
-        Animation animation = AnimationUtils.loadAnimation(main.examFragment.getContext(), R.anim.replace_in);
-        convertView.setAnimation(animation);
 
         mSubname.setText(sub.getName());
         mDate.setText(String.format("%d월 %d일", sub.getTestDate().get(Calendar.MONTH)+1, sub.getTestDate().get(Calendar.DAY_OF_MONTH)));
