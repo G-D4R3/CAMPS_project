@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#3A707C</color>
     <color name="colorAccent">#EC725B</color>
 
+    <color name="colorHeader">#fcfcfc</color>
+    <color name="colorHeaderText">#7d7d7d</color>
+    <color name="colorTableItem">#efefef</color>
+
     <string-array name="timetable_color">
         <item>#F15F4F</item>
         <item>#FFC44E</item>
@@ -15,6 +19,10 @@
         <item>#4AA04B</item>
         <item>#4859B3</item>
     </string-array>
+
+    <color name="base_color">#3a707c</color>
+    <color name="main_color">#245b66</color>
+    <color name="sub_color">#ec525b</color>
 
     <color name="default_side_header_font_color">#7d7d7d</color>
     <color name="default_header_font_color">#7d7d7d</color>
