@@ -51,12 +51,14 @@ public class CalendarFragment extends Fragment{
     CalendarListAdapter lowerAdapter;
     ListView upperListView;
     ListView lowerListView;
+    int colorAccent;
+
     @Nullable
     @Override
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        colorAccent = getResources().getColor(R.color.colorAccent);
         //ArrayList<Event> events = new ArrayList<>();
         main = (MainActivity)getActivity();
         schedules = main.schedules;
@@ -229,7 +231,7 @@ public class CalendarFragment extends Fragment{
             calendarDay = CalendarDay.from(year,month,day);
             testDaysList.add(calendarDay);
         }
-        calendarView.addDecorators(new EventDecorator(Color.GREEN,testDaysList));
+        calendarView.addDecorators(new EventDecorator(colorAccent,testDaysList));
     }
     public void dotAssignment(){
 
@@ -244,7 +246,7 @@ public class CalendarFragment extends Fragment{
             calendarDay = CalendarDay.from(year,month,day);
             assignmentDaysList.add(calendarDay);
         }
-        calendarView.addDecorators(new EventDecorator(Color.RED,assignmentDaysList));
+        calendarView.addDecorators(new EventDecorator(colorAccent,assignmentDaysList));
     }
     public void dotSchedule(){
         Collection<CalendarDay> scheduleDaysList = new ArrayList<>();
@@ -261,7 +263,7 @@ public class CalendarFragment extends Fragment{
             scheduleDaysList.add(calendarDay);
         }
 
-        calendarView.addDecorators(new EventDecorator(Color.BLUE,scheduleDaysList));
+        calendarView.addDecorators(new EventDecorator(colorAccent,scheduleDaysList));
     }
 
     @Override
