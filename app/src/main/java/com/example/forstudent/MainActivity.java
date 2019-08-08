@@ -2,6 +2,7 @@ package com.example.forstudent;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
@@ -9,6 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -57,7 +60,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public addNewExamSub addnewExamsub = new addNewExamSub();
     public AddNewAssignment addNewAssignment = new AddNewAssignment();
     public HomeFragmentSetup homeFragmentSetup = new HomeFragmentSetup();
-
+    public ActionBar actionBar;
 
     //for storage
     ArrayList<Assignment> assignment = new ArrayList<>();
@@ -79,7 +82,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        actionBar= getSupportActionBar() ;
 
         //
 
@@ -271,6 +274,12 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return testSub_model;
     }
 
+
+    public void setActionBarTitle(String title) {
+        Drawable backGround = getDrawable(R.drawable.actionbar_background);
+        actionBar.setTitle(title);
+        actionBar.setBackgroundDrawable(backGround);
+    }
 
     public static MainActivity getInstance() {
         return instance;

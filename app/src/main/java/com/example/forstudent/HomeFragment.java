@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Assignment;
@@ -67,7 +68,8 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ListViewSetter listViewSetter = new ListViewSetter();
-
+        MainActivity main = (MainActivity)getActivity();
+        main.setActionBarTitle("홈");
         //view 정의
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
@@ -93,7 +95,7 @@ public class HomeFragment extends Fragment {
         datecount = new DateCount(Calendar.getInstance());
 
         //load data
-        MainActivity main = (MainActivity)getActivity();
+
         tests = main.testSub;
 
         if(mSetAssignment==true){

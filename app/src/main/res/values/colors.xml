@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#3A707C</color>
     <color name="colorAccent">#EC725B</color>
 
+    <drawable name="colorPrimaryDarkDrawable">#3A707C</drawable>
+
     <color name="colorHeader">#fcfcfc</color>
     <color name="colorHeaderText">#7d7d7d</color>
     <color name="colorTableItem">#efefef</color>

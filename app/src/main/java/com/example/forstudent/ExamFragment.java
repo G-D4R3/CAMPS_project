@@ -52,7 +52,7 @@ public class ExamFragment extends Fragment{
         Collections.sort(ExamList);
         MainActivity main = (MainActivity)getActivity();
         ExamList = main.testSub;
-
+        main.setActionBarTitle("시험");
         //listvieww
         adapter = new ExamListAdapter(ExamList);
         mlistView = (ListView)view.findViewById(R.id.examlistView);
