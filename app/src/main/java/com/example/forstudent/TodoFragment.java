@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +53,7 @@ public class TodoFragment extends Fragment {
         mTitle = (TextView)view.findViewById(R.id.restDo);
         mlistView = (ListView)view.findViewById(R.id.assignmentList);
         mImportant = (ListView)view.findViewById(R.id.importantAssignment);
-        Button mAdd = (Button)view.findViewById(R.id.addAss);
+        ImageButton mAdd = (ImageButton)view.findViewById(R.id.addAss);
         mImpSec = (TextView)view.findViewById(R.id.SectionHeader2);
         mAssSec = (TextView)view.findViewById(R.id.SectionHeader3);
         mIhide = (TextView)view.findViewById(R.id.hide2);

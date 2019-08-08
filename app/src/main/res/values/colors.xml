@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#000000</color>
+    <color name="colorPrimary">#245B66</color>
+    <color name="colorPrimaryDark">#3A707C</color>
+    <color name="colorAccent">#EC725B</color>
 
     <string-array name="timetable_color">
         <item>#F15F4F</item>
