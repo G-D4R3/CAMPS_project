@@ -59,6 +59,7 @@ public class TodoListAdapter extends BaseAdapter {
                 if(isChecked) { //나중에 애니메이션 추가
                     Toast.makeText(main.todoFragment.getContext(),"완료",Toast.LENGTH_SHORT).show();
                     main.todoFragment.RemoveAss(main.todoFragment.AssList.get(position));
+                    main.todoFragment.setView();
                 }
             }
         });

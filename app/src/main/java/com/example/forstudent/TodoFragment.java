@@ -26,7 +26,7 @@ import java.util.Collections;
 
 public class TodoFragment extends Fragment {
     public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
-    ArrayList<Assignment> ImpList = new ArrayList<Assignment>();
+    public ArrayList<Assignment> ImpList = new ArrayList<Assignment>();
     TodoListAdapter adapter;
     TodoListAdapter ImportantAdapter;
     TextView mTitle;
@@ -60,7 +60,6 @@ public class TodoFragment extends Fragment {
         mAhide = (TextView)view.findViewById(R.id.hide3);
 
         loadData();
-        System.out.println(AssList.size());
 
         mTitle.setText(title);
 
@@ -102,12 +101,13 @@ public class TodoFragment extends Fragment {
                             switch (which) {
                                 case 0:
                                     Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
-                                    setImportance(adapter.data.get(pos));
                                     mImportant.setVisibility(View.VISIBLE);
+                                    setImportance(adapter.data.get(pos));
                                     break;
                                 case 1:
                                     dialog.dismiss();
                                     ModifyAss(adapter.data.get(pos));
+                                    setView();
                                     break;
                                 case 2:
                                     AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
@@ -119,6 +119,7 @@ public class TodoFragment extends Fragment {
                                             RemoveAss(adapter.data.get(pos));
                                             mTitle.setText(title);
                                             dialog.dismiss();
+                                            setView();
                                         }
                                     });
                                     remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -279,13 +280,6 @@ public class TodoFragment extends Fragment {
 
     }
 
-    public void Check(){
-        Toast toast = Toast.makeText(getContext(),"할 일 완료", Toast.LENGTH_LONG);
-        toast.show();
-        //
-        Collections.sort(AssList);
-        adapter.notifyDataSetChanged();
-    }
 
     public void setImportance(Assignment a){
         a.setFlag(true);
@@ -302,5 +296,16 @@ public class TodoFragment extends Fragment {
         Collections.sort(ImpList);
 
         title = String.format("남은 과제 : %d", AssList.size());
+    }
+
+    public void setView(){
+        title = String.format("남은 과제 : %d", AssList.size());
+        mTitle.setText(title);
+        if(ImpList.size()>0){
+            mImportant.setVisibility(View.VISIBLE);
+        }
+        else{
+            mImportant.setVisibility(View.GONE);
+        }
     }
 }
