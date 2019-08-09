@@ -6,7 +6,6 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
-    android:layout_margin="10dp"
     android:layout_height="45dp">
 
 
