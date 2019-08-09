@@ -90,7 +90,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //
 
 
-
         instance = this;
         ObjectBox.init(this);
         setContentView(R.layout.activity_main);
@@ -149,6 +148,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         for(long i=1; i<=testBox.count(); i++){
             testSub.add(TestSubHelper.getTestSub(i));
         }
+
+
 
 
 
