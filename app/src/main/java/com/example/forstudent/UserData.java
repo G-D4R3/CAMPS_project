@@ -39,15 +39,15 @@ public class UserData {
 
     }
     //생성자에 모든 요소들을 넣어줘야함. 당장 쓰지 않더라도 디폴트 값이라도 넣어줄 것.
-    public UserData(long id,String name,Date lastDay,int hello){
+    public UserData(long id,String name,Date lastDay,int hello, boolean b0, boolean b1, boolean b2, boolean b3){
         this.id = id;
         this.name = name;
         this.lastDay = lastDay;
         this.hello  =hello;
-        this.homeAssignmentCheck=true;
-        this.homeClassCheck=true;
-        this.homeExamCheck=true;
-        this.homeScheduleCheck=true;
+        this.homeAssignmentCheck=b0;
+        this.homeClassCheck=b1;
+        this.homeExamCheck=b2;
+        this.homeScheduleCheck=b3;
     }
     public void setName(String name){
         this.name = name;

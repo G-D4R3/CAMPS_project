@@ -64,6 +64,8 @@ public class HomeFragmentSetup extends Fragment {
                         main.getUser().setHomeClassCheck(select[1]);
                         main.getUser().setHomeAssignmentCheck(select[2]);
                         main.getUser().setHomeExamCheck(select[3]);
+                        main.getUserDataBox().removeAll();
+                        main.getUserDataBox().put(main.getUser());
                         dialog.dismiss();
                         Toast.makeText(getContext(),"설정이 적용됩니다.", Toast.LENGTH_SHORT).show();
                     }

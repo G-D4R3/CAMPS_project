@@ -294,8 +294,12 @@ public class TodoFragment extends Fragment {
         ImpList = main.important;
         Collections.sort(AssList);
         Collections.sort(ImpList);
-
-        title = String.format("남은 과제 : %d", AssList.size());
+        if(AssList.size()==0){
+            title = "남은 과제가 없습니다.";
+        }
+        else {
+            title = String.format("남은 과제 : %d", AssList.size());
+        }
     }
 
     public void setView(){

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Assignment;
@@ -122,7 +121,7 @@ public class HomeFragment extends Fragment {
         mTestList.setAdapter(examAdapter);
         listViewSetter.setListViewHeight(mTestList);
 
-        setListView(layoutset);
+        setListView();
         setExist();
 
 
@@ -144,7 +143,7 @@ public class HomeFragment extends Fragment {
                 MainActivity main = (MainActivity)getActivity();
                 main.FragmentAdd(main.homeFragmentSetup);
                 layoutset = main.homeFragmentSetup.select;
-                setListView(layoutset);
+                setListView();
             }
         });
 
@@ -212,7 +211,14 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void setListView(boolean[] layoutset) { //설정한 레이아웃 적용
+    private void setListView() { //설정한 레이아웃 적용
+
+        MainActivity main = (MainActivity)getActivity();
+        layoutset[0]=main.getUser().isHomeScheduleCheck();
+        layoutset[1]=main.getUser().isHomeClassCheck();
+        layoutset[2]=main.getUser().isHomeAssignmentCheck();
+        layoutset[3]=main.getUser().isHomeExamCheck();
+
 
         if(layoutset[0]==true){
             mSchedule.setVisibility(View.VISIBLE);
