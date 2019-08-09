@@ -1,0 +1,199 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:8128133066598458306",
+      "lastPropertyId": "9:1843076826299622972",
+      "name": "Assignment_Model",
+      "properties": [
+        {
+          "id": "1:8553137689606202668",
+          "name": "id"
+        },
+        {
+          "id": "2:4280422939788081198",
+          "name": "subject"
+        },
+        {
+          "id": "3:8898663875914749463",
+          "name": "deadLineYear"
+        },
+        {
+          "id": "4:8032867792734439650",
+          "name": "deadLineMonth"
+        },
+        {
+          "id": "5:8105280623859268480",
+          "name": "deadLineDay"
+        },
+        {
+          "id": "6:5118775558338117147",
+          "name": "deadLineHour"
+        },
+        {
+          "id": "7:4078613292669913757",
+          "name": "deadLineMinute"
+        },
+        {
+          "id": "8:7382808930216538929",
+          "name": "memo"
+        },
+        {
+          "id": "9:1843076826299622972",
+          "name": "flag"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:6088020804849161799",
+      "lastPropertyId": "9:3163268408786962471",
+      "name": "Schedule_Model",
+      "properties": [
+        {
+          "id": "1:7694211922447210095",
+          "name": "id"
+        },
+        {
+          "id": "2:2658555541205017474",
+          "name": "title"
+        },
+        {
+          "id": "3:7958967639711815405",
+          "name": "year"
+        },
+        {
+          "id": "4:8946912620536237939",
+          "name": "month"
+        },
+        {
+          "id": "5:1168517215726381711",
+          "name": "day"
+        },
+        {
+          "id": "6:8836456906447869863",
+          "name": "hour"
+        },
+        {
+          "id": "7:1687739499881800552",
+          "name": "minute"
+        },
+        {
+          "id": "8:7448422926996467118",
+          "name": "memo"
+        },
+        {
+          "id": "9:3163268408786962471",
+          "name": "important"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:8545263492309097356",
+      "lastPropertyId": "11:5357119687562885351",
+      "name": "TestSub_Model",
+      "properties": [
+        {
+          "id": "1:3605435424303381102",
+          "name": "id"
+        },
+        {
+          "id": "2:7404340255348413629",
+          "name": "Name"
+        },
+        {
+          "id": "3:3480678792425284981",
+          "name": "Year"
+        },
+        {
+          "id": "4:5486644443734022415",
+          "name": "Month"
+        },
+        {
+          "id": "5:4158850813574167290",
+          "name": "Day"
+        },
+        {
+          "id": "6:7306346109995233930",
+          "name": "Place"
+        },
+        {
+          "id": "7:5758674436871639678",
+          "name": "startHour"
+        },
+        {
+          "id": "8:1493483181248828671",
+          "name": "startMinute"
+        },
+        {
+          "id": "9:6176432408653615321",
+          "name": "endHour"
+        },
+        {
+          "id": "10:3392050661466512020",
+          "name": "endMinute"
+        },
+        {
+          "id": "11:5357119687562885351",
+          "name": "Range"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:61412947045362643",
+      "lastPropertyId": "8:1711413228850983912",
+      "name": "UserData",
+      "properties": [
+        {
+          "id": "1:1125080460536369278",
+          "name": "id"
+        },
+        {
+          "id": "2:5999387204399286902",
+          "indexId": "1:8640500884546969367",
+          "name": "USERNAME"
+        },
+        {
+          "id": "3:4158136398307188794",
+          "name": "lastDay"
+        },
+        {
+          "id": "4:433052832435404993",
+          "name": "hello"
+        },
+        {
+          "id": "5:7595423187639638245",
+          "name": "homeScheduleCheck"
+        },
+        {
+          "id": "6:8878902013961699365",
+          "name": "homeClassCheck"
+        },
+        {
+          "id": "7:2043934700920689565",
+          "name": "homeAssignmentCheck"
+        },
+        {
+          "id": "8:1711413228850983912",
+          "name": "homeExamCheck"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "4:61412947045362643",
+  "lastIndexId": "1:8640500884546969367",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
