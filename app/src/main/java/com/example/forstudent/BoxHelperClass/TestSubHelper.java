@@ -10,8 +10,8 @@ public class TestSubHelper {
 
     public TestSub_Model testSub_model;
 
-    public TestSubHelper(long id, String name, Calendar date, int startHour, int startMinute, int endHour, int endMinute, String Range){
-        testSub_model = new TestSub_Model(id, name, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), startHour, startMinute, endHour, endMinute, Range);
+    public TestSubHelper(long id, String name, Calendar date, String place, int startHour, int startMinute, int endHour, int endMinute, String Range){
+        testSub_model = new TestSub_Model(id, name, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), place, startHour, startMinute, endHour, endMinute, Range);
     }
 
     public static void setName(long id, String name){
@@ -35,6 +35,12 @@ public class TestSubHelper {
     public static void setDay(long id,int day){
         TestSub_Model testSub_model = (TestSub_Model) MainActivity.getInstance().getAssignmentBox().get(id);
         testSub_model.setDay(day);
+        MainActivity.getInstance().getTestSubBox().put(testSub_model);
+    }
+
+    public static void setPlace(long id, String place){
+        TestSub_Model testSub_model = (TestSub_Model) MainActivity.getInstance().getAssignmentBox().get(id);
+        testSub_model.setPlace(place);
         MainActivity.getInstance().getTestSubBox().put(testSub_model);
     }
 
@@ -85,6 +91,11 @@ public class TestSubHelper {
         return calendar;
     }
 
+    public static String getPlace(long id){
+        TestSub_Model testSub_model = (TestSub_Model) MainActivity.getInstance().getTestSubBox().get(id);
+        return testSub_model.getPlace();
+    }
+
     public static int getStartHour(long id){
         TestSub_Model testSub_model = (TestSub_Model) MainActivity.getInstance().getTestSubBox().get(id);
         return testSub_model.getStartHour();
@@ -111,7 +122,7 @@ public class TestSubHelper {
     }
 
     public static TestSub getTestSub(long id){
-        TestSub testsub = new TestSub(getName(id), getDate(id), getStartHour(id), getStartMinute(id), getEndHour(id), getStartMinute(id), getRange(id));
+        TestSub testsub = new TestSub(getName(id), getDate(id), getPlace(id), getStartHour(id), getStartMinute(id), getEndHour(id), getStartMinute(id), getRange(id));
         return testsub;
     }
 }

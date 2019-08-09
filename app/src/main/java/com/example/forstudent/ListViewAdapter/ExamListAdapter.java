@@ -49,6 +49,7 @@ public class ExamListAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.exam_list_view,parent, false);
 
         TextView mDate = (TextView)convertView.findViewById(R.id.examDate);
+        TextView mPlace = (TextView)convertView.findViewById(R.id.examPlace);
         TextView mSubname = (TextView)convertView.findViewById(R.id.subname3);
         TextView mStart = (TextView)convertView.findViewById(R.id.startTime3);
         TextView mEnd = (TextView)convertView.findViewById(R.id.endTime3);
@@ -58,9 +59,22 @@ public class ExamListAdapter extends BaseAdapter {
         MainActivity main = MainActivity.getInstance();
 
         mSubname.setText(sub.getName());
+        if(sub.getPlace()==null){
+            mPlace.setVisibility(View.GONE);
+        }
+        else{
+            mPlace.setVisibility(View.VISIBLE);
+            mPlace.setText(sub.getPlace());
+        }
         mDate.setText(String.format("%d월 %d일", sub.getTestDate().get(Calendar.MONTH)+1, sub.getTestDate().get(Calendar.DAY_OF_MONTH)));
         mStart.setText(sub.getStartHour()+"시 "+sub.getStartMinute()+"분");
-        mEnd.setText("~ "+sub.getEndHour()+"시 "+sub.getEndMinute()+"분");
+        if(sub.getEndHour()==-1){
+            mEnd.setVisibility(View.GONE);
+        }
+        else{
+            mEnd.setVisibility(View.VISIBLE);
+            mEnd.setText("~ "+sub.getEndHour()+"시 "+sub.getEndMinute()+"분");
+        }
 
 
 

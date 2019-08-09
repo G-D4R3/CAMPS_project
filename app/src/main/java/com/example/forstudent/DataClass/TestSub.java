@@ -11,6 +11,8 @@ public class TestSub extends Event implements Comparable<TestSub>{
 
     private Calendar TestDate=Calendar.getInstance();
 
+    private String Place=null;
+
     private int startHour=-1;
     private int startMinute;
 
@@ -21,9 +23,10 @@ public class TestSub extends Event implements Comparable<TestSub>{
 
     public int sorting;
 
-    public TestSub(String name, Calendar calendar, int starthour, int startminute, int endhour, int  endminute, String range){
+    public TestSub(String name, Calendar calendar, String place, int starthour, int startminute, int endhour, int  endminute, String range){
         this.Name=name;
         TestDate.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        this.Place = place;
         this.startHour = starthour;
         this.startMinute = startminute;
         this.endHour = endhour;
@@ -39,6 +42,10 @@ public class TestSub extends Event implements Comparable<TestSub>{
 
     public Calendar getTestDate(){
         return TestDate;
+    }
+
+    public String getPlace(){
+        return Place;
     }
 
     public int getStartHour(){
@@ -60,6 +67,7 @@ public class TestSub extends Event implements Comparable<TestSub>{
     public String getRange(){
         return range;
     }
+
 
 
     @Override

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -70,6 +69,10 @@ public class TodoFragment extends Fragment {
 
         ImportantAdapter = new TodoListAdapter(ImpList);
         mImportant.setAdapter(ImportantAdapter);
+
+        ListViewSetter setter = new ListViewSetter();
+        setter.setListViewHeight(mlistView);
+        setter.setListViewHeight(mImportant);
 
 
 
@@ -180,12 +183,12 @@ public class TodoFragment extends Fragment {
                 if(mIvisible==true){
                     mImportant.setVisibility(View.GONE);
                     mIvisible=false;
-                    mIhide.setText("+");
+                    mIhide.setText("더보기");
                 }
-                else{
+               else{
                     mImportant.setVisibility(View.VISIBLE);
                     mIvisible=true;
-                    mIhide.setText("-");
+                    mIhide.setText("줄이기");
                 }
             }
         });
@@ -196,12 +199,12 @@ public class TodoFragment extends Fragment {
                 if(mDvisible==true){
                     mlistView.setVisibility(View.GONE);
                     mDvisible=false;
-                    mAhide.setText("+");
+                    mAhide.setText("더보기");
                 }
                 else{
                     mlistView.setVisibility(View.VISIBLE);
                     mDvisible=true;
-                    mAhide.setText("-");
+                    mAhide.setText("줄이기");
                 }
             }
         });

@@ -6,6 +6,10 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class ListViewSetter {
+    int divider=0;
+    public boolean Flag=false;
+
+
     public void setListViewHeight(ListView listview){
         ListAdapter adapter = listview.getAdapter();
 
@@ -20,13 +24,19 @@ public class ListViewSetter {
         for(int i=0; i<adapter.getCount(); i++){
             View item = adapter.getView(i, null, listview);
             item.measure(0,0);
-            totalheight+=item.getMeasuredHeight()+20;
+            totalheight+=item.getMeasuredHeight()+15;
         }
 
-        int divider = listview.getDividerHeight() *( adapter.getCount()-1);
+        divider = listview.getDividerHeight() * adapter.getCount();
+
 
         ViewGroup.LayoutParams params = listview.getLayoutParams();
-        params.height = totalheight+divider;
+        if(divider==0){
+            params.height = totalheight;
+        }
+        else{
+            params.height = totalheight+divider+(30*adapter.getCount());
+        }
         listview.setLayoutParams(params);
         listview.requestLayout();
     }

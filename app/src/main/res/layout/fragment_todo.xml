@@ -7,112 +7,140 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:orientation="vertical"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-
-        <TextView
-            android:id="@+id/restDo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:gravity="center"
-            android:text="남은 과제 수"
-            android:fontFamily="@font/barun"
-            android:textSize="20dp" />
-
-        <ImageButton
-            android:id="@+id/addAss"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:background="#00FFFFFF"
-            android:src="@mipmap/add_icon"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"/>
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:layout_marginBottom="10dp">
+
 
             <TextView
-                android:id="@+id/SectionHeader2"
+                android:id="@+id/restDo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="   중요"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/barun"
-                android:textSize="20dp" />
+                android:gravity="center_vertical"
+                android:text="남은 과제 수"
+                android:textColor="@color/title_color"
+                android:textSize="24dp" />
 
-            <TextView
-                android:id="@+id/hide2"
+            <ImageButton
+                android:id="@+id/addAss"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:background="#00FFFFFF"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/add_icon" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="8"
-                android:gravity="center"
-                android:fontFamily="@font/barun"
-                android:textSize="20dp"
-                android:text="-" />
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/SectionHeader2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/barun"
+                    android:gravity="center_vertical"
+                    android:text="중요"
+                    android:textColor="@color/layout_title_color"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/hide2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:fontFamily="@font/barun"
+                    android:gravity="center"
+                    android:text="줄이기"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12dp" />
 
 
+            </LinearLayout>
+
+
+            <ListView
+                android:id="@+id/importantAssignment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#FFFFFF"
+                android:dividerHeight="3dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/SectionHeader3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/barun"
+                    android:gravity="center_vertical"
+                    android:text="과제"
+                    android:textColor="@color/layout_title_color"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/hide3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7"
+                    android:fontFamily="@font/barun"
+                    android:gravity="center"
+                    android:text="줄이기"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+
+            <ListView
+                android:id="@+id/assignmentList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#FFFFFF"
+                android:dividerHeight="3dp" />
         </LinearLayout>
 
 
+    </ScrollView>
 
-        <ListView
-            android:id="@+id/importantAssignment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            >
-
-            <TextView
-                android:id="@+id/SectionHeader3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/barun"
-                android:text="   과제"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/hide3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="8"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:fontFamily="@font/barun"
-                android:text="-" />
-
-
-        </LinearLayout>
-
-
-
-        <ListView
-            android:id="@+id/assignmentList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

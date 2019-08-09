@@ -1,7 +1,5 @@
 package com.example.forstudent.BoxClass;
 
-import com.example.forstudent.DataClass.TestSub;
-
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 
@@ -17,6 +15,8 @@ public class TestSub_Model {
     private int Month;
     private int Day;
 
+    private String Place=null;
+
     private int startHour=-1;
     private int startMinute;
 
@@ -25,12 +25,13 @@ public class TestSub_Model {
 
     private String Range=null;
 
-    public TestSub_Model (long id, String name, int year, int month, int day, int starthour, int startminute, int endhour, int  endminute, String range){
+    public TestSub_Model (long id, String name, int year, int month, int day, String place, int starthour, int startminute, int endhour, int  endminute, String range){
         this.id =id;
         this.Name=name;
         this.Year = year;
         this.Month = month;
         this.Day = day;
+        this.Place = place;
         this.startHour = starthour;
         this.startMinute = startminute;
         this.endHour = endhour;
@@ -52,6 +53,10 @@ public class TestSub_Model {
 
     public void setDay(int day){
         this.Day = day;
+    }
+
+    public void setPlace(String place){
+        this.Place = place;
     }
 
     public void setStartHour(int sh){
@@ -88,6 +93,10 @@ public class TestSub_Model {
 
     public int getDay(){
         return Day;
+    }
+
+    public String getPlace(){
+        return Place;
     }
 
     public int getStartHour(){

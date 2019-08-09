@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,18 +57,8 @@ public class AddNewAssignment extends Fragment {
         TextView mComplete = (TextView)view.findViewById(R.id.complete_add_schedule);
         mRange = (EditText)view.findViewById(R.id.Range3);
         MainActivity main = (MainActivity)getActivity();
+
         input = main.keypad;
-
-        LinearLayout layout = (LinearLayout)view.findViewById(R.id.asslayout);
-
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                input.hideSoftInputFromWindow(mName.getWindowToken(),0);
-                input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
-            }
-        });
-
 
 
 
@@ -87,6 +76,7 @@ public class AddNewAssignment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                hideKey();
                 DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener(){
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -103,6 +93,7 @@ public class AddNewAssignment extends Fragment {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKey();
                 MainActivity main = (MainActivity)getActivity();
                 main.showActionBar();
                 main.FragmentRemove(AddNewAssignment.this);
@@ -112,6 +103,7 @@ public class AddNewAssignment extends Fragment {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hideKey();
                 main.todoFragment.AssList.remove(ass);
                 if(Flag==true){
                     main.todoFragment.ImpList.remove(ass);
@@ -179,6 +171,12 @@ public class AddNewAssignment extends Fragment {
         MainActivity main = (MainActivity) getActivity();
         main.hideActionBar();
     }
+
+    private void hideKey() {
+        input.hideSoftInputFromWindow(mName.getWindowToken(),0);
+        input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
+    }
+
 
 
 

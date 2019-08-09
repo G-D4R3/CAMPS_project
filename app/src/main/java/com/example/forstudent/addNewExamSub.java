@@ -28,6 +28,7 @@ public class addNewExamSub extends Fragment {
     public boolean MOD = false;
     public String title;
     public String range;
+    public String place;
     Calendar calendar = Calendar.getInstance();
     String mName=null;
     int mYear = calendar.get(Calendar.YEAR);
@@ -35,12 +36,13 @@ public class addNewExamSub extends Fragment {
     int mDay;
     int mSHour = calendar.get(Calendar.HOUR_OF_DAY);
     int mSMinute = calendar.get(Calendar.MINUTE);
-    int mEHour = calendar.get(Calendar.HOUR_OF_DAY);
+    int mEHour = -1;
     int mEMinute = calendar.get(Calendar.MINUTE);
     public TestSub subject=null;
     InputMethodManager imm;
 
     EditText mSubname;
+    EditText mPlace;
     EditText mRange;
 
 
@@ -68,6 +70,7 @@ public class addNewExamSub extends Fragment {
         TextView Title = (TextView)view.findViewById(R.id.fragTitle);
         mSubname = (EditText) view.findViewById(R.id.subName);
         final TextView mDate = (TextView)view.findViewById(R.id.date2);
+        mPlace = (EditText) view.findViewById(R.id.testPlace);
         final TextView mStart = (TextView)view.findViewById(R.id.time2);
         final TextView mEnd = (TextView)view.findViewById(R.id.time2_1);
         TextView mCancle = (TextView)view.findViewById(R.id.cancle2);
@@ -92,6 +95,7 @@ public class addNewExamSub extends Fragment {
 
         if(MOD==true){
             mSubname.setText(subject.getName());
+            mPlace.setText(subject.getPlace());
             mDate.setText((mMonth+1)+"월 "+mDay+"일");
             mStart.setText(mSHour+"시 "+mSMinute+"분");
             mEnd.setText(mEHour+"시 "+mEMinute+"분");
@@ -178,27 +182,41 @@ public class addNewExamSub extends Fragment {
                 if(MOD==true){ //if this fragment is modify, then remove original object and add new one
                     main.examFragment.ExamList.remove(subject);
                     if(mRange.getText().toString().length()==0){
-                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,null);
+                        range = null;
                     }
                     else{
-                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
+                        range = mRange.getText().toString();
                     }
+                    if(mPlace.getText().toString().length()==0){
+                        place = null;
+                    }
+                    else{
+                        place = mPlace.getText().toString();
+                    }
+                    subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
                     MainActivity main = (MainActivity)getActivity();
                     main.examFragment.ExamList.add(subject);
                     main.FragmentRemove(addNewExamSub.this);
                 }
                 else{
                     if(mRange.getText().toString().length()==0){
-                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,null);
+                        range = null;
                     }
-                    else {
-                        subject = new TestSub(mSubname.getText().toString(),calendar,mSHour,mSMinute,mEHour,mEMinute,mRange.getText().toString());
+                    else{
+                        range = mRange.getText().toString();
+                    }
+                    if(mPlace.getText().toString().length()==0){
+                        place = null;
+                    }
+                    else{
+                        place = mPlace.getText().toString();
                     }
 
-                    if(subject.getName()==null||DATE_PICKED==false||START_PICKED==false){
+                    if(mSubname.getText().toString().length()==0||DATE_PICKED==false||START_PICKED==false){
                         setYetDialog();
                     }
                     else{
+                        subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
                         MainActivity main = (MainActivity)getActivity();
                         main.examFragment.ExamList.add(subject);
                         main.showActionBar();
@@ -218,6 +236,7 @@ public class addNewExamSub extends Fragment {
     private void hideKey() {
         imm.hideSoftInputFromWindow(mSubname.getWindowToken(),0);
         imm.hideSoftInputFromWindow(mRange.getWindowToken(),0);
+        imm.hideSoftInputFromWindow(mPlace.getWindowToken(),0);
     }
 
     public void setYetDialog(){

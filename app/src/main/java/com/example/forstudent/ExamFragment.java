@@ -148,7 +148,7 @@ public class ExamFragment extends Fragment{
         MainActivity main = (MainActivity)getActivity();
         main.getTestSubBox().removeAll();
         for(int i=0; i<ExamList.size(); i++){
-            TestSubHelper helper = new TestSubHelper((long)i+1, ExamList.get(i).getName(), ExamList.get(i).getTestDate(), ExamList.get(i).getStartHour(), ExamList.get(i).getStartMinute(), ExamList.get(i).getEndHour(), ExamList.get(i).getEndMinute(), ExamList.get(i).getRange());
+            TestSubHelper helper = new TestSubHelper((long)i+1, ExamList.get(i).getName(), ExamList.get(i).getTestDate(), ExamList.get(i).getPlace(), ExamList.get(i).getStartHour(), ExamList.get(i).getStartMinute(), ExamList.get(i).getEndHour(), ExamList.get(i).getEndMinute(), ExamList.get(i).getRange());
             TestSubHelper.putTestSub(helper);
         }
     }
@@ -169,7 +169,7 @@ public class ExamFragment extends Fragment{
         ExamList.remove(sub);
         Collections.sort(ExamList);
         if(ExamList.isEmpty()==true){
-            titleDday="D-day";
+            titleDday="시험이 없습니다.";
         }
         else{
             DateSet();
@@ -185,6 +185,7 @@ public class ExamFragment extends Fragment{
         mod.mYear = sub.getTestDate().get(Calendar.YEAR);
         mod.mMonth = sub.getTestDate().get(Calendar.MONTH);
         mod.mDay = sub.getTestDate().get(Calendar.DAY_OF_MONTH);
+        mod.place = sub.getPlace();
         mod.mSHour = sub.getStartHour();
         mod.mSMinute = sub.getStartMinute();
         mod.mEHour = sub.getEndHour();
@@ -200,7 +201,7 @@ public class ExamFragment extends Fragment{
 
     public void DateSet(){
         if(ExamList.size()<=0){
-            titleDday = "디데이";
+            titleDday = "시험이 없습니다.";
         }
         else{
             TestSub e=null;
@@ -224,7 +225,7 @@ public class ExamFragment extends Fragment{
                 }
             }
             else{
-                titleDday = "모든 시험이 끝났습니다.";
+                titleDday = "시험이 없습니다.";
             }
         }
     }

@@ -26,6 +26,10 @@
     <color name="main_color">#245b66</color>
     <color name="sub_color">#ec525b</color>
 
+    <color name="title_color">#12373F</color>
+    <color name="layout_title_color">#3F3F3F</color>
+    <color name="layout_content_color">#505050</color>
+
     <color name="default_side_header_font_color">#7d7d7d</color>
     <color name="default_header_font_color">#7d7d7d</color>
     <color name="default_header_highlight_font_color">#ffffff</color>

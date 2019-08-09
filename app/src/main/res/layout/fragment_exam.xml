@@ -25,11 +25,13 @@
         <TextView
             android:id="@+id/examTitle"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:textSize="25dp"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="30dp"
+            android:textSize="24dp"
             android:fontFamily="@font/barun"
+            android:textColor="@color/title_color"
             android:text="D-Day" />
 
         <ImageButton
