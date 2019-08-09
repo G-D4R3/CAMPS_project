@@ -7,8 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:statusBarColor">#3A707C</item>
+        <item name="android:statusBarColor">#fff</item>
+
 
     </style>
-
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+    </style>
 </resources>

@@ -3,6 +3,7 @@ package com.example.forstudent;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -162,6 +163,7 @@ public class addNewExamSub extends Fragment {
             public void onClick(View v) {
                 hideKey();
                 MainActivity main = (MainActivity)getActivity();
+                main.showActionBar();
                 main.FragmentRemove(addNewExamSub.this);
             }
         });
@@ -199,6 +201,7 @@ public class addNewExamSub extends Fragment {
                     else{
                         MainActivity main = (MainActivity)getActivity();
                         main.examFragment.ExamList.add(subject);
+                        main.showActionBar();
                         main.FragmentRemove(addNewExamSub.this);
                     }
                 }
@@ -227,7 +230,13 @@ public class addNewExamSub extends Fragment {
                 //
             }
         });
+
         dialog.show();
     }
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        MainActivity main = (MainActivity) getActivity();
+        main.hideActionBar();
+    }
 }

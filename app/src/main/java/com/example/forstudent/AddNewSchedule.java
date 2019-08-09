@@ -2,6 +2,7 @@ package com.example.forstudent;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -65,6 +66,7 @@ public class AddNewSchedule extends Fragment {
             public void onClick(View v) {
                 hideKey();
                 MainActivity main = (MainActivity) getActivity();
+                main.showActionBar();
                 main.FragmentRemove(AddNewSchedule.this);
             }
         });
@@ -108,6 +110,7 @@ public class AddNewSchedule extends Fragment {
                 else{
                     main.calendarFragment.schedules.add(schedule);
                     if(removeTarget != null) main.calendarFragment.schedules.remove(removeTarget);
+                    main.showActionBar();
                     main.FragmentRemove(AddNewSchedule.this);
 
                 }
@@ -136,5 +139,12 @@ public class AddNewSchedule extends Fragment {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        MainActivity main = (MainActivity) getActivity();
+        main.hideActionBar();
     }
 }

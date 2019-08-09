@@ -2,9 +2,13 @@ package com.example.forstudent;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -274,11 +278,25 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return testSub_model;
     }
 
+    private void setActionbarTextColor(ActionBar actBar, int color) {
 
+        String title = actBar.getTitle().toString();
+        Spannable spannablerTitle = new SpannableString(title);
+        spannablerTitle.setSpan(new ForegroundColorSpan(color), 0, spannablerTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        actBar.setTitle(spannablerTitle);
+
+    }
     public void setActionBarTitle(String title) {
         Drawable backGround = getDrawable(R.drawable.actionbar_background);
         actionBar.setTitle(title);
+        setActionbarTextColor(actionBar, Color.BLACK);
         actionBar.setBackgroundDrawable(backGround);
+    }
+    public void hideActionBar(){
+        actionBar.hide();
+    }
+    public void showActionBar(){
+        actionBar.show();
     }
 
     public static MainActivity getInstance() {

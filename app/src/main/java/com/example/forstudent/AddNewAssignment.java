@@ -2,6 +2,7 @@ package com.example.forstudent;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -103,6 +104,7 @@ public class AddNewAssignment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity main = (MainActivity)getActivity();
+                main.showActionBar();
                 main.FragmentRemove(AddNewAssignment.this);
             }
         });
@@ -129,6 +131,7 @@ public class AddNewAssignment extends Fragment {
                     main.todoFragment.ImpList.add(ass);
                 }
                // main.calendarFragment.dotAssignment();
+                main.showActionBar();
                 main.FragmentRemove(AddNewAssignment.this);
 
             }
@@ -159,6 +162,7 @@ public class AddNewAssignment extends Fragment {
             }
         });
         dialog.show();
+
     }
 
     public void setAss(Assignment a){
@@ -169,7 +173,12 @@ public class AddNewAssignment extends Fragment {
         input.hideSoftInputFromWindow(mName.getWindowToken(),0);
         input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
     }
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        MainActivity main = (MainActivity) getActivity();
+        main.hideActionBar();
+    }
 
 
 

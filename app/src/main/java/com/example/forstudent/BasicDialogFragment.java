@@ -1,5 +1,6 @@
 package com.example.forstudent;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,5 +29,9 @@ public class BasicDialogFragment extends Fragment {
         return view;
 
     }
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        MainActivity main = (MainActivity) getActivity();
+    }
 }
