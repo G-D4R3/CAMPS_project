@@ -9,9 +9,11 @@ import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -64,6 +66,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public AddNewAssignment addNewAssignment = new AddNewAssignment();
     public HomeFragmentSetup homeFragmentSetup = new HomeFragmentSetup();
     public ActionBar actionBar;
+    public Menu menu;
 
     //for storage
     ArrayList<Assignment> assignment = new ArrayList<>();
@@ -302,7 +305,25 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public static MainActivity getInstance() {
         return instance;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.setting_icon) {
+            Toast.makeText(this, "홈아이콘 클릭", Toast.LENGTH_SHORT).show();
+            return true;
+
+         }
+            return super.onOptionsItemSelected(item);
+        }
+
+
 }
+
 /*
 ObjectBox 사용 안내
 
