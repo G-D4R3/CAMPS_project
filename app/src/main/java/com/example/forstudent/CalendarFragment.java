@@ -69,7 +69,7 @@ public class CalendarFragment extends Fragment{
         lowerListView = view.findViewById(R.id.lowerCalendarListView);
         calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
         main.setActionBarTitle("캘린더");
-        main.menu.findItem(R.id.setting_icon).setEnabled(false);
+        //main.menu.findItem(R.id.setting_icon).setEnabled(false);
         for(Schedule tmp:schedules){
             //Event event = new Event(tmp.getTitle(),tmp.getDate().get(Calendar.HOUR),tmp.getDate().get(Calendar.MINUTE),tmp.getMemo(),2);
             tmp.setHour(tmp.getDate().get(Calendar.HOUR));
