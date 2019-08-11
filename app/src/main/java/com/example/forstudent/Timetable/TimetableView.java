@@ -72,6 +72,8 @@ public class TimetableView extends LinearLayout {
     public TimetableView(Context context, AttributeSet attrs, int defStyleAttr){
         super(context, attrs, defStyleAttr);
         this.context = context;
+        getAttrs(attrs);
+        init();
 
     }
 
