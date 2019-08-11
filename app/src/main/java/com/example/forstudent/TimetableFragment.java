@@ -129,7 +129,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         SharedPreferences.Editor editor = mPref.edit();
         editor.putString("timetable_demo",data);
         editor.commit();
-        Toast.makeText(getActivity(),"saved!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"저장 완료",Toast.LENGTH_SHORT).show();
     }
 
     private void loadSavedData(){
@@ -138,7 +138,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         String savedData = mPref.getString("timetable_demo","");
         if(savedData == null && savedData.equals("")) return;
         timetable.load(savedData);
-        Toast.makeText(getActivity(),"loaded!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"불러오기 완",Toast.LENGTH_SHORT).show();
     }
 
 }
