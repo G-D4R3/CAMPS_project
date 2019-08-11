@@ -15,10 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.forstudent.Timetable.Schedule;
-import com.example.forstudent.Timetable.TimetableView;
+import com.github.tlaabs.timetableview.Schedule;
+import com.github.tlaabs.timetableview.TimetableView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class TimetableFragment extends Fragment implements View.OnClickListener{
 
@@ -47,6 +48,20 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         return view;
     }
 
+    private int DayofWeek(){
+        Calendar cal = Calendar.getInstance();
+        int nWeek= cal.get(Calendar.DAY_OF_WEEK);
+        int n = 0;
+
+        if (nWeek == 2) n = 1;
+        else if (nWeek == 3) n = 2;
+        else if (nWeek == 4) n = 3;
+        else if (nWeek == 5) n = 4;
+        else if (nWeek == 6) n = 5;
+        else if (nWeek == 7) n = 6;
+        return n;
+    }
+
 
     private void init(View v){
         this.context = getActivity();
@@ -56,7 +71,8 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         loadBtn = v.findViewById(R.id.load_btn);
 
         timetable = v.findViewById(R.id.timetable);
-        timetable.setHeaderHighlight(2);
+        if (DayofWeek() > 0 ){
+        timetable.setHeaderHighlight(DayofWeek());}
         initView();
     }
 
@@ -138,7 +154,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         String savedData = mPref.getString("timetable_demo","");
         if(savedData == null && savedData.equals("")) return;
         timetable.load(savedData);
-        Toast.makeText(getActivity(),"불러오기 완",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"불러오기 완료",Toast.LENGTH_SHORT).show();
     }
 
 }

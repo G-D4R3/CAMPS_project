@@ -48,7 +48,7 @@
 
     </LinearLayout>
 
-    <com.example.forstudent.Timetable.TimetableView
+    <com.github.tlaabs.timetableview.TimetableView
         android:id="@+id/timetable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
