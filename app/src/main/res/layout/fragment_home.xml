@@ -17,6 +17,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--
             <ImageButton
                 android:id="@+id/setup"
                 android:layout_margin="10dp"
@@ -26,7 +27,7 @@
                 android:layout_gravity="right"
                 android:src="@mipmap/setting"
                 android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter" />-->
 
             <TextView
                 android:id="@+id/Dday"

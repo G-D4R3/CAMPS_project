@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -64,6 +65,8 @@ public class HomeFragment extends Fragment {
         user = ((MainActivity)getActivity()).getUser();
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,7 +77,7 @@ public class HomeFragment extends Fragment {
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
-        ImageButton mSetup = (ImageButton)view.findViewById(R.id.setup);
+       // ImageButton mSetup = (ImageButton)view.findViewById(R.id.setup);
 
         mSchedule = (TextView)view.findViewById(R.id.home_schedule);
         mClass = (TextView)view.findViewById(R.id.home_class);
@@ -137,7 +140,7 @@ public class HomeFragment extends Fragment {
         restDay = datecount.calcDday();
         setDateView();
 
-
+/*
         mSetup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +149,7 @@ public class HomeFragment extends Fragment {
                 layoutset = main.homeFragmentSetup.select;
                 setListView();
             }
-        });
+        });*/
 
 
 
@@ -212,7 +215,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void setListView() { //설정한 레이아웃 적용
+    public void setListView() { //설정한 레이아웃 적용
 
         MainActivity main = (MainActivity)getActivity();
         layoutset[0]=main.getUser().isHomeScheduleCheck();

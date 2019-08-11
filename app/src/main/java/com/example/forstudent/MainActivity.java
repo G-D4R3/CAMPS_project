@@ -310,16 +310,31 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.setting_icon) {
+            FragmentAdd(homeFragmentSetup);
+            homeFragment.layoutset = homeFragmentSetup.select;
+            homeFragment.setListView();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.setting_icon) {
+
             Toast.makeText(this, "홈아이콘 클릭", Toast.LENGTH_SHORT).show();
             return true;
 
          }
             return super.onOptionsItemSelected(item);
-        }
+        }*/
 
 
 }
