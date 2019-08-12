@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -203,6 +202,15 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed(){
+        
+        super.onBackPressed();
+
+    }
+
+
 
     @Override
     protected void onDestroy() {
