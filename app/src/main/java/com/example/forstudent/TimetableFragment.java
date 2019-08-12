@@ -43,7 +43,8 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_timetable, container, false);
         MainActivity main = (MainActivity)getActivity();
         main.setActionBarTitle("시간표");
-
+        timetable = view.findViewById(R.id.timetable);
+        timetable.setVisibility(view.INVISIBLE);
         init(view);
         return view;
     }

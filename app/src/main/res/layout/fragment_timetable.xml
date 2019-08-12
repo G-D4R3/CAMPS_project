@@ -52,7 +52,9 @@
         android:id="@+id/timetable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:column_count="6"
         app:header_title="@array/header_title"
+
         />
 
 
