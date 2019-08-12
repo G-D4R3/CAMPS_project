@@ -22,8 +22,8 @@
         <item>#4859B3</item>
     </string-array>
 
-    <color name="base_color">#3a707c</color>
-    <color name="main_color">#245b66</color>
+    <color name="base_color">#206D7E</color>
+    <color name="main_color">#0B5A69</color>
     <color name="sub_color">#ec525b</color>
 
     <color name="title_color">#12373F</color>

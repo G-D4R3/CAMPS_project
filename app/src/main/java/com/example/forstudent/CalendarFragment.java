@@ -2,7 +2,6 @@ package com.example.forstudent;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
 import com.example.forstudent.DataClass.Assignment;
@@ -51,7 +48,12 @@ public class CalendarFragment extends Fragment{
     CalendarListAdapter lowerAdapter;
     ListView upperListView;
     ListView lowerListView;
+    TextView mUheader;
+    TextView mLheader;
     int colorAccent;
+    int upperSize=0;
+    int lowerSize=0;
+
 
     @Nullable
     @Override
@@ -67,6 +69,8 @@ public class CalendarFragment extends Fragment{
         testList = main.testSub;
         upperListView = view.findViewById(R.id.upperCalendarListView);
         lowerListView = view.findViewById(R.id.lowerCalendarListView);
+        mUheader = view.findViewById(R.id.calendar_as_ex);
+        mLheader  = view.findViewById(R.id.calendar_sche);
         calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
         main.setActionBarTitle("캘린더");
         //main.menu.findItem(R.id.setting_icon).setEnabled(false);
@@ -77,6 +81,7 @@ public class CalendarFragment extends Fragment{
             tmp.setType(2);
             System.out.println(tmp.toString());
             if(!events.contains(tmp)) events.add(tmp);
+            lowerSize++;
         }
         for(Assignment tmp:assignmentList){
             //Event event = new Event(tmp.getName(),tmp.getPeriod().get(Calendar.HOUR),tmp.getPeriod().get(Calendar.MINUTE),tmp.getMemo(),1);
@@ -85,6 +90,7 @@ public class CalendarFragment extends Fragment{
             tmp.setMinute(tmp.getPeriod().get(Calendar.MINUTE));
             tmp.setType(1);
             if(!events.contains(tmp)) events.add(tmp);
+            upperSize++;
         }
         for(TestSub tmp:testList){
             //Event event = new Event(tmp.getName(),tmp.getStartHour(),tmp.getStartMinute(),tmp.getRange(),3);
@@ -94,7 +100,14 @@ public class CalendarFragment extends Fragment{
             tmp.setMemo(tmp.getRange());
             tmp.setType(3);
             if(!events.contains(tmp)) events.add(tmp);
+            upperSize++;
         }
+
+        //뷰설정
+        ListViewSetter setter = new ListViewSetter();
+        setHeader();
+        mLheader.setVisibility(View.GONE);
+        mUheader.setVisibility(View.GONE);
 
         dotAssignment();
         dotSchedule();
@@ -140,7 +153,11 @@ public class CalendarFragment extends Fragment{
                     upperListView.setAdapter(upperAdapter);
                     lowerListView.setAdapter(lowerAdapter);
                 }
-
+                upperSize = dayEvent.size();
+                lowerSize = scheduleDayEvent.size();
+                setter.setListViewHeight(upperListView);
+                setter.setListViewHeight(lowerListView);
+                setHeader();
             }
         });
 
@@ -304,6 +321,28 @@ public class CalendarFragment extends Fragment{
     }
     public MaterialCalendarView getCalendarView() {
         return calendarView;
+    }
+
+    private void setHeader(){
+        TextView mNoschedule = view.findViewById(R.id.calendar_null);
+        if(upperSize>0){
+            mUheader.setVisibility(View.VISIBLE);
+        }
+        else{
+            mUheader.setVisibility(View.GONE);
+        }
+        if(lowerSize>0){
+            mLheader.setVisibility(View.VISIBLE);
+        }
+        else{
+            mLheader.setVisibility(View.GONE);
+        }
+        if(!(upperSize>0) && !(lowerSize>0)){
+            mNoschedule.setVisibility(View.VISIBLE);
+        }
+        else{
+            mNoschedule.setVisibility(View.GONE);
+        }
     }
 
 
