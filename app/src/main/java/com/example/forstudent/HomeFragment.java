@@ -22,6 +22,7 @@ import com.example.forstudent.ListViewAdapter.HomeScheduleAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 
@@ -107,6 +108,7 @@ public class HomeFragment extends Fragment {
         }
 
         schedules = main.schedules;
+        Collections.sort(schedules);
 
 
         scheduleAdapter = new HomeScheduleAdapter(schedules);

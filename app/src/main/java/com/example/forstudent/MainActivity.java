@@ -75,6 +75,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<Schedule> schedules = new ArrayList<>();
 
     InputMethodManager keypad;
+    private long time=0;
 
 
     //store things
@@ -205,9 +206,13 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        
-        super.onBackPressed();
-
+        if(System.currentTimeMillis()-time>=1000){
+            time=System.currentTimeMillis();
+            return;
+        }
+        else{
+            finish();
+        }
     }
 
 
