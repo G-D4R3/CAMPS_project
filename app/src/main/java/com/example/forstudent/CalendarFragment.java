@@ -130,7 +130,7 @@ public class CalendarFragment extends Fragment{
                             Assignment assignment = (Assignment)tmp;
 
                             if(assignment.getPeriod().get(Calendar.YEAR)!=date.getYear()) break;
-                            if(assignment.getPeriod().get(Calendar.MONTH)!=date.getMonth()) break;
+                            if(assignment.getPeriod().get(Calendar.MONTH)!=date.getMonth()-1) break;
                             if(assignment.getPeriod().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             dayEvent.add(tmp);
 
@@ -138,7 +138,7 @@ public class CalendarFragment extends Fragment{
                         case 2:
                             Schedule schedule = (Schedule)tmp;
                             if(schedule.getDate().get(Calendar.YEAR)!=date.getYear()) break;
-                            if(schedule.getDate().get(Calendar.MONTH)!=date.getMonth()) break;
+                            if(schedule.getDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
                             if(schedule.getDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             scheduleDayEvent.add(tmp);
                             //System.out.println(tmp.toString());
@@ -146,7 +146,7 @@ public class CalendarFragment extends Fragment{
                         case 3:
                             TestSub testSub = (TestSub)tmp;
                             if(testSub.getTestDate().get(Calendar.YEAR)!=date.getYear())break;
-                            if(testSub.getTestDate().get(Calendar.MONTH)!=date.getMonth()) break;
+                            if(testSub.getTestDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
                             if(testSub.getTestDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             dayEvent.add(tmp);
                             //System.out.println(tmp.toString());
