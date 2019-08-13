@@ -282,7 +282,7 @@ public class CalendarFragment extends Fragment{
             System.out.println(tmp.getDate().toString());
             Calendar calendar = tmp.getDate();
             int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
+            int month = calendar.get(Calendar.MONTH)+1;
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             calendarDay = CalendarDay.from(year,month,day);
             scheduleDaysList.add(calendarDay);
@@ -295,6 +295,7 @@ public class CalendarFragment extends Fragment{
     public void onStop() {
         super.onStop();
         MainActivity main = (MainActivity)getActivity();
+        main.toolbarButtonState.remove("SETTING_INVISIBLE");
         main.getScheduleBox().removeAll();
         for(int i=0; i<schedules.size(); i++){
             ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),false);

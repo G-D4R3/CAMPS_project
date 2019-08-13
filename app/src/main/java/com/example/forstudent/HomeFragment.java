@@ -72,6 +72,8 @@ public class HomeFragment extends Fragment {
         ListViewSetter listViewSetter = new ListViewSetter();
         MainActivity main = (MainActivity)getActivity();
         main.setActionBarTitle("홈");
+        main.invalidateOptionsMenu();
+        //main.toolbarButtonState.remove("SETTING_INVISIBLE");
         //view 정의
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);

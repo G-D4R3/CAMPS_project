@@ -57,7 +57,8 @@ public class ExamFragment extends Fragment{
         adapter = new ExamListAdapter(ExamList);
         mlistView = (ListView)view.findViewById(R.id.examlistView);
         mlistView.setAdapter(adapter);
-
+        main.invalidateOptionsMenu();
+        main.toolbarButtonState.add("SETTING_INVISIBLE");
         DateSet();
         dday.setText(titleDday);
 
@@ -230,8 +231,10 @@ public class ExamFragment extends Fragment{
         }
     }
 
-
-
-
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity main = (MainActivity)getActivity();
+        main.toolbarButtonState.remove("SETTING_INVISIBLE");
+    }
 }
