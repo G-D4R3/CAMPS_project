@@ -128,7 +128,7 @@ public class CalendarFragment extends Fragment{
                             Assignment assignment = (Assignment)tmp;
 
                             if(assignment.getPeriod().get(Calendar.YEAR)!=date.getYear()) break;
-                            if(assignment.getPeriod().get(Calendar.MONTH)+1!=date.getMonth()) break;
+                            if(assignment.getPeriod().get(Calendar.MONTH)!=date.getMonth()) break;
                             if(assignment.getPeriod().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             dayEvent.add(tmp);
 
@@ -144,7 +144,7 @@ public class CalendarFragment extends Fragment{
                         case 3:
                             TestSub testSub = (TestSub)tmp;
                             if(testSub.getTestDate().get(Calendar.YEAR)!=date.getYear())break;
-                            if(testSub.getTestDate().get(Calendar.MONTH)+1!=date.getMonth()) break;
+                            if(testSub.getTestDate().get(Calendar.MONTH)!=date.getMonth()) break;
                             if(testSub.getTestDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                             dayEvent.add(tmp);
                             //System.out.println(tmp.toString());
@@ -247,7 +247,7 @@ public class CalendarFragment extends Fragment{
             //System.out.println(tmp.getPeriod());
             Calendar calendar = tmp.getTestDate();
             int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH)+1;
+            int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             calendarDay = CalendarDay.from(year,month,day);
             testDaysList.add(calendarDay);
@@ -262,7 +262,7 @@ public class CalendarFragment extends Fragment{
             System.out.println(tmp.getPeriod());
             Calendar calendar = tmp.getPeriod();
             int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH)+1;
+            int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             calendarDay = CalendarDay.from(year,month,day);
             assignmentDaysList.add(calendarDay);

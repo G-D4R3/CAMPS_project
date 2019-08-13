@@ -10,6 +10,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -90,7 +91,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        menu = findViewById(R.menu.menu);
         //
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -103,6 +104,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //actionBar.setHomeAsUpIndicator(R.drawable.button_back); //뒤로가기 버튼을 본인이 만든 아이콘으로 하기 위해 필요
 
         toolbar.bringToFront();
+//        MenuItem item = menu.findItem(R.id.setting_icon);
+ //       item.setVisible(false);
         instance = this;
         ObjectBox.init(this);
 
@@ -221,6 +224,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ObjectBox.get().close();
+
         //
         //
         //

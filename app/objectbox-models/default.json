@@ -183,9 +183,45 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "5:2386988589777390084",
+      "lastPropertyId": "7:3875278549707381615",
+      "name": "Timetable_Model",
+      "properties": [
+        {
+          "id": "1:2137822964904247077",
+          "name": "id"
+        },
+        {
+          "id": "2:2978352592924057925",
+          "name": "hour"
+        },
+        {
+          "id": "3:6990386948384296676",
+          "name": "minute"
+        },
+        {
+          "id": "4:835503393449259401",
+          "name": "dayOfWeek"
+        },
+        {
+          "id": "5:4285354948726395744",
+          "name": "professor"
+        },
+        {
+          "id": "6:6955415529924408813",
+          "name": "lectureRoom"
+        },
+        {
+          "id": "7:3875278549707381615",
+          "name": "subject"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "4:5085101731946375109",
+  "lastEntityId": "5:2386988589777390084",
   "lastIndexId": "1:5547632745895557288",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
