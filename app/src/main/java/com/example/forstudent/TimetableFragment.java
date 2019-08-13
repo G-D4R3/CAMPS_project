@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.github.tlaabs.timetableview.Schedule;
 import com.github.tlaabs.timetableview.TimetableView;
+import com.example.forstudent.Timetable.TableView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,6 +34,9 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     private Button loadBtn;
 
     private TimetableView timetable;
+    private TableView timeview;
+
+    private EditActivity e;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +47,6 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_timetable, container, false);
         MainActivity main = (MainActivity)getActivity();
         main.setActionBarTitle("시간표");
-
         init(view);
         return view;
     }
@@ -70,9 +73,11 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         saveBtn = v.findViewById(R.id.save_btn);
         loadBtn = v.findViewById(R.id.load_btn);
 
-        timetable = v.findViewById(R.id.timetable);
-        if (DayofWeek() > 0 ){
-        timetable.setHeaderHighlight(DayofWeek());}
+        timetable = v.findViewById(R.id.timetable_fri);
+
+
+        if (DayofWeek() > 0){
+        timeview.setHeaderHighlight(DayofWeek());}
         initView();
     }
 
@@ -100,6 +105,14 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
             case R.id.add_btn:
                 Intent i = new Intent(getActivity(),EditActivity.class);
                 i.putExtra("mode",REQUEST_ADD);
+                int num = e.getDay();
+
+                if (num == 5) {
+                    timetable = v.findViewById(R.id.timetable_sat);
+                }
+                else if (num == 6) {
+                    timetable = v.findViewById(R.id.timetable_sun);
+                }
                 startActivityForResult(i,REQUEST_ADD);
                 break;
             case R.id.clear_btn:
@@ -121,6 +134,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
                 if(resultCode == EditActivity.RESULT_OK_ADD){
                     ArrayList<Schedule> item = (ArrayList<Schedule>)data.getSerializableExtra("schedules");
                     timetable.add(item);
+
                 }
                 break;
             case REQUEST_EDIT:

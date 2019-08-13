@@ -40,6 +40,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private Schedule schedule;
     private int editIdx;
 
+    private int day = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +128,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -136,6 +140,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     ArrayList<Schedule> schedules = new ArrayList<Schedule>();
                     //you can add more schedules to ArrayList
                     schedules.add(schedule);
+                    if (schedule.getDay() == 5) day = 5;
+                    else if (schedule.getDay() == 6) day = 6;
                     i.putExtra("schedules",schedules);
                     setResult(RESULT_OK_ADD,i);
                     finish();
@@ -145,6 +151,8 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     Intent i = new Intent();
                     ArrayList<Schedule> schedules = new ArrayList<Schedule>();
                     schedules.add(schedule);
+                    if (schedule.getDay() == 5) day = 5;
+                    else if (schedule.getDay() == 6) day = 6;
                     i.putExtra("idx",editIdx);
                     i.putExtra("schedules",schedules);
                     setResult(RESULT_OK_EDIT,i);
@@ -175,5 +183,9 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         schedule.setClassTitle(subjectEdit.getText().toString());
         schedule.setClassPlace(classroomEdit.getText().toString());
         schedule.setProfessorName(professorEdit.getText().toString());
+    }
+
+    public int getDay(){
+        return day;
     }
 }

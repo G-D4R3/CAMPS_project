@@ -49,11 +49,28 @@
     </LinearLayout>
 
     <com.github.tlaabs.timetableview.TimetableView
-        android:id="@+id/timetable"
+        android:id="@+id/timetable_fri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:column_count="6"
         app:header_title="@array/header_title"
         />
+    <com.github.tlaabs.timetableview.TimetableView
+        android:id="@+id/timetable_sat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:column_count="7"
+        app:header_title="@array/header_title"
+        />
+
+    <com.github.tlaabs.timetableview.TimetableView
+        android:id="@+id/timetable_sun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:column_count="8"
+        app:header_title="@array/header_title"
+        />
+
 
 
 
