@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="65dp"
-    android:background="#FFFFFF">
+    android:layout_height="50dp"
+    android:background="@drawable/listview_border">
 
 
 

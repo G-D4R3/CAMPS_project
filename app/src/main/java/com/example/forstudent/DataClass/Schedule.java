@@ -2,7 +2,7 @@ package com.example.forstudent.DataClass;
 
 import java.util.Calendar;
 
-public class Schedule extends Event{
+public class Schedule extends Event implements Comparable<Schedule>{
 
     String title;
     Calendar date;
@@ -62,5 +62,15 @@ public class Schedule extends Event{
                 ", memo='" + memo + '\'' +
                 ", important=" + important +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Schedule o) {
+        if(date.getTimeInMillis()>o.getDate().getTimeInMillis()){
+            return 1;
+        }
+        else{
+            return -1;
+        }
     }
 }
