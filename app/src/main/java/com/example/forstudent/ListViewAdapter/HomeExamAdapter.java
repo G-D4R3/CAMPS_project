@@ -1,5 +1,6 @@
 package com.example.forstudent.ListViewAdapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.forstudent.DataClass.TestSub;
+import com.example.forstudent.MainActivity;
 import com.example.forstudent.R;
 
 import java.util.ArrayList;
@@ -48,6 +50,21 @@ public class HomeExamAdapter extends BaseAdapter {
         mTime.setText(String.format("%d시 %d분", sub.getStartHour(), sub.getStartMinute()));
         System.out.println(sub.getStartHour()+sub.getStartMinute());
         mExam.setText(sub.getName());
+        MainActivity main = MainActivity.getInstance();
+
+        Calendar today = Calendar.getInstance();
+        if(sub.getTestDate().get(Calendar.MONTH)==today.get(Calendar.MONTH) && sub.getTestDate().get(Calendar.DAY_OF_MONTH)==today.get(Calendar.DAY_OF_MONTH)){
+            mDate.setTextColor(Color.parseColor("#ec525b"));
+            mExam.setTextColor(Color.parseColor("#ec525b"));
+            mTime.setTextColor(Color.parseColor("#ec525b"));
+        }
+
+        System.out.println("home schedule "+sub.getTestDate().getTimeInMillis()+" "+today.getTimeInMillis());
+
+        if(sub.getTestDate().getTimeInMillis()<today.getTimeInMillis()){
+            main.homeFragment.schedules.remove(position);
+            main.homeFragment.scheduleAdapter.notifyDataSetChanged();
+        }
 
 
         return convertView;
