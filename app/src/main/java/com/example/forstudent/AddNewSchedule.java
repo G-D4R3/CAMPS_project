@@ -94,13 +94,13 @@ public class AddNewSchedule extends Fragment {
             public void onClick(View v) {
                 if(memoText.getText().toString().length() == 0){ //no memo
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(year,month,day,hour,minute);
+                    calendar.set(year,month-1,day,hour,minute);
                     schedule = new Schedule(titleText.getText().toString(),calendar,false);
                  //   System.out.println(schedule.toString());
                 }
                 else{ //memo
                     Calendar calendar = Calendar.getInstance();
-                    calendar.set(year,month,day,hour,minute);
+                    calendar.set(year,month-1,day,hour,minute);
                     schedule = new Schedule(titleText.getText().toString(),calendar,memoText.getText().toString(),false);
                  //   System.out.println(schedule.toString());
                 }

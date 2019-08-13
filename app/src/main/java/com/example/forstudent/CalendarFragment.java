@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -75,7 +76,8 @@ public class CalendarFragment extends Fragment{
         mLheader  = view.findViewById(R.id.calendar_sche);
         calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
         main.setActionBarTitle("캘린더");
-
+        main.invalidateOptionsMenu();
+        main.toolbarButtonState.add("SETTING_INVISIBLE");
         //main.menu.findItem(R.id.setting_icon).setEnabled(false);
         for(Schedule tmp:schedules){
             //Event event = new Event(tmp.getTitle(),tmp.getDate().get(Calendar.HOUR),tmp.getDate().get(Calendar.MINUTE),tmp.getMemo(),2);
@@ -232,6 +234,8 @@ public class CalendarFragment extends Fragment{
 
             }
         });
+
+
 
         return view;
     }

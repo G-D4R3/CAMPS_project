@@ -74,7 +74,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<Assignment> important = new ArrayList<>();
     ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
-
+    public ArrayList<String> toolbarButtonState = new ArrayList<>();
     InputMethodManager keypad;
     private long time=0;
 
@@ -91,7 +91,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        menu = findViewById(R.menu.menu);
+        //toolbarButtonState.add("SETTING_INVISIBLE");
         //
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -100,12 +100,11 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
+        actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         //actionBar.setHomeAsUpIndicator(R.drawable.button_back); //뒤로가기 버튼을 본인이 만든 아이콘으로 하기 위해 필요
 
         toolbar.bringToFront();
-//        MenuItem item = menu.findItem(R.id.setting_icon);
- //       item.setVisible(false);
+
         instance = this;
         ObjectBox.init(this);
 
@@ -334,8 +333,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+        for(String state : toolbarButtonState) {
+            if (state.equals("SETTING_INVISIBLE")) {
+                for (int i = 0; i < menu.size(); i++) menu.getItem(i).setVisible(false);
+            }
+        }
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
