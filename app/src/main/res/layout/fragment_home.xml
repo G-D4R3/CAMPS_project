@@ -37,7 +37,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/barun"
                 android:text="D-day 설정하기"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textColor="#12373F"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="238dp" />
@@ -50,7 +50,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/barun"
                 android:text="Today"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="#EC725B"
                 app:layout_constraintStart_toStartOf="@+id/Dday"
                 app:layout_constraintTop_toBottomOf="@+id/Dday" />
@@ -76,7 +76,7 @@
                     android:gravity="center_vertical"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:text="일정"/>
 
 
@@ -118,7 +118,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
                     android:text="수업"/>
@@ -159,7 +159,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
                     android:gravity="center_vertical"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/barun"
                     android:textColor="#3F3F3F"
                     android:text="과제"/>
@@ -205,7 +205,7 @@
                     android:gravity="center_vertical"
                     android:text="시험"
                     android:textColor="#3F3F3F"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/noexam"

@@ -30,7 +30,7 @@
             android:layout_marginHorizontal="10dp"
             android:gravity="center_vertical"
             android:layout_marginTop="30dp"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:fontFamily="@font/barun"
             android:textColor="@color/title_color"
             android:text="D-Day" />

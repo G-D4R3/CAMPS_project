@@ -71,10 +71,11 @@
                 android:id="@+id/schedule_date"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:layout_marginHorizontal="18dp"
                 android:layout_marginTop="9dp"
                 android:text="날짜"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/title"
@@ -86,7 +87,7 @@
                 android:hint="일정"
                 android:inputType="textShortMessage"
                 android:text=""
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="시간"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/timeText"
@@ -110,7 +111,7 @@
                     android:gravity="right"
                     android:hint="설정하기"
                     android:text=""
-                    android:textSize="20dp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <TextView
@@ -122,7 +123,7 @@
                 android:layout_marginRight="18dp"
                 android:layout_marginBottom="10dp"
                 android:text="메모"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
 
             <EditText
@@ -134,7 +135,7 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="memo"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
 
         </LinearLayout>

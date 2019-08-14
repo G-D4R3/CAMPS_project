@@ -67,7 +67,7 @@
             android:fontFamily="@font/barun"
             android:gravity="center_vertical"
             android:text="홈 화면 구성"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/barun"
             android:text="과제"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
 
 
@@ -102,7 +102,7 @@
                     android:fontFamily="@font/barun"
                     android:text="중요한 과제만 표시"
                     android:textColor="#505050"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/viewAllAssign"
@@ -112,7 +112,7 @@
                     android:fontFamily="@font/barun"
                     android:text="모두 표시"
                     android:textColor="#505050"
-                    android:textSize="16dp" />
+                    android:textSize="16sp" />
             </RadioGroup>
         <View
             android:layout_width="match_parent"

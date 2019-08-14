@@ -25,7 +25,7 @@
             android:layout_marginVertical="8dp"
             android:gravity="center_vertical"
             android:layout_weight="4"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="#505050"
             android:fontFamily="@font/barun"
             android:text="시간" />
@@ -40,7 +40,7 @@
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:text="수업"
-            android:textSize="15dp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
