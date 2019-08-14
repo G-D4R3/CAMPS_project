@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,7 +20,6 @@ import com.example.forstudent.DataClass.Event;
 import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
 import com.example.forstudent.ListViewAdapter.CalendarListAdapter;
-import com.github.tlaabs.timetableview.TimetableView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateLongClickListener;
@@ -30,6 +28,7 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 
 public class CalendarFragment extends Fragment{
     ArrayList<Assignment> assignmentList;
@@ -297,6 +296,7 @@ public class CalendarFragment extends Fragment{
         MainActivity main = (MainActivity)getActivity();
         main.toolbarButtonState.remove("SETTING_INVISIBLE");
         main.getScheduleBox().removeAll();
+        Collections.sort(schedules);
         for(int i=0; i<schedules.size(); i++){
             ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),false);
             ScheduleHelper.putSchedule(helper);
