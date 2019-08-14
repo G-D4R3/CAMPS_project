@@ -59,13 +59,6 @@ public class HomeExamAdapter extends BaseAdapter {
             mTime.setTextColor(Color.parseColor("#ec525b"));
         }
 
-        System.out.println("home schedule "+sub.getTestDate().getTimeInMillis()+" "+today.getTimeInMillis());
-
-        if(sub.getTestDate().getTimeInMillis()<today.getTimeInMillis()){
-            main.homeFragment.schedules.remove(position);
-            main.homeFragment.scheduleAdapter.notifyDataSetChanged();
-        }
-
 
         return convertView;
     }

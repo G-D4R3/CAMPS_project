@@ -30,8 +30,8 @@ public class TodoFragment extends Fragment {
     TodoListAdapter adapter;
     TodoListAdapter ImportantAdapter;
     TextView mTitle;
-    ListView mlistView;
-    ListView mImportant;
+    public ListView mlistView;
+    public ListView mImportant;
     TextView mAssSec;
     TextView mImpSec;
     TextView mIhide;
@@ -42,6 +42,7 @@ public class TodoFragment extends Fragment {
     long boxSize;
     protected static boolean MOD = false;
     static int mod_index;
+    public ListViewSetter setter = new ListViewSetter();
 
 
     @Nullable
@@ -69,7 +70,6 @@ public class TodoFragment extends Fragment {
         ImportantAdapter = new TodoListAdapter(ImpList);
         mImportant.setAdapter(ImportantAdapter);
 
-        ListViewSetter setter = new ListViewSetter();
         setter.setListViewHeight(mlistView);
         setter.setListViewHeight(mImportant);
 
@@ -103,6 +103,7 @@ public class TodoFragment extends Fragment {
                                     Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
                                     mImportant.setVisibility(View.VISIBLE);
                                     setImportance(adapter.data.get(pos));
+                                    setter.setListViewHeight(mImportant);
                                     break;
                                 case 1:
                                     dialog.dismiss();
@@ -165,6 +166,7 @@ public class TodoFragment extends Fragment {
                         if(ImpList.size()==0){
                             mImportant.setVisibility(View.GONE);
                         }
+                        setter.setListViewHeight(mImportant);
                     }
                 });
                 dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -285,6 +287,7 @@ public class TodoFragment extends Fragment {
         a.setFlag(true);
         ImpList.add(a);
         ImportantAdapter.notifyDataSetChanged();
+        mImportant.setVisibility(View.VISIBLE);
     }
 
     public void loadData(){

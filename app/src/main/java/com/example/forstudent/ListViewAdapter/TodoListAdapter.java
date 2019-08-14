@@ -60,6 +60,8 @@ public class TodoListAdapter extends BaseAdapter {
                     Toast.makeText(main.todoFragment.getContext(),"완료",Toast.LENGTH_SHORT).show();
                     main.todoFragment.RemoveAss(main.todoFragment.AssList.get(position));
                     main.todoFragment.setView();
+                    main.todoFragment.setter.setListViewHeight(main.todoFragment.mImportant);
+                    main.todoFragment.setter.setListViewHeight(main.todoFragment.mlistView);
                 }
             }
         });
