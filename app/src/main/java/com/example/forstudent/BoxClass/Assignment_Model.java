@@ -105,4 +105,19 @@ public class Assignment_Model {
     public void setFlag(boolean flag){
         this.flag = flag;
     }
+
+    @Override
+    public String toString() {
+        return "Assignment_Model{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", deadLineYear=" + deadLineYear +
+                ", deadLineMonth=" + deadLineMonth +
+                ", deadLineDay=" + deadLineDay +
+                ", deadLineHour=" + deadLineHour +
+                ", deadLineMinute=" + deadLineMinute +
+                ", memo='" + memo + '\'' +
+                ", flag=" + flag +
+                '}';
+    }
 }
