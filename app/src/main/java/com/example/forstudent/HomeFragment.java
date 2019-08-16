@@ -3,6 +3,9 @@ package com.example.forstudent;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -346,8 +349,25 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        MainActivity main = (MainActivity)getActivity();
+        if (id == R.id.setting_icon) {
+            main.FragmentAdd(main.homeFragmentSetup);
+            main.homeFragment.layoutset = main.homeFragmentSetup.select;
+            main.homeFragment.setListView();
+            return true;
+        }
 
+        return true;
+    }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_home,menu);
+    }
 
 
 

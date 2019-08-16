@@ -147,10 +147,4 @@ public class AddNewSchedule extends Fragment {
         dialog.show();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        MainActivity main = (MainActivity) getActivity();
-        main.hideActionBar();
-    }
 }

@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Assignment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddNewAssignment extends Fragment {
@@ -36,6 +40,7 @@ public class AddNewAssignment extends Fragment {
     EditText mName;
     EditText mRange;
     static boolean iscanceled;
+    ArrayList <String> toolbarButtonStatus = new ArrayList<>();
 
 
     public static AddNewAssignment newInstance(){
@@ -44,6 +49,7 @@ public class AddNewAssignment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -53,13 +59,31 @@ public class AddNewAssignment extends Fragment {
         TextView mTitle = (TextView)view.findViewById(R.id.assTitle);
         mName = (EditText)view.findViewById(R.id.assName);
         TextView mDate = (TextView)view.findViewById(R.id.pdate2);
-        TextView mCancel = (TextView)view.findViewById(R.id.cancle_add_schedule);
-        TextView mComplete = (TextView)view.findViewById(R.id.complete_add_schedule);
+
         mRange = (EditText)view.findViewById(R.id.Range3);
+
         MainActivity main = (MainActivity)getActivity();
+
 
         input = main.keypad;
 
+        main.getSupportActionBar().setDisplayShowTitleEnabled(true);
+        main.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        main.centerToolbarTitle.setText("과제 추가");
+        main.toolbar.setTitle("");
+        main.invalidateOptionsMenu();
+
+
+        main.toolbarButtonState = toolbarButtonStatus;
+
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKey();
+
+                main.FragmentRemove(AddNewAssignment.this);
+            }
+        });
 
 
 
@@ -89,6 +113,7 @@ public class AddNewAssignment extends Fragment {
             }
         });
 
+        /*
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +151,7 @@ public class AddNewAssignment extends Fragment {
 
             }
 
-        });
+        });*/
 
 
 
@@ -163,11 +188,11 @@ public class AddNewAssignment extends Fragment {
         input.hideSoftInputFromWindow(mName.getWindowToken(),0);
         input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
     }
+
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        MainActivity main = (MainActivity) getActivity();
-        main.hideActionBar();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_assignment,menu);
     }
 
     private void hideKey() {
@@ -175,7 +200,31 @@ public class AddNewAssignment extends Fragment {
         input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        MainActivity main = (MainActivity)getActivity();
+        if (id == R.id.check_icon) {
+            hideKey();
+            if (Flag == true) {
+                main.todoFragment.ImpList.remove(ass);
+            }
 
+            if (mName.getText().length() == 0 || DATE_CHECKED == false) {
+                setYetDialog();
+            } else {
+                ass = new Assignment(mName.getText().toString(), period, mRange.getText().toString(), Flag);
+                System.out.println(ass.toString());
+                main.todoFragment.AssList.add(ass);
+                if (Flag == true) {
+                    main.todoFragment.ImpList.add(ass);
 
+                }
 
+                main.FragmentRemove(AddNewAssignment.this);
+            }
+        }
+
+        return true;
+    }
 }

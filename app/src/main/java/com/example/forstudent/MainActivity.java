@@ -75,7 +75,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<Assignment> important = new ArrayList<>();
     ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
-
+    TextView centerToolbarTitle;
     // 각 fragment 마다 툴바의 버튼 상태를 저장
     ArrayList<String> toolbarButtonState;
 
@@ -108,7 +108,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //actionBar.setHomeAsUpIndicator(R.drawable.button_back); //뒤로가기 버튼을 본인이 만든 아이콘으로 하기 위해 필요
 
         toolbar.bringToFront();
-
+        centerToolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         instance = this;
         ObjectBox.init(this);
 
@@ -277,6 +277,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.remove(fragment);
         fragmentManager.popBackStack();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         transaction.commit();
 
     }
@@ -332,7 +334,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     }
 
 
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -342,6 +344,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         for(int i=0;i<menu.size();i++){
             menu.getItem(i).setVisible(false);
         }
+        actionBar.setDisplayHomeAsUpEnabled(false);
 
         //make visible that fragment need
         for(String state : toolbarButtonState) {
@@ -352,25 +355,15 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                 case "CHECK":
                     menu.getItem(1).setVisible(true);
                     break;
+                case "BACK":
+                    actionBar.setDisplayHomeAsUpEnabled(true);
 
             }
         }
         return true;
-    }
+    }*/
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.setting_icon) {
-            FragmentAdd(homeFragmentSetup);
-            homeFragment.layoutset = homeFragmentSetup.select;
-            homeFragment.setListView();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
     /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

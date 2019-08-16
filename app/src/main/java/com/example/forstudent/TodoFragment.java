@@ -50,6 +50,7 @@ public class TodoFragment extends Fragment {
     protected static boolean MOD = false;
     static int mod_index;
     public ListViewSetter setter = new ListViewSetter();
+    ArrayList<String> toolbarButtonStatus = new ArrayList<>();
 
     loadData load;
     saveData save;
@@ -80,6 +81,9 @@ public class TodoFragment extends Fragment {
         mAhide = (TextView)view.findViewById(R.id.hide3);
         adapter = new TodoListAdapter(AssList);
         ImportantAdapter = new TodoListAdapter(ImpList);
+
+
+
 
 
         handler = new Handler();
@@ -402,4 +406,11 @@ public class TodoFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        main.centerToolbarTitle.setText("");
+
+    }
 }

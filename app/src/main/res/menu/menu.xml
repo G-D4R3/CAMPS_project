@@ -8,10 +8,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     android:title="setting_selections"
     app:showAsAction="always" />
 
-<item
-    android:id="@+id/check_icon"
-    android:icon="@mipmap/check"
-    android:title="check_selections"
-    app:showAsAction="always" />
+
 
 </menu>
