@@ -3,11 +3,11 @@ package com.example.forstudent.DataClass;
 import java.util.Calendar;
 
 public class Assignment extends Event implements Comparable<Assignment>{
-        private String Name=null;
-        private Calendar Period;
-        String Memo;
+        public String Name=null;
+        public Calendar Period;
+        public String Memo;
         long sorting;
-        boolean flag=false;
+        public boolean flag=false;
 
 
         public Assignment(String name, Calendar period, String memo, boolean flag){

@@ -1,8 +1,11 @@
 package com.example.forstudent;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import java.util.Calendar;
 import java.util.Collections;
 
 public class TodoFragment extends Fragment {
+    Handler handler;
     public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
     public ArrayList<Assignment> ImpList;
     TodoListAdapter adapter;
@@ -46,26 +50,24 @@ public class TodoFragment extends Fragment {
     static int mod_index;
     public ListViewSetter setter = new ListViewSetter();
 
+    loadData load;
+    saveData save;
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        loadData load = new loadData();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        load = new loadData();
         load.start();
-    }
-
-
-    @Override
-    public void onAttachFragment(Fragment childFragment) {
-        super.onAttachFragment(childFragment);
-
+        save = new saveData();
 
     }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_todo, container, false);
         MainActivity main = (MainActivity)getActivity();
+        view  = inflater.inflate(R.layout.fragment_todo, container, false);
         main.setActionBarTitle("과제");
         mTitle = (TextView)view.findViewById(R.id.restDo);
         mlistView = (ListView)view.findViewById(R.id.assignmentList);
@@ -75,18 +77,33 @@ public class TodoFragment extends Fragment {
         mAssSec = (TextView)view.findViewById(R.id.SectionHeader3);
         mIhide = (TextView)view.findViewById(R.id.hide2);
         mAhide = (TextView)view.findViewById(R.id.hide3);
-
-
-        mTitle.setText(title);
-
         adapter = new TodoListAdapter(AssList);
-        mlistView.setAdapter(adapter);
-
         ImportantAdapter = new TodoListAdapter(ImpList);
-        mImportant.setAdapter(ImportantAdapter);
 
-        setter.setListViewHeight(mlistView);
-        setter.setListViewHeight(mImportant);
+
+        handler = new Handler();
+
+
+        Thread setView = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.v("TodoFragment", "Set View");
+
+                        mTitle.setText(title);
+
+                        mlistView.setAdapter(adapter);
+                        mImportant.setAdapter(ImportantAdapter);
+
+                        setter.setListViewHeight(mlistView);
+                        setter.setListViewHeight(mImportant);
+                    }
+                });
+            }
+        });
+        setView.start();
 
 
         mAdd.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +112,7 @@ public class TodoFragment extends Fragment {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.v("TodoFragment", "Add Assignment");
                         main.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -116,8 +134,9 @@ public class TodoFragment extends Fragment {
                         main.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Log.v("TodoFragment", "Item Clicked");
                                 try{
-                                    String name = adapter.data.get(position).getName();
+                                    String name = adapter.data.get(position).Name;
                                     String[] menu = {"중요도 표시","수정", "삭제"};
 
 
@@ -187,6 +206,7 @@ public class TodoFragment extends Fragment {
                         main.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Log.v("TodoFragment", "Remove important");
                                 final int pos = position;
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                                 dialog.setTitle("해제");
@@ -196,7 +216,7 @@ public class TodoFragment extends Fragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         for(int i=0; i<AssList.size(); i++){
                                             if(AssList.get(i).equals(ImpList.get(position))){
-                                                AssList.get(i).setFlag(false);
+                                                AssList.get(i).flag=false;
                                             }
                                         }
                                         ImpList.remove(ImportantAdapter.data.get(position));
@@ -263,16 +283,8 @@ public class TodoFragment extends Fragment {
 
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Collections.sort(AssList);
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
-        saveData save = new saveData();
         save.run();
     }
 
@@ -303,11 +315,11 @@ public class TodoFragment extends Fragment {
 
         MainActivity main = (MainActivity)getActivity();
         AddNewAssignment fragment = AddNewAssignment.newInstance();
-        fragment.setAss(a);
+        fragment.ass = a;
         fragment.MOD=true;
-        fragment.Name=a.getName();
-        fragment.range = a.getMemo();
-        fragment.Date = String.format((a.getPeriod().get(Calendar.MONTH)+1)+"월 "+a.getPeriod().get(Calendar.DAY_OF_MONTH)+"일");
+        fragment.Name=a.Name;
+        fragment.range = a.Memo;
+        fragment.Date = String.format((a.Period.get(Calendar.MONTH)+1)+"월 "+a.Period.get(Calendar.DAY_OF_MONTH)+"일");
         main.FragmentAdd(fragment);
         adapter.notifyDataSetChanged();
 
@@ -315,7 +327,7 @@ public class TodoFragment extends Fragment {
 
 
     public void setImportance(Assignment a){
-        a.setFlag(true);
+        a.flag =true;
         ImpList.add(a);
         ImportantAdapter.notifyDataSetChanged();
         mImportant.setVisibility(View.VISIBLE);
@@ -341,12 +353,15 @@ public class TodoFragment extends Fragment {
 
         public void run(){
             try{
+                Log.v("TodoFragment", "Saved Data");
                 MainActivity main = (MainActivity)getActivity();
                 main.getAssignmentBox().removeAll();
+                int i=1;
                 if(AssList.size()!=0){
-                    for(int i=0; i<AssList.size(); i++){
-                        AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo(),AssList.get(i).getFlag());
+                    for(Assignment tmp : AssList){
+                        AssignmentHelper helper = new AssignmentHelper((long)i+1, tmp.Name, tmp.Period, tmp.Memo, tmp.flag);
                         AssignmentHelper.putAssignment(helper);
+                        i++;
                     }
                 }
             }
@@ -365,18 +380,18 @@ public class TodoFragment extends Fragment {
 
         public void run(){
             try{
+
+                Log.v("TodoFragment", "Loaded Data");
                 MainActivity main = (MainActivity)getActivity();
 
                 AssList = main.assignment;
                 ImpList = new ArrayList<>();
 
-                for(int i=0; i<AssList.size(); i++){
-                    if(AssList.get(i).getFlag()==true){
-                        ImpList.add(AssList.get(i));
+                for(Assignment tmp :AssList) {
+                    if (tmp.flag == true) {
+                        ImpList.add(tmp);
                     }
                 }
-
-
 
                 if(AssList.size()==0){
                     title = "남은 과제가 없습니다.";
