@@ -36,8 +36,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import io.objectbox.Box;
 
@@ -81,6 +79,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     InputMethodManager keypad;
     private long time=0;
+
+    public  boolean BACK_STACK = false;
 
 
     //store things
@@ -208,12 +208,17 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if(System.currentTimeMillis()-time>=1000){
-            time=System.currentTimeMillis();
-            return;
+        if(BACK_STACK){
+            super.onBackPressed();
         }
         else{
-            finish();
+            if(System.currentTimeMillis()-time>=1000){
+                time=System.currentTimeMillis();
+                return;
+            }
+            else{
+                finish();
+            }
         }
     }
 

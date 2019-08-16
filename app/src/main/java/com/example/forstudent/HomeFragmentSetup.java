@@ -33,6 +33,7 @@ public class HomeFragmentSetup extends Fragment {
         TextView mCancel = (TextView)view.findViewById(R.id.cancel5);
         TextView mLayout = (TextView)view.findViewById(R.id.layoutset);
         MainActivity main = (MainActivity)getActivity();
+        main.BACK_STACK=true;
         RadioGroup mAssignmentView = (RadioGroup)view.findViewById(R.id.AssignmentView);
         select[0]=main.getUser().homeScheduleCheck;
         select[1]=main.getUser().homeClassCheck;

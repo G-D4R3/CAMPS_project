@@ -3,7 +3,6 @@ package com.example.forstudent;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -79,6 +78,7 @@ public class addNewExamSub extends Fragment {
         LinearLayout layout = (LinearLayout)view.findViewById(R.id.examlayout);
 
         MainActivity main = (MainActivity)getActivity();
+        main.BACK_STACK=true;
         imm = main.keypad;
 
 

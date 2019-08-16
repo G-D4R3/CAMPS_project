@@ -2,7 +2,6 @@ package com.example.forstudent;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,7 +51,9 @@ public class AddNewSchedule extends Fragment {
         memoText = (EditText) view.findViewById(R.id.memo);
 
         MainActivity main = (MainActivity)getActivity();
+        main.BACK_STACK=true;
         inputMethodManager=main.keypad;
+
         dateText.setText(String.format("%d년 %d월 %d일", year, month, day));
         if(MOD){
            titleText.setText(removeTarget.getTitle());

@@ -2,7 +2,6 @@ package com.example.forstudent;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,6 +62,7 @@ public class AddNewAssignment extends Fragment {
         mRange = (EditText)view.findViewById(R.id.Range3);
 
         MainActivity main = (MainActivity)getActivity();
+        main.BACK_STACK=true;
 
 
         input = main.keypad;
@@ -212,13 +212,15 @@ public class AddNewAssignment extends Fragment {
 
             if (mName.getText().length() == 0 || DATE_CHECKED == false) {
                 setYetDialog();
-            } else {
+            }
+
+            else {
                 ass = new Assignment(mName.getText().toString(), period, mRange.getText().toString(), Flag);
                 System.out.println(ass.toString());
                 main.todoFragment.AssList.add(ass);
+                main.todoFragment.setView();
                 if (Flag == true) {
                     main.todoFragment.ImpList.add(ass);
-
                 }
 
                 main.FragmentRemove(AddNewAssignment.this);
@@ -227,4 +229,7 @@ public class AddNewAssignment extends Fragment {
 
         return true;
     }
+
+    MainActivity main = (MainActivity)getActivity();
+
 }

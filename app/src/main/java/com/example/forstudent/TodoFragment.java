@@ -345,6 +345,12 @@ public class TodoFragment extends Fragment {
         else{
             mImportant.setVisibility(View.GONE);
         }
+        if(AssList.size()==0){
+            title = "남은 과제가 없습니다.";
+        }
+        else {
+            title = String.format("남은 과제 : %d", AssList.size());
+        }
     }
 
 
