@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
     public HomeAssignmentAdapter assignmentAdapter;
     public HomeExamAdapter examAdapter;
     public HomeScheduleAdapter scheduleAdapter;
+    ArrayList<String> toolbarButtonState = new ArrayList<>();
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,12 @@ public class HomeFragment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
         main.setActionBarTitle("홈");
         main.invalidateOptionsMenu();
+
+
+        toolbarButtonState.add("SETTING");
+        main.toolbarButtonState = toolbarButtonState;
+
+
         //main.toolbarButtonState.remove("SETTING_INVISIBLE");
         //view 정의
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
