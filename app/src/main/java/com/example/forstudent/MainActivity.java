@@ -210,6 +210,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public void onBackPressed(){
         if(BACK_STACK){
             super.onBackPressed();
+            BACK_STACK=false;
         }
         else{
             if(System.currentTimeMillis()-time>=1000){
