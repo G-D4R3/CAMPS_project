@@ -33,6 +33,7 @@ import java.util.Collections;
 public class CalendarFragment extends Fragment{
     ArrayList<Assignment> assignmentList;
     Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
+    ArrayList<String> toolbarButtonState = new ArrayList<>();
 
     private TextView Dday;
     private TextView today;
@@ -76,7 +77,8 @@ public class CalendarFragment extends Fragment{
         calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
         main.setActionBarTitle("캘린더");
         main.invalidateOptionsMenu();
-        main.toolbarButtonState.add("SETTING_INVISIBLE");
+        toolbarButtonState.add("CHECK");
+        main.toolbarButtonState=toolbarButtonState;
         //main.menu.findItem(R.id.setting_icon).setEnabled(false);
         for(Schedule tmp:schedules){
             //Event event = new Event(tmp.getTitle(),tmp.getDate().get(Calendar.HOUR),tmp.getDate().get(Calendar.MINUTE),tmp.getMemo(),2);

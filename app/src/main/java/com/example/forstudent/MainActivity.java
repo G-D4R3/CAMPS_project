@@ -36,6 +36,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.objectbox.Box;
 
@@ -73,7 +75,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<Assignment> important = new ArrayList<>();
     ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
-    public ArrayList<String> toolbarButtonState = new ArrayList<>();
+
+    // 각 fragment 마다 툴바의 버튼 상태를 저장
+    ArrayList<String> toolbarButtonState;
+
     InputMethodManager keypad;
     private long time=0;
 
@@ -325,12 +330,29 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public static MainActivity getInstance() {
         return instance;
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+
+
+        //first make all invisible
+        for(int i=0;i<menu.size();i++){
+            menu.getItem(i).setVisible(false);
+        }
+
+        //make visible that fragment need
         for(String state : toolbarButtonState) {
-            if (state.equals("SETTING_INVISIBLE")) {
-                for (int i = 0; i < menu.size(); i++) menu.getItem(i).setVisible(false);
+            switch(state){
+                case "SETTING":
+                    menu.getItem(0).setVisible(true);
+                    break;
+                case "CHECK":
+                    menu.getItem(1).setVisible(true);
+                    break;
+
             }
         }
         return true;
