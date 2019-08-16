@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.Collections;
 
 public class TodoFragment extends Fragment {
+    MainActivity main;
     Handler handler;
     public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
     public ArrayList<Assignment> ImpList;
@@ -56,6 +57,7 @@ public class TodoFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        main = (MainActivity)getActivity();
         load = new loadData();
         load.start();
         save = new saveData();
@@ -66,7 +68,6 @@ public class TodoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        MainActivity main = (MainActivity)getActivity();
         view  = inflater.inflate(R.layout.fragment_todo, container, false);
         main.setActionBarTitle("과제");
         mTitle = (TextView)view.findViewById(R.id.restDo);
@@ -289,7 +290,6 @@ public class TodoFragment extends Fragment {
     }
 
     public void AddNewAss(){
-        MainActivity main = (MainActivity)getActivity();
         AddNewAssignment fragment = AddNewAssignment.newInstance();
         main.FragmentAdd(fragment);
 
@@ -312,8 +312,6 @@ public class TodoFragment extends Fragment {
     }
 
     public void ModifyAss(Assignment a){
-
-        MainActivity main = (MainActivity)getActivity();
         AddNewAssignment fragment = AddNewAssignment.newInstance();
         fragment.ass = a;
         fragment.MOD=true;
@@ -354,7 +352,6 @@ public class TodoFragment extends Fragment {
         public void run(){
             try{
                 Log.v("TodoFragment", "Saved Data");
-                MainActivity main = (MainActivity)getActivity();
                 main.getAssignmentBox().removeAll();
                 int i=1;
                 if(AssList.size()!=0){
@@ -382,7 +379,6 @@ public class TodoFragment extends Fragment {
             try{
 
                 Log.v("TodoFragment", "Loaded Data");
-                MainActivity main = (MainActivity)getActivity();
 
                 AssList = main.assignment;
                 ImpList = new ArrayList<>();

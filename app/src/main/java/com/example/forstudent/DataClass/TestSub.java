@@ -7,19 +7,19 @@ public class TestSub extends Event implements Comparable<TestSub>{
 
     //시험 정보 저장
 
-    private String Name=null;
+    public String Name=null;
 
-    private Calendar TestDate=Calendar.getInstance();
+    public Calendar TestDate=Calendar.getInstance();
 
-    private String Place=null;
+    public String Place=null;
 
-    private int startHour=-1;
-    private int startMinute;
+    public int startHour=-1;
+    public int startMinute;
 
-    private int endHour=-1;
-    private int endMinute;
+    public int endHour=-1;
+    public int endMinute;
 
-    private String range=null;
+    public String range=null;
 
     public int sorting;
 

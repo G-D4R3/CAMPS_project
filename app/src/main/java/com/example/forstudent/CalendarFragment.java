@@ -1,6 +1,7 @@
 package com.example.forstudent;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,13 +32,15 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CalendarFragment extends Fragment{
+    MainActivity main;
+
     ArrayList<Assignment> assignmentList;
     Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
     ArrayList<String> toolbarButtonState = new ArrayList<>();
 
     private TextView Dday;
     private TextView today;
-    MainActivity main;
+
     View view;
     TextView mTitle;
     MaterialCalendarView calendarView;
@@ -56,20 +59,33 @@ public class CalendarFragment extends Fragment{
     int colorAccent;
     int upperSize=0;
     int lowerSize=0;
+    loadData load;
+    saveData save;
 
+    public CalendarFragment getInstance(){
+        return this;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        main = (MainActivity)getActivity();
+        load = new loadData();
+        save = new saveData();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
-
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         colorAccent = getResources().getColor(R.color.colorAccent);
         //ArrayList<Event> events = new ArrayList<>();
-        main = (MainActivity)getActivity();
-        schedules = main.schedules;
+
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
-        assignmentList = main.assignment;
-        testList = main.testSub;
         upperListView = view.findViewById(R.id.upperCalendarListView);
         lowerListView = view.findViewById(R.id.lowerCalendarListView);
         mUheader = view.findViewById(R.id.calendar_as_ex);
@@ -80,37 +96,12 @@ public class CalendarFragment extends Fragment{
         toolbarButtonState.add("CHECK");
         main.toolbarButtonState=toolbarButtonState;
         //main.menu.findItem(R.id.setting_icon).setEnabled(false);
-        for(Schedule tmp:schedules){
-            //Event event = new Event(tmp.getTitle(),tmp.getDate().get(Calendar.HOUR),tmp.getDate().get(Calendar.MINUTE),tmp.getMemo(),2);
-            tmp.setHour(tmp.getDate().get(Calendar.HOUR));
-            tmp.setMinute(tmp.getDate().get(Calendar.MINUTE));
-            tmp.setType(2);
-            System.out.println(tmp.toString());
-            if(!events.contains(tmp)) events.add(tmp);
-            lowerSize++;
-        }
-        for(Assignment tmp:assignmentList){
-            //Event event = new Event(tmp.getName(),tmp.getPeriod().get(Calendar.HOUR),tmp.getPeriod().get(Calendar.MINUTE),tmp.getMemo(),1);
-            tmp.setTitle(tmp.getName());
-            tmp.setHour(tmp.getPeriod().get(Calendar.HOUR));
-            tmp.setMinute(tmp.getPeriod().get(Calendar.MINUTE));
-            tmp.setType(1);
-            if(!events.contains(tmp)) events.add(tmp);
-            upperSize++;
-        }
-        for(TestSub tmp:testList){
-            //Event event = new Event(tmp.getName(),tmp.getStartHour(),tmp.getStartMinute(),tmp.getRange(),3);
-            tmp.setTitle(tmp.getName());
-            tmp.setHour(tmp.getStartHour());
-            tmp.setMinute(tmp.getStartMinute());
-            tmp.setMemo(tmp.getRange());
-            tmp.setType(3);
-            if(!events.contains(tmp)) events.add(tmp);
-            upperSize++;
-        }
+
+        load.run();
 
         //뷰설정
         ListViewSetter setter = new ListViewSetter();
+
         setHeader();
         mLheader.setVisibility(View.GONE);
         mUheader.setVisibility(View.GONE);
@@ -122,102 +113,121 @@ public class CalendarFragment extends Fragment{
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 //System.out.println(date.toString());
-                dayEvent = new ArrayList<>();
-                scheduleDayEvent = new ArrayList<>();
-                for(Event tmp:events){
 
-                    switch(tmp.getType()){
-                        case 1:
-                            Assignment assignment = (Assignment)tmp;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dayEvent = new ArrayList<>();
+                                scheduleDayEvent = new ArrayList<>();
+                                for(Event tmp:events){
 
-                            if(assignment.getPeriod().get(Calendar.YEAR)!=date.getYear()) break;
-                            if(assignment.getPeriod().get(Calendar.MONTH)!=date.getMonth()-1) break;
-                            if(assignment.getPeriod().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
-                            dayEvent.add(tmp);
+                                    switch(tmp.getType()){
+                                        case 1:
+                                            Assignment assignment = (Assignment)tmp;
 
-                            break;
-                        case 2:
-                            Schedule schedule = (Schedule)tmp;
-                            if(schedule.getDate().get(Calendar.YEAR)!=date.getYear()) break;
-                            if(schedule.getDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
-                            if(schedule.getDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
-                            scheduleDayEvent.add(tmp);
-                            //System.out.println(tmp.toString());
-                            break;
-                        case 3:
-                            TestSub testSub = (TestSub)tmp;
-                            if(testSub.getTestDate().get(Calendar.YEAR)!=date.getYear())break;
-                            if(testSub.getTestDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
-                            if(testSub.getTestDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
-                            dayEvent.add(tmp);
-                            //System.out.println(tmp.toString());
-                            break;
+                                            if(assignment.getPeriod().get(Calendar.YEAR)!=date.getYear()) break;
+                                            if(assignment.getPeriod().get(Calendar.MONTH)!=date.getMonth()-1) break;
+                                            if(assignment.getPeriod().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
+                                            dayEvent.add(tmp);
+
+                                            break;
+                                        case 2:
+                                            Schedule schedule = (Schedule)tmp;
+                                            if(schedule.getDate().get(Calendar.YEAR)!=date.getYear()) break;
+                                            if(schedule.getDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
+                                            if(schedule.getDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
+                                            scheduleDayEvent.add(tmp);
+                                            //System.out.println(tmp.toString());
+                                            break;
+                                        case 3:
+                                            TestSub testSub = (TestSub)tmp;
+                                            if(testSub.getTestDate().get(Calendar.YEAR)!=date.getYear())break;
+                                            if(testSub.getTestDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
+                                            if(testSub.getTestDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
+                                            dayEvent.add(tmp);
+                                            //System.out.println(tmp.toString());
+                                            break;
+                                    }
+                                }
+                                upperAdapter = new CalendarListAdapter(dayEvent);
+                                lowerAdapter = new CalendarListAdapter(scheduleDayEvent);
+                                //listView = view.findViewById(R.id.upperCalendarListView);
+                                upperListView.setAdapter(upperAdapter);
+                                lowerListView.setAdapter(lowerAdapter);
+                                setter.setListViewHeight(upperListView);
+                                setter.setListViewHeight(lowerListView);
+                                setHeader();
+                            }
+                        });
                     }
-                    upperAdapter = new CalendarListAdapter(dayEvent);
-                    lowerAdapter = new CalendarListAdapter(scheduleDayEvent);
-                    //listView = view.findViewById(R.id.upperCalendarListView);
-                    upperListView.setAdapter(upperAdapter);
-                    lowerListView.setAdapter(lowerAdapter);
-                }
-                upperSize = dayEvent.size();
-                lowerSize = scheduleDayEvent.size();
-                setter.setListViewHeight(upperListView);
-                setter.setListViewHeight(lowerListView);
-                setHeader();
+                }).start();
             }
         });
 
         lowerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final int pos = position;
+                                try{
+                                    String name = lowerAdapter.eventList.get(position).getTitle();
+                                    String[] menu = {"수정", "삭제"};
 
-                final int pos = position;
-                try{
-                    String name = lowerAdapter.eventList.get(position).getTitle();
-                    String[] menu = {"수정", "삭제"};
 
-
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                    dialog.setTitle(name);
-                    dialog.setItems(menu, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-                                case 0:
-                                    dialog.dismiss();
-                                    modifySchedule(lowerAdapter.eventList.get(pos),lowerAdapter);
-                                    break;
-                                case 1:
-                                    AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
-                                    remove.setTitle("삭제");
-                                    remove.setMessage("일정을 삭제 합니다.");
-                                    remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                                    dialog.setTitle(name);
+                                    dialog.setItems(menu, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            removeSchedule(lowerAdapter.eventList.get(pos),lowerAdapter);
-                                            //mTitle.setText(name);
-                                            dialog.dismiss();
+                                            switch (which) {
+                                                case 0:
+                                                    dialog.dismiss();
+                                                    modifySchedule(lowerAdapter.eventList.get(pos),lowerAdapter);
+                                                    break;
+                                                case 1:
+                                                    AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
+                                                    remove.setTitle("삭제");
+                                                    remove.setMessage("일정을 삭제 합니다.");
+                                                    remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            removeSchedule(lowerAdapter.eventList.get(pos),lowerAdapter);
+                                                            //mTitle.setText(name);
+                                                            dialog.dismiss();
+                                                        }
+                                                    });
+                                                    remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.cancel();
+
+                                                        }
+                                                    });
+                                                    remove.show();
+                                                    break;
+
+                                            }
                                         }
                                     });
-                                    remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.cancel();
-
-                                        }
-                                    });
-                                    remove.show();
-                                    break;
-
+                                    dialog.create();
+                                    dialog.show();
+                                }
+                                catch (NullPointerException e){
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    });
-                    dialog.create();
-                    dialog.show();
-                }
-                catch (NullPointerException e){
-                    e.printStackTrace();
-                }
+                        });
+                    }
+                }).start();
+
 
             }
         });
@@ -225,13 +235,23 @@ public class CalendarFragment extends Fragment{
         calendarView.setOnDateLongClickListener(new OnDateLongClickListener() {
             @Override
             public void onDateLongClick(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date) {
-                System.out.println("Long" + date.toString());
-                AddNewSchedule addFragment = AddNewSchedule.newInstance();
-                MainActivity main = (MainActivity)getActivity();
-                addFragment.year = date.getYear();
-                addFragment.month = date.getMonth();
-                addFragment.day = date.getDay();
-                main.FragmentAdd(addFragment);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.out.println("Long" + date.toString());
+                                AddNewSchedule addFragment = AddNewSchedule.newInstance();
+                                MainActivity main = (MainActivity)getActivity();
+                                addFragment.year = date.getYear();
+                                addFragment.month = date.getMonth();
+                                addFragment.day = date.getDay();
+                                main.FragmentAdd(addFragment);
+                            }
+                        });
+                    }
+                }).start();
 
             }
         });
@@ -241,9 +261,18 @@ public class CalendarFragment extends Fragment{
         return view;
     }
 
-    public CalendarFragment getInstance(){
-        return this;
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity main = (MainActivity)getActivity();
+        main.toolbarButtonState.remove("SETTING_INVISIBLE");
+        save.run();
+
     }
+
+
+
     public void dotTest(){
         Collection<CalendarDay> testDaysList = new ArrayList<>();
         CalendarDay calendarDay;
@@ -292,18 +321,6 @@ public class CalendarFragment extends Fragment{
         calendarView.addDecorators(new EventDecorator(colorAccent,scheduleDaysList));
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        MainActivity main = (MainActivity)getActivity();
-        main.toolbarButtonState.remove("SETTING_INVISIBLE");
-        main.getScheduleBox().removeAll();
-        Collections.sort(schedules);
-        for(int i=0; i<schedules.size(); i++){
-            ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),false);
-            ScheduleHelper.putSchedule(helper);
-        }
-    }
     public void addTransparent(){
         TransparentFragment addFragment = TransparentFragment.newInstance();
         MainActivity main = (MainActivity)getActivity();
@@ -353,6 +370,74 @@ public class CalendarFragment extends Fragment{
         }
         else{
             mNoschedule.setVisibility(View.GONE);
+        }
+    }
+
+    private class saveData extends Thread{
+        public saveData(){
+
+        }
+
+        public void run(){
+            try{
+                main.getScheduleBox().removeAll();
+                Collections.sort(schedules);
+                for(int i=0; i<schedules.size(); i++){
+                    ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),false);
+                    ScheduleHelper.putSchedule(helper);
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+    private class loadData extends Thread{
+        public loadData(){
+
+        }
+
+        public void run(){
+            try{
+                schedules = main.schedules;
+                assignmentList = main.assignment;
+                testList = main.testSub;
+                for(Schedule tmp:schedules){
+                    //Event event = new Event(tmp.getTitle(),tmp.getDate().get(Calendar.HOUR),tmp.getDate().get(Calendar.MINUTE),tmp.getMemo(),2);
+                    tmp.setHour(tmp.getDate().get(Calendar.HOUR));
+                    tmp.setMinute(tmp.getDate().get(Calendar.MINUTE));
+                    tmp.setType(2);
+                    System.out.println(tmp.toString());
+                    if(!events.contains(tmp)) events.add(tmp);
+                    lowerSize++;
+                }
+                for(Assignment tmp:assignmentList){
+                    //Event event = new Event(tmp.getName(),tmp.getPeriod().get(Calendar.HOUR),tmp.getPeriod().get(Calendar.MINUTE),tmp.getMemo(),1);
+                    tmp.setTitle(tmp.getName());
+                    tmp.setHour(tmp.getPeriod().get(Calendar.HOUR));
+                    tmp.setMinute(tmp.getPeriod().get(Calendar.MINUTE));
+                    tmp.setType(1);
+                    if(!events.contains(tmp)) events.add(tmp);
+                    upperSize++;
+                }
+                for(TestSub tmp:testList){
+                    //Event event = new Event(tmp.getName(),tmp.getStartHour(),tmp.getStartMinute(),tmp.getRange(),3);
+                    tmp.setTitle(tmp.getName());
+                    tmp.setHour(tmp.getStartHour());
+                    tmp.setMinute(tmp.getStartMinute());
+                    tmp.setMemo(tmp.getRange());
+                    tmp.setType(3);
+                    if(!events.contains(tmp)) events.add(tmp);
+                    upperSize++;
+                }
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

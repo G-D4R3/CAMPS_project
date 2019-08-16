@@ -1,6 +1,7 @@
 package com.example.forstudent;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,18 +28,29 @@ import java.util.Collections;
 public class ExamFragment extends Fragment{
 
     ArrayList<TestSub> ExamList=new ArrayList<TestSub>();
-    public String titleDday="D-day";
+    String titleDday="D-day";
     ListView mlistView = null;
     ExamListAdapter adapter;
     private ImageButton addSubject;
     View view;
     DateCount count;
     public TextView dday;
+    MainActivity main;
+    loadData load;
+    saveData save;
 
     public static ExamFragment newInstance() {
         return new ExamFragment();
     }
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        main = (MainActivity)getActivity();
+        load = new loadData();
+        save = new saveData();
+    }
 
     @Nullable
     @Override
@@ -46,95 +58,109 @@ public class ExamFragment extends Fragment{
         view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
         addSubject = (ImageButton) view.findViewById(R.id.addSubject);
         dday = (TextView)view.findViewById(R.id.examTitle);
+        mlistView = (ListView)view.findViewById(R.id.examlistView);
+
 
         count = new DateCount();
 
-        Collections.sort(ExamList);
-        MainActivity main = (MainActivity)getActivity();
-        ExamList = main.testSub;
         main.setActionBarTitle("시험");
-        //listvieww
-        adapter = new ExamListAdapter(ExamList);
-        mlistView = (ListView)view.findViewById(R.id.examlistView);
-        mlistView.setAdapter(adapter);
-        main.invalidateOptionsMenu();
         main.toolbarButtonState.add("SETTING_INVISIBLE");
-        DateSet();
-        dday.setText(titleDday);
-
+        main.invalidateOptionsMenu();
+        //listvieww
+        load.run();
 
 
 
         addSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("과목 추가");
-                dialog.setMessage("시험 추가");
-                dialog.setNegativeButton("불러오기", new DialogInterface.OnClickListener() {
+                new Thread(new Runnable() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                                dialog.setTitle("과목 추가");
+                                dialog.setMessage("시험 추가");
+                                dialog.setNegativeButton("불러오기", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                dialog.setPositiveButton("직접추가", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        addNewsub();
+                                    }
+                                });
+                                dialog.create();
+                                dialog.show();
+                            }
+                        });
                     }
-                });
-                dialog.setPositiveButton("직접추가", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        addNewsub();
-                    }
-                });
-                dialog.create();
-                dialog.show();
+                }).start();
+
             }
         });
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final int pos = position;
-                String name = adapter.data.get(position).getName();
-                String[] menu = {"수정", "삭제"};
-
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle(name);
-                dialog.setItems(menu, new DialogInterface.OnClickListener() {
+                new Thread(new Runnable() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                Toast toast = Toast.makeText(getContext(), "수정", Toast.LENGTH_SHORT);
-                                toast.show();
-                                modifySub(adapter.data.get(pos));
-                                dialog.dismiss();
-                                break;
-                            case 1:
-                                AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
-                                remove.setTitle("삭제");
-                                remove.setMessage("과목을 삭제 합니다.");
-                                remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final int pos = position;
+                                String name = adapter.data.get(position).Name;
+                                String[] menu = {"수정", "삭제"};
+
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                                dialog.setTitle(name);
+                                dialog.setItems(menu, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        removeSub(adapter.data.get(pos));
-                                        dday.setText(titleDday);
-                                        dialog.dismiss();
+                                        switch (which) {
+                                            case 0:
+                                                Toast toast = Toast.makeText(getContext(), "수정", Toast.LENGTH_SHORT);
+                                                toast.show();
+                                                modifySub(adapter.data.get(pos));
+                                                dialog.dismiss();
+                                                break;
+                                            case 1:
+                                                AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
+                                                remove.setTitle("삭제");
+                                                remove.setMessage("과목을 삭제 합니다.");
+                                                remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        removeSub(adapter.data.get(pos));
+                                                        dday.setText(titleDday);
+                                                        dialog.dismiss();
+                                                    }
+                                                });
+                                                remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.cancel();
+
+                                                    }
+                                                });
+                                                remove.show();
+                                                break;
+
+                                        }
                                     }
                                 });
-                                remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-
-                                    }
-                                });
-                                remove.show();
-                                break;
-
-                        }
+                                dialog.create();
+                                dialog.show();
+                            }
+                        });
                     }
-                });
-                dialog.create();
-                dialog.show();
-
+                }).start();
             }
         });
 
@@ -144,20 +170,17 @@ public class ExamFragment extends Fragment{
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        MainActivity main = (MainActivity)getActivity();
-        main.getTestSubBox().removeAll();
-        for(int i=0; i<ExamList.size(); i++){
-            TestSubHelper helper = new TestSubHelper((long)i+1, ExamList.get(i).getName(), ExamList.get(i).getTestDate(), ExamList.get(i).getPlace(), ExamList.get(i).getStartHour(), ExamList.get(i).getStartMinute(), ExamList.get(i).getEndHour(), ExamList.get(i).getEndMinute(), ExamList.get(i).getRange());
-            TestSubHelper.putTestSub(helper);
-        }
+    public void onStop() {
+        super.onStop();
+        main.toolbarButtonState.remove("SETTING_INVISIBLE");
+        save.run();
     }
+
+
 
     public void addNewsub(){ //nullcheck 필요? rangd null일 수 있음
 
         addNewExamSub add = addNewExamSub.newInstance();
-        MainActivity main = (MainActivity)getActivity();
         main.FragmentAdd(add);
         Collections.sort(ExamList);
 
@@ -181,18 +204,17 @@ public class ExamFragment extends Fragment{
     public void modifySub(TestSub sub){
 
         addNewExamSub mod = addNewExamSub.newInstance();
-        MainActivity main = (MainActivity)getActivity();
         mod.subject = sub;
-        mod.mYear = sub.getTestDate().get(Calendar.YEAR);
-        mod.mMonth = sub.getTestDate().get(Calendar.MONTH);
-        mod.mDay = sub.getTestDate().get(Calendar.DAY_OF_MONTH);
-        mod.place = sub.getPlace();
-        mod.mSHour = sub.getStartHour();
-        mod.mSMinute = sub.getStartMinute();
-        mod.mEHour = sub.getEndHour();
-        mod.mEMinute = sub.getEndMinute();
+        mod.mYear = sub.TestDate.get(Calendar.YEAR);
+        mod.mMonth = sub.TestDate.get(Calendar.MONTH);
+        mod.mDay = sub.TestDate.get(Calendar.DAY_OF_MONTH);
+        mod.place = sub.Place;
+        mod.mSHour = sub.startHour;
+        mod.mSMinute = sub.startMinute;
+        mod.mEHour = sub.endHour;
+        mod.mEMinute = sub.endMinute;
         mod.MOD = true;
-        mod.range = sub.getRange();
+        mod.range = sub.range;
         main.FragmentAdd(mod);
         Collections.sort(ExamList);
 
@@ -205,36 +227,65 @@ public class ExamFragment extends Fragment{
             titleDday = "시험이 없습니다.";
         }
         else{
-            TestSub e=null;
             boolean flag = true; //모두 날짜가 지난 시험인지 체크
-            for(int i=0; i<ExamList.size(); i++){
-                e = ExamList.get(i);
-                count.dcalendar = e.getTestDate();
+            for(TestSub tmp : ExamList){
+                count.dcalendar = tmp.TestDate;
                 count.calcDday();
                 if(count.result>=0){ //나중에 D-day일 경우 시간 계산 추가해야함
                     flag = false;
+                    if(count.result == 0){
+                        titleDday = String.format("%s D-Day", tmp.Name);
+                    }
+                    else{
+                        titleDday = String.format("%s D-%d", tmp.Name, count.result);
+                    }
                     break;
-
                 }
             }
-            if(flag==false){
-                if(count.result == 0){
-                    titleDday = String.format("%s D-Day", e.getName());
-                }
-                else{
-                    titleDday = String.format("%s D-%d", e.getName(), count.result);
-                }
-            }
-            else{
+            if(flag==true){
                 titleDday = "시험이 없습니다.";
             }
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        MainActivity main = (MainActivity)getActivity();
-        main.toolbarButtonState.remove("SETTING_INVISIBLE");
+
+    private class saveData extends Thread{
+        public saveData(){
+
+        }
+
+        public void  run(){
+            try{
+                main.getTestSubBox().removeAll();
+                int i=0;
+                for(TestSub tmp  : ExamList){
+                    TestSubHelper helper = new TestSubHelper((long)i+1, tmp.Name, tmp.TestDate, tmp.Place, tmp.startHour, tmp.startMinute, tmp.endHour, tmp.endMinute, tmp.range);
+                    TestSubHelper.putTestSub(helper);
+                    i++;
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class loadData extends Thread{
+        public loadData(){
+
+        }
+
+        public void run(){
+            try{
+                ExamList = main.testSub;
+                adapter = new ExamListAdapter(ExamList);
+                mlistView.setAdapter(adapter);
+                DateSet();
+                dday.setText(titleDday);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }
