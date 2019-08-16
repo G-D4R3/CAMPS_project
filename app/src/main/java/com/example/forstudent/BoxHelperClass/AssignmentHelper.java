@@ -94,4 +94,10 @@ public class  AssignmentHelper{
         return assignment;
     }
 
+    @Override
+    public String toString() {
+        return "AssignmentHelper{" +
+                "assignmentModel=" + assignmentModel.toString() +
+                '}';
+    }
 }

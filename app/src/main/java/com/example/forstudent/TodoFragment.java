@@ -363,10 +363,11 @@ public class TodoFragment extends Fragment {
             try{
                 Log.v("TodoFragment", "Saved Data");
                 main.getAssignmentBox().removeAll();
-                int i=1;
+                int i=0;
                 if(AssList.size()!=0){
                     for(Assignment tmp : AssList){
                         AssignmentHelper helper = new AssignmentHelper((long)i+1, tmp.Name, tmp.Period, tmp.Memo, tmp.flag);
+
                         AssignmentHelper.putAssignment(helper);
                         i++;
                     }
