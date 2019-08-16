@@ -20,7 +20,6 @@
         android:id="@+id/toolbar_title"
         android:textSize="20sp"
         android:fontFamily="@font/barun"
-        android:textColor="@color/colorAccent"
         />
     </androidx.appcompat.widget.Toolbar>
 

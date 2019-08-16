@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -30,11 +32,15 @@ public class HomeFragmentSetup extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = (View)inflater.inflate(R.layout.home_setup, container, false);
-        TextView Title = (TextView)view.findViewById(R.id.setupTitle);
-        TextView mCancel = (TextView)view.findViewById(R.id.cancel5);
+        //TextView Title = (TextView)view.findViewById(R.id.setupTitle);
+        //TextView mCancel = (TextView)view.findViewById(R.id.cancel5);
         TextView mLayout = (TextView)view.findViewById(R.id.layoutset);
         MainActivity main = (MainActivity)getActivity();
         main.BACK_STACK=true;
+
+
+
+
         RadioGroup mAssignmentView = (RadioGroup)view.findViewById(R.id.AssignmentView);
         select[0]=main.getUser().homeScheduleCheck;
         select[1]=main.getUser().homeClassCheck;
@@ -44,9 +50,20 @@ public class HomeFragmentSetup extends Fragment {
 
         mAssignmentView.check(assignmentViewCheck);
 
+        main.toolbar.setTitle("");
+        main.getSupportActionBar().setTitle("DSGDGS");
+        main.centerToolbarTitle.setText("설정");
 
+        main.invalidateOptionsMenu();
 
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.FragmentRemove(HomeFragmentSetup.this);
+            }
+        });
 
+/*
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +73,7 @@ public class HomeFragmentSetup extends Fragment {
 
             }
         });
-
+*/
 
 
         mLayout.setOnClickListener(new View.OnClickListener() {
@@ -127,5 +144,16 @@ public class HomeFragmentSetup extends Fragment {
         return view;
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity main = (MainActivity)getActivity();
+        main.centerToolbarTitle.setText("");
 
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_assignment,menu);
+    }
 }
