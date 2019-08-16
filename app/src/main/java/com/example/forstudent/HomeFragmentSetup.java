@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 public class HomeFragmentSetup extends Fragment {
     public boolean[] select = {true, true, true, true};
+    int assignmentViewCheck;
 
     public static HomeFragmentSetup newInstance(){
         return new HomeFragmentSetup();
@@ -39,6 +40,12 @@ public class HomeFragmentSetup extends Fragment {
         select[1]=main.getUser().homeClassCheck;
         select[2]=main.getUser().homeAssignmentCheck;
         select[3]=main.getUser().homeExamCheck;
+        assignmentViewCheck = main.getUser().getHomeAssignmentViewCheck();
+
+        mAssignmentView.check(assignmentViewCheck);
+
+
+
 
 
         mCancel.setOnClickListener(new View.OnClickListener() {
