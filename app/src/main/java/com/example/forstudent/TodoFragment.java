@@ -295,8 +295,6 @@ public class TodoFragment extends Fragment {
 
         AssList = main.assignment;
         ImpList = main.important;
-        Collections.sort(AssList);
-        Collections.sort(ImpList);
         if(AssList.size()==0){
             title = "남은 과제가 없습니다.";
         }

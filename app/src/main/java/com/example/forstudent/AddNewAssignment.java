@@ -83,7 +83,6 @@ public class AddNewAssignment extends Fragment {
                         mDate.setText((month+1)+"월 "+dayOfMonth+"일");
                         period.set(year,month,dayOfMonth);
                         DATE_CHECKED=true;
-
                     }
                 },today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DATE));
                 dialog.show();
@@ -104,27 +103,26 @@ public class AddNewAssignment extends Fragment {
             @Override
             public void onClick(View v) {
                 hideKey();
-                main.todoFragment.AssList.remove(ass);
                 if(Flag==true){
                     main.todoFragment.ImpList.remove(ass);
                 }
-
 
                 if(mName.getText().length()==0 || DATE_CHECKED==false){
                     setYetDialog();
                 }
                 else{
                     ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString(),Flag);
+                    MainActivity main = (MainActivity)getActivity();
+                    main.todoFragment.AssList.add(ass);
+                    if(Flag==true){
+                        main.todoFragment.ImpList.add(ass);
+
+                    }
+
+                    main.FragmentRemove(AddNewAssignment.this);
                 }
 
-                MainActivity main = (MainActivity)getActivity();
-                main.todoFragment.AssList.add(ass);
-                if(Flag==true){
-                    main.todoFragment.ImpList.add(ass);
-                }
                // main.calendarFragment.dotAssignment();
-                main.showActionBar();
-                main.FragmentRemove(AddNewAssignment.this);
 
             }
 
