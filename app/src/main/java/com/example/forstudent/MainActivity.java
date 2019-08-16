@@ -276,6 +276,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         transaction.setCustomAnimations(R.anim.popup,R.anim.slide_down,0,R.anim.slide_down);
         transaction.replace(R.id.frame_layout,fragment);
         transaction.addToBackStack(null);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
         transaction.commit();
     }
 

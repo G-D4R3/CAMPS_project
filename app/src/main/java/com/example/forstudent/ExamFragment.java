@@ -64,7 +64,7 @@ public class ExamFragment extends Fragment{
         count = new DateCount();
 
         main.setActionBarTitle("시험");
-        main.toolbarButtonState.add("SETTING_INVISIBLE");
+
         main.invalidateOptionsMenu();
         //listvieww
         load.run();
@@ -172,10 +172,15 @@ public class ExamFragment extends Fragment{
     @Override
     public void onStop() {
         super.onStop();
-        main.toolbarButtonState.remove("SETTING_INVISIBLE");
         save.run();
     }
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        main.centerToolbarTitle.setText("");
+
+    }
 
 
     public void addNewsub(){ //nullcheck 필요? rangd null일 수 있음

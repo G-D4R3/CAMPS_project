@@ -6,6 +6,9 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.TestSub;
 
 import java.util.Calendar;
@@ -58,10 +62,12 @@ public class addNewExamSub extends Fragment {
 
 
 
+
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,14 +78,28 @@ public class addNewExamSub extends Fragment {
         mPlace = (EditText) view.findViewById(R.id.testPlace);
         final TextView mStart = (TextView)view.findViewById(R.id.time2);
         final TextView mEnd = (TextView)view.findViewById(R.id.time2_1);
-        TextView mCancle = (TextView)view.findViewById(R.id.cancle2);
-        TextView mComplete = (TextView)view.findViewById(R.id.complete2);
+        //TextView mCancle = (TextView)view.findViewById(R.id.cancle2);
+        //TextView mComplete = (TextView)view.findViewById(R.id.complete2);
         mRange = (EditText)view.findViewById(R.id.Range2);
         LinearLayout layout = (LinearLayout)view.findViewById(R.id.examlayout);
 
         MainActivity main = (MainActivity)getActivity();
         main.BACK_STACK=true;
         imm = main.keypad;
+
+        main.centerToolbarTitle.setText("시험 추가");
+        main.toolbar.setTitle("");
+        main.invalidateOptionsMenu();
+
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKey();
+                MainActivity main = (MainActivity)getActivity();
+                main.showActionBar();
+                main.FragmentRemove(addNewExamSub.this);
+            }
+        });
 
 
         layout.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +180,7 @@ public class addNewExamSub extends Fragment {
             }
         });
 
-
+/*
         mCancle.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -227,7 +247,7 @@ public class addNewExamSub extends Fragment {
 
             }
         });
-
+*/
 
         return view;
 
@@ -237,6 +257,69 @@ public class addNewExamSub extends Fragment {
         imm.hideSoftInputFromWindow(mSubname.getWindowToken(),0);
         imm.hideSoftInputFromWindow(mRange.getWindowToken(),0);
         imm.hideSoftInputFromWindow(mPlace.getWindowToken(),0);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_assignment,menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        MainActivity main = (MainActivity)getActivity();
+        if (id == R.id.check_icon) {
+            hideKey();
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(mYear,mMonth,mDay);
+
+            if(MOD==true){ //if this fragment is modify, then remove original object and add new one
+                main.examFragment.ExamList.remove(subject);
+                if(mRange.getText().toString().length()==0){
+                    range = null;
+                }
+                else{
+                    range = mRange.getText().toString();
+                }
+                if(mPlace.getText().toString().length()==0){
+                    place = null;
+                }
+                else{
+                    place = mPlace.getText().toString();
+                }
+                subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
+                main.examFragment.ExamList.add(subject);
+                main.FragmentRemove(addNewExamSub.this);
+            }
+            else{
+                if(mRange.getText().toString().length()==0){
+                    range = null;
+                }
+                else{
+                    range = mRange.getText().toString();
+                }
+                if(mPlace.getText().toString().length()==0){
+                    place = null;
+                }
+                else{
+                    place = mPlace.getText().toString();
+                }
+
+                if(mSubname.getText().toString().length()==0||DATE_PICKED==false||START_PICKED==false){
+                    setYetDialog();
+                }
+                else{
+                    subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
+                    main.examFragment.ExamList.add(subject);
+                    main.showActionBar();
+                    main.FragmentRemove(addNewExamSub.this);
+                }
+            }
+
+        }
+
+        return true;
     }
 
     public void setYetDialog(){

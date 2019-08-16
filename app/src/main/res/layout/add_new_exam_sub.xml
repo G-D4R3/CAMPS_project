@@ -32,178 +32,178 @@
 
 
 
+            <!--
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/cancle2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:fontFamily="@font/barun"
+                                android:layout_gravity="center"
+                                android:text="취소" />
 
-                <TextView
-                    android:id="@+id/cancle2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/barun"
-                    android:layout_gravity="center"
-                    android:text="취소" />
+                            <TextView
+                                android:id="@+id/fragTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:fontFamily="@font/barun"
+                                android:text="직접 추가"
+                                android:textSize="25dp" />
 
-                <TextView
-                    android:id="@+id/fragTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:fontFamily="@font/barun"
-                    android:text="직접 추가"
-                    android:textSize="25dp" />
+                            <TextView
+                                android:id="@+id/complete2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20dp"
+                                android:fontFamily="@font/barun"
+                                android:layout_gravity="center"
+                                android:gravity="right"
+                                android:text="완료" />
+                        </LinearLayout>
+            -->
+                        <EditText
+                            android:id="@+id/subName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:editable="true"
+                            android:ems="10"
+                            android:hint="과목 이름"
+                            android:text=""
+                            android:fontFamily="@font/barun"
+                            android:inputType="textShortMessage"
+                            android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/complete2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/barun"
-                    android:layout_gravity="center"
-                    android:gravity="right"
-                    android:text="완료" />
-            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_margin="18dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/subName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:editable="true"
-                android:ems="10"
-                android:hint="과목 이름"
-                android:text=""
-                android:fontFamily="@font/barun"
-                android:inputType="textShortMessage"
-                android:textSize="20sp" />
+                            <TextView
+                                android:id="@+id/Tdate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/barun"
+                                android:text="시험 날짜" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_margin="18dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/date2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="18sp"
+                                android:gravity="right"
+                                android:hint="설정하기"
+                                android:fontFamily="@font/barun"
+                                android:text="" />
+                        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/Tdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/barun"
-                    android:text="시험 날짜" />
+                        <EditText
+                            android:id="@+id/testPlace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:editable="true"
+                            android:ems="10"
+                            android:hint="장소"
+                            android:text=""
+                            android:fontFamily="@font/barun"
+                            android:inputType="textShortMessage"
+                            android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/date2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:gravity="right"
-                    android:hint="설정하기"
-                    android:fontFamily="@font/barun"
-                    android:text="" />
-            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="18dp"
+                            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/testPlace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:editable="true"
-                android:ems="10"
-                android:hint="장소"
-                android:text=""
-                android:fontFamily="@font/barun"
-                android:inputType="textShortMessage"
-                android:textSize="20sp" />
+                            <TextView
+                                android:id="@+id/Tstart"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/barun"
+                                android:text="시작 시간" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="18dp"
-                android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/time2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="18sp"
+                                android:gravity="right"
+                                android:hint="설정하기"
+                                android:fontFamily="@font/barun"
+                                android:text="" />
+                        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/Tstart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/barun"
-                    android:text="시작 시간" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="18dp"
+                            android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/time2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:gravity="right"
-                    android:hint="설정하기"
-                    android:fontFamily="@font/barun"
-                    android:text="" />
-            </LinearLayout>
+                            <TextView
+                                android:id="@+id/Tend"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/barun"
+                                android:text="종료 시간" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="18dp"
-                android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/time2_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/barun"
+                                android:gravity="right"
+                                android:hint="설정하기"
+                                android:text="" />
+                        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/Tend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/barun"
-                    android:text="종료 시간" />
-
-                <TextView
-                    android:id="@+id/time2_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/barun"
-                    android:gravity="right"
-                    android:hint="설정하기"
-                    android:text="" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_marginTop="18dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/barun"
-                android:text="시험 범위" />
-
-
-            <EditText
-                android:id="@+id/Range2"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:ems="10"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:textSize="18sp"
-                android:fontFamily="@font/barun"
-                android:hint="범위"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:layout_marginTop="18dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginRight="18dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/barun"
+                            android:text="시험 범위" />
 
 
-        </LinearLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                        <EditText
+                            android:id="@+id/Range2"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:ems="10"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/barun"
+                            android:hint="범위"
+                            android:gravity="start|top"
+                            android:inputType="textMultiLine" />
+
+
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>

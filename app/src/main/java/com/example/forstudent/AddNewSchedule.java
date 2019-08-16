@@ -5,6 +5,9 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -17,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Event;
 import com.example.forstudent.DataClass.Schedule;
 
@@ -54,6 +58,22 @@ public class AddNewSchedule extends Fragment {
         main.BACK_STACK=true;
         inputMethodManager=main.keypad;
 
+        main.centerToolbarTitle.setText("일정 추가");
+        main.toolbar.setTitle("");
+        main.invalidateOptionsMenu();
+
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKey();
+
+                main.FragmentRemove(AddNewSchedule.this);
+            }
+        });
+
+
+
+
         dateText.setText(String.format("%d년 %d월 %d일", year, month, day));
         if(MOD){
            titleText.setText(removeTarget.getTitle());
@@ -66,7 +86,7 @@ public class AddNewSchedule extends Fragment {
                 hideKey();
             }
         });
-
+/*
 
         cancleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +96,7 @@ public class AddNewSchedule extends Fragment {
                 main.showActionBar();
                 main.FragmentRemove(AddNewSchedule.this);
             }
-        });
+        });*/
 
         editDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +115,7 @@ public class AddNewSchedule extends Fragment {
             }
 
         });
-
+/*
         completeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +143,7 @@ public class AddNewSchedule extends Fragment {
                 }
             }
         });
-
+*/
         return view;
     }
     private void hideKey() {
@@ -148,4 +168,46 @@ public class AddNewSchedule extends Fragment {
         dialog.show();
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_assignment,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        MainActivity main = (MainActivity)getActivity();
+        if (id == R.id.check_icon) {
+            if(memoText.getText().toString().length() == 0){ //no memo
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year,month-1,day,hour,minute);
+                schedule = new Schedule(titleText.getText().toString(),calendar,false);
+                //   System.out.println(schedule.toString());
+            }
+            else{ //memo
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year,month-1,day,hour,minute);
+                schedule = new Schedule(titleText.getText().toString(),calendar,memoText.getText().toString(),false);
+                //   System.out.println(schedule.toString());
+            }
+            if(titleText.getText().toString().length()==0 || TIME_PICKED == false){
+                setYetDialog();
+            }
+            else{
+                main.calendarFragment.schedules.add(schedule);
+                if(removeTarget != null) main.calendarFragment.schedules.remove(removeTarget);
+                main.showActionBar();
+                main.FragmentRemove(AddNewSchedule.this);
+
+            }
+
+        }
+
+        return true;
+    }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 }

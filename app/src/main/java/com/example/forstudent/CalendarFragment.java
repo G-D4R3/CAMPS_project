@@ -372,7 +372,13 @@ public class CalendarFragment extends Fragment{
             mNoschedule.setVisibility(View.GONE);
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        main.centerToolbarTitle.setText("");
+
+    }
     private class saveData extends Thread{
         public saveData(){
 

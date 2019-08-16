@@ -39,7 +39,7 @@ public class AddNewAssignment extends Fragment {
     EditText mName;
     EditText mRange;
     static boolean iscanceled;
-    ArrayList <String> toolbarButtonStatus = new ArrayList<>();
+
 
 
     public static AddNewAssignment newInstance(){
@@ -67,14 +67,9 @@ public class AddNewAssignment extends Fragment {
 
         input = main.keypad;
 
-        main.getSupportActionBar().setDisplayShowTitleEnabled(true);
-        main.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         main.centerToolbarTitle.setText("과제 추가");
         main.toolbar.setTitle("");
         main.invalidateOptionsMenu();
-
-
-        main.toolbarButtonState = toolbarButtonStatus;
 
         main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,7 +186,7 @@ public class AddNewAssignment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        //super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_add_assignment,menu);
     }
 

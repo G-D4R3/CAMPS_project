@@ -59,15 +59,12 @@ public class HomeFragment extends Fragment {
     public HomeAssignmentAdapter assignmentAdapter;
     public HomeExamAdapter examAdapter;
     public HomeScheduleAdapter scheduleAdapter;
-    ArrayList<String> toolbarButtonState = new ArrayList<>();
-
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         user = ((MainActivity)getActivity()).getUser();
     }
-
-
 
     @Nullable
     @Override
@@ -78,8 +75,6 @@ public class HomeFragment extends Fragment {
         main.invalidateOptionsMenu();
 
 
-        toolbarButtonState.add("SETTING");
-        main.toolbarButtonState = toolbarButtonState;
 
 
         //main.toolbarButtonState.remove("SETTING_INVISIBLE");
@@ -365,7 +360,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        //super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_home,menu);
     }
 
