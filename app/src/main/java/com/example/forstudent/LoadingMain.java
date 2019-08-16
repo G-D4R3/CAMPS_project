@@ -25,5 +25,6 @@ public class LoadingMain extends Activity {
         finish();
 
 
+
     }
 }

@@ -26,7 +26,7 @@ import java.util.Collections;
 
 public class TodoFragment extends Fragment {
     public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
-    public ArrayList<Assignment> ImpList = new ArrayList<Assignment>();
+    public ArrayList<Assignment> ImpList;
     TodoListAdapter adapter;
     TodoListAdapter ImportantAdapter;
     TextView mTitle;
@@ -37,30 +37,45 @@ public class TodoFragment extends Fragment {
     TextView mIhide;
     TextView mAhide;
     String title = "남은 과제 수";
+    ImageButton  mAdd;
     Boolean mIvisible=true;
     Boolean mDvisible=true;
+    View view;
     long boxSize;
     protected static boolean MOD = false;
     static int mod_index;
     public ListViewSetter setter = new ListViewSetter();
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loadData load = new loadData();
+        load.start();
+    }
+
+
+    @Override
+    public void onAttachFragment(Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.fragment_todo, container, false);
+        view  = inflater.inflate(R.layout.fragment_todo, container, false);
         MainActivity main = (MainActivity)getActivity();
         main.setActionBarTitle("과제");
         mTitle = (TextView)view.findViewById(R.id.restDo);
         mlistView = (ListView)view.findViewById(R.id.assignmentList);
         mImportant = (ListView)view.findViewById(R.id.importantAssignment);
-        ImageButton mAdd = (ImageButton)view.findViewById(R.id.addAss);
+        mAdd = (ImageButton)view.findViewById(R.id.addAss);
         mImpSec = (TextView)view.findViewById(R.id.SectionHeader2);
         mAssSec = (TextView)view.findViewById(R.id.SectionHeader3);
         mIhide = (TextView)view.findViewById(R.id.hide2);
         mAhide = (TextView)view.findViewById(R.id.hide3);
 
-        loadData();
 
         mTitle.setText(title);
 
@@ -74,74 +89,91 @@ public class TodoFragment extends Fragment {
         setter.setListViewHeight(mImportant);
 
 
-
-
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddNewAss();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AddNewAss();
+                            }
+                        });
+                    }
+                }).start();
             }
         });
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 final int pos = position;
-                try{
-                    String name = adapter.data.get(position).getName();
-                    String[] menu = {"중요도 표시","수정", "삭제"};
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    String name = adapter.data.get(position).getName();
+                                    String[] menu = {"중요도 표시","수정", "삭제"};
 
 
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                    dialog.setTitle(name);
-                    dialog.setItems(menu, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
-                                case 0:
-                                    Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
-                                    mImportant.setVisibility(View.VISIBLE);
-                                    setImportance(adapter.data.get(pos));
-                                    setter.setListViewHeight(mImportant);
-                                    break;
-                                case 1:
-                                    dialog.dismiss();
-                                    ModifyAss(adapter.data.get(pos));
-                                    setView();
-                                    break;
-                                case 2:
-                                    AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
-                                    remove.setTitle("삭제");
-                                    remove.setMessage("할 일을 삭제 합니다.");
-                                    remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                                    dialog.setTitle(name);
+                                    dialog.setItems(menu, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            RemoveAss(adapter.data.get(pos));
-                                            mTitle.setText(title);
-                                            dialog.dismiss();
-                                            setView();
+                                            switch (which) {
+                                                case 0:
+                                                    Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
+                                                    mImportant.setVisibility(View.VISIBLE);
+                                                    setImportance(adapter.data.get(pos));
+                                                    setter.setListViewHeight(mImportant);
+                                                    break;
+                                                case 1:
+                                                    dialog.dismiss();
+                                                    ModifyAss(adapter.data.get(pos));
+                                                    setView();
+                                                    break;
+                                                case 2:
+                                                    AlertDialog.Builder remove = new AlertDialog.Builder(getContext());
+                                                    remove.setTitle("삭제");
+                                                    remove.setMessage("할 일을 삭제 합니다.");
+                                                    remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            RemoveAss(adapter.data.get(pos));
+                                                            mTitle.setText(title);
+                                                            dialog.dismiss();
+                                                            setView();
+                                                        }
+                                                    });
+                                                    remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            dialog.cancel();
+
+                                                        }
+                                                    });
+                                                    remove.show();
+                                                    break;
+
+                                            }
                                         }
                                     });
-                                    remove.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.cancel();
-
-                                        }
-                                    });
-                                    remove.show();
-                                    break;
-
+                                    dialog.create();
+                                    dialog.show();
+                                }
+                                catch (NullPointerException e){
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                    });
-                    dialog.create();
-                    dialog.show();
-                }
-                catch (NullPointerException e){
-                    e.printStackTrace();
-                }
+                        });
+                    }
+                }).start();
 
             }
         });
@@ -149,34 +181,45 @@ public class TodoFragment extends Fragment {
         mImportant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final int pos = position;
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("해제");
-                dialog.setMessage("중요도 표시를 해제합니다.");
-                dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                new Thread(new Runnable() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        for(int i=0; i<AssList.size(); i++){
-                            if(AssList.get(i).equals(ImpList.get(position))){
-                                AssList.get(i).setFlag(false);
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final int pos = position;
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                                dialog.setTitle("해제");
+                                dialog.setMessage("중요도 표시를 해제합니다.");
+                                dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        for(int i=0; i<AssList.size(); i++){
+                                            if(AssList.get(i).equals(ImpList.get(position))){
+                                                AssList.get(i).setFlag(false);
+                                            }
+                                        }
+                                        ImpList.remove(ImportantAdapter.data.get(position));
+                                        ImportantAdapter.notifyDataSetChanged();
+                                        if(ImpList.size()==0){
+                                            mImportant.setVisibility(View.GONE);
+                                        }
+                                        setter.setListViewHeight(mImportant);
+                                    }
+                                });
+                                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                dialog.create();
+                                dialog.show();
                             }
-                        }
-                        ImpList.remove(ImportantAdapter.data.get(position));
-                        ImportantAdapter.notifyDataSetChanged();
-                        if(ImpList.size()==0){
-                            mImportant.setVisibility(View.GONE);
-                        }
-                        setter.setListViewHeight(mImportant);
+                        });
                     }
-                });
-                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.create();
-                dialog.show();
+                }).start();
+
             }
         });
 
@@ -214,10 +257,6 @@ public class TodoFragment extends Fragment {
 
 
 
-
-
-
-
         return view;
     }
 
@@ -231,21 +270,13 @@ public class TodoFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        MainActivity main = (MainActivity)getActivity();
-        main.getAssignmentBox().removeAll();
-        if(AssList.size()!=0){
-            for(int i=0; i<AssList.size(); i++){
-                AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo(),AssList.get(i).getFlag());
-                AssignmentHelper.putAssignment(helper);
-            }
-        }
+    public void onStop() {
+        super.onStop();
+        saveData save = new saveData();
+        save.run();
     }
 
     public void AddNewAss(){
-
-
         MainActivity main = (MainActivity)getActivity();
         AddNewAssignment fragment = AddNewAssignment.newInstance();
         main.FragmentAdd(fragment);
@@ -290,18 +321,6 @@ public class TodoFragment extends Fragment {
         mImportant.setVisibility(View.VISIBLE);
     }
 
-    public void loadData(){
-        MainActivity main = (MainActivity)getActivity();
-
-        AssList = main.assignment;
-        ImpList = main.important;
-        if(AssList.size()==0){
-            title = "남은 과제가 없습니다.";
-        }
-        else {
-            title = String.format("남은 과제 : %d", AssList.size());
-        }
-    }
 
     public void setView(){
         title = String.format("남은 과제 : %d", AssList.size());
@@ -313,4 +332,63 @@ public class TodoFragment extends Fragment {
             mImportant.setVisibility(View.GONE);
         }
     }
+
+
+    private class saveData extends Thread{
+        public saveData(){
+
+        }
+
+        public void run(){
+            try{
+                MainActivity main = (MainActivity)getActivity();
+                main.getAssignmentBox().removeAll();
+                if(AssList.size()!=0){
+                    for(int i=0; i<AssList.size(); i++){
+                        AssignmentHelper helper = new AssignmentHelper((long)i+1, AssList.get(i).getName(), AssList.get(i).getPeriod(), AssList.get(i).getMemo(),AssList.get(i).getFlag());
+                        AssignmentHelper.putAssignment(helper);
+                    }
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    private class loadData extends Thread{
+        public loadData(){
+
+        }
+
+        public void run(){
+            try{
+                MainActivity main = (MainActivity)getActivity();
+
+                AssList = main.assignment;
+                ImpList = new ArrayList<>();
+
+                for(int i=0; i<AssList.size(); i++){
+                    if(AssList.get(i).getFlag()==true){
+                        ImpList.add(AssList.get(i));
+                    }
+                }
+
+
+
+                if(AssList.size()==0){
+                    title = "남은 과제가 없습니다.";
+                }
+                else {
+                    title = String.format("남은 과제 : %d", AssList.size());
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

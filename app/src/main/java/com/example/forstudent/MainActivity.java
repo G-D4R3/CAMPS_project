@@ -10,7 +10,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -153,11 +152,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         for(long i=1; i<=assignmentBox.count(); i++){
             assignment.add(AssignmentHelper.getAssignment(i));
         }
-        for(int i=0; i<assignment.size(); i++){
-            if(assignment.get(i).getFlag()==true){
-                important.add(assignment.get(i));
-            }
-        }
+
 
         //Exam data load
         for(long i=1; i<=testBox.count(); i++){
