@@ -22,7 +22,6 @@ import com.example.forstudent.ListViewAdapter.HomeScheduleAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 
 
@@ -95,22 +94,9 @@ public class HomeFragment extends Fragment {
         mAssignList = (ListView)view.findViewById(R.id.home_asslistview);
         mTestList = (ListView)view.findViewById(R.id.home_examlistview);
 
-
         datecount = new DateCount(Calendar.getInstance());
 
-        //load data
-
-        tests = main.testSub;
-
-        if(mSetAssignment==true){
-            ass = main.assignment;
-        }
-        else{
-            ass = main.important;
-        }
-
-        schedules = main.schedules;
-        Collections.sort(schedules);
+        initArrayLists();
 
 
         scheduleAdapter = new HomeScheduleAdapter(schedules);
@@ -188,6 +174,71 @@ public class HomeFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void initArrayLists() {
+        MainActivity main = (MainActivity)getActivity();
+        Calendar today = Calendar.getInstance();
+        //load data
+
+        tests = main.testSub;
+
+        if(mSetAssignment==true){
+            ass = main.assignment;
+        }
+        else{
+            ass = main.important;
+        }
+
+        schedules = main.schedules;
+
+
+        //schedule
+        int position=0;
+        int size = schedules.size();
+        int rest = 0;
+
+        for(int i=0; i<size; i++){
+            datecount.dcalendar.set(schedules.get(i).getDate().get(Calendar.YEAR),schedules.get(i).getDate().get(Calendar.MONTH),schedules.get(i).getDate().get(Calendar.DAY_OF_MONTH));
+            rest = datecount.calcDday();
+            if(rest>=0){
+                position = i;
+                break;
+            }
+        }
+        schedules = new ArrayList(schedules.subList(position, size));
+
+
+        //assignment
+        position=0;
+        size = ass.size();
+
+        for(int i=0; i<size; i++){
+            datecount.dcalendar.set(ass.get(i).getPeriod().get(Calendar.YEAR), ass.get(i).getPeriod().get(Calendar.MONTH), ass.get(i).getPeriod().get(Calendar.DAY_OF_MONTH));
+            rest = datecount.calcDday();
+            if(rest>=0){
+                position = i;
+                break;
+            }
+        }
+        ass = new ArrayList(ass.subList(position, size));
+
+
+        //exam
+        position = 0;
+        size = tests.size();
+        for(int i=0; i<size; i++){
+            datecount.dcalendar.set(tests.get(i).getTestDate().get(Calendar.YEAR), tests.get(i).getTestDate().get(Calendar.MONTH), tests.get(i).getTestDate().get(Calendar.DAY_OF_MONTH));
+            rest = datecount.calcDday();
+            if(rest>=0){
+                position = i;
+                break;
+            }
+        }
+        tests = new ArrayList(tests.subList(position, size));
+
+
+
     }
 
     private void setExist() {

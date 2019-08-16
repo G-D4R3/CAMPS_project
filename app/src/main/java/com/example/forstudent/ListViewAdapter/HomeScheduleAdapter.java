@@ -1,5 +1,6 @@
 package com.example.forstudent.ListViewAdapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +42,14 @@ public class HomeScheduleAdapter extends BaseAdapter {
 
         Schedule s = schedules.get(position);
 
-        System.out.println("Title "+s.getTitle());
-
-        mDate.setText(String.format("%d.%2d",s.getDate().get(Calendar.MONTH), s.getDate().get(Calendar.DAY_OF_MONTH)));
+        mDate.setText(String.format("%d.%2d",s.getDate().get(Calendar.MONTH)+1, s.getDate().get(Calendar.DAY_OF_MONTH)));
         mSchedule.setText(s.getTitle());
+
+        Calendar today = Calendar.getInstance();
+        if(s.getDate().get(Calendar.MONTH)==today.get(Calendar.MONTH) && s.getDate().get(Calendar.DAY_OF_MONTH)==today.get(Calendar.DAY_OF_MONTH)){
+            mDate.setTextColor(Color.parseColor("#ec525b"));
+            mSchedule.setTextColor(Color.parseColor("#ec525b"));
+        }
 
         return convertView;
     }

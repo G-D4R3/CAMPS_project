@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:fontFamily="@font/barun"
             android:text="요일" />
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_weight="10"
             android:fontFamily="@font/barun"
             android:text="시작시간" />
@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_weight="10"
             android:fontFamily="@font/barun"
             android:text="끝시간" />

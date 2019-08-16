@@ -42,13 +42,13 @@
                     android:id="@+id/calendar_null"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="18dp"
-                    android:gravity="center"
                     android:fontFamily="@font/barun"
-                    android:text="일정이 없습니다."/>
+                    android:gravity="center"
+                    android:text="일정이 없습니다."
+                    android:textSize="18sp" />
 
                 
                 <TextView
@@ -58,7 +58,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/barun"
                     android:text="과제 / 시험"/>
@@ -78,7 +78,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/barun"
                     android:text="일정"/>

@@ -1,5 +1,6 @@
 package com.example.forstudent.ListViewAdapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.MainActivity;
 import com.example.forstudent.R;
 
 import java.util.ArrayList;
@@ -45,6 +47,13 @@ public class HomeAssignmentAdapter extends BaseAdapter {
         mDate.setText(String.format("%d.%2d",assignment.getPeriod().get(Calendar.MONTH)+1,assignment.getPeriod().get(Calendar.DAY_OF_MONTH)));
         mAssignment.setText(assignment.getName());
 
+        Calendar today = Calendar.getInstance();
+        if(assignment.getPeriod().get(Calendar.MONTH)==today.get(Calendar.MONTH) && assignment.getPeriod().get(Calendar.DAY_OF_MONTH)==today.get(Calendar.DAY_OF_MONTH)){
+            mDate.setTextColor(Color.parseColor("#ec525b"));
+            mAssignment.setTextColor(Color.parseColor("#ec525b"));
+        }
+
+        MainActivity main = MainActivity.getInstance();
 
 
 

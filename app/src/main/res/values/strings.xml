@@ -23,6 +23,23 @@
         <item >금</item>
     </string-array>
 
+    <string-array name="grades">
+        <item >A+</item>
+        <item >A0</item>
+        <item >A-</item>
+        <item >B+</item>
+        <item >B0</item>
+        <item >B-</item>
+        <item >C+</item>
+        <item >C0</item>
+        <item >C-</item>
+        <item >D+</item>
+        <item >D0</item>
+        <item >D-</item>
+        <item >F</item>
+        <item >P</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
