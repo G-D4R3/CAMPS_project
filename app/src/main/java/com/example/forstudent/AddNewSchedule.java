@@ -30,6 +30,7 @@ public class AddNewSchedule extends Fragment {
     int day;
     int hour;
     int minute;
+    boolean MOD = false;
     CalendarFragment calendarFragment;
     Boolean TIME_PICKED = false;
     InputMethodManager inputMethodManager;
@@ -53,6 +54,11 @@ public class AddNewSchedule extends Fragment {
         MainActivity main = (MainActivity)getActivity();
         inputMethodManager=main.keypad;
         dateText.setText(String.format("%d년 %d월 %d일", year, month, day));
+        if(MOD){
+           titleText.setText(removeTarget.getTitle());
+           memoText.setText(removeTarget.getMemo());
+           editDate.setText(removeTarget.getHour() + "시 " + removeTarget.getMinute()+ "분");
+        }
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -251,7 +251,7 @@ public class CalendarFragment extends Fragment{
             //System.out.println(tmp.getPeriod());
             Calendar calendar = tmp.getTestDate();
             int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
+            int month = calendar.get(Calendar.MONTH)+1;
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             calendarDay = CalendarDay.from(year,month,day);
             testDaysList.add(calendarDay);
@@ -266,7 +266,7 @@ public class CalendarFragment extends Fragment{
             System.out.println(tmp.getPeriod());
             Calendar calendar = tmp.getPeriod();
             int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
+            int month = calendar.get(Calendar.MONTH)+1;
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             calendarDay = CalendarDay.from(year,month,day);
             assignmentDaysList.add(calendarDay);
@@ -319,9 +319,10 @@ public class CalendarFragment extends Fragment{
         AddNewSchedule addFragment = AddNewSchedule.newInstance();
         Schedule schedule = (Schedule)event;
         addFragment.year = schedule.getDate().get(Calendar.YEAR);
-        addFragment.month = schedule.getDate().get(Calendar.MONTH);
+        addFragment.month = schedule.getDate().get(Calendar.MONTH)-1;
         addFragment.day = schedule.getDate().get(Calendar.DAY_OF_MONTH);
         addFragment.removeTarget = event;
+        addFragment.MOD=true;
         main.FragmentAdd(addFragment);
         adapter.notifyDataSetChanged();
         addTransparent();
