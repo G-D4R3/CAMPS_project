@@ -27,23 +27,38 @@
                 android:id="@+id/grade"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
                 android:fontFamily="@font/barun"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="학점 : "/>
 
             <TextView
                 android:id="@+id/grade_credit"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="15dp"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/barun"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:text="이수 : " />
+
+            <ImageButton
+                android:id="@+id/button2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="10dp"
+                android:background="#FFFFFF"
+                android:scaleType="fitCenter"
+                app:srcCompat="@mipmap/check" />
+
+
+
+
 
         </LinearLayout>
 

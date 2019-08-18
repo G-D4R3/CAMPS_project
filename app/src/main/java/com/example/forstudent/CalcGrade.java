@@ -18,7 +18,6 @@ public class CalcGrade{
 
     public void Calculate(){
         for(Grade tmp : data){
-            totalCredit += tmp.credit;
             grade += (tmp.grade * tmp.credit);
         }
         grade = grade / totalCredit;

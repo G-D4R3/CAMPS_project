@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -68,6 +69,16 @@ public class ExamFragment extends Fragment{
         main.invalidateOptionsMenu();
         //listvieww
         load.run();
+
+        /****없앨거임****/
+        Button calc = (Button)view.findViewById(R.id.button);
+        calc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CalcGradeFragment add = new CalcGradeFragment();
+                main.FragmentAdd(add);
+            }
+        });
 
 
 
