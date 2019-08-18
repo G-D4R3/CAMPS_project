@@ -76,6 +76,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public Menu menu;
     public Toolbar toolbar;
     public BottomNavigationView navBar;
+    public String schoolName;
     //for storage
     ArrayList<Assignment> assignment = new ArrayList<>();
     ArrayList<Assignment> important = new ArrayList<>();

@@ -38,7 +38,7 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
     Button testbutton;
     double latitude;
     double longitude;
-    String schoolName = "";
+    String schoolName;
     private String m_Text = "";
 
     @Override
@@ -54,12 +54,10 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
     @Override
     public void onStart() {
         super.onStart();
+        MainActivity main = (MainActivity)getActivity();
         testbutton = (Button)getView().findViewById(R.id.testbutton);
-        schoolNameDialog();
-
-
-
-
+        schoolName= main.schoolName;
+        System.out.println(schoolName);
 
 
         List<Address> addressList = null;
@@ -85,38 +83,13 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(SCHOOL);
+        System.out.println(SCHOOL.toString());
         markerOptions.title(schoolName);
-        //markerOptions.snippet("한국의 수도");
         mMap.addMarker(markerOptions);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(SCHOOL));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SCHOOL,17));
+
 
     }
-    public void schoolNameDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("학교 이름을 입력해주세요");
 
-// Set up the input
-        final EditText input = new EditText(getContext());
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(input);
-
-// Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
 }

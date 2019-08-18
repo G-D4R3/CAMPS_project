@@ -1,7 +1,10 @@
 package com.example.forstudent;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -356,8 +360,10 @@ public class HomeFragment extends Fragment {
             return true;
         }
         else if(id == R.id.school_map){
-
-            main.FragmentAdd(main.schoolMap);
+            if(main.schoolName == null)
+                schoolNameDialog();
+            else
+                main.FragmentAdd(main.schoolMap);
             return true;
         }
 
@@ -370,6 +376,34 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.menu_home,menu);
     }
 
+    public void schoolNameDialog(){
+        MainActivity main = (MainActivity)getActivity();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("학교 이름을 입력해주세요");
 
+// Set up the input
+        final EditText input = new EditText(getContext());
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                main.schoolName = input.getText().toString();
+                main.FragmentAdd(main.schoolMap);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+
+            }
+        });
+
+        builder.show();
+    }
 
 }
