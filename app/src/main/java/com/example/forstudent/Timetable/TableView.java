@@ -11,7 +11,7 @@ import android.widget.TableLayout;
 import com.example.forstudent.R;
 import com.github.tlaabs.timetableview.TimetableView;
 
-public class TableView extends TimetableView {
+/* public class TableView extends TimetableView {
     private static final int DEFAULT_HEADER_HIGHLIGHT_FONT_SIZE_DP = 15;
     TableLayout tableHeader;
     private Context context;
@@ -35,4 +35,4 @@ public class TableView extends TimetableView {
     }
 
 
-}
+}*/
