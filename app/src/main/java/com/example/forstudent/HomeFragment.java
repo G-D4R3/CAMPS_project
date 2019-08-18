@@ -349,7 +349,8 @@ public class HomeFragment extends Fragment {
         int id = item.getItemId();
         MainActivity main = (MainActivity)getActivity();
         if (id == R.id.setting_icon) {
-            main.FragmentAdd(main.homeFragmentSetup);
+            main.FragmentAdd(main.schoolMap);
+            //main.FragmentAdd(main.homeFragmentSetup);
             main.homeFragment.layoutset = main.homeFragmentSetup.select;
             main.homeFragment.setListView();
             return true;

@@ -12,6 +12,11 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden">
 
+        <meta-data
+
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyACJZAr20RuJZWi2yEa0odXZP20HthKbVc" />
+
         <activity android:name=".LoadingMain"
             android:theme="@style/SplashTheme">
             <intent-filter>

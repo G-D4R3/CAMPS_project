@@ -71,6 +71,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public addNewExamSub addnewExamsub = new addNewExamSub();
     public AddNewAssignment addNewAssignment = new AddNewAssignment();
     public HomeFragmentSetup homeFragmentSetup = new HomeFragmentSetup();
+    public SchoolMap schoolMap = new SchoolMap();
     public ActionBar actionBar;
     public Menu menu;
     public Toolbar toolbar;
