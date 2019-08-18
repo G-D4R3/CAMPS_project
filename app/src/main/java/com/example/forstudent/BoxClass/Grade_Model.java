@@ -14,6 +14,7 @@ public class Grade_Model {
     double grade;
 
     public Grade_Model(long id,String name, int credit, double grade){
+        this.id = id;
         this.name = name;
         this.credit = credit;
         this.grade = grade;
