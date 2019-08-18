@@ -7,481 +7,492 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/listview_border">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/listview_border">
+
+                <TextView
+                    android:id="@+id/grade"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/barun"
+                    android:textSize="18sp"
+                    android:text="학점 : "/>
+
+                <TextView
+                    android:id="@+id/grade_credit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/barun"
+                    android:textSize="18sp"
+                    android:text="이수 : " />
+
+                <ImageButton
+                    android:id="@+id/button2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:layout_marginRight="10dp"
+                    android:background="#FFFFFF"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@mipmap/check" />
+
+
+
+
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/grade_radio"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:background="@drawable/listview_border">
+
+                <RadioButton
+                    android:id="@+id/radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="4.3" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="4.5" />
+            </RadioGroup>
+
+
+            <TableLayout
+                android:id="@+id/grade_table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:stretchColumns="2">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/barun"
+                        android:text="학점" />
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/barun"
+                        android:layout_weight="1"
+                        android:text="이수" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/barun"
+                        android:text="과목" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+
+                    <EditText
+                        android:id="@+id/grade_grade1"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub1"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade2"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub2"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade3"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub3"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade4"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub4"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade5"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub5"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade6"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub6"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade7"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub7"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner8"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade8"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:inputType="numberDecimal"
+                        android:text="0"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/grade_sub8"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade9"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub9"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+
+                    <Spinner
+                        android:id="@+id/grade_spinner10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/grades45"/>
+
+                    <EditText
+                        android:id="@+id/grade_grade10"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp"/>
+
+                    <EditText
+                        android:id="@+id/grade_sub10"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:fontFamily="@font/barun"
+                        android:textSize="18sp"/>
+
+                </TableRow>
+
+
+            </TableLayout>
 
             <TextView
-                android:id="@+id/grade"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
+                android:id="@+id/grade_add"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:fontFamily="@font/barun"
+                android:layout_margin="10dp"
                 android:textSize="18sp"
-                android:text="학점 : "/>
-
-            <TextView
-                android:id="@+id/grade_credit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="15dp"
-                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/barun"
-                android:textSize="18sp"
-                android:text="이수 : " />
-
-            <ImageButton
-                android:id="@+id/button2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:layout_marginRight="10dp"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"
-                app:srcCompat="@mipmap/check" />
-
-
-
+                android:text="+ 과목 추가하기"
+                android:visibility="invisible"/>
 
 
         </LinearLayout>
 
-        <RadioGroup
-            android:id="@+id/grade_radio"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:background="@drawable/listview_border">
 
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="15dp"
-                android:layout_gravity="center_vertical"
-                android:text="4.3" />
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:text="4.5" />
-        </RadioGroup>
-
-
-        <TableLayout
-            android:id="@+id/grade_table"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:stretchColumns="2">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="40dp">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barun"
-                    android:text="학점" />
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/barun"
-                    android:layout_weight="1"
-                    android:text="이수" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:layout_weight="2"
-                    android:fontFamily="@font/barun"
-                    android:text="과목" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-
-                <EditText
-                    android:id="@+id/grade_grade1"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub1"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade2"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub2"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade3"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub3"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade4"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub4"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner5"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade5"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub5"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner6"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade6"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub6"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner7"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade7"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub7"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade8"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:inputType="numberDecimal"
-                    android:text="0"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/grade_sub8"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade9"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub9"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-
-
-                <Spinner
-                    android:id="@+id/grade_spinner10"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/grades45"/>
-
-                <EditText
-                    android:id="@+id/grade_grade10"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_horizontal"
-                    android:text="0"
-                    android:textSize="18sp"/>
-
-                <EditText
-                    android:id="@+id/grade_sub10"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:fontFamily="@font/barun"
-                    android:textSize="18sp"/>
-
-            </TableRow>
-
-
-        </TableLayout>
-
-        <TextView
-            android:id="@+id/grade_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="18sp"
-            android:fontFamily="@font/barun"
-            android:text="+ 과목 추가하기"
-            android:visibility="invisible"/>
-
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

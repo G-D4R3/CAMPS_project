@@ -145,6 +145,7 @@ public class CalcGradeFragment extends Fragment {
 
     public void calc45(){
         int totalcredit=0;
+        int ptotalcredit=0;
         data = new ArrayList<>();
         for(int i=0; i<credits.length; i++){
             double credit = (double)Double.parseDouble(credits[i].getText().toString());
@@ -152,9 +153,12 @@ public class CalcGradeFragment extends Fragment {
             System.out.println(grade);
             String subject = subjects[i].getText().toString();
             if(credit==0) break;
-            if(grade==-1) break;
-            Grade g = new Grade(subject, grade, credit);
+            if(grade==-1) {
+                ptotalcredit+= (int)credit;
+                break;
+            }
             totalcredit += (int)credit;
+            Grade g = new Grade(subject, grade, credit);
             data.add(g);
         }
         if(totalcredit==0) return;
@@ -162,7 +166,7 @@ public class CalcGradeFragment extends Fragment {
         calcGrade.totalCredit = totalcredit;
         calcGrade.Calculate();
         mGrade.setText(String.format("학점 : %.2f",calcGrade.grade));
-        mCredit.setText("이수 : "+totalcredit);
+        mCredit.setText(String.format("이수 : %d",totalcredit+ptotalcredit));
 
     }
 
