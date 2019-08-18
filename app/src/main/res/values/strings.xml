@@ -23,7 +23,7 @@
         <item >금</item>
     </string-array>
 
-    <string-array name="grades">
+    <string-array name="grades43">
         <item >A+</item>
         <item >A0</item>
         <item >A-</item>
@@ -36,6 +36,19 @@
         <item >D+</item>
         <item >D0</item>
         <item >D-</item>
+        <item >F</item>
+        <item >P</item>
+    </string-array>
+
+    <string-array name="grades45">
+        <item >A+</item>
+        <item >A0</item>
+        <item >B+</item>
+        <item >B0</item>
+        <item >C+</item>
+        <item >C0</item>
+        <item >D+</item>
+        <item >D0</item>
         <item >F</item>
         <item >P</item>
     </string-array>
