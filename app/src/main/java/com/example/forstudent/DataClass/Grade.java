@@ -2,17 +2,18 @@ package com.example.forstudent.DataClass;
 
 public class Grade {
     public String subject;
+    public int credit;
     public double grade;
-    public double credit;
 
     public Grade(){
 
     }
 
-    public Grade(String sub, double grade, double credit){
+    public Grade(String sub, int credit, double grade){
         this.subject = sub;
-        this.grade = grade;
         this.credit = credit;
+
+        this.grade = grade;
     }
 
     public void setSubject(String sub){
@@ -23,7 +24,7 @@ public class Grade {
         this.grade = grade;
     }
 
-    public void setCredit(double credit){
+    public void setCredit(int credit){
         this.credit = credit;
     }
 
@@ -31,7 +32,7 @@ public class Grade {
         return subject;
     }
 
-    public double getCredit() {
+    public int getCredit() {
         return credit;
     }
 

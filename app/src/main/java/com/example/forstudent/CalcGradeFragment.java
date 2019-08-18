@@ -1,5 +1,6 @@
 package com.example.forstudent;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.BoxHelperClass.GradeHelper;
 import com.example.forstudent.DataClass.Grade;
 
 import java.util.ArrayList;
@@ -39,12 +41,22 @@ public class CalcGradeFragment extends Fragment {
     View view;
     CalcGrade calcGrade;
     MainActivity main;
-    boolean radio; //true = 4.5, false 4.3
+    int radio;
+    loadData load;
+    saveData save;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        main  = (MainActivity)getActivity();
+        radio = main.getUser().getCalcGradeCheck();
+        load = new loadData();
+        save = new saveData();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        main  = (MainActivity)getActivity();
     }
 
     @Nullable
@@ -66,13 +78,13 @@ public class CalcGradeFragment extends Fragment {
                     case R.id.radioButton:
                         for(int i=0; i<10; i++){
                             spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner43));
-                            radio = false;
+                            radio = R.id.radioButton;
                         }
                         break;
                     case R.id.radioButton2:
                         for(int i=0; i<10; i++){
                             spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner45));
-                            radio = true;
+                            radio = R.id.radioButton2;
                         }
                 }
             }
@@ -116,18 +128,20 @@ public class CalcGradeFragment extends Fragment {
         subjects[8] = view.findViewById(R.id.grade_sub9);
         subjects[9] = view.findViewById(R.id.grade_sub10);
 
+        load.run();
         ImageButton calcnow = (ImageButton)view.findViewById(R.id.button2);
 
         calcnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-                if(radio==true){
+                if(radio==R.id.radioButton2){
                     calc45();
                 }
                 else{
                     calc43();
                 }
+                save.run();
             }
         });
 
@@ -140,17 +154,16 @@ public class CalcGradeFragment extends Fragment {
         int ptotalcredit=0;
         data = new ArrayList<>();
         for(int i=0; i<credits.length; i++){
-            double credit = (double)Double.parseDouble(credits[i].getText().toString());
+            int credit = Integer.parseInt(credits[i].getText().toString());
             double grade = toDouble45(spinners[i].getSelectedItem().toString());
-            System.out.println(grade);
             String subject = subjects[i].getText().toString();
             if(credit==0) continue;
             if(grade==-1) {
-                ptotalcredit+= (int)credit;
+                ptotalcredit+= credit;
                 continue;
             }
-            totalcredit += (int)credit;
-            Grade g = new Grade(subject, grade, credit);
+            totalcredit += credit;
+            Grade g = new Grade(subject, credit, grade);
             data.add(g);
         }
         if(totalcredit==0) return;
@@ -193,17 +206,16 @@ public class CalcGradeFragment extends Fragment {
         int ptotalcredit=0;
         data = new ArrayList<>();
         for(int i=0; i<credits.length; i++){
-            double credit = (double)Double.parseDouble(credits[i].getText().toString());
+            int credit = Integer.parseInt(credits[i].getText().toString());
             double grade = toDouble43(spinners[i].getSelectedItem().toString());
-            System.out.println(grade);
             String subject = subjects[i].getText().toString();
-            if(credit==0) break;
+            if(credit==0) continue;
             if(grade==-1) {
                 ptotalcredit+= (int)credit;
-                break;
+                continue;
             }
             totalcredit += (int)credit;
-            Grade g = new Grade(subject, grade, credit);
+            Grade g = new Grade(subject, credit, grade);
             data.add(g);
         }
         if(totalcredit==0) return;
@@ -252,5 +264,135 @@ public class CalcGradeFragment extends Fragment {
     public void hidekeyboard(){
 
     }
+
+    public class loadData extends Thread{
+        public loadData(){
+
+        }
+
+        public void run(){
+            data =  main.grades;
+            mMethod.check(radio);
+            switch (radio){
+                case R.id.radioButton:
+                    for(int i=0; i<10; i++){
+                        spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner43));
+                    }
+                    break;
+                case R.id.radioButton2:
+                    for(int i=0; i<10; i++){
+                        spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner45));
+                    }
+            }
+
+            for(int i=0; i<data.size(); i++){
+                if(radio==R.id.radioButton){
+                    spinners[i].setSelection(setSelect43(data.get(i)));
+                    String credit = Integer.toString(data.get(i).credit);
+                    credits[i].setText(credit);
+                    subjects[i].setText(data.get(i).subject);
+                }
+                else{
+                    spinners[i].setSelection(setSelect45(data.get(i)));
+                    String credit = Integer.toString(data.get(i).credit);
+                    credits[i].setText(credit);
+                    subjects[i].setText(data.get(i).subject);
+                }
+            }
+        }
+
+        private int setSelect45(Grade g) {
+            if(g.grade==4.5){
+                return 0;
+            }
+            else if(g.grade==4.0){
+                return 1;
+            }
+            else if(g.grade==3.5){
+                return 2;
+            }
+            else if(g.grade==3.0){
+                return 4;
+            }
+            else if(g.grade==2.5){
+                return 5;
+            }
+            else if(g.grade==2.0){
+                return 6;
+            }
+            else if(g.grade==1.5){
+                return 7;
+            }
+            else if(g.grade==1.0){
+                return 8;
+            }
+            else if(g.grade==-1){
+                return 9;
+            }
+            return 0;
+        }
+
+        public int setSelect43(Grade g){
+            if(g.grade==4.3){
+                return 0;
+            }
+            else if(g.grade==4.0){
+                return 1;
+            }
+            else if(g.grade==3.7){
+                return 2;
+            }
+            else if(g.grade==3.3){
+                return 4;
+            }
+            else if(g.grade==3.0){
+                return 5;
+            }
+            else if(g.grade==2.7){
+                return 6;
+            }
+            else if(g.grade==2.3){
+                return 7;
+            }
+            else if(g.grade==2.0){
+                return 8;
+            }
+            else if(g.grade==1.7){
+                return 9;
+            }
+            else if(g.grade==1.3){
+                return 10;
+            }
+            else if(g.grade==1.0){
+                return 11;
+            }
+            else if(g.grade==0.7){
+                return 12;
+            }
+            else if(g.grade==0){
+                return 13;
+            }
+            return 0;
+        }
+
+
+    }
+
+    public class saveData extends Thread{
+        public saveData(){
+
+        }
+
+        public void run(){
+            main.getGradeBox().removeAll();
+            for(int i=0; i<data.size(); i++){
+                GradeHelper gradeHelper = new GradeHelper((long)i+1, data.get(i).getSubject(),data.get(i).getCredit(),data.get(i).getGrade());
+                GradeHelper.putGrade(gradeHelper);
+            }
+            main.getUser().setCalcGradeCheck(radio);
+        }
+    }
+
+
 
 }

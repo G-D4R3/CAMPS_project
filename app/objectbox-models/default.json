@@ -181,7 +181,7 @@
     },
     {
       "id": "5:5322398851059366871",
-      "lastPropertyId": "9:5760294227776066219",
+      "lastPropertyId": "10:8827715746114767999",
       "name": "UserData",
       "properties": [
         {
@@ -220,12 +220,40 @@
         {
           "id": "9:5760294227776066219",
           "name": "homeAssignementViewCheck"
+        },
+        {
+          "id": "10:8827715746114767999",
+          "name": "calcGradeCheck"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:1203137725882643405",
+      "lastPropertyId": "4:7100937305700122246",
+      "name": "Grade_Model",
+      "properties": [
+        {
+          "id": "1:4511366884849526446",
+          "name": "id"
+        },
+        {
+          "id": "2:2397355219268538428",
+          "name": "name"
+        },
+        {
+          "id": "3:8458432708919049673",
+          "name": "credit"
+        },
+        {
+          "id": "4:7100937305700122246",
+          "name": "grade"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "5:5322398851059366871",
+  "lastEntityId": "6:1203137725882643405",
   "lastIndexId": "1:8122387358516719236",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

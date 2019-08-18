@@ -35,12 +35,13 @@ public class UserData {
     boolean homeAssignmentCheck;
     boolean homeExamCheck;
     int homeAssignementViewCheck;
+    int calcGradeCheck;
 
     public UserData(){
 
     }
     //생성자에 모든 요소들을 넣어줘야함. 당장 쓰지 않더라도 디폴트 값이라도 넣어줄 것.
-    public UserData(long id,String name,Date lastDay,int hello, boolean b0, boolean b1, boolean b2, boolean b3, int aCheck){
+    public UserData(long id,String name,Date lastDay,int hello, boolean b0, boolean b1, boolean b2, boolean b3, int aCheck, int cCheck){
         this.id = id;
         this.name = name;
         this.lastDay = lastDay;
@@ -50,13 +51,16 @@ public class UserData {
         this.homeExamCheck=b2;
         this.homeScheduleCheck=b3;
         this.homeAssignementViewCheck = aCheck;
+        this.calcGradeCheck = cCheck;
     }
     public void setName(String name){
         this.name = name;
     }
+
     public String getName(){
         return name;
     }
+
     public void setLastDay(Date lastDay){
         this.lastDay = lastDay;
     }
@@ -105,5 +109,13 @@ public class UserData {
 
     public int getHomeAssignmentViewCheck(){
         return this.homeAssignementViewCheck;
+    }
+
+    public void setCalcGradeCheck(int calcGradeCheck) {
+        this.calcGradeCheck = calcGradeCheck;
+    }
+
+    public int getCalcGradeCheck() {
+        return calcGradeCheck;
     }
 }

@@ -24,12 +24,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.forstudent.BoxClass.Assignment_Model;
+import com.example.forstudent.BoxClass.Grade_Model;
 import com.example.forstudent.BoxClass.Schedule_Model;
 import com.example.forstudent.BoxClass.TestSub_Model;
 import com.example.forstudent.BoxHelperClass.AssignmentHelper;
+import com.example.forstudent.BoxHelperClass.GradeHelper;
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
 import com.example.forstudent.BoxHelperClass.TestSubHelper;
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.Grade;
 import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -51,12 +54,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private Box<Assignment_Model> assignmentBox;
     private Box<TestSub_Model> testBox;
     private Box<Schedule_Model> scheduleBox;
+    private Box<Grade_Model> gradeBox;
 
     //박스에 들어갈 객체 선언
     private UserData user;
     private Assignment_Model assignment_model;
     private TestSub_Model testSub_model;
     private Schedule_Model schedule_model;
+    private Grade_Model grade_model;
 
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
@@ -75,6 +80,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<Assignment> important = new ArrayList<>();
     ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
+    ArrayList<Grade> grades = new ArrayList<>();
     TextView centerToolbarTitle;
     // 각 fragment 마다 툴바의 버튼 상태를 저장
     ArrayList<String> toolbarButtonState;
@@ -126,12 +132,13 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         assignmentBox = ObjectBox.get().boxFor(Assignment_Model.class);
         testBox = ObjectBox.get().boxFor(TestSub_Model.class);
         scheduleBox = ObjectBox.get().boxFor(Schedule_Model.class);
+        gradeBox = ObjectBox.get().boxFor(Grade_Model.class);
 
         //test 유저 처음 저장 작업 (처음실행용)
         if(userDataBox.isEmpty()) {
 
             //user 생성
-            user = new UserData(id, "DEFAULT", new Date(), 99, true, true,  true,  true, R.id.viewAllAssign);
+            user = new UserData(id, "DEFAULT", new Date(), 99, true, true,  true,  true, R.id.viewAllAssign, R.id.radioButton2);
             //박스에 user 객체 저장
             userDataBox.put(user);
 
@@ -165,6 +172,11 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //Exam data load
         for(long i=1; i<=testBox.count(); i++){
             testSub.add(TestSubHelper.getTestSub(i));
+        }
+
+        //Grade data load
+        for(long i=1; i<=gradeBox.count(); i++){
+            grades.add(GradeHelper.getGrade(i));
         }
 
 
@@ -323,6 +335,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return testSub_model;
     }
 
+    public Box<Grade_Model> getGradeBox() {
+        return gradeBox;
+    }
+
+    public Grade_Model getGrade(){
+        return grade_model;
+    }
+
     private void setActionbarTextColor(Toolbar actBar, int color) {
 
         String title = actBar.getTitle().toString();
@@ -346,6 +366,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public static MainActivity getInstance() {
         return instance;
     }
+
 
 
 /*
