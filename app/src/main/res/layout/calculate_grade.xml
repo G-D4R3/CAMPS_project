@@ -146,8 +146,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
 
                     <EditText
@@ -180,8 +179,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner2"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade2"
@@ -213,8 +211,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner3"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade3"
@@ -247,8 +244,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner4"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade4"
@@ -281,8 +277,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner5"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade5"
@@ -315,8 +310,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner6"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade6"
@@ -349,8 +343,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner7"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade7"
@@ -383,8 +376,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner8"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade8"
@@ -417,8 +409,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner9"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade9"
@@ -451,8 +442,7 @@
                     <Spinner
                         android:id="@+id/grade_spinner10"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:entries="@array/grades45"/>
+                        android:layout_height="match_parent"/>
 
                     <EditText
                         android:id="@+id/grade_grade10"
