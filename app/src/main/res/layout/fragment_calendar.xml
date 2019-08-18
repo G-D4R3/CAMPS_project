@@ -17,20 +17,19 @@
 
             android:layout_height="match_parent"
 
-            android:orientation="vertical"
+            android:background="#FFFFFF"
 
+            android:orientation="vertical"
             android:padding="16dp">
 
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/calendarView"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:mcv_showOtherDates="all"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
                 app:mcv_selectionColor="@color/colorPrimaryDark"
-                />
-
+                app:mcv_showOtherDates="all" />
 
 
             <LinearLayout
@@ -50,46 +49,46 @@
                     android:text="일정이 없습니다."
                     android:textSize="18sp" />
 
-                
+
                 <TextView
                     android:id="@+id/calendar_as_ex"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="18sp"
-                    android:gravity="center_vertical"
                     android:fontFamily="@font/barun"
-                    android:text="과제 / 시험"/>
+                    android:gravity="center_vertical"
+                    android:text="과제 / 시험"
+                    android:textSize="18sp" />
 
                 <ListView
                     android:id="@+id/upperCalendarListView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:divider="#FFFFFF"
-                    android:dividerHeight="2dp"
-                    android:layout_weight="1"/>
+                    android:dividerHeight="2dp" />
 
                 <TextView
                     android:id="@+id/calendar_sche"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="18sp"
-                    android:gravity="center_vertical"
                     android:fontFamily="@font/barun"
-                    android:text="일정"/>
+                    android:gravity="center_vertical"
+                    android:text="일정"
+                    android:textSize="18sp" />
 
                 <ListView
                     android:id="@+id/lowerCalendarListView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:divider="#FFFFFF"
-                    android:dividerHeight="2dp"
-                    android:layout_weight="1">
+                    android:dividerHeight="2dp">
 
                 </ListView>
 

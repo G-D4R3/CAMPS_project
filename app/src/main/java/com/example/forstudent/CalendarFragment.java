@@ -91,7 +91,8 @@ public class CalendarFragment extends Fragment{
         mUheader = view.findViewById(R.id.calendar_as_ex);
         mLheader  = view.findViewById(R.id.calendar_sche);
         calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
-        main.setActionBarTitle("캘린더");
+        main.setActionBarTitle("");
+        main.centerToolbarTitle.setText("캘린더");
         main.invalidateOptionsMenu();
         toolbarButtonState.add("CHECK");
         main.toolbarButtonState=toolbarButtonState;
@@ -372,13 +373,7 @@ public class CalendarFragment extends Fragment{
             mNoschedule.setVisibility(View.GONE);
         }
     }
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        main.centerToolbarTitle.setText("");
-
-    }
     private class saveData extends Thread{
         public saveData(){
 

@@ -63,8 +63,8 @@ public class ExamFragment extends Fragment{
 
         count = new DateCount();
 
-        main.setActionBarTitle("시험");
-
+        main.setActionBarTitle("");
+        main.centerToolbarTitle.setText("시험");
         main.invalidateOptionsMenu();
         //listvieww
         load.run();
@@ -173,13 +173,6 @@ public class ExamFragment extends Fragment{
     public void onStop() {
         super.onStop();
         save.run();
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        main.centerToolbarTitle.setText("");
-
     }
 
 

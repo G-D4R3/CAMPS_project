@@ -11,6 +11,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
@@ -68,6 +69,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public ActionBar actionBar;
     public Menu menu;
     public Toolbar toolbar;
+    public BottomNavigationView navBar;
     //for storage
     ArrayList<Assignment> assignment = new ArrayList<>();
     ArrayList<Assignment> important = new ArrayList<>();
@@ -98,6 +100,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //toolbarButtonState.add("SETTING_INVISIBLE");
         //
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        navBar = (BottomNavigationView)findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
         actionBar= getSupportActionBar();
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -279,6 +282,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
+        navBar.setVisibility(View.GONE);
         transaction.commit();
     }
 
@@ -288,6 +292,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         fragmentManager.popBackStack();
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        navBar.setVisibility(View.VISIBLE);
         transaction.commit();
 
     }
