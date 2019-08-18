@@ -42,7 +42,8 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timetable, container, false);
         MainActivity main = (MainActivity)getActivity();
-        main.setActionBarTitle("시간표");
+        main.setActionBarTitle("");
+        main.centerToolbarTitle.setText("시간표");
 
         init(view);
         return view;

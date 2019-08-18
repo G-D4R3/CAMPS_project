@@ -71,10 +71,10 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ListViewSetter listViewSetter = new ListViewSetter();
         MainActivity main = (MainActivity)getActivity();
-        main.setActionBarTitle("홈");
+        //main.setActionBarTitle("홈");
         main.invalidateOptionsMenu();
 
-
+        main.centerToolbarTitle.setText("홈");
 
 
         //main.toolbarButtonState.remove("SETTING_INVISIBLE");

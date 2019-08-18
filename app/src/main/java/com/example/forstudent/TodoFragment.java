@@ -70,7 +70,8 @@ public class TodoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view  = inflater.inflate(R.layout.fragment_todo, container, false);
-        main.setActionBarTitle("과제");
+        main.setActionBarTitle("");
+        main.centerToolbarTitle.setText("과제");
         mTitle = (TextView)view.findViewById(R.id.restDo);
         mlistView = (ListView)view.findViewById(R.id.assignmentList);
         mImportant = (ListView)view.findViewById(R.id.importantAssignment);
@@ -413,11 +414,5 @@ public class TodoFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        main.centerToolbarTitle.setText("");
-
-    }
 }
