@@ -58,6 +58,7 @@ public class CalcGradeFragment extends Fragment {
         mMethod = (RadioGroup)view.findViewById(R.id.grade_radio);
         InputMethodManager imm = main.keypad;
 
+
         mMethod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
