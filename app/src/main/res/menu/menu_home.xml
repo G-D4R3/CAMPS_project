@@ -7,6 +7,10 @@
         android:icon="@mipmap/setting"
         android:title="setting_selections"
         app:showAsAction="always" />
-
+    <item
+        android:id="@+id/school_map"
+        android:icon="@mipmap/add_icon"
+        android:title="school_map_selections"
+        app:showAsAction="always" />
 
 </menu>
