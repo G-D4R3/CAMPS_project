@@ -7,18 +7,24 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <!--
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -50,49 +56,48 @@
 
         </LinearLayout>
 -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="8dp"
-            android:background="#505050"
-            android:baselineAligned="false" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="8dp"
+                android:background="#505050"
+                android:baselineAligned="false" />
 
-        <TextView
-            android:id="@+id/layoutset"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:fontFamily="@font/barun"
-            android:gravity="center_vertical"
-            android:text="홈 화면 구성"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/layoutset"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/barun"
+                android:gravity="center_vertical"
+                android:text="홈 화면 구성"
+                android:textSize="20sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#505050" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#505050" />
 
-        <TextView
-            android:id="@+id/setup_assignment"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/barun"
-            android:text="과제"
-            android:textSize="20sp" />
-
+            <TextView
+                android:id="@+id/setup_assignment"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/barun"
+                android:text="과제"
+                android:textSize="20sp" />
 
 
             <RadioGroup
                 android:id="@+id/AssignmentView"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:orientation="horizontal"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/ImpOnly"
@@ -114,10 +119,12 @@
                     android:textColor="#505050"
                     android:textSize="16sp" />
             </RadioGroup>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#505050"/>
 
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#505050" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

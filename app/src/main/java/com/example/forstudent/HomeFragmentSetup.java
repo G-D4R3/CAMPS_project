@@ -26,6 +26,7 @@ public class HomeFragmentSetup extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -37,7 +38,18 @@ public class HomeFragmentSetup extends Fragment {
         TextView mLayout = (TextView)view.findViewById(R.id.layoutset);
         MainActivity main = (MainActivity)getActivity();
         main.BACK_STACK=true;
+        main.toolbar.setTitle("");
+        //main.getSupportActionBar().setTitle("설정");
+        main.centerToolbarTitle.setText("설정");
 
+        main.invalidateOptionsMenu();
+
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.FragmentRemove(HomeFragmentSetup.this);
+            }
+        });
 
 
 
@@ -50,18 +62,6 @@ public class HomeFragmentSetup extends Fragment {
 
         mAssignmentView.check(assignmentViewCheck);
 
-        main.toolbar.setTitle("");
-        main.getSupportActionBar().setTitle("DSGDGS");
-        main.centerToolbarTitle.setText("설정");
-
-        main.invalidateOptionsMenu();
-
-        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                main.FragmentRemove(HomeFragmentSetup.this);
-            }
-        });
 
 /*
 
@@ -148,7 +148,7 @@ public class HomeFragmentSetup extends Fragment {
     public void onResume() {
         super.onResume();
         MainActivity main = (MainActivity)getActivity();
-        main.centerToolbarTitle.setText("");
+        //main.centerToolbarTitle.setText("");
 
     }
     @Override

@@ -13,14 +13,18 @@
         android:layout_height="wrap_content"
         android:background="#fff"
         >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/toolbar_title"
-        android:textSize="20sp"
-        android:fontFamily="@font/barun"
-        />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/barun"
+            android:textSize="24sp"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="206dp"
+            tools:layout_editor_absoluteY="15dp"
+            tools:visibility="visible" />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
