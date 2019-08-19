@@ -360,7 +360,7 @@ public class HomeFragment extends Fragment {
             return true;
         }
         else if(id == R.id.school_map){
-            if(main.schoolName == null)
+            if(main.getUser().name.equals("DEFAULT"))
                 schoolNameDialog();
             else
                 main.FragmentAdd(main.schoolMap);
@@ -391,7 +391,8 @@ public class HomeFragment extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                main.schoolName = input.getText().toString();
+                main.getUser().name = input.getText().toString();
+                main.getUserDataBox().put(main.getUser());
                 main.FragmentAdd(main.schoolMap);
             }
         });

@@ -8,6 +8,8 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,9 +58,17 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
         super.onStart();
         MainActivity main = (MainActivity)getActivity();
         testbutton = (Button)getView().findViewById(R.id.testbutton);
-        schoolName= main.schoolName;
+        schoolName= main.getUser().name;
         System.out.println(schoolName);
-
+        main.centerToolbarTitle.setText("학교 지도");
+        main.toolbar.setTitle("");
+        main.invalidateOptionsMenu();
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.FragmentRemove(SchoolMap.this);
+            }
+        });
 
         List<Address> addressList = null;
         try {
@@ -90,6 +100,11 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SCHOOL,17));
 
 
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_assignment,menu);
     }
 
 }

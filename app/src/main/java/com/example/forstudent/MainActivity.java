@@ -151,13 +151,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             System.out.println("DAY "+user.lastDay);
         }
 
+        /*
         if(userDataBox.get(id).getName().equals("DEFAULT")){
             System.out.println("Change Name");
             //디폴트인 경우 이름 바꿈, 텍스트박스안 텍스트를 받아오거나 하는 경우로 사용하면됨.
             user.setName("JIYOUNG");
             userDataBox.put(user);
 
-        }
+        }*/
 
         this.loadData(user);
         //schedule data load
