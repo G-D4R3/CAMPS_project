@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.forstudent" >
+    package="com.example.forstudent">
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="false"
@@ -10,25 +11,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="stateAlwaysHidden">
+        android:windowSoftInputMode="stateAlwaysHidden"
+        tools:ignore="GoogleAppIndexingWarning">
+        <service
+            android:name=".PushService"
+            android:enabled="true"
+            android:exported="true"></service>
+
 
         <meta-data
-
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyACJZAr20RuJZWi2yEa0odXZP20HthKbVc" />
 
-        <activity android:name=".LoadingMain"
+        <activity
+            android:name=".LoadingMain"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity android:name=".EditActivity"></activity>
+            android:label="@string/app_name" />
+        <activity android:name=".EditActivity" />
+
+        <service android:name=".FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

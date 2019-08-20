@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -64,10 +65,12 @@ public class HomeFragment extends Fragment {
     public HomeExamAdapter examAdapter;
     public HomeScheduleAdapter scheduleAdapter;
 
+    Button btnStart;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         user = ((MainActivity)getActivity()).getUser();
+
     }
 
     @Nullable

@@ -1,6 +1,10 @@
 package com.example.forstudent;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -14,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -100,12 +105,75 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     int day;
     Date lastDay;
 
+
+
+    NotificationManager notificationManager;
+
+    PendingIntent intent;
+
+
+
+
+
+
+
     final long id=77;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //toolbarButtonState.add("SETTING_INVISIBLE");
+
+        intent = PendingIntent.getActivity(this, 0, new Intent(getApplicationContext(), MainActivity.class),
+
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification.Builder builder = new Notification.Builder(this)
+
+                .setSmallIcon(R.drawable.ic_launcher_background) // 아이콘 설정하지 않으면 오류남
+
+                .setDefaults(Notification.DEFAULT_ALL)
+
+                .setContentTitle("알림 제목") // 제목 설정
+
+                .setContentText("알림 내용") // 내용 설정
+
+                .setTicker("한줄 출력") // 상태바에 표시될 한줄 출력
+
+                .setAutoCancel(true)
+
+                .setContentIntent(intent);
+
+        notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, builder.build());
+
+
+        Toast.makeText(getApplicationContext(),"Service 시작",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this,PushService.class);
+        startService(intent);
+
+
+
+
+
+
+
+        FirebaseInstanceIDService t = new FirebaseInstanceIDService();
+        String tok="";
+        t.onTokenRefresh();
+
+
+
+
+
+
+
+
+
+
+
+
         //
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navBar = (BottomNavigationView)findViewById(R.id.nav_view);
