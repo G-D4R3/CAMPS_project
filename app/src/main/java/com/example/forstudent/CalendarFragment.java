@@ -107,7 +107,11 @@ public class CalendarFragment extends Fragment{
         Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(main,99,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)main.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,100000,pendingIntent);
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(2019,8,21,0,25);
+        long time = calendar.getTimeInMillis();
+        System.out.println(time);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time+20000,pendingIntent);
 
         load.run();
 
