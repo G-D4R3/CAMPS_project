@@ -5,11 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -54,6 +52,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private TextView mTextMessage;
     public FragmentManager fragmentManager = getSupportFragmentManager();
 
+
+    /*****objectbox*****/
     //박스 선언은 여기에서 함. 유저정보, 시간표정보 등등 필요한 구성에 따라 나눌 예정
     private Box<UserData> userDataBox;
     private Box<Assignment_Model> assignmentBox;
@@ -68,6 +68,21 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private Schedule_Model schedule_model;
     private Grade_Model grade_model;
 
+    //for storage
+    ArrayList<Assignment> assignment = new ArrayList<>();
+    ArrayList<Assignment> important = new ArrayList<>();
+    ArrayList<TestSub> testSub = new ArrayList<>();
+    ArrayList<Schedule> schedules = new ArrayList<>();
+    ArrayList<Grade> grades = new ArrayList<>();
+
+    //store things
+    //dday count
+    int year;
+    int month;
+    int day;
+    Date lastDay;
+
+    /*****Fragment*****/
     public HomeFragment homeFragment= new HomeFragment();
     public TimetableFragment timetableFragment= new TimetableFragment();
     public CalendarFragment calendarFragment= new CalendarFragment();
@@ -77,38 +92,30 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public AddNewAssignment addNewAssignment = new AddNewAssignment();
     public HomeFragmentSetup homeFragmentSetup = new HomeFragmentSetup();
     public SchoolMap schoolMap = new SchoolMap();
+
+
+
+    /*****toolbar, navigation *****/
+
     public ActionBar actionBar;
     public Menu menu;
     public Toolbar toolbar;
     public BottomNavigationView navBar;
     public String schoolName;
-    //for storage
-    ArrayList<Assignment> assignment = new ArrayList<>();
-    ArrayList<Assignment> important = new ArrayList<>();
-    ArrayList<TestSub> testSub = new ArrayList<>();
-    ArrayList<Schedule> schedules = new ArrayList<>();
-    ArrayList<Grade> grades = new ArrayList<>();
+
     TextView centerToolbarTitle;
     // 각 fragment 마다 툴바의 버튼 상태를 저장
     ArrayList<String> toolbarButtonState;
 
+
+    /*****backpressed*****/
     InputMethodManager keypad;
     private long time=0;
-
     public  boolean BACK_STACK = false;
-
-
-    //store things
-    //dday count
-    int year;
-    int month;
-    int day;
-    Date lastDay;
 
 
 
     NotificationManager notificationManager;
-
     PendingIntent intent;
 
 
@@ -124,6 +131,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //toolbarButtonState.add("SETTING_INVISIBLE");
 
+
+        /**********notification*********/
         intent = PendingIntent.getActivity(this, 0, new Intent(getApplicationContext(), MainActivity.class),
 
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -156,21 +165,12 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-        //
+        /**********toolbar*********/
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navBar = (BottomNavigationView)findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
         actionBar= getSupportActionBar();
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
         actionBar.setDisplayShowTitleEnabled(false);
@@ -191,7 +191,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
 
-
+        /********objectbox*********/
         //박스를 가져오는 작업
         userDataBox = ObjectBox.get().boxFor(UserData.class);
         assignmentBox = ObjectBox.get().boxFor(Assignment_Model.class);
@@ -234,7 +234,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             assignment.add(AssignmentHelper.getAssignment(i));
         }
 
-
         //Exam data load
         for(long i=1; i<=testBox.count(); i++){
             testSub.add(TestSubHelper.getTestSub(i));
@@ -249,7 +248,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
 
-
+        /**********bottom navigation*********/
         //private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
           //      = new BottomNavigationView.OnNavigationItemSelectedListener() {
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -311,27 +310,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         super.onDestroy();
         ObjectBox.get().close();
 
-        //
-        //
-        //
-        //
-        // ObjectBox.boxStore.deleteAllFiles();
-        //
-        // saveData();
-
     }
 
-
-
-    //나중에 objectbox 구현하면 삭제해야할 부분
-    protected void saveData(){
-        SharedPreferences store = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = store.edit();
-        editor.putInt("D-dayYear", year);
-        editor.putInt("D-dayMonth", month);
-        editor.putInt("D-dayDay", day);
-
-    }
 
     //나중에 objectbox 구현하면 삭제해야할 부분
     protected void loadData(UserData user){
@@ -351,7 +331,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
 
-
+    /**********Fragment***********/
     public void FragmentAdd(Fragment fragment){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.popup,R.anim.slide_down,0,R.anim.slide_down);
@@ -374,17 +354,30 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         transaction.commit();
 
     }
+
+
+    /***********objectbox************/
+
+
+    /****user****/
     public Box getUserDataBox(){
         return userDataBox;
     }
-    public Box getScheduleBox(){return scheduleBox;}
+
     public void setLastDay(Date lastDay){
         this.lastDay = lastDay;
     }
+
     public UserData getUser(){
         return user;
     }
 
+
+    /****schedule****/
+    public Box getScheduleBox(){return scheduleBox;}
+
+
+    /****assignment****/
     public Box<Assignment_Model> getAssignmentBox() {
         return assignmentBox;
     }
@@ -393,6 +386,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return assignment_model;
     }
 
+
+    /****testsub****/
     public Box<TestSub_Model> getTestSubBox(){
         return testBox;
     }
@@ -401,6 +396,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return testSub_model;
     }
 
+    /****grade****/
     public Box<Grade_Model> getGradeBox() {
         return gradeBox;
     }
@@ -409,6 +405,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         return grade_model;
     }
 
+
+    /***********toolbar************/
     private void setActionbarTextColor(Toolbar actBar, int color) {
 
         String title = actBar.getTitle().toString();
@@ -422,9 +420,11 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         toolbar.setTitle(title);
         toolbar.setTitleTextColor(Color.BLACK);
     }
+
     public void hideActionBar(){
         actionBar.hide();
     }
+
     public void showActionBar(){
         actionBar.show();
     }
