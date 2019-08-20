@@ -19,6 +19,8 @@ public class AlarmService extends Service {
 
     }
 
+
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String year = intent.getStringExtra("year");
@@ -27,8 +29,6 @@ public class AlarmService extends Service {
         String hour = intent.getStringExtra("hour");
         String minute = intent.getStringExtra("minute");
         String memo = intent.getStringExtra("memo");
-
-        year = year.substring(2);
 
         Intent alarmIntent = new Intent(AlarmService.this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(AlarmService.this, 0, alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);

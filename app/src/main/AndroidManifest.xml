@@ -18,7 +18,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyACJZAr20RuJZWi2yEa0odXZP20HthKbVc" />
         <service
-            android:name=".PushService"
+            android:name=".AlarmService"
             android:enabled="true"
             android:exported="true"></service>
 
