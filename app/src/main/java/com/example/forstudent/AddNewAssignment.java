@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Assignment;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddNewAssignment extends Fragment {
@@ -64,18 +63,15 @@ public class AddNewAssignment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
         main.BACK_STACK=true;
 
-
         input = main.keypad;
 
         main.centerToolbarTitle.setText("과제 추가");
         main.toolbar.setTitle("");
-        main.invalidateOptionsMenu();
 
         main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hideKey();
-
                 main.FragmentRemove(AddNewAssignment.this);
             }
         });

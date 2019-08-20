@@ -30,29 +30,11 @@
             android:layout_marginHorizontal="10dp"
             android:gravity="center_vertical"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="50dp"
             android:textSize="24sp"
             android:fontFamily="@font/barun"
             android:textColor="@color/title_color"
             android:text="D-Day" />
-
-        <ImageButton
-            android:id="@+id/addSubject"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:adjustViewBounds="true"
-            android:background="#FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/add_icon"/>
-
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
 
         <ListView
             android:id="@+id/examlistView"

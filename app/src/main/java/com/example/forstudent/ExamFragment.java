@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,13 +53,19 @@ public class ExamFragment extends Fragment{
         main = (MainActivity)getActivity();
         load = new loadData();
         save = new saveData();
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_exam,menu);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
-        addSubject = (ImageButton) view.findViewById(R.id.addSubject);
         dday = (TextView)view.findViewById(R.id.examTitle);
         mlistView = (ListView)view.findViewById(R.id.examlistView);
 
@@ -70,52 +78,7 @@ public class ExamFragment extends Fragment{
         //listvieww
         load.run();
 
-        /****없앨거임****/
-        Button calc = (Button)view.findViewById(R.id.button);
-        calc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CalcGradeFragment add = new CalcGradeFragment();
-                main.FragmentAdd(add);
-            }
-        });
 
-
-
-        addSubject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        main.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                                dialog.setTitle("과목 추가");
-                                dialog.setMessage("시험 추가");
-                                dialog.setNegativeButton("불러오기", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                                dialog.setPositiveButton("직접추가", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        addNewsub();
-                                    }
-                                });
-                                dialog.create();
-                                dialog.show();
-                            }
-                        });
-                    }
-                }).start();
-
-            }
-        });
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -296,5 +259,57 @@ public class ExamFragment extends Fragment{
                 e.printStackTrace();
             }
         }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_exam:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                                dialog.setTitle("과목 추가");
+                                dialog.setMessage("시험 추가");
+                                dialog.setNegativeButton("불러오기", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                dialog.setPositiveButton("직접추가", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                        addNewsub();
+                                    }
+                                });
+                                dialog.create();
+                                dialog.show();
+                            }
+                        });
+                    }
+                }).start();
+            case R.id.cal_Grade:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                CalcGradeFragment add = new CalcGradeFragment();
+                                main.FragmentAdd(add);
+                            }
+                        });
+                    }
+                }).start();
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }
