@@ -23,6 +23,8 @@ public class AlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+
         String year = intent.getStringExtra("year");
         String month = intent.getStringExtra("month");
         String date = intent.getStringExtra("date");
@@ -41,7 +43,8 @@ public class AlarmService extends Service {
         {
             String channelId = "default_channel_id";
             String channelDescription = "Default Channel";
-            NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelId);
+            //NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelId);
+            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelDescription, NotificationManager.IMPORTANCE_HIGH);
             if (notificationChannel == null) {
                 int importance = NotificationManager.IMPORTANCE_HIGH;
                 notificationChannel = new NotificationChannel(channelId, channelDescription, importance);

@@ -83,6 +83,27 @@ public class CalendarFragment extends Fragment{
 
     }
 
+    public void alarmSet(long add){
+        main = (MainActivity)getActivity();
+        Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
+        alarmIntent.addCategory("android.intent.category.DEFAULT");
+        alarmIntent.setClass(main,AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(main,99,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent alarmIntent1 = new Intent("com.example.ForStudent.ALARM_START");
+        alarmIntent1.addCategory("android.intent.category.DEFAULT");
+        alarmIntent1.setClass(main,AlarmReceiver.class);
+        PendingIntent pendingIntent1 = PendingIntent.getBroadcast(main,100,alarmIntent1,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager)main.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager1 = (AlarmManager)main.getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(2019,8,21,0,25);
+        long time = calendar.getTimeInMillis();
+        System.out.println(time);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time+add,pendingIntent);
+        alarmManager1.setExact(AlarmManager.RTC_WAKEUP,time+add+10000,pendingIntent1);
+
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -104,14 +125,8 @@ public class CalendarFragment extends Fragment{
 
 //        main.pushIntent.putExtra("messageTitle","CALENDAR");
 
-        Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(main,99,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager)main.getSystemService(Context.ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        //calendar.set(2019,8,21,0,25);
-        long time = calendar.getTimeInMillis();
-        System.out.println(time);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time+20000,pendingIntent);
+        alarmSet(10000);
+
 
         load.run();
 
