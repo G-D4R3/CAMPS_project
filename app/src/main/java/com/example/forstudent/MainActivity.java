@@ -159,15 +159,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
 
-        FirebaseInstanceIDService t = new FirebaseInstanceIDService();
-        String tok="";
-        t.onTokenRefresh();
-
-
-
-
-
-
 
 
 
