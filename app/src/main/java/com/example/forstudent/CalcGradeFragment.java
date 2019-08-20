@@ -23,7 +23,7 @@ import com.example.forstudent.DataClass.Grade;
 
 import java.util.ArrayList;
 
-public class CalcGradeFragment extends Fragment {
+public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPressedListener{
 
     String[] spinner45 = {"A+", "A0", "B+", "B0", "C+", "C0", "D+", "D0", "F", "P"};
     String[] spinner43 = {"A+", "A0", "A-", "B+", "B0", "B-", "C+", "C0", "C-", "D+", "D0", "D-", "F", "P"};
@@ -45,6 +45,10 @@ public class CalcGradeFragment extends Fragment {
     loadData load;
     saveData save;
 
+    public static CalcGradeFragment newInstance() {
+        return new CalcGradeFragment();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -52,6 +56,7 @@ public class CalcGradeFragment extends Fragment {
         radio = main.getUser().getCalcGradeCheck();
         load = new loadData();
         save = new saveData();
+        main.setOnBackPressedListener(this);
     }
 
     @Override
@@ -63,6 +68,8 @@ public class CalcGradeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = (View)inflater.inflate(R.layout.calculate_grade, container, false);
+        main.setActionBarTitle("");
+        main.centerToolbarTitle.setText("학점 계산기");
         mGrade = (TextView)view.findViewById(R.id.grade);
         mCredit = (TextView)view.findViewById(R.id.grade_credit);
         //mList = (ListView)view.findViewById(R.id.grade_list);
@@ -152,6 +159,15 @@ public class CalcGradeFragment extends Fragment {
 
 
         return view;
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        main.getSupportActionBar().setDisplayShowTitleEnabled(false);
+        main.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        main.navBar.setVisibility(View.VISIBLE);
     }
 
     public void calc45(){
@@ -268,6 +284,12 @@ public class CalcGradeFragment extends Fragment {
 
     public void hidekeyboard(){
 
+    }
+
+    @Override
+    public void OnBack() {
+        main.setOnBackPressedListener(null);
+        main.fragmentManager.beginTransaction().replace(R.id.frame_layout, main.homeFragment);
     }
 
     public class loadData extends Thread{

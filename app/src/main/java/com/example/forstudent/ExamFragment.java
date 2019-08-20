@@ -294,6 +294,7 @@ public class ExamFragment extends Fragment{
                         });
                     }
                 }).start();
+                break;
             case R.id.cal_Grade:
                 new Thread(new Runnable() {
                     @Override
@@ -301,12 +302,13 @@ public class ExamFragment extends Fragment{
                         main.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                CalcGradeFragment add = new CalcGradeFragment();
+                                CalcGradeFragment add = CalcGradeFragment.newInstance();
                                 main.FragmentAdd(add);
                             }
                         });
                     }
                 }).start();
+                break;
         }
 
 

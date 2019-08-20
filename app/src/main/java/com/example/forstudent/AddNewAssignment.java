@@ -221,6 +221,5 @@ public class AddNewAssignment extends Fragment {
         return true;
     }
 
-    MainActivity main = (MainActivity)getActivity();
 
 }

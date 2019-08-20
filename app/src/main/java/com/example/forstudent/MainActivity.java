@@ -96,6 +96,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public AddNewAssignment addNewAssignment = new AddNewAssignment();
     public HomeFragmentSetup homeFragmentSetup = new HomeFragmentSetup();
     public SchoolMap schoolMap = new SchoolMap();
+    public Fragment fragment;
+
 
 
 
@@ -116,6 +118,13 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     InputMethodManager keypad;
     private long time=0;
     public  boolean BACK_STACK = false;
+    public interface OnBackPressedListener{
+        public void OnBack();
+    }
+    public OnBackPressedListener mBackListener;
+    public void setOnBackPressedListener(OnBackPressedListener listener){
+        mBackListener = listener;
+    }
 
 
 
@@ -123,6 +132,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     PendingIntent intent;
 
     Intent pushIntent;
+
 
 
 
@@ -317,24 +327,29 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         keypad = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
-    }
 
+    }//onCreate
+
+    /*
     @Override
     public void onBackPressed(){
-        if(BACK_STACK){
-            super.onBackPressed();
-            BACK_STACK=false;
-        }
-        else{
-            if(System.currentTimeMillis()-time>=1000){
-                time=System.currentTimeMillis();
-                return;
+            if(BACK_STACK){
+                super.onBackPressed();
+                FragmentRemove(fragment);
+                BACK_STACK=false;
             }
             else{
-                finish();
+                if(System.currentTimeMillis()-time>=1000){
+                    time=System.currentTimeMillis();
+                    return;
+                }
+                else{
+                    finish();
+                }
             }
-        }
-    }
+
+    }*/
+
 
 
 
@@ -366,6 +381,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     /**********Fragment***********/
     public void FragmentAdd(Fragment fragment){
+        this.fragment = fragment;
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(R.anim.popup,R.anim.slide_down,0,R.anim.slide_down);
         transaction.replace(R.id.frame_layout,fragment);
