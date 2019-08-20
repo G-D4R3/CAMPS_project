@@ -39,13 +39,21 @@
             android:text="추가"
             android:fontFamily="@font/barun"
             />
+
+        <Button
+            android:id="@+id/capture_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/barun"
+            android:onClick="mOnCaptureClick"
+            android:text="캡쳐하기" />
+
         <Button
             android:id="@+id/clear_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전체삭제"
             android:fontFamily="@font/barun"
-            />
+            android:text="전체삭제" />
 
     </LinearLayout>
 

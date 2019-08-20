@@ -4,7 +4,10 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -12,10 +15,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.net.Uri;
 
 import com.github.tlaabs.timetableview.Schedule;
 import com.github.tlaabs.timetableview.Time;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
@@ -188,4 +195,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     public int getDay(){
         return day;
     }
+
+
 }
