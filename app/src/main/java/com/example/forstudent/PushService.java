@@ -19,21 +19,34 @@ import androidx.core.app.NotificationCompat;
 public class PushService extends Service {
     NotificationManager Notifi_M;
     ServiceThread thread;
+    ServiceThread thread2;
     Notification Notifi ;
     PowerManager powerManager;
-
     PowerManager.WakeLock wakeLock;
+
+
+    public String messageTitle =null;
+    public String messageText = null;
+
+    boolean FLAG = true;
+
     @Override
     public IBinder onBind(Intent intent) {
+
         return null;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Notifi_M = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        myServiceHandler handler = new myServiceHandler();
-        thread = new ServiceThread(handler);
-        thread.start();
+
+            messageTitle = intent.getStringExtra("messageTitle");
+            messageText = intent.getStringExtra("messageText");
+            Notifi_M = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            myServiceHandler handler = new myServiceHandler();
+            thread = new ServiceThread(handler);
+            thread.start();
+
+
         return START_STICKY;
     }
 
@@ -68,15 +81,15 @@ public class PushService extends Service {
                 }
                 notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
                 .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle("TITLE")
-                .setContentText("SAFDSF")
+                .setContentTitle(messageTitle)
+                .setContentText(messageText)
                 .setTicker("TICK")
                 .setContentIntent(pendingIntent);
             } else {
                 notificationBuilder = new NotificationCompat.Builder(getApplicationContext()).
                         setSmallIcon(R.drawable.ic_launcher_background)
-                        .setContentTitle("TITLE")
-                        .setContentText("SAFDSF")
+                        .setContentTitle(messageTitle)
+                        .setContentText(messageText)
                         .setTicker("TICK")
                         .setContentIntent(pendingIntent);
             }

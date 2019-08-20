@@ -1,13 +1,11 @@
 package com.example.forstudent;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -17,13 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -120,7 +116,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     NotificationManager notificationManager;
     PendingIntent intent;
 
-
+    Intent pushIntent;
 
 
 
@@ -133,8 +129,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //toolbarButtonState.add("SETTING_INVISIBLE");
 
+/*
 
-        /**********notification*********/
         intent = PendingIntent.getActivity(this, 0, new Intent(getApplicationContext(), MainActivity.class),
 
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -158,7 +154,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         } else {
             notificationBuilder = new NotificationCompat.Builder(this);
         }
-/*
+
         Notification.Builder builder = new Notification.Builder(this)
 
                 .setSmallIcon(R.drawable.ic_launcher_background) // 아이콘 설정하지 않으면 오류남
@@ -180,9 +176,18 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         notificationManager.notify(0, builder.build());
 */
 
+/*
         Toast.makeText(getApplicationContext(),"Service 시작",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this,PushService.class);
-        startService(intent);
+        pushIntent = new Intent(MainActivity.this,PushService.class);
+        pushIntent.putExtra("messageTitle","TITLECHANKG");
+        pushIntent.putExtra("messageText","TEXTCHANFKGE");
+        startService(pushIntent);
+*/
+
+        /*
+        Toast.makeText(getApplicationContext(),"Service 끝",Toast.LENGTH_SHORT).show();
+        Intent intentl = new Intent(MainActivity.this,PushService.class);
+        stopService(intent);*/
 
 
 
@@ -454,6 +459,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public static MainActivity getInstance() {
         return instance;
     }
+
+
 
 
 

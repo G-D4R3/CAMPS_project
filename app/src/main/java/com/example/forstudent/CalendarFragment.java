@@ -2,8 +2,10 @@ package com.example.forstudent;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
@@ -100,6 +101,13 @@ public class CalendarFragment extends Fragment{
         toolbarButtonState.add("CHECK");
         main.toolbarButtonState=toolbarButtonState;
         //main.menu.findItem(R.id.setting_icon).setEnabled(false);
+
+//        main.pushIntent.putExtra("messageTitle","CALENDAR");
+
+        Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(main,99,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)main.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,100000,pendingIntent);
 
         load.run();
 

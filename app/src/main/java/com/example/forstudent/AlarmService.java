@@ -1,39 +1,75 @@
 package com.example.forstudent;
 
-import android.app.AlarmManager;
-import android.app.IntentService;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.SystemClock;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.IBinder;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
-public class AlarmService extends IntentService {
-    public static final int POLL_INTERVAL = 1000 * 5;
-    public static final String TAG = "알람 테스트";
-    public static Intent newIntent(Context context){
-     return new Intent(context,AlarmService.class);
-    }
-    public static void setServiceAlarm(Context context, boolean isOn){
-        Intent i = AlarmService.newIntent(context);
-        PendingIntent pi = PendingIntent.getService(context,0,i,0);
-        AlarmManager alarmManager=(AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        if(isOn){
-            alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(),POLL_INTERVAL,pi);
+public class AlarmService extends Service {
+    private int REQUEST_CODE = 1;
+    public AlarmService(){
 
-        }
-        else{
-            alarmManager.cancel(pi);
-            pi.cancel();
-        }
     }
+
     @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        String year = intent.getStringExtra("year");
+        String month = intent.getStringExtra("month");
+        String date = intent.getStringExtra("date");
+        String hour = intent.getStringExtra("hour");
+        String minute = intent.getStringExtra("minute");
+        String memo = intent.getStringExtra("memo");
 
+        year = year.substring(2);
+
+        Intent alarmIntent = new Intent(AlarmService.this, MainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(AlarmService.this, 0, alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder notificationBuilder = null;
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            String channelId = "default_channel_id";
+            String channelDescription = "Default Channel";
+            NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelId);
+            if (notificationChannel == null) {
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                notificationChannel = new NotificationChannel(channelId, channelDescription, importance);
+                notificationChannel.setLightColor(Color.GREEN);
+                notificationChannel.enableVibration(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+            notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setContentTitle("알람이다")
+                    .setContentText("알람이야")
+                    .setTicker("TICK")
+                    .setContentIntent(pendingIntent);
+        } else {
+            notificationBuilder = new NotificationCompat.Builder(getApplicationContext()).
+                    setSmallIcon(R.drawable.ic_launcher_background)
+                    .setContentTitle("알람이다")
+                    .setContentText("알람이야")
+                    .setTicker("TICK")
+                    .setContentIntent(pendingIntent);
+        }
+        notificationManager.notify(0,notificationBuilder.build());
+        return START_NOT_STICKY;
     }
 
-    public AlarmService(String name) {
-        super(name);
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
