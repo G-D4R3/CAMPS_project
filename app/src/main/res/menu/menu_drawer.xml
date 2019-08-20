@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:icon="@mipmap/exam_on"
+            android:title="학점 계산기"
+            android:id="@+id/calculate_grade"/>
+        <item
+            android:icon="@mipmap/check"
+            android:title="학교 지도"
+            android:id="@+id/school_map2" />
+    </group>
+
+</menu>

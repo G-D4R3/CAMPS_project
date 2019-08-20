@@ -197,6 +197,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss();
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
+
+
+
         //박스를 가져오는 작업
         userDataBox = ObjectBox.get().boxFor(UserData.class);
         assignmentBox = ObjectBox.get().boxFor(Assignment_Model.class);
