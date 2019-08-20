@@ -69,7 +69,12 @@ public class CalcGradeFragment extends Fragment {
         mTable = (TableLayout)view.findViewById(R.id.grade_table);
         mMethod = (RadioGroup)view.findViewById(R.id.grade_radio);
         InputMethodManager imm = main.keypad;
-
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.FragmentRemove(CalcGradeFragment.this);
+            }
+        });
 
         mMethod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
