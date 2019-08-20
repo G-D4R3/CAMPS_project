@@ -16,45 +16,45 @@
     </string-array>
 
     <string-array name="days">
-        <item >월</item>
-        <item >화</item>
-        <item >수</item>
-        <item >목</item>
-        <item >금</item>
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
     </string-array>
 
     <string-array name="grades43">
-        <item >A+</item>
-        <item >A0</item>
-        <item >A-</item>
-        <item >B+</item>
-        <item >B0</item>
-        <item >B-</item>
-        <item >C+</item>
-        <item >C0</item>
-        <item >C-</item>
-        <item >D+</item>
-        <item >D0</item>
-        <item >D-</item>
-        <item >F</item>
-        <item >P</item>
+        <item>A+</item>
+        <item>A0</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B0</item>
+        <item>B-</item>
+        <item>C+</item>
+        <item>C0</item>
+        <item>C-</item>
+        <item>D+</item>
+        <item>D0</item>
+        <item>D-</item>
+        <item>F</item>
+        <item>P</item>
     </string-array>
 
     <string-array name="grades45">
-        <item >A+</item>
-        <item >A0</item>
-        <item >B+</item>
-        <item >B0</item>
-        <item >C+</item>
-        <item >C0</item>
-        <item >D+</item>
-        <item >D0</item>
-        <item >F</item>
-        <item >P</item>
+        <item>A+</item>
+        <item>A0</item>
+        <item>B+</item>
+        <item>B0</item>
+        <item>C+</item>
+        <item>C0</item>
+        <item>D+</item>
+        <item>D0</item>
+        <item>F</item>
+        <item>P</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="default_notification_channel_name">channel_name</string>
-    <string name="default_notification_channel_id">channel_id</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
