@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.forstudent">
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -14,21 +15,30 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden"
         tools:ignore="GoogleAppIndexingWarning">
+        <receiver android:name=".NewAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info" />
+        </receiver>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyACJZAr20RuJZWi2yEa0odXZP20HthKbVc" />
+
         <service
             android:name=".AlarmService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <receiver android:name=".AlarmReceiver">
             <intent-filter>
-                <action android:name="com.example.ForStudent.ALARM_START"/>
+                <action android:name="com.example.ForStudent.ALARM_START" />
             </intent-filter>
         </receiver>
-
-
 
         <activity
             android:name=".LoadingMain"
@@ -43,7 +53,6 @@
             android:name=".MainActivity"
             android:label="@string/app_name" />
         <activity android:name=".EditActivity" />
-
     </application>
 
 </manifest>
