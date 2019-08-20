@@ -17,16 +17,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.example.forstudent.BoxClass.Assignment_Model;
 import com.example.forstudent.BoxClass.Grade_Model;
@@ -41,7 +36,6 @@ import com.example.forstudent.DataClass.Grade;
 import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,7 +43,7 @@ import java.util.Date;
 
 import io.objectbox.Box;
 
-public class MainActivity<notesBox> extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity<notesBox> extends AppCompatActivity {
     private static MainActivity instance;
 
     private TextView mTextMessage;
@@ -98,11 +92,6 @@ public class MainActivity<notesBox> extends AppCompatActivity implements Navigat
 
     public  boolean BACK_STACK = false;
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    ActionBarDrawerToggle actionBarDrawerToggle;
-    NavController drawer_controller;
-
 
     //store things
     //dday count
@@ -139,16 +128,6 @@ public class MainActivity<notesBox> extends AppCompatActivity implements Navigat
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout, homeFragment).commitAllowingStateLoss();
         //navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-
-        setdrawer();
-
-
-
-
-
-
-
 
 
 
@@ -246,16 +225,6 @@ public class MainActivity<notesBox> extends AppCompatActivity implements Navigat
 
         keypad = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
-
-    }
-
-    private void setdrawer() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.drawer_nav_view);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout, R.string.title_home, R.string.title_home);
-        drawer_controller = Navigation.findNavController(this, R.id.frame_layout);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
@@ -403,22 +372,6 @@ public class MainActivity<notesBox> extends AppCompatActivity implements Navigat
 
     public static MainActivity getInstance() {
         return instance;
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.calculate_grade:
-                CalcGradeFragment calc = new CalcGradeFragment();
-                fragmentManager.beginTransaction().replace(R.id.frame_layout,calc).commitAllowingStateLoss();
-                break;
-            case R.id.school_map2:
-                SchoolMap map = new SchoolMap();
-                fragmentManager.beginTransaction().replace(R.id.frame_layout,map).commitAllowingStateLoss();
-                break;
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return false;
     }
 
 
