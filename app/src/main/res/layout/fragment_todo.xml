@@ -40,21 +40,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/barun"
                 android:gravity="center_vertical"
                 android:text="남은 과제 수"
                 android:textColor="@color/title_color"
                 android:textSize="24sp" />
-
-            <ImageButton
-                android:id="@+id/addAss"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="right"
-                android:adjustViewBounds="true"
-                android:background="#00FFFFFF"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/add_icon" />
 
             <LinearLayout
                 android:layout_width="match_parent"

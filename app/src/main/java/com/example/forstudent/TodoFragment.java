@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +44,6 @@ public class TodoFragment extends Fragment {
     TextView mIhide;
     TextView mAhide;
     String title = "남은 과제 수";
-    ImageButton  mAdd;
     Boolean mIvisible=true;
     Boolean mDvisible=true;
     View view;
@@ -62,7 +63,15 @@ public class TodoFragment extends Fragment {
         load = new loadData();
         load.start();
         save = new saveData();
+        setHasOptionsMenu(true);
 
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_assignment,menu);
     }
 
 
@@ -73,11 +82,11 @@ public class TodoFragment extends Fragment {
 
         main.setActionBarTitle("");
         main.centerToolbarTitle.setText("과제");
+        main.invalidateOptionsMenu();
 
         mTitle = (TextView)view.findViewById(R.id.restDo);
         mlistView = (ListView)view.findViewById(R.id.assignmentList);
         mImportant = (ListView)view.findViewById(R.id.importantAssignment);
-        mAdd = (ImageButton)view.findViewById(R.id.addAss);
         mImpSec = (TextView)view.findViewById(R.id.SectionHeader2);
         mAssSec = (TextView)view.findViewById(R.id.SectionHeader3);
         mIhide = (TextView)view.findViewById(R.id.hide2);
@@ -86,7 +95,7 @@ public class TodoFragment extends Fragment {
         ImportantAdapter = new TodoListAdapter(ImpList);
 
 
-
+        Handler handler = new Handler();
 
 
         Thread setView = new Thread(new Runnable() {
@@ -110,24 +119,6 @@ public class TodoFragment extends Fragment {
         });
         setView.start();
 
-
-        mAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.v("TodoFragment", "Add Assignment");
-                        main.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                AddNewAss();
-                            }
-                        });
-                    }
-                }).start();
-            }
-        });
 
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -414,4 +405,29 @@ public class TodoFragment extends Fragment {
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.add_assignment:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.v("TodoFragment", "Add Assignment");
+                        main.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AddNewAss();
+                            }
+                        });
+                    }
+                }).start();
+
+        }
+
+
+
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }
