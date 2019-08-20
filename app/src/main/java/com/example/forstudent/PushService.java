@@ -1,15 +1,20 @@
 package com.example.forstudent;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
 
 public class PushService extends Service {
     NotificationManager Notifi_M;
@@ -45,6 +50,38 @@ public class PushService extends Service {
             Intent intent = new Intent(PushService.this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(PushService.this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
+            NotificationCompat.Builder notificationBuilder = null;
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            {
+                String channelId = "default_channel_id";
+                String channelDescription = "Default Channel";
+                NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelId);
+                if (notificationChannel == null) {
+                    int importance = NotificationManager.IMPORTANCE_HIGH;
+                    notificationChannel = new NotificationChannel(channelId, channelDescription, importance);
+                    notificationChannel.setLightColor(Color.GREEN);
+                    notificationChannel.enableVibration(true);
+                    notificationManager.createNotificationChannel(notificationChannel);
+                }
+                notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("TITLE")
+                .setContentText("SAFDSF")
+                .setTicker("TICK")
+                .setContentIntent(pendingIntent);
+            } else {
+                notificationBuilder = new NotificationCompat.Builder(getApplicationContext()).
+                        setSmallIcon(R.drawable.ic_launcher_background)
+                        .setContentTitle("TITLE")
+                        .setContentText("SAFDSF")
+                        .setTicker("TICK")
+                        .setContentIntent(pendingIntent);
+            }
+            notificationManager.notify(0,notificationBuilder.build());
+/*
             Notifi = new Notification.Builder(getApplicationContext())
                     .setContentTitle("Content Title")
                     .setContentText("Content Text")
@@ -64,7 +101,7 @@ public class PushService extends Service {
 
 
             Notifi_M.notify( 777 , Notifi);
-
+*/
             powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
 
             wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "WAKELOCK");

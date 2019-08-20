@@ -1,12 +1,13 @@
 package com.example.forstudent;
 
-import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,11 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -133,21 +136,51 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         /**********notification*********/
         intent = PendingIntent.getActivity(this, 0, new Intent(getApplicationContext(), MainActivity.class),
+
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
+        NotificationCompat.Builder notificationBuilder = null;
+        NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            String channelId = "default_channel_id";
+            String channelDescription = "Default Channel";
+            NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelId);
+            if (notificationChannel == null) {
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                notificationChannel = new NotificationChannel(channelId, channelDescription, importance);
+                notificationChannel.setLightColor(Color.GREEN);
+                notificationChannel.enableVibration(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+            notificationBuilder = new NotificationCompat.Builder(this, channelId);
+        } else {
+            notificationBuilder = new NotificationCompat.Builder(this);
+        }
+/*
         Notification.Builder builder = new Notification.Builder(this)
+
                 .setSmallIcon(R.drawable.ic_launcher_background) // 아이콘 설정하지 않으면 오류남
+
                 .setDefaults(Notification.DEFAULT_ALL)
+
                 .setContentTitle("알림 제목") // 제목 설정
+
                 .setContentText("알림 내용") // 내용 설정
+
                 .setTicker("한줄 출력") // 상태바에 표시될 한줄 출력
+
                 .setAutoCancel(true)
+
                 .setContentIntent(intent);
 
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
 
-        //Toast.makeText(getApplicationContext(),"Service 시작",Toast.LENGTH_SHORT).show();
+        notificationManager.notify(0, builder.build());
+*/
+
+        Toast.makeText(getApplicationContext(),"Service 시작",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this,PushService.class);
         startService(intent);
 
