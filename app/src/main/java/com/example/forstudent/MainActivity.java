@@ -1,5 +1,6 @@
 package com.example.forstudent;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -133,7 +134,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     Intent pushIntent;
 
-
+    /**** FINAL VALUES ****/
+    final int SCHEDULE_ALARM_BASE   = 20000000;
+    final int ASSIGNMENT_ALARM_BASE = 40000000;
+    final int TEST_ALARM_BASE       = 60000000;
 
 
 
@@ -515,6 +519,56 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         view.setDrawingCacheEnabled(false);
         return file;
+    }
+
+
+    /**** alarm ****/
+
+    public Calendar calcHourBefore(Calendar calendar,int amount){
+        calendar.set(Calendar.SECOND,0);
+        long destDateInMillis = calendar.getTimeInMillis()-3600000*amount;
+
+        Calendar destDate = Calendar.getInstance();
+        destDate.setTimeInMillis(destDateInMillis);
+        return destDate;
+    }
+    public void alarmDelete(long id,Calendar alarmDate,String title,String memo){
+        Calendar ringDate = calcHourBefore(alarmDate,1);
+        Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
+        alarmIntent.putExtra("year",ringDate.get(Calendar.YEAR));
+        alarmIntent.putExtra("month",ringDate.get(Calendar.MONTH));
+        alarmIntent.putExtra("day",ringDate.get(Calendar.DAY_OF_MONTH));
+        alarmIntent.putExtra("hour",ringDate.get(Calendar.HOUR));
+        alarmIntent.putExtra("minute",ringDate.get(Calendar.MINUTE));
+        alarmIntent.putExtra("title",title);
+        alarmIntent.putExtra("memo",memo);
+
+        alarmIntent.addCategory("android.intent.category.DEFAULT");
+        alarmIntent.setClass(this,AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,(int)id,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.cancel(pendingIntent);
+
+    }
+    public void alarmSet(long id, Calendar alarmDate,String title,String memo){
+        Calendar ringDate = calcHourBefore(alarmDate,1);
+        Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
+        alarmIntent.putExtra("year",ringDate.get(Calendar.YEAR));
+        alarmIntent.putExtra("month",ringDate.get(Calendar.MONTH));
+        alarmIntent.putExtra("day",ringDate.get(Calendar.DAY_OF_MONTH));
+        alarmIntent.putExtra("hour",ringDate.get(Calendar.HOUR));
+        alarmIntent.putExtra("minute",ringDate.get(Calendar.MINUTE));
+        alarmIntent.putExtra("title",title);
+        alarmIntent.putExtra("memo",memo);
+
+        alarmIntent.addCategory("android.intent.category.DEFAULT");
+        alarmIntent.setClass(this,AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,(int)id,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+
+        long time = ringDate.getTimeInMillis();
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time,pendingIntent);
     }
 
 

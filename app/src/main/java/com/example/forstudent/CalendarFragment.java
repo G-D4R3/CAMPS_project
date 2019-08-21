@@ -1,11 +1,8 @@
 package com.example.forstudent;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,27 +80,9 @@ public class CalendarFragment extends Fragment{
 
     }
 
-    public void alarmSet(long add){
-        main = (MainActivity)getActivity();
-        Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
-        alarmIntent.addCategory("android.intent.category.DEFAULT");
-        alarmIntent.setClass(main,AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(main,99,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-        Intent alarmIntent1 = new Intent("com.example.ForStudent.ALARM_START");
-        alarmIntent1.addCategory("android.intent.category.DEFAULT");
-        alarmIntent1.setClass(main,AlarmReceiver.class);
-        PendingIntent pendingIntent1 = PendingIntent.getBroadcast(main,100,alarmIntent1,PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager alarmManager = (AlarmManager)main.getSystemService(Context.ALARM_SERVICE);
-        AlarmManager alarmManager1 = (AlarmManager)main.getSystemService(Context.ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
-        //calendar.set(2019,8,21,0,25);
-        long time = calendar.getTimeInMillis();
-        System.out.println(time);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time+add,pendingIntent);
-        alarmManager1.setExact(AlarmManager.RTC_WAKEUP,time+add+10000,pendingIntent1);
 
-    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -121,12 +100,6 @@ public class CalendarFragment extends Fragment{
         main.invalidateOptionsMenu();
         toolbarButtonState.add("CHECK");
         main.toolbarButtonState=toolbarButtonState;
-        //main.menu.findItem(R.id.setting_icon).setEnabled(false);
-
-//        main.pushIntent.putExtra("messageTitle","CALENDAR");
-
-        alarmSet(10000);
-
 
         load.run();
 
@@ -231,7 +204,6 @@ public class CalendarFragment extends Fragment{
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             removeSchedule(lowerAdapter.eventList.get(pos),lowerAdapter);
-                                                            //mTitle.setText(name);
                                                             dialog.dismiss();
                                                         }
                                                     });
@@ -358,6 +330,9 @@ public class CalendarFragment extends Fragment{
         main.FragmentAdd(addFragment);
     }
     public void removeSchedule(Event event,CalendarListAdapter adapter){
+        MainActivity main = (MainActivity)getActivity();
+        Schedule schedule = (Schedule)event;
+        main.alarmDelete(main.SCHEDULE_ALARM_BASE+main.calendarFragment.schedules.indexOf(schedule)+1,schedule.getDate(),schedule.getTitle(),schedule.getMemo());
         schedules.remove((Schedule)event);
         scheduleDayEvent.remove(event);
         events.remove(event);
@@ -369,7 +344,7 @@ public class CalendarFragment extends Fragment{
         AddNewSchedule addFragment = AddNewSchedule.newInstance();
         Schedule schedule = (Schedule)event;
         addFragment.year = schedule.getDate().get(Calendar.YEAR);
-        addFragment.month = schedule.getDate().get(Calendar.MONTH)-1;
+        addFragment.month = schedule.getDate().get(Calendar.MONTH)+1;
         addFragment.day = schedule.getDate().get(Calendar.DAY_OF_MONTH);
         addFragment.removeTarget = event;
         addFragment.MOD=true;
@@ -433,6 +408,7 @@ public class CalendarFragment extends Fragment{
 
         public void run(){
             try{
+
                 schedules = main.schedules;
                 assignmentList = main.assignment;
                 testList = main.testSub;

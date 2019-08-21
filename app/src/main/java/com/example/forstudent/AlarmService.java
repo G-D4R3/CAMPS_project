@@ -27,12 +27,15 @@ public class AlarmService extends Service {
 
         PowerManager powerManager;
         PowerManager.WakeLock wakeLock;
-        String year = intent.getStringExtra("year");
-        String month = intent.getStringExtra("month");
-        String date = intent.getStringExtra("date");
-        String hour = intent.getStringExtra("hour");
-        String minute = intent.getStringExtra("minute");
+        int year = intent.getIntExtra("year",1);
+        int month = intent.getIntExtra("month",1);
+        int date = intent.getIntExtra("date",1);
+        int hour = intent.getIntExtra("hour",1);
+        int minute = intent.getIntExtra("minute",1);
+        String title = intent.getStringExtra("title");
         String memo = intent.getStringExtra("memo");
+
+
 
         Intent alarmIntent = new Intent(AlarmService.this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(AlarmService.this, 0, alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);
@@ -43,10 +46,11 @@ public class AlarmService extends Service {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
-            String channelId = "default_channel_id";
+            String channelId = "default_channel";
             String channelDescription = "Default Channel";
+            NotificationChannel notificationChannel=null;
             //NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelId);
-            NotificationChannel notificationChannel = new NotificationChannel(channelId, channelDescription, NotificationManager.IMPORTANCE_HIGH);
+           // NotificationChannel notificationChannel = new NotificationChannel(channelId, channelDescription, NotificationManager.IMPORTANCE_HIGH);
             if (notificationChannel == null) {
                 int importance = NotificationManager.IMPORTANCE_HIGH;
                 notificationChannel = new NotificationChannel(channelId, channelDescription, importance);
@@ -56,15 +60,15 @@ public class AlarmService extends Service {
             }
             notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
                     .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setContentTitle("알람이다")
-                    .setContentText("알람이야")
+                    .setContentTitle(String.format("1시간 후에 %s이 있습니다.",title))
+                    .setContentText(memo)
                     .setTicker("TICK")
                     .setContentIntent(pendingIntent);
         } else {
             notificationBuilder = new NotificationCompat.Builder(getApplicationContext()).
                     setSmallIcon(R.drawable.ic_launcher_background)
-                    .setContentTitle("알람이다")
-                    .setContentText("알람이야")
+                    .setContentTitle(String.format("1시간 후에 %s이 있습니다.",title))
+                    .setContentText(memo)
                     .setTicker("TICK")
                     .setContentIntent(pendingIntent);
         }

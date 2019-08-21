@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Event;
 import com.example.forstudent.DataClass.Schedule;
 
@@ -104,10 +103,10 @@ public class AddNewSchedule extends Fragment {
                 hideKey();
                 TimePickerDialog timepick = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
                         editDate.setText(hourOfDay + "시 " + minute + "분");
                         hour = hourOfDay;
-                        minute = minute;
+                        minute = minutes;
                         TIME_PICKED = true;
                     }
                 }, hour, minute, true);
@@ -196,7 +195,14 @@ public class AddNewSchedule extends Fragment {
             }
             else{
                 main.calendarFragment.schedules.add(schedule);
-                if(removeTarget != null) main.calendarFragment.schedules.remove(removeTarget);
+
+                if(removeTarget != null) {
+                    Schedule removeSchedule = (Schedule)removeTarget;
+                    main.alarmDelete(main.SCHEDULE_ALARM_BASE+main.calendarFragment.schedules.indexOf(removeSchedule)+1,removeSchedule.getDate(),removeSchedule.getTitle(),removeSchedule.getMemo());
+                    main.calendarFragment.schedules.remove(removeTarget);
+                    main.calendarFragment.events.remove(removeTarget);
+                }
+                main.alarmSet(main.SCHEDULE_ALARM_BASE+main.calendarFragment.schedules.indexOf(schedule)+1,schedule.getDate(),schedule.getTitle(),schedule.getMemo());
                 main.showActionBar();
                 main.FragmentRemove(AddNewSchedule.this);
 
