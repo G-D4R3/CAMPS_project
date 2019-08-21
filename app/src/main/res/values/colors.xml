@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#245B66</color>
-    <color name="colorPrimaryDark">#3A707C</color>
-    <color name="colorAccent">#EC725B</color>
+    <color name="colorPrimary">#202020</color>
+    <color name="colorPrimaryDark">#303030</color>
+    <color name="colorAccent">#E25244</color>
 
-    <drawable name="colorPrimaryDarkDrawable">#3A707C</drawable>
+    <drawable name="colorPrimaryDarkDrawable">#303030</drawable>
     <drawable name="white">#fff</drawable>
     <color name="colorheader">#fcfcfc</color>
     <color name="colorheaderText">#7d7d7d</color>
@@ -22,11 +22,12 @@
         <item>#4859B3</item>
     </string-array>
 
-    <color name="base_color">#206D7E</color>
-    <color name="main_color">#0B5A69</color>
-    <color name="sub_color">#ec525b</color>
+    <color name="base_color">#303030</color>
+    <color name="main_color">#202020</color>
+    <color name="sub_color">#E25244</color>
+    <color name="border_color">#909090</color>
 
-    <color name="title_color">#12373F</color>
+    <color name="title_color">#202020</color>
     <color name="layout_title_color">#3F3F3F</color>
     <color name="layout_content_color">#505050</color>
 

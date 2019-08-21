@@ -135,7 +135,6 @@ public class TodoFragment extends Fragment {
                                     String name = adapter.data.get(position).Name;
                                     String[] menu = {"중요도 표시","수정", "삭제"};
 
-
                                     AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                                     dialog.setTitle(name);
                                     dialog.setItems(menu, new DialogInterface.OnClickListener() {

@@ -21,9 +21,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/barun"
+            android:textColor="@color/title_color"
             android:paddingTop="6sp"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:visibility="visible"
+            android:gravity="center"
             tools:layout_editor_absoluteX="206dp"
             tools:layout_editor_absoluteY="15dp"
             tools:visibility="visible" />

@@ -7,9 +7,18 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/border_color"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:fillViewport="true">
 
         <LinearLayout
@@ -34,11 +43,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:gravity="center"
                 android:fontFamily="@font/barun"
+                android:gravity="center"
                 android:text="D-day 설정하기"
-                android:textSize="25sp"
-                android:textColor="#12373F"
+                android:textColor="@color/title_color"
+                android:textSize="22sp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="238dp" />
 
@@ -47,36 +56,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:gravity="center"
                 android:fontFamily="@font/barun"
+                android:gravity="center"
                 android:text="Today"
-                android:textSize="20sp"
-                android:textColor="#EC725B"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/Dday"
                 app:layout_constraintTop_toBottomOf="@+id/Dday" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/listview_border"
-                android:layout_marginTop="30dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/home_schedule"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
+                    android:layout_weight="1"
                     android:fontFamily="@font/barun"
-                    android:textColor="#3F3F3F"
-                    android:textSize="18sp"
-                    android:text="일정"/>
+                    android:gravity="center_vertical"
+                    android:text="일정"
+                    android:textColor="@color/layout_title_color"
+                    android:textSize="18sp" />
 
 
                 <TextView
@@ -90,13 +98,14 @@
 
                 <ListView
                     android:id="@+id/home_schedulelistview"
-                    android:layout_gravity="center"
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@null"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:divider="@null"
+                    android:scrollbars="none" />
 
 
             </LinearLayout>
@@ -105,63 +114,64 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/listview_border"
-                android:layout_marginTop="5dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/home_class"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/barun"
-                    android:textColor="#3F3F3F"
-                    android:text="수업"/>
+                    android:gravity="center_vertical"
+                    android:text="수업"
+                    android:textColor="@color/layout_title_color"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/noclass"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:gravity="center"
                     android:fontFamily="@font/barun"
-                    android:textColor="#6F6F6F"
-                    android:text="수업이 없습니다." />
+                    android:gravity="center"
+                    android:text="수업이 없습니다."
+                    android:textColor="#6F6F6F" />
 
                 <ListView
                     android:id="@+id/home_classlistview"
-                    android:layout_gravity="center"
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@null"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:divider="@null"
+                    android:scrollbars="none" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="10dp"
-                android:background="@drawable/listview_border">
+                android:layout_marginTop="5dp"
+                android:background="@drawable/listview_border"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/home_ass"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/barun"
-                    android:textColor="#3F3F3F"
-                    android:text="과제"/>
+                    android:gravity="center_vertical"
+                    android:text="과제"
+                    android:textColor="@color/layout_title_color"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/noassignment"
@@ -174,56 +184,58 @@
 
                 <ListView
                     android:id="@+id/home_asslistview"
-                    android:layout_gravity="center"
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@null"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:divider="@null"
+                    android:scrollbars="none" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
+                android:background="@drawable/listview_border"
                 android:descendantFocusability="blocksDescendants"
-                android:background="@drawable/listview_border">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/home_exam"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center_vertical"
                     android:text="시험"
-                    android:textColor="#3F3F3F"
+                    android:textColor="@color/layout_title_color"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/noexam"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:gravity="center"
                     android:fontFamily="@font/barun"
-                    android:textColor="#6F6F6F"
-                    android:text="시험이 없습니다." />
+                    android:gravity="center"
+                    android:text="시험이 없습니다."
+                    android:textColor="#6F6F6F" />
 
                 <ListView
                     android:id="@+id/home_examlistview"
-                    android:layout_gravity="center"
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@null"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:divider="@null"
+                    android:scrollbars="none" />
 
             </LinearLayout>
 
