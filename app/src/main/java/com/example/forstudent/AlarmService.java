@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.PowerManager;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -24,7 +25,8 @@ public class AlarmService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-
+        PowerManager powerManager;
+        PowerManager.WakeLock wakeLock;
         String year = intent.getStringExtra("year");
         String month = intent.getStringExtra("month");
         String date = intent.getStringExtra("date");
@@ -67,6 +69,15 @@ public class AlarmService extends Service {
                     .setContentIntent(pendingIntent);
         }
         notificationManager.notify(0,notificationBuilder.build());
+        powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
+
+        wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "WAKELOCK");
+
+
+        wakeLock.acquire(); // WakeLock 깨우기
+
+        wakeLock.release(); // WakeLock 해제
+
         return START_NOT_STICKY;
     }
 
