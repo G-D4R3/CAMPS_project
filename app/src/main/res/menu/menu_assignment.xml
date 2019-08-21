@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/add_assignment"
-        android:icon="@mipmap/add_icon"
+        android:icon="@mipmap/add"
         android:title="과제 추가"
         app:showAsAction="always" />
 

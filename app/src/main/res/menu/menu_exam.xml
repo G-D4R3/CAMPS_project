@@ -5,12 +5,12 @@
     <item
         android:id="@+id/cal_Grade"
         android:icon="@mipmap/calculate"
-        android:title="시험 추가"
+        android:title="학점 계산기"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/add_exam"
-        android:icon="@mipmap/add_icon"
+        android:icon="@mipmap/add"
         android:title="시험 추가"
         app:showAsAction="always" />
 
