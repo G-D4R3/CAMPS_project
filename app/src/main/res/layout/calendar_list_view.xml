@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:background="@drawable/listview_border">
 
 
@@ -13,10 +13,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,32 +21,39 @@
 
         <TextView
             android:id="@+id/calendar_icon"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="3.5"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:fontFamily="@font/barun"
+            android:textColor="@color/layout_content_color"
             android:text="아이콘" />
 
         <TextView
             android:id="@+id/calendar_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_weight="2"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="3"
             android:fontFamily="@font/barun"
-            android:textSize="15sp"
+            android:textSize="14sp"
+            android:textColor="@color/layout_content_color"
             android:text="시간" />
 
         <TextView
             android:id="@+id/calendar_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:gravity="center"
+            android:layout_weight="2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
             android:fontFamily="@font/barun"
-            android:textSize="15sp"
+            android:textSize="14sp"
+            android:textColor="@color/layout_content_color"
             android:text="제목" />
     </LinearLayout>
 

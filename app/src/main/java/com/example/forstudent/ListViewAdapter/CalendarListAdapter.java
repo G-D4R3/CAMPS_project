@@ -6,14 +6,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Event;
-import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
 import com.example.forstudent.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 public class CalendarListAdapter extends BaseAdapter{
     public ArrayList<Event> eventList = null;
     LayoutInflater inflater = null;
@@ -60,11 +57,9 @@ public class CalendarListAdapter extends BaseAdapter{
         switch (typeFlag){
             case 1:
                 icon.setText("과제");
-                time.setText(event.getMemo());
                 break;
             case 2:
                 icon.setText("일정");
-                time.setText(event.getMemo());
                 break;
             case 3:
                 icon.setText("시험");

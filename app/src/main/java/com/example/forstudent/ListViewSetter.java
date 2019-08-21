@@ -24,7 +24,7 @@ public class ListViewSetter {
         for(int i=0; i<adapter.getCount(); i++){
             View item = adapter.getView(i, null, listview);
             item.measure(0,0);
-            totalheight+=item.getMeasuredHeight()+20;
+            totalheight+=(item.getMeasuredHeight()+40);
         }
 
         divider = listview.getDividerHeight() * adapter.getCount();
@@ -32,7 +32,7 @@ public class ListViewSetter {
 
         ViewGroup.LayoutParams params = listview.getLayoutParams();
         if(divider==0){
-            params.height = totalheight+30;
+            params.height = totalheight;
         }
         else{
             params.height = totalheight+divider+(30*adapter.getCount());

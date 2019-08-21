@@ -60,6 +60,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center_vertical"
+                    android:textColor="@color/layout_title_color"
                     android:text="과제 / 시험"
                     android:textSize="18sp" />
 
@@ -80,6 +81,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center_vertical"
+                    android:textColor="@color/layout_title_color"
                     android:text="일정"
                     android:textSize="18sp" />
 
