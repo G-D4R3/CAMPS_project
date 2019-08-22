@@ -506,10 +506,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         Bitmap screenBitmap = view.getDrawingCache();   //캐시를 비트맵으로 변환
 
         String filename = "screenshot.png";
-        File file = new File(Environment.getExternalStorageDirectory()+"/Pictures", filename);  //Pictures폴더 screenshot.png 파일
+        String address = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.forstudent/Pictures"+filename;
+        //System.out.println(Environment.getExternalStorageState());
+        //File filePath = new File(, "/Pictures");
+        File file = new File(Environment.getExternalStorageDirectory(), filename);//Pictures폴더 screenshot.png 파일
         FileOutputStream os = null;
         try{
-            os = new FileOutputStream(file);
+            //filePath.mkdir();
+            os = new FileOutputStream(address);
             screenBitmap.compress(Bitmap.CompressFormat.PNG, 90, os);   //비트맵을 PNG파일로 변환
             os.close();
         }catch (IOException e){
