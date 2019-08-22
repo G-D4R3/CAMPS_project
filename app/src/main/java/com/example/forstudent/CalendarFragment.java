@@ -32,11 +32,19 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class CalendarFragment extends Fragment{
+
     MainActivity main;
 
+
+    /*** ArrayList for Events ***/
     ArrayList<Assignment> assignmentList;
     Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
     ArrayList<String> toolbarButtonState = new ArrayList<>();
+    ArrayList<Schedule> schedules = new ArrayList<>();
+    ArrayList<TestSub> testList = new ArrayList<>();
+    ArrayList<Event> events = new ArrayList<>();
+    ArrayList<Event> dayEvent;
+    ArrayList<Event> scheduleDayEvent;
 
     private TextView Dday;
     private TextView today;
@@ -45,11 +53,7 @@ public class CalendarFragment extends Fragment{
     TextView mTitle;
     MaterialCalendarView calendarView;
 
-    ArrayList<Schedule> schedules = new ArrayList<>();
-    ArrayList<TestSub> testList = new ArrayList<>();
-    ArrayList<Event> events = new ArrayList<>();
-    ArrayList<Event> dayEvent;
-    ArrayList<Event> scheduleDayEvent;
+
     CalendarListAdapter upperAdapter;
     CalendarListAdapter lowerAdapter;
     ListView upperListView;
@@ -116,7 +120,7 @@ public class CalendarFragment extends Fragment{
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                //System.out.println(date.toString());
+
 
                 new Thread(new Runnable() {
                     @Override
@@ -144,7 +148,7 @@ public class CalendarFragment extends Fragment{
                                             if(schedule.getDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
                                             if(schedule.getDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                                             scheduleDayEvent.add(tmp);
-                                            //System.out.println(tmp.toString());
+
                                             break;
                                         case 3:
                                             TestSub testSub = (TestSub)tmp;
@@ -152,7 +156,7 @@ public class CalendarFragment extends Fragment{
                                             if(testSub.getTestDate().get(Calendar.MONTH)!=date.getMonth()-1) break;
                                             if(testSub.getTestDate().get(Calendar.DAY_OF_MONTH)!=date.getDay())break;
                                             dayEvent.add(tmp);
-                                            //System.out.println(tmp.toString());
+
                                             break;
                                     }
                                 }
@@ -244,7 +248,6 @@ public class CalendarFragment extends Fragment{
                         main.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                System.out.println("Long" + date.toString());
                                 AddNewSchedule addFragment = AddNewSchedule.newInstance();
                                 MainActivity main = (MainActivity)getActivity();
                                 addFragment.year = date.getYear();
@@ -281,7 +284,7 @@ public class CalendarFragment extends Fragment{
         CalendarDay calendarDay;
 
         for(TestSub tmp : testList){
-            //System.out.println(tmp.getPeriod());
+
             Calendar calendar = tmp.getTestDate();
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH)+1;
@@ -296,7 +299,7 @@ public class CalendarFragment extends Fragment{
         CalendarDay calendarDay;
 
         for(Assignment tmp : assignmentList){
-            System.out.println(tmp.getPeriod());
+
             Calendar calendar = tmp.getPeriod();
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH)+1;
@@ -312,7 +315,7 @@ public class CalendarFragment extends Fragment{
         CalendarDay calendarDay;
 
         for(Schedule tmp : schedules){
-            System.out.println(tmp.getDate().toString());
+
             Calendar calendar = tmp.getDate();
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH)+1;
@@ -417,7 +420,7 @@ public class CalendarFragment extends Fragment{
                     tmp.setHour(tmp.getDate().get(Calendar.HOUR));
                     tmp.setMinute(tmp.getDate().get(Calendar.MINUTE));
                     tmp.setType(2);
-                    System.out.println(tmp.toString());
+
                     if(!events.contains(tmp)) events.add(tmp);
                     lowerSize++;
                 }
