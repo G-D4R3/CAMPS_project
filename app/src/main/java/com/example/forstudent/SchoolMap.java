@@ -14,7 +14,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -77,13 +76,6 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
         mMap = googleMap;
 
         LatLng SCHOOL = new LatLng(latitude, longitude);
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SCHOOL);
-        System.out.println(SCHOOL.toString());
-        markerOptions.title(schoolName);
-        mMap.addMarker(markerOptions);
-
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SCHOOL,17));
 
 

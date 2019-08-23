@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         app:column_count="6"
         app:header_title="@array/header_title"
+        app:header_highlight_color="@color/colorAccent"
 
         />
      <!-- <com.github.tlaabs.timetableview.TimetableView
