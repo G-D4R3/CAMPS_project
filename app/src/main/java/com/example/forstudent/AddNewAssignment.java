@@ -25,22 +25,31 @@ import java.util.Calendar;
 
 public class AddNewAssignment extends Fragment {
 
-    Calendar today = Calendar.getInstance();
-    Calendar period = Calendar.getInstance();
-    Assignment ass;
+    /*** main ***/
+    MainActivity main;
+    InputMethodManager input; //키보드
+
+    /*** tmp ***/
     String Name;
     String Date;
-    String range;
-    Boolean Flag=false;  //중요도
-    Boolean MOD = false;
-    Boolean DATE_CHECKED=false;
-    InputMethodManager input;
-    EditText mName;
-    EditText mRange;
-    static boolean iscanceled;
+    String range; //메모
+
+    /*** view ***/
+    EditText mName; //이름 입력
+    EditText mRange; //메모 입력
+
+    /*** flag ***/
+    Boolean Flag=false; //중요도
+    Boolean MOD = false; //수정인지 아닌지
+    Boolean DATE_CHECKED=false; //false면 설정 완료하지 못함
+
+    /*** storage ***/
+    Calendar today = Calendar.getInstance(); //오늘 날짜
+    Calendar period = Calendar.getInstance(); //과제 기한
+    Assignment ass;
 
 
-
+    /*** instanciate ***/
     public static AddNewAssignment newInstance(){
         return new AddNewAssignment();
     }
@@ -48,26 +57,25 @@ public class AddNewAssignment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        main = (MainActivity)getActivity();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        /***** view load *****/
         View view = (View)inflater.inflate(R.layout.add_new_assignment, container, false);
         TextView mTitle = (TextView)view.findViewById(R.id.assTitle);
         mName = (EditText)view.findViewById(R.id.assName);
         TextView mDate = (TextView)view.findViewById(R.id.pdate2);
-
         mRange = (EditText)view.findViewById(R.id.Range3);
-
-        MainActivity main = (MainActivity)getActivity();
-        main.BACK_STACK=true;
-
         input = main.keypad;
 
+        /***** toolbar *****/
+        main.BACK_STACK=true;
         main.centerToolbarTitle.setText("과제 추가");
         main.toolbar.setTitle("");
-
         main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,18 +85,18 @@ public class AddNewAssignment extends Fragment {
         });
 
 
-
+        /***** modify면 textview set *****/
         if(MOD==true){
             DATE_CHECKED=true;
             mName.setText(ass.getName());
             Flag = ass.getFlag();
             mDate.setText(String.format("%d월 %d일",ass.getPeriod().get(Calendar.MONTH)+1,ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
-            //System.out.println(ass.getMemo());
             mRange.setText(ass.getMemo());
-        }
+        } //if문
 
+
+        /***** 기한 설정 *****/
         mDate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 hideKey();
@@ -96,67 +104,21 @@ public class AddNewAssignment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         mDate.setText((month+1)+"월 "+dayOfMonth+"일");
-                        period.set(year,month,dayOfMonth);
-                        DATE_CHECKED=true;
+                        period.set(year,month,dayOfMonth); //기한 설정
+                        DATE_CHECKED=true; //flag true
                     }
                 },today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DATE));
                 dialog.show();
             }
         });
 
-        /*
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKey();
-                MainActivity main = (MainActivity)getActivity();
-                main.showActionBar();
-                main.FragmentRemove(AddNewAssignment.this);
-            }
-        });
-
-        mComplete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKey();
-                if(Flag==true){
-                    main.todoFragment.ImpList.remove(ass);
-                }
-
-                if(mName.getText().length()==0 || DATE_CHECKED==false){
-                    setYetDialog();
-                }
-                else{
-                    ass = new Assignment(mName.getText().toString(),period,mRange.getText().toString(),Flag);
-                    MainActivity main = (MainActivity)getActivity();
-                    main.todoFragment.AssList.add(ass);
-                    if(Flag==true){
-                        main.todoFragment.ImpList.add(ass);
-
-                    }
-
-                    main.FragmentRemove(AddNewAssignment.this);
-                }
-
-               // main.calendarFragment.dotAssignment();
-
-            }
-
-        });*/
-
-
-
-
-
-
-
-
 
         return view;
 
     }
 
-
+    /***** 설정 미완 dialog *
+     * 이름, 기한 미설정시 띄움 *****/
     public void setYetDialog(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setTitle("알림");
@@ -168,27 +130,27 @@ public class AddNewAssignment extends Fragment {
             }
         });
         dialog.show();
-
     }
 
+    /***setter***/
     public void setAss(Assignment a){
         this.ass = a;
     }
 
-    public void hideKeyBoard(View v){
+
+    /***키보드 숨김***/
+    private void hideKey() {
         input.hideSoftInputFromWindow(mName.getWindowToken(),0);
         input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
     }
 
+
+
+    /***** toolbar *****/
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_add_assignment,menu);
-    }
-
-    private void hideKey() {
-        input.hideSoftInputFromWindow(mName.getWindowToken(),0);
-        input.hideSoftInputFromWindow(mRange.getWindowToken(),0);
     }
 
     @Override

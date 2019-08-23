@@ -22,18 +22,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.TestSub;
 
 import java.util.Calendar;
 
 public class addNewExamSub extends Fragment {
-    public boolean MOD = false;
+    /*** main ***/
+    MainActivity main;
+    InputMethodManager imm;
+
+    /*** tmp ***/
     public String title;
     public String range;
     public String place;
-    Calendar calendar = Calendar.getInstance();
     String mName=null;
+
+    /*** view ***/
+    EditText mSubname;
+    EditText mPlace;
+    EditText mRange;
+
+    /*** flag ***/
+    public boolean MOD = false;
+    boolean DATE_PICKED = false;
+    boolean START_PICKED = false;
+
+    /*** tmp ***/
+    Calendar calendar = Calendar.getInstance();
     int mYear = calendar.get(Calendar.YEAR);
     int mMonth = calendar.get(Calendar.MONTH);
     int mDay;
@@ -42,35 +57,25 @@ public class addNewExamSub extends Fragment {
     int mEHour = -1;
     int mEMinute = calendar.get(Calendar.MINUTE);
     public TestSub subject=null;
-    InputMethodManager imm;
-
-    EditText mSubname;
-    EditText mPlace;
-    EditText mRange;
 
 
-    Boolean DATE_PICKED = false;
-    Boolean START_PICKED = false;
-
-
-
-
-
+    /***** instanciate *****/
     public static addNewExamSub newInstance(){
         return new addNewExamSub();
     }
 
 
 
-
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        main = (MainActivity)getActivity();
     }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        /***** view load *****/
         View view = (View)inflater.inflate(R.layout.add_new_exam_sub, container, false);
         TextView Title = (TextView)view.findViewById(R.id.fragTitle);
         mSubname = (EditText) view.findViewById(R.id.subName);
@@ -78,12 +83,8 @@ public class addNewExamSub extends Fragment {
         mPlace = (EditText) view.findViewById(R.id.testPlace);
         final TextView mStart = (TextView)view.findViewById(R.id.time2);
         final TextView mEnd = (TextView)view.findViewById(R.id.time2_1);
-        //TextView mCancle = (TextView)view.findViewById(R.id.cancle2);
-        //TextView mComplete = (TextView)view.findViewById(R.id.complete2);
         mRange = (EditText)view.findViewById(R.id.Range2);
         LinearLayout layout = (LinearLayout)view.findViewById(R.id.examlayout);
-
-        MainActivity main = (MainActivity)getActivity();
         main.BACK_STACK=true;
         imm = main.keypad;
 
