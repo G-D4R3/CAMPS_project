@@ -6,11 +6,12 @@ public class DateCount {
 
     protected long Today;
     protected long setday;
+
     protected long left;
     protected int result=0;
 
-    Calendar tcalendar = Calendar.getInstance();
-    Calendar dcalendar = Calendar.getInstance();
+    Calendar tcalendar = Calendar.getInstance(); //오늘 날짜
+    Calendar dcalendar = Calendar.getInstance(); //D-day 날짜
 
     public DateCount(){
     }
@@ -21,8 +22,6 @@ public class DateCount {
 
 
     public int calcDday(){
-        //현재 날짜
-
         Today = tcalendar.getTimeInMillis()/(24*60*60*1000);
         setday = dcalendar.getTimeInMillis()/(24*60*60*1000);
 

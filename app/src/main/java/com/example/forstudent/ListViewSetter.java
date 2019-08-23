@@ -6,6 +6,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 public class ListViewSetter {
+
     int divider=0;
     public boolean Flag=false;
 

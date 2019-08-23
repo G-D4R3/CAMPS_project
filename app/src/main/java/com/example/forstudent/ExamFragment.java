@@ -29,19 +29,30 @@ import java.util.Calendar;
 import java.util.Collections;
 
 public class ExamFragment extends Fragment{
+    /*** main ***/
+    MainActivity main;
 
-    ArrayList<TestSub> ExamList=new ArrayList<TestSub>();
-    String titleDday="D-day";
+    /*** tmp ***/
+    String titleDday = "D-day";
+    DateCount count;
+
+    /*** view ***/
+    View view;
     ListView mlistView = null;
     ExamListAdapter adapter;
-    private ImageButton addSubject;
-    View view;
-    DateCount count;
-    public TextView dday;
-    MainActivity main;
+    ImageButton addSubject;
+    TextView dday;
+    ListViewSetter setter;
+
+    /*** storage ***/
+    ArrayList<TestSub> ExamList=new ArrayList<>();
+
+    /*** thread ***/
     loadData load;
     saveData save;
 
+
+    /***** instanciate *****/
     public static ExamFragment newInstance() {
         return new ExamFragment();
     }
@@ -65,20 +76,25 @@ public class ExamFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        /***** view load *****/
         view = (View) inflater.inflate(R.layout.fragment_exam, container, false);
         dday = (TextView)view.findViewById(R.id.examTitle);
         mlistView = (ListView)view.findViewById(R.id.examlistView);
-
-
         count = new DateCount();
+        setter = new ListViewSetter();
 
-        main.setActionBarTitle("");
-        main.centerToolbarTitle.setText("시험");
-        main.invalidateOptionsMenu();
-        //listvieww
+
         load.run();
 
 
+        /***** toolbar *****/
+        main.setActionBarTitle("");
+        main.centerToolbarTitle.setText("시험");
+        main.invalidateOptionsMenu();
+
+
+        /***** listview item 클릭 이벤트 *****/
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -136,7 +152,7 @@ public class ExamFragment extends Fragment{
                     }
                 }).start();
             }
-        });
+        }); //mlistview.setOnClickListener();
 
 
 
@@ -151,11 +167,9 @@ public class ExamFragment extends Fragment{
 
 
     public void addNewsub(){ //nullcheck 필요? rangd null일 수 있음
-
         addNewExamSub add = addNewExamSub.newInstance();
         main.FragmentAdd(add);
         Collections.sort(ExamList);
-
         if (ExamList.size() > 0) {
             DateSet();
         }
@@ -164,17 +178,18 @@ public class ExamFragment extends Fragment{
     public void removeSub(TestSub sub){
         ExamList.remove(sub);
         Collections.sort(ExamList);
+
         if(ExamList.isEmpty()==true){
             titleDday="시험이 없습니다.";
         }
         else{
-            DateSet();
+            DateSet(); //가장 빠른 시험 D-day 계산
         }
+
         adapter.notifyDataSetChanged();
     }
 
     public void modifySub(TestSub sub){
-
         addNewExamSub mod = addNewExamSub.newInstance();
         mod.subject = sub;
         mod.mYear = sub.TestDate.get(Calendar.YEAR);
@@ -187,11 +202,14 @@ public class ExamFragment extends Fragment{
         mod.mEMinute = sub.endMinute;
         mod.MOD = true;
         mod.range = sub.range;
+
         main.FragmentAdd(mod);
+
         Collections.sort(ExamList);
+        DateSet();
 
         adapter.notifyDataSetChanged();
-        DateSet();
+
     }
 
     public void DateSet(){

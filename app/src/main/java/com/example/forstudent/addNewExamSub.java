@@ -70,6 +70,7 @@ public class addNewExamSub extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         main = (MainActivity)getActivity();
+        main.BACK_STACK=true;
     }
     @Nullable
     @Override
@@ -77,21 +78,21 @@ public class addNewExamSub extends Fragment {
 
         /***** view load *****/
         View view = (View)inflater.inflate(R.layout.add_new_exam_sub, container, false);
-        TextView Title = (TextView)view.findViewById(R.id.fragTitle);
-        mSubname = (EditText) view.findViewById(R.id.subName);
-        final TextView mDate = (TextView)view.findViewById(R.id.date2);
-        mPlace = (EditText) view.findViewById(R.id.testPlace);
-        final TextView mStart = (TextView)view.findViewById(R.id.time2);
-        final TextView mEnd = (TextView)view.findViewById(R.id.time2_1);
-        mRange = (EditText)view.findViewById(R.id.Range2);
         LinearLayout layout = (LinearLayout)view.findViewById(R.id.examlayout);
-        main.BACK_STACK=true;
+        mSubname = (EditText) view.findViewById(R.id.subName);
+        mPlace = (EditText) view.findViewById(R.id.testPlace);
+        mRange = (EditText)view.findViewById(R.id.Range2);
+        TextView Title = (TextView)view.findViewById(R.id.fragTitle);
+        TextView mDate = (TextView)view.findViewById(R.id.date2);
+        TextView mStart = (TextView)view.findViewById(R.id.time2);
+        TextView mEnd = (TextView)view.findViewById(R.id.time2_1);
         imm = main.keypad;
 
+
+        /***** toolbar *****/
         main.centerToolbarTitle.setText("시험 추가");
         main.toolbar.setTitle("");
         main.invalidateOptionsMenu();
-
         main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +103,7 @@ public class addNewExamSub extends Fragment {
             }
         });
 
-
+        /***** 키보드 숨기기 *****/
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,9 +112,7 @@ public class addNewExamSub extends Fragment {
         });
 
 
-
-
-
+        /***** modify면 textview set *****/
         if(MOD==true){
             mSubname.setText(subject.getName());
             mPlace.setText(subject.getPlace());
@@ -125,8 +124,7 @@ public class addNewExamSub extends Fragment {
             START_PICKED=true;
         }
 
-
-
+        /***** 날짜 설정 *****/
         mDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -138,14 +136,16 @@ public class addNewExamSub extends Fragment {
                         mYear = year;
                         mMonth = month;
                         mDay = dayOfMonth;
-                        DATE_PICKED=true;
+                        DATE_PICKED=true; //flag true
                     }
                 },mYear, mMonth, calendar.get(Calendar.DATE));
-                calendar.set(mYear,mMonth,calendar.get(Calendar.DATE));
+                calendar.set(mYear,mMonth,calendar.get(Calendar.DATE)); //calendar에 set해서 기한 저장
                 datepick.show();
             }
         });
 
+
+        /***** 시험 시작 시간 *****/
         mStart.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -157,13 +157,14 @@ public class addNewExamSub extends Fragment {
                         mStart.setText(hourOfDay+"시 "+minute+"분");
                         mSHour = hourOfDay;
                         mSMinute = minute;
-                        START_PICKED=true;
+                        START_PICKED=true; //flag true
                     }
                 },mSHour,mSMinute,true);
                 timepick.show();
             }
         });
 
+        /***** 시험 종료 시간 *****/
         mEnd.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -181,86 +182,18 @@ public class addNewExamSub extends Fragment {
             }
         });
 
-/*
-        mCancle.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                hideKey();
-                MainActivity main = (MainActivity)getActivity();
-                main.showActionBar();
-                main.FragmentRemove(addNewExamSub.this);
-            }
-        });
-
-        mComplete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKey();
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(mYear,mMonth,mDay);
-
-                if(MOD==true){ //if this fragment is modify, then remove original object and add new one
-                    main.examFragment.ExamList.remove(subject);
-                    if(mRange.getText().toString().length()==0){
-                        range = null;
-                    }
-                    else{
-                        range = mRange.getText().toString();
-                    }
-                    if(mPlace.getText().toString().length()==0){
-                        place = null;
-                    }
-                    else{
-                        place = mPlace.getText().toString();
-                    }
-                    subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
-                    MainActivity main = (MainActivity)getActivity();
-                    main.examFragment.ExamList.add(subject);
-                    main.FragmentRemove(addNewExamSub.this);
-                }
-                else{
-                    if(mRange.getText().toString().length()==0){
-                        range = null;
-                    }
-                    else{
-                        range = mRange.getText().toString();
-                    }
-                    if(mPlace.getText().toString().length()==0){
-                        place = null;
-                    }
-                    else{
-                        place = mPlace.getText().toString();
-                    }
-
-                    if(mSubname.getText().toString().length()==0||DATE_PICKED==false||START_PICKED==false){
-                        setYetDialog();
-                    }
-                    else{
-                        subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
-                        MainActivity main = (MainActivity)getActivity();
-                        main.examFragment.ExamList.add(subject);
-                        main.showActionBar();
-                        main.FragmentRemove(addNewExamSub.this);
-                    }
-                }
-
-
-            }
-        });
-*/
-
         return view;
 
     }
 
+    /***** 키보드 숨기기 *****/
     private void hideKey() {
         imm.hideSoftInputFromWindow(mSubname.getWindowToken(),0);
         imm.hideSoftInputFromWindow(mRange.getWindowToken(),0);
         imm.hideSoftInputFromWindow(mPlace.getWindowToken(),0);
     }
 
-
+    /***** toolbar *****/
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //super.onCreateOptionsMenu(menu, inflater);
@@ -323,6 +256,7 @@ public class addNewExamSub extends Fragment {
         return true;
     }
 
+    /***** 설정 미완료시 dialog *****/
     public void setYetDialog(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setTitle("알림");

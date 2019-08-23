@@ -30,31 +30,38 @@ import java.util.Calendar;
 import java.util.Collections;
 
 public class TodoFragment extends Fragment {
+    /*** main ***/
     MainActivity main;
-    Handler handler;
-    public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
-    public ArrayList<Assignment> ImpList;
+
+    /*** tmp ***/
+    String title = "남은 과제 수";
+
+    /*** view ***/
+    View view;
+    public ListView mlistView;
+    public ListView mImportant;
     TodoListAdapter adapter;
     TodoListAdapter ImportantAdapter;
     TextView mTitle;
-    public ListView mlistView;
-    public ListView mImportant;
-    TextView mAssSec;
+    TextView mAssSec; //section header
     TextView mImpSec;
-    TextView mIhide;
+    TextView mIhide; //더보기 줄이기
     TextView mAhide;
-    String title = "남은 과제 수";
-    Boolean mIvisible=true;
-    Boolean mDvisible=true;
-    View view;
-    long boxSize;
-    protected static boolean MOD = false;
-    static int mod_index;
     public ListViewSetter setter = new ListViewSetter();
+
+    /*** flag ***/
+    Boolean mIvisible=true; //중요 표시 과제
+    Boolean mDvisible=true; //과제
+
+    /*** storage ***/
+    public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
+    public ArrayList<Assignment> ImpList;
     ArrayList<String> toolbarButtonStatus = new ArrayList<>();
 
+    /*** thread ***/
     loadData load;
     saveData save;
+
 
     @Override
     public void onAttach(Context context) {
@@ -78,12 +85,8 @@ public class TodoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        /***** view load *****/
         view  = inflater.inflate(R.layout.fragment_todo, container, false);
-
-        main.setActionBarTitle("");
-        main.centerToolbarTitle.setText("과제");
-        main.invalidateOptionsMenu();
-
         mTitle = (TextView)view.findViewById(R.id.restDo);
         mlistView = (ListView)view.findViewById(R.id.assignmentList);
         mImportant = (ListView)view.findViewById(R.id.importantAssignment);
@@ -93,11 +96,14 @@ public class TodoFragment extends Fragment {
         mAhide = (TextView)view.findViewById(R.id.hide3);
         adapter = new TodoListAdapter(AssList);
         ImportantAdapter = new TodoListAdapter(ImpList);
-
-
         Handler handler = new Handler();
 
+        /***** toolbar *****/
+        main.setActionBarTitle("");
+        main.centerToolbarTitle.setText("과제");
+        main.invalidateOptionsMenu();
 
+        /***** listview adapter set *****/
         Thread setView = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -120,6 +126,7 @@ public class TodoFragment extends Fragment {
         setView.start();
 
 
+        /***** listview item 클릭 이벤트 *****/
         mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -190,8 +197,10 @@ public class TodoFragment extends Fragment {
                 }).start();
 
             }
-        });
+        }); //mlistview.setOnItemClickListener
 
+
+        /***** 중요 과목 listview item 클릭 이벤트 *****/
         mImportant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -236,8 +245,10 @@ public class TodoFragment extends Fragment {
                 }).start();
 
             }
-        });
+        }); //mImportant.setOnItemClickListener
 
+
+        /***** 더보기 줄이기 *****/
         mIhide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -289,6 +300,7 @@ public class TodoFragment extends Fragment {
 
         Collections.sort(AssList);
         adapter.notifyDataSetChanged();
+
         title = String.format("남은 과제 : %d",AssList.size());
     }
 
@@ -319,13 +331,14 @@ public class TodoFragment extends Fragment {
 
 
     public void setImportance(Assignment a){
-        a.flag =true;
+        a.flag =true; //flag = 중요표시
         ImpList.add(a);
         ImportantAdapter.notifyDataSetChanged();
         mImportant.setVisibility(View.VISIBLE);
     }
 
 
+    /***** title textview set *****/
     public void setView(){
         title = String.format("남은 과제 : %d", AssList.size());
         mTitle.setText(title);
@@ -378,18 +391,19 @@ public class TodoFragment extends Fragment {
 
         public void run(){
             try{
-
                 Log.v("TodoFragment", "Loaded Data");
 
                 AssList = main.assignment;
                 ImpList = new ArrayList<>();
 
+                //중요한 과목은 Implist에 추가
                 for(Assignment tmp :AssList) {
                     if (tmp.flag == true) {
                         ImpList.add(tmp);
                     }
                 }
 
+                //textview set
                 if(AssList.size()==0){
                     title = "남은 과제가 없습니다.";
                 }

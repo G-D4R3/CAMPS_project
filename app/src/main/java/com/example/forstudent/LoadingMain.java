@@ -24,7 +24,5 @@ public class LoadingMain extends Activity {
         startActivity(new Intent(this, MainActivity.class));
         finish();
 
-
-
     }
 }
