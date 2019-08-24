@@ -170,6 +170,7 @@ public class ExamFragment extends Fragment{
     public void addNewsub(){ //nullcheck 필요? rangd null일 수 있음
         addNewExamSub add = addNewExamSub.newInstance();
         main.FragmentAdd(add);
+
         if (ExamList.size() > 0) {
             DateSet();
         }
