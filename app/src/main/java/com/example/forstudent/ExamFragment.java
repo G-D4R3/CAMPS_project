@@ -170,10 +170,11 @@ public class ExamFragment extends Fragment{
     public void addNewsub(){ //nullcheck 필요? rangd null일 수 있음
         addNewExamSub add = addNewExamSub.newInstance();
         main.FragmentAdd(add);
-        Collections.sort(ExamList);
         if (ExamList.size() > 0) {
             DateSet();
         }
+        Collections.sort(ExamList);
+        adapter.notifyDataSetChanged();
     }
 
     public void removeSub(TestSub sub){
@@ -273,6 +274,7 @@ public class ExamFragment extends Fragment{
                 mlistView.setAdapter(adapter);
                 DateSet();
                 dday.setText(titleDday);
+                Collections.sort(ExamList);
             }
             catch (Exception e){
                 e.printStackTrace();

@@ -23,7 +23,7 @@ import com.example.forstudent.DataClass.Grade;
 
 import java.util.ArrayList;
 
-public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPressedListener{
+public class CalcGradeFragment extends Fragment{
 
     /*** main ***/
     MainActivity main;
@@ -66,7 +66,6 @@ public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPr
         radio = main.getUser().getCalcGradeCheck(); //radio button id
         load = new loadData();
         save = new saveData();
-        main.setOnBackPressedListener(this);
     }
 
     @Override
@@ -332,14 +331,6 @@ public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPr
     } //to43
 
 
-    //지워야됨 무시하삼
-    @Override
-    public void OnBack() {
-        main.setOnBackPressedListener(null);
-        main.fragmentManager.beginTransaction().replace(R.id.frame_layout, main.homeFragment);
-    }
-
-
     /***** 불러오기 *****/
     public class loadData extends Thread{
         public loadData(){
@@ -348,6 +339,7 @@ public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPr
 
         public void run(){
             data =  main.grades;
+            radio = main.getUser().calcGradeCheck;
             mMethod.check(radio);
 
             //저장된 라디오 버튼대로 스피너 세팅
@@ -376,6 +368,12 @@ public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPr
                     credits[i].setText(credit);
                     subjects[i].setText(data.get(i).subject);
                 }
+            }
+            if(radio==R.id.radioButton){
+                calc43();
+            }
+            else{
+                calc45();
             }
         }//run
 
@@ -421,34 +419,34 @@ public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPr
                 return 2;
             }
             else if(g.grade==3.3){
-                return 4;
+                return 3;
             }
             else if(g.grade==3.0){
-                return 5;
+                return 4;
             }
             else if(g.grade==2.7){
-                return 6;
+                return 5;
             }
             else if(g.grade==2.3){
-                return 7;
+                return 6;
             }
             else if(g.grade==2.0){
-                return 8;
+                return 7;
             }
             else if(g.grade==1.7){
-                return 9;
+                return 8;
             }
             else if(g.grade==1.3){
-                return 10;
+                return 9;
             }
             else if(g.grade==1.0){
-                return 11;
+                return 10;
             }
             else if(g.grade==0.7){
-                return 12;
+                return 11;
             }
             else if(g.grade==0){
-                return 13;
+                return 12;
             }
             return 0;
         } //43
@@ -470,6 +468,7 @@ public class CalcGradeFragment extends Fragment implements MainActivity.OnBackPr
                 GradeHelper.putGrade(gradeHelper);
             }
             main.getUser().setCalcGradeCheck(radio);
+            main.getUserDataBox().put(main.getUser());
         }
     }
 

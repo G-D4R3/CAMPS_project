@@ -22,16 +22,17 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
 
     private GoogleMap mMap;
     private Geocoder geocoder;
-    MainActivity main = (MainActivity)getActivity();
+    MainActivity main;
     Button testbutton;
     double latitude;
     double longitude;
     String schoolName;
-    private String m_Text = "";
+    private String mText = "";
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        main = (MainActivity)getActivity();
         geocoder = new Geocoder(activity);
 
     }
