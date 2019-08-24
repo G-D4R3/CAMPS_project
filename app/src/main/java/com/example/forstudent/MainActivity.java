@@ -592,6 +592,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         }
         ringDate = calcHourBefore(alarmDate,timeBefore);
+        if(ringDate.compareTo(Calendar.getInstance())==-1){
+            return;
+        }
         Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
 
         alarmIntent.putExtra("year",ringDate.get(Calendar.YEAR));
@@ -655,6 +658,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         }
         ringDate = calcHourBefore(alarmDate,timeBefore);
+        if(ringDate.compareTo(Calendar.getInstance())==-1){
+            return;
+        }
         Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
         alarmIntent.putExtra("year",ringDate.get(Calendar.YEAR));
         alarmIntent.putExtra("month",ringDate.get(Calendar.MONTH));
