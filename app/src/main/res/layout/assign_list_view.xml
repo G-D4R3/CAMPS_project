@@ -22,11 +22,11 @@
 
         <TextView
             android:id="@+id/period"
-            android:layout_width="match_parent"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_weight="5"
-            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
             android:textSize="15sp"
             android:textColor="@color/layout_content_color"
             android:fontFamily="@font/barun"
@@ -40,7 +40,7 @@
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
             android:textSize="15sp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:fontFamily="@font/barun"
             android:textColor="@color/layout_content_color"
             android:text="과제" />
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:layout_weight="5"
+            android:layout_weight="4"
             android:focusable="false"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
