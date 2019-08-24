@@ -101,7 +101,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
 
-
     /*****toolbar, navigation *****/
 
     public ActionBar actionBar;
@@ -334,11 +333,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     }//onCreate
 
-    /*
-    @Override
+
     public void onBackPressed(){
             if(BACK_STACK){
-                super.onBackPressed();
                 FragmentRemove(fragment);
                 BACK_STACK=false;
             }
@@ -352,7 +349,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                 }
             }
 
-    }*/
+    }
 
 
 
@@ -386,7 +383,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     /**********Fragment***********/
     public void FragmentAdd(Fragment fragment){
         this.fragment = fragment;
+        BACK_STACK=true;
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+
         transaction.setCustomAnimations(R.anim.popup,R.anim.slide_down,0,R.anim.slide_down);
         transaction.replace(R.id.frame_layout,fragment);
         transaction.addToBackStack(null);

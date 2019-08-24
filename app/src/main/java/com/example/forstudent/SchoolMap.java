@@ -33,16 +33,23 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         geocoder = new Geocoder(activity);
+
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getMapAsync(this);
+
     }
+
+    @Override
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+    }
+
     @Override
     public void onStart() {
         super.onStart();
-        MainActivity main = (MainActivity)getActivity();
         testbutton = (Button)getView().findViewById(R.id.testbutton);
         schoolName= main.getUser().name;
         System.out.println(schoolName);
