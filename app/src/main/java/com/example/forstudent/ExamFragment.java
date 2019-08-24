@@ -127,6 +127,7 @@ public class ExamFragment extends Fragment{
                                                 remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialog, int which) {
+                                                        main.alarmDelete(adapter.data.get(pos));
                                                         removeSub(adapter.data.get(pos));
                                                         dday.setText(titleDday);
                                                         dialog.dismiss();

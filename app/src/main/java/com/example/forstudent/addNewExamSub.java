@@ -209,6 +209,7 @@ public class addNewExamSub extends Fragment {
             calendar.set(mYear,mMonth,mDay);
 
             if(MOD==true){ //if this fragment is modify, then remove original object and add new one
+                main.alarmDelete(subject);
                 main.examFragment.ExamList.remove(subject);
                 if(mRange.getText().toString().length()==0){
                     range = null;
@@ -223,6 +224,7 @@ public class addNewExamSub extends Fragment {
                     place = mPlace.getText().toString();
                 }
                 subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
+                main.alarmSet(subject);
                 main.examFragment.ExamList.add(subject);
                 main.FragmentRemove(addNewExamSub.this);
             }

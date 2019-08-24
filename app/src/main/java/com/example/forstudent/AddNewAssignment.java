@@ -160,6 +160,7 @@ public class AddNewAssignment extends Fragment {
         if (id == R.id.check_icon) {
             hideKey();
             if (Flag == true) {
+                main.alarmDelete(ass);
                 main.todoFragment.ImpList.remove(ass);
             }
 
