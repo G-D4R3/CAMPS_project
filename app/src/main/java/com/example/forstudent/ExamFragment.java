@@ -89,8 +89,8 @@ public class ExamFragment extends Fragment{
 
 
         /***** toolbar *****/
-        main.setActionBarTitle("");
-        main.centerToolbarTitle.setText("시험");
+        main.setActionBarTitle(" 시험");
+        main.centerToolbarTitle.setText("");
         main.invalidateOptionsMenu();
 
 

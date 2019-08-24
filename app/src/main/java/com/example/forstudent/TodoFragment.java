@@ -103,8 +103,8 @@ public class TodoFragment extends Fragment {
         ImportantAdapter.notifyDataSetChanged();
 
         /***** toolbar *****/
-        main.setActionBarTitle("");
-        main.centerToolbarTitle.setText("과제");
+        main.setActionBarTitle(" 과제");
+        main.centerToolbarTitle.setText("");
         main.invalidateOptionsMenu();
 
         /***** listview adapter set *****/

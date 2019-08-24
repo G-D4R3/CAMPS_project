@@ -99,8 +99,8 @@ public class CalendarFragment extends Fragment{
 
 
         /*** toolbar setting ***/
-        main.setActionBarTitle("");
-        main.centerToolbarTitle.setText("캘린더");
+        main.setActionBarTitle(" 캘린더");
+        main.centerToolbarTitle.setText("");
         main.invalidateOptionsMenu();
 
 

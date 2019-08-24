@@ -143,8 +143,11 @@ public class HomeFragment extends Fragment {
 
 
         /***** toolbar *****/
+        main.setActionBarTitle(" 홈");
+        main.centerToolbarTitle.setText("");
         main.invalidateOptionsMenu();
-        main.centerToolbarTitle.setText("홈");
+
+
 
 
 
