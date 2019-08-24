@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -35,13 +34,18 @@ import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
+    /*** main ***/
+    MainActivity main;
+
+    /*** tmp ***/
+    /*** view ***/
     private TextView Dday;
     private TextView today;
     protected DateCount datecount;
-    private UserData user;
-    final long id = 77;
     int restDay=0;
+
     boolean[] layoutset={true,true,true,true};
+
     TextView mSchedule;
     TextView mClass;
     TextView mAssignment;
@@ -50,72 +54,80 @@ public class HomeFragment extends Fragment {
     TextView mNoClass;
     TextView mNoAssignment;
     TextView mNoExam;
+
     ListView mScheduleList;
     ListView mClassList;
     ListView mAssignList;
     ListView mTestList;
+    public HomeAssignmentAdapter assignmentAdapter;
+    public HomeExamAdapter examAdapter;
+    public HomeScheduleAdapter scheduleAdapter;
+
+
+    /*** flag ***/
     boolean mSetAssignment=true; //true면 전부,  false면 중요한 과제만 표시
+
+    /*** storage ***/
+
+    private UserData user;
+    static final long id = 77;
 
     public ArrayList<Assignment> ass = new ArrayList<>();
     public ArrayList<TestSub> tests = new ArrayList<>();
     public ArrayList<Schedule> schedules = new ArrayList<>();
 
 
-    public HomeAssignmentAdapter assignmentAdapter;
-    public HomeExamAdapter examAdapter;
-    public HomeScheduleAdapter scheduleAdapter;
 
-    Button btnStart;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        user = ((MainActivity)getActivity()).getUser();
+        main = (MainActivity)getActivity();
+        user = main.getUser();
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ListViewSetter listViewSetter = new ListViewSetter();
-        MainActivity main = (MainActivity)getActivity();
-        //main.setActionBarTitle("홈");
-        main.invalidateOptionsMenu();
 
-        main.centerToolbarTitle.setText("홈");
-
-
-        //main.toolbarButtonState.remove("SETTING_INVISIBLE");
-        //view 정의
+        /***** view load *****/
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
-       // ImageButton mSetup = (ImageButton)view.findViewById(R.id.setup);
 
+        /*** section header ***/
         mSchedule = (TextView)view.findViewById(R.id.home_schedule);
         mClass = (TextView)view.findViewById(R.id.home_class);
         mAssignment = (TextView)view.findViewById(R.id.home_ass);
         mExam = (TextView)view.findViewById(R.id.home_exam);
 
+        /*** null check ***/
         mNoSchedule = (TextView)view.findViewById(R.id.noschedule);
         mNoClass = (TextView)view.findViewById(R.id.noclass);
         mNoAssignment = (TextView)view.findViewById(R.id.noassignment);
         mNoExam = (TextView)view.findViewById(R.id.noexam);
 
+        /*** listview ***/
         mScheduleList = (ListView)view.findViewById(R.id.home_schedulelistview);
         mClassList = (ListView)view.findViewById(R.id.home_classlistview);
         mAssignList = (ListView)view.findViewById(R.id.home_asslistview);
         mTestList = (ListView)view.findViewById(R.id.home_examlistview);
 
+        //종강 날짜 count
         datecount = new DateCount(Calendar.getInstance());
+        datecount.dcalendar=user.getLastDay();
+        restDay = datecount.calcDday();
+        setDateView();
 
+        //set list data
         initArrayLists();
+        ListViewSetter listViewSetter = new ListViewSetter();
 
 
+        /*** adapter set ***/
         scheduleAdapter = new HomeScheduleAdapter(schedules);
         mScheduleList.setAdapter(scheduleAdapter);
         listViewSetter.setListViewHeight(mScheduleList);
-
-
 
         assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
@@ -130,27 +142,9 @@ public class HomeFragment extends Fragment {
 
 
 
-
-
-        /*objectBox에서 불러오기*/
-
-        datecount.dcalendar=user.getLastDay();
-
-
-        restDay = datecount.calcDday();
-        setDateView();
-
-/*
-        mSetup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity main = (MainActivity)getActivity();
-                main.FragmentAdd(main.homeFragmentSetup);
-                layoutset = main.homeFragmentSetup.select;
-                setListView();
-            }
-        });*/
-
+        /***** toolbar *****/
+        main.invalidateOptionsMenu();
+        main.centerToolbarTitle.setText("홈");
 
 
 
@@ -179,30 +173,29 @@ public class HomeFragment extends Fragment {
                 },datecount.dcalendar.get(Calendar.YEAR), datecount.dcalendar.get(Calendar.MONTH), datecount.dcalendar.get(Calendar.DATE));
                 datepick.show();
             }
-        });
-
-
+        }); //Dday set onclicklistener
 
 
 
         return view;
-    }
+    } //OnCreateView
 
+    /***** main에서 arraylist 불러옴 *****/
     private void initArrayLists() {
-        MainActivity main = (MainActivity)getActivity();
-        Calendar today = Calendar.getInstance();
-        //load data
 
-        tests = main.testSub;
+        Calendar today = Calendar.getInstance();
+
+        //모두 불러옴
+        schedules = main.schedules;
 
         if(mSetAssignment==true){
             ass = main.assignment;
         }
         else{
             ass = main.important;
-        }
+        } // setting에 설정한 중요한 과제만 표시할지 전부 표시할지에 따라 다르게 불러옴
 
-        schedules = main.schedules;
+        tests = main.testSub;
 
 
         //schedule
@@ -217,7 +210,7 @@ public class HomeFragment extends Fragment {
                 position = i;
                 break;
             }
-        }
+        } //오늘 날짜 이후 일정 제외
         schedules = new ArrayList(schedules.subList(position, size));
 
 
@@ -250,9 +243,9 @@ public class HomeFragment extends Fragment {
         tests = new ArrayList(tests.subList(position, size));
 
 
+    } //initArraylist
 
-    }
-
+    /***** arraylist size check => visibility set *****/
     private void setExist() {
         if(layoutset[0]==true){
             if(schedules.size()>0){
@@ -280,6 +273,8 @@ public class HomeFragment extends Fragment {
         }
     }
 
+
+    /***** 설정에 따라 체크한 리스트만 visible *****/
     public void setListView() { //설정한 레이아웃 적용
 
         MainActivity main = (MainActivity)getActivity();
@@ -326,8 +321,8 @@ public class HomeFragment extends Fragment {
             mTestList.setVisibility(View.GONE);
         }
 
+    } //setListView
 
-    }
 
     @Override
     public void onStart() {
@@ -336,6 +331,8 @@ public class HomeFragment extends Fragment {
         examAdapter.notifyDataSetChanged();
     }
 
+
+    /***** 종강 D-day 날짜에 따라 textview set *****/
     public void setDateView(){
         //D-day textview set
         today.setText(String.format("종강 %d월 %d일",(datecount.dcalendar.get(Calendar.MONTH)+1),datecount.dcalendar.get(Calendar.DAY_OF_MONTH)));
@@ -380,18 +377,18 @@ public class HomeFragment extends Fragment {
     }
 
     public void schoolNameDialog(){
-        MainActivity main = (MainActivity)getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("학교 이름을 입력해주세요");
 
-// Set up the input
+        // Set up the input
         final EditText input = new EditText(getContext());
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-// Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        // Set up the buttons
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 main.getUser().name = input.getText().toString();
@@ -399,7 +396,8 @@ public class HomeFragment extends Fragment {
                 main.FragmentAdd(main.schoolMap);
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -408,6 +406,6 @@ public class HomeFragment extends Fragment {
         });
 
         builder.show();
-    }
+    } //schoolnamedialog
 
 }

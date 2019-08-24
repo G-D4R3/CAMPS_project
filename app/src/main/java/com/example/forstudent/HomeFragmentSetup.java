@@ -17,31 +17,44 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragmentSetup extends Fragment {
-    public boolean[] select = {true, true, true, true};
-    int assignmentViewCheck;
 
+    MainActivity main;
+
+    public boolean[] select = {true, true, true, true}; //리스트뷰 표시
+    int assignmentViewCheck; //과제 표시
+
+    /***** instanciate *****/
     public static HomeFragmentSetup newInstance(){
         return new HomeFragmentSetup();
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        main = (MainActivity)getActivity();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        /***** view load *****/
         View view = (View)inflater.inflate(R.layout.home_setup, container, false);
-        //TextView Title = (TextView)view.findViewById(R.id.setupTitle);
-        //TextView mCancel = (TextView)view.findViewById(R.id.cancel5);
         TextView mLayout = (TextView)view.findViewById(R.id.layoutset);
-        MainActivity main = (MainActivity)getActivity();
+        RadioGroup mAssignmentView = (RadioGroup)view.findViewById(R.id.AssignmentView);
+
+        select[0]=main.getUser().homeScheduleCheck;
+        select[1]=main.getUser().homeClassCheck;
+        select[2]=main.getUser().homeAssignmentCheck;
+        select[3]=main.getUser().homeExamCheck;
+
+        assignmentViewCheck = main.getUser().getHomeAssignmentViewCheck();
+        mAssignmentView.check(assignmentViewCheck);
+
+
+        /***** toolbar *****/
         main.BACK_STACK=true;
         main.toolbar.setTitle("");
-        //main.getSupportActionBar().setTitle("설정");
         main.centerToolbarTitle.setText("설정");
-
         main.invalidateOptionsMenu();
 
         main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -51,29 +64,6 @@ public class HomeFragmentSetup extends Fragment {
             }
         });
 
-
-
-        RadioGroup mAssignmentView = (RadioGroup)view.findViewById(R.id.AssignmentView);
-        select[0]=main.getUser().homeScheduleCheck;
-        select[1]=main.getUser().homeClassCheck;
-        select[2]=main.getUser().homeAssignmentCheck;
-        select[3]=main.getUser().homeExamCheck;
-        assignmentViewCheck = main.getUser().getHomeAssignmentViewCheck();
-
-        mAssignmentView.check(assignmentViewCheck);
-
-
-/*
-
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity main = (MainActivity)getActivity();
-                main.FragmentRemove(HomeFragmentSetup.this);
-
-            }
-        });
-*/
 
 
         mLayout.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +112,7 @@ public class HomeFragmentSetup extends Fragment {
             }
         });
 
+
         mAssignmentView.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -139,16 +130,12 @@ public class HomeFragmentSetup extends Fragment {
 
 
 
-
-
         return view;
 
     }
     @Override
     public void onResume() {
         super.onResume();
-        MainActivity main = (MainActivity)getActivity();
-        //main.centerToolbarTitle.setText("");
 
     }
     @Override
