@@ -501,19 +501,26 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     //화면 캡쳐하기
     public File ScreenShot(View view){
+        String folder = "Pictures";
         view.setDrawingCacheEnabled(true);  //화면에 뿌릴때 캐시를 사용하게 한다
 
         Bitmap screenBitmap = view.getDrawingCache();   //캐시를 비트맵으로 변환
 
-        String filename = "screenshot.png";
-        String address = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.forstudent/Pictures"+filename;
-        //System.out.println(Environment.getExternalStorageState());
-        //File filePath = new File(, "/Pictures");
+        String filename = "screenshot.jpg";
+
+        File sdCardPath = Environment.getExternalStorageDirectory();
+        File dirs = new File(Environment.getExternalStorageDirectory(), folder);
+
+        if (!dirs.exists()) { // 원하는 경로에 폴더가 있는지 확인
+            dirs.mkdirs(); // Test 폴더 생성
+             }
+        String save = sdCardPath.getPath() + "/" + folder + "/" + filename;
+
         File file = new File(Environment.getExternalStorageDirectory(), filename);//Pictures폴더 screenshot.png 파일
         FileOutputStream os = null;
         try{
             //filePath.mkdir();
-            os = new FileOutputStream(address);
+            os = new FileOutputStream(save);
             screenBitmap.compress(Bitmap.CompressFormat.PNG, 90, os);   //비트맵을 PNG파일로 변환
             os.close();
         }catch (IOException e){
@@ -530,14 +537,60 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     public Calendar calcHourBefore(Calendar calendar,int amount){
         calendar.set(Calendar.SECOND,0);
+
+        if(24<=amount) {
+            calendar.set(Calendar.MINUTE,0);
+            calendar.set(Calendar.HOUR,0);
+        }
+
         long destDateInMillis = calendar.getTimeInMillis()-3600000*amount;
 
         Calendar destDate = Calendar.getInstance();
         destDate.setTimeInMillis(destDateInMillis);
         return destDate;
     }
-    public void alarmDelete(long id,Calendar alarmDate,String title,String memo){
-        Calendar ringDate = calcHourBefore(alarmDate,1);
+    public void alarmDelete(Object src){
+        String className = src.getClass().getSimpleName();
+        Calendar ringDate = null;
+        Calendar alarmDate = null;
+
+        Assignment assignment;
+        Schedule schedule;
+        TestSub testSub;
+
+        String title=null;
+        String memo=null;
+
+        int timeBefore=0;
+        int id=-1;
+
+        switch (className){
+            case "Assignment":
+                timeBefore = 24;
+                assignment = (Assignment) src;
+                alarmDate = assignment.getPeriod();
+                title = "[과제] 내일 까지 "+assignment.Name+"가 있습니다.";
+                memo = assignment.Memo;
+                id = ASSIGNMENT_ALARM_BASE+todoFragment.AssList.indexOf(assignment)+1;
+                break;
+            case "Schedule":
+                timeBefore = 1;
+                schedule = (Schedule) src;
+                alarmDate = schedule.getDate();
+                title = "[일정] 1시간 후에 "+schedule.getTitle()+"이 있습니다.";
+                memo = schedule.getMemo();
+                id = SCHEDULE_ALARM_BASE+calendarFragment.schedules.indexOf(schedule)+1;
+                break;
+            case "TestSub:":
+                timeBefore = 24;
+                testSub = (TestSub) src;
+                alarmDate = testSub.getTestDate();
+                title = "[시함] 내일 "+testSub.Name+"시험이 있습니다.";
+                id = TEST_ALARM_BASE+examFragment.ExamList.indexOf(testSub)+1;
+                break;
+
+
+        }
         Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
         alarmIntent.putExtra("year",ringDate.get(Calendar.YEAR));
         alarmIntent.putExtra("month",ringDate.get(Calendar.MONTH));
@@ -555,8 +608,51 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
 
     }
-    public void alarmSet(long id, Calendar alarmDate,String title,String memo){
-        Calendar ringDate = calcHourBefore(alarmDate,1);
+
+    public void alarmSet(Object src){
+        String className = src.getClass().getSimpleName();
+        Calendar ringDate = null;
+        Calendar alarmDate = null;
+
+        Assignment assignment;
+        Schedule schedule;
+        TestSub testSub;
+
+        String title=null;
+        String memo=null;
+
+        int timeBefore=0;
+        int id=-1;
+
+        switch (className){
+            case "Assignment":
+                timeBefore = 24;
+                assignment = (Assignment) src;
+                alarmDate = assignment.getPeriod();
+                title = "[과제]";
+                memo = "내일 까지 "+assignment.Name+"가 있습니다.";
+                id = ASSIGNMENT_ALARM_BASE+todoFragment.AssList.indexOf(assignment)+1;
+                break;
+            case "Schedule":
+                timeBefore = 1;
+                schedule = (Schedule) src;
+                alarmDate = schedule.getDate();
+                title = "[일정]";
+                memo = "1시간 후에 "+schedule.getTitle()+"가 있습니다.";
+                id = SCHEDULE_ALARM_BASE+calendarFragment.schedules.indexOf(schedule)+1;
+                break;
+            case "TestSub":
+                timeBefore = 24;
+                testSub = (TestSub) src;
+                alarmDate = testSub.getTestDate();
+                title = "[시험]";
+                memo = "내일 "+testSub.Name+"시험이 있습니다.";
+                id = TEST_ALARM_BASE+examFragment.ExamList.indexOf(testSub)+1;
+                break;
+
+
+        }
+        ringDate = calcHourBefore(alarmDate,timeBefore);
         Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
         alarmIntent.putExtra("year",ringDate.get(Calendar.YEAR));
         alarmIntent.putExtra("month",ringDate.get(Calendar.MONTH));
@@ -565,7 +661,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         alarmIntent.putExtra("minute",ringDate.get(Calendar.MINUTE));
         alarmIntent.putExtra("title",title);
         alarmIntent.putExtra("memo",memo);
-
         alarmIntent.addCategory("android.intent.category.DEFAULT");
         alarmIntent.setClass(this,AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this,(int)id,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT);

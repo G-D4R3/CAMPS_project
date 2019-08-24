@@ -171,6 +171,7 @@ public class AddNewAssignment extends Fragment {
                 ass = new Assignment(mName.getText().toString(), period, mRange.getText().toString(), Flag);
                 System.out.println(ass.toString());
                 main.todoFragment.AssList.add(ass);
+                main.alarmSet(ass);
                 main.todoFragment.setView();
                 if (Flag == true) {
                     main.todoFragment.ImpList.add(ass);

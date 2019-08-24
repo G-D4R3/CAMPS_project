@@ -60,14 +60,14 @@ public class AlarmService extends Service {
             }
             notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
                     .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setContentTitle(String.format("1시간 후에 %s이 있습니다.",title))
+                    .setContentTitle(title)
                     .setContentText(memo)
                     .setTicker("TICK")
                     .setContentIntent(pendingIntent);
         } else {
             notificationBuilder = new NotificationCompat.Builder(getApplicationContext()).
                     setSmallIcon(R.drawable.ic_launcher_background)
-                    .setContentTitle(String.format("1시간 후에 %s이 있습니다.",title))
+                    .setContentTitle(title)
                     .setContentText(memo)
                     .setTicker("TICK")
                     .setContentIntent(pendingIntent);
@@ -76,7 +76,6 @@ public class AlarmService extends Service {
         powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
 
         wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "WAKELOCK");
-
 
         wakeLock.acquire(); // WakeLock 깨우기
 

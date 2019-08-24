@@ -35,34 +35,38 @@ public class CalendarFragment extends Fragment{
 
     MainActivity main;
 
-
     /*** ArrayList for Events ***/
     ArrayList<Assignment> assignmentList;
-    Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
-    ArrayList<String> toolbarButtonState = new ArrayList<>();
-    ArrayList<Schedule> schedules = new ArrayList<>();
-    ArrayList<TestSub> testList = new ArrayList<>();
+    ArrayList<Schedule> schedules;
+    ArrayList<TestSub> testList;
+
     ArrayList<Event> events = new ArrayList<>();
+
+    //When pick a specific day, The events of that day will add to dayEvent.
+    //Especially Schedule managed by scheduleDayEvent.
     ArrayList<Event> dayEvent;
     ArrayList<Event> scheduleDayEvent;
 
-    private TextView Dday;
-    private TextView today;
 
-    View view;
-    TextView mTitle;
-    MaterialCalendarView calendarView;
-
-
-    CalendarListAdapter upperAdapter;
-    CalendarListAdapter lowerAdapter;
+    /*** View Attributes ***/
     ListView upperListView;
     ListView lowerListView;
     TextView mUheader;
     TextView mLheader;
+
+    MaterialCalendarView calendarView;
+    // upper for assignment & exam
+    CalendarListAdapter upperAdapter;
+    // lower for schedule
+    CalendarListAdapter lowerAdapter;
+    View view;
+
+    //Calendar dot color
     int colorAccent;
+
     int upperSize=0;
     int lowerSize=0;
+
     loadData load;
     saveData save;
 
@@ -74,36 +78,31 @@ public class CalendarFragment extends Fragment{
     public void onAttach(Context context) {
         super.onAttach(context);
         main = (MainActivity)getActivity();
+        colorAccent = getResources().getColor(R.color.colorAccent);
         load = new loadData();
         save = new saveData();
     }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        colorAccent = getResources().getColor(R.color.colorAccent);
-        //ArrayList<Event> events = new ArrayList<>();
-
         view = (View)inflater.inflate(R.layout.fragment_calendar,container,false);
+        calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
+
         upperListView = view.findViewById(R.id.upperCalendarListView);
         lowerListView = view.findViewById(R.id.lowerCalendarListView);
+
+
         mUheader = view.findViewById(R.id.calendar_as_ex);
         mLheader  = view.findViewById(R.id.calendar_sche);
-        calendarView = (MaterialCalendarView) view.findViewById(R.id.calendarView);
+
+
+        /*** toolbar setting ***/
         main.setActionBarTitle("");
         main.centerToolbarTitle.setText("캘린더");
         main.invalidateOptionsMenu();
-        toolbarButtonState.add("CHECK");
-        main.toolbarButtonState=toolbarButtonState;
+
 
         load.run();
 
@@ -114,13 +113,11 @@ public class CalendarFragment extends Fragment{
         mLheader.setVisibility(View.GONE);
         mUheader.setVisibility(View.GONE);
 
-        dotAssignment();
-        dotSchedule();
-        dotTest();
+
+        // pick a day
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-
 
                 new Thread(new Runnable() {
                     @Override
@@ -175,6 +172,8 @@ public class CalendarFragment extends Fragment{
             }
         });
 
+
+        //pick a list
         lowerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -262,7 +261,10 @@ public class CalendarFragment extends Fragment{
             }
         });
 
-
+        /*** draw a dot in calendar. In the future these three method can be merged ***/
+        dotAssignment();
+        dotSchedule();
+        dotTest();
 
         return view;
     }
@@ -272,9 +274,7 @@ public class CalendarFragment extends Fragment{
     public void onStop() {
         super.onStop();
         MainActivity main = (MainActivity)getActivity();
-        main.toolbarButtonState.remove("SETTING_INVISIBLE");
         save.run();
-
     }
 
 
@@ -295,7 +295,7 @@ public class CalendarFragment extends Fragment{
         calendarView.addDecorators(new EventDecorator(colorAccent,testDaysList));
     }
     public void dotAssignment(){
-
+        Collection<CalendarDay> assignmentDaysList= new ArrayList<>();
         CalendarDay calendarDay;
 
         for(Assignment tmp : assignmentList){
@@ -332,10 +332,11 @@ public class CalendarFragment extends Fragment{
         MainActivity main = (MainActivity)getActivity();
         main.FragmentAdd(addFragment);
     }
+
     public void removeSchedule(Event event,CalendarListAdapter adapter){
         MainActivity main = (MainActivity)getActivity();
         Schedule schedule = (Schedule)event;
-        main.alarmDelete(main.SCHEDULE_ALARM_BASE+main.calendarFragment.schedules.indexOf(schedule)+1,schedule.getDate(),schedule.getTitle(),schedule.getMemo());
+        main.alarmDelete(schedule);
         schedules.remove((Schedule)event);
         scheduleDayEvent.remove(event);
         events.remove(event);

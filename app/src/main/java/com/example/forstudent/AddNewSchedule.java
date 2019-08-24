@@ -198,11 +198,11 @@ public class AddNewSchedule extends Fragment {
 
                 if(removeTarget != null) {
                     Schedule removeSchedule = (Schedule)removeTarget;
-                    main.alarmDelete(main.SCHEDULE_ALARM_BASE+main.calendarFragment.schedules.indexOf(removeSchedule)+1,removeSchedule.getDate(),removeSchedule.getTitle(),removeSchedule.getMemo());
+                    main.alarmDelete(removeTarget);
                     main.calendarFragment.schedules.remove(removeTarget);
                     main.calendarFragment.events.remove(removeTarget);
                 }
-                main.alarmSet(main.SCHEDULE_ALARM_BASE+main.calendarFragment.schedules.indexOf(schedule)+1,schedule.getDate(),schedule.getTitle(),schedule.getMemo());
+                main.alarmSet(schedule);
                 main.showActionBar();
                 main.FragmentRemove(AddNewSchedule.this);
 

@@ -246,6 +246,7 @@ public class addNewExamSub extends Fragment {
                 else{
                     subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
                     main.examFragment.ExamList.add(subject);
+                    main.alarmSet(subject);
                     main.showActionBar();
                     main.FragmentRemove(addNewExamSub.this);
                 }
