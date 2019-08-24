@@ -50,6 +50,7 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
     @Override
     public void onStart() {
         super.onStart();
+        MainActivity main = (MainActivity)getActivity();
         testbutton = (Button)getView().findViewById(R.id.testbutton);
         schoolName= main.getUser().name;
         System.out.println(schoolName);

@@ -581,7 +581,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                 memo = schedule.getMemo();
                 id = SCHEDULE_ALARM_BASE+calendarFragment.schedules.indexOf(schedule)+1;
                 break;
-            case "TestSub:":
+            case "TestSub":
                 timeBefore = 24;
                 testSub = (TestSub) src;
                 alarmDate = testSub.getTestDate();
@@ -591,7 +591,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
 
         }
+        ringDate = calcHourBefore(alarmDate,timeBefore);
         Intent alarmIntent = new Intent("com.example.ForStudent.ALARM_START");
+
         alarmIntent.putExtra("year",ringDate.get(Calendar.YEAR));
         alarmIntent.putExtra("month",ringDate.get(Calendar.MONTH));
         alarmIntent.putExtra("day",ringDate.get(Calendar.DAY_OF_MONTH));
