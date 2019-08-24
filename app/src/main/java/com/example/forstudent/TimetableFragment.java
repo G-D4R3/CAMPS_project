@@ -72,7 +72,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         loadBtn = v.findViewById(R.id.load_btn);
 
         timetable = v.findViewById(R.id.timetable);
-        if (DayofWeek() > 0 ){
+        if (DayofWeek() > 0 && DayofWeek() < 5){
         timetable.setHeaderHighlight(DayofWeek());}
         initView();
     }
