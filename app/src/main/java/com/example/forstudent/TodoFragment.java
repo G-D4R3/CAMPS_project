@@ -98,6 +98,10 @@ public class TodoFragment extends Fragment {
         ImportantAdapter = new TodoListAdapter(ImpList);
         Handler handler = new Handler();
 
+        load.run();
+        adapter.notifyDataSetChanged();
+        ImportantAdapter.notifyDataSetChanged();
+
         /***** toolbar *****/
         main.setActionBarTitle("");
         main.centerToolbarTitle.setText("과제");
@@ -365,6 +369,8 @@ public class TodoFragment extends Fragment {
 
         public void run(){
             try{
+                Collections.sort(AssList);
+                Collections.sort(ImpList);
                 Log.v("TodoFragment", "Saved Data");
                 main.getAssignmentBox().removeAll();
                 int i=0;
@@ -411,6 +417,8 @@ public class TodoFragment extends Fragment {
                 else {
                     title = String.format("남은 과제 : %d", AssList.size());
                 }
+                Collections.sort(AssList);
+                Collections.sort(ImpList);
             }
             catch (Exception e){
                 e.printStackTrace();
