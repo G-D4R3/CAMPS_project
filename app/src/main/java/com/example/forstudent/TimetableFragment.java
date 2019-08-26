@@ -102,9 +102,12 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.add_btn:
-                Intent i = new Intent(getActivity(),EditActivity.class);
+                AddNewClass addFragment = AddNewClass.newInstance();
+                MainActivity main = (MainActivity)getActivity();
+                main.FragmentAdd(addFragment);
+                /*Intent i = new Intent(getActivity(),EditActivity.class);
                 i.putExtra("mode",REQUEST_ADD);
-                startActivityForResult(i,REQUEST_ADD);
+                startActivityForResult(i,REQUEST_ADD);*/
                 break;
             case R.id.clear_btn:
                 timetable.removeAll();
@@ -116,7 +119,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
                 loadSavedData();
                 break;
             case R.id.capture_btn:
-                MainActivity main = (MainActivity)getActivity();
+                main = (MainActivity)getActivity();
                 main.mOnCaptureClick(timetable);
                 break;
         }
