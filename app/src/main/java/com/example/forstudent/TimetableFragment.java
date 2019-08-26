@@ -31,6 +31,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     private Button clearBtn;
     private Button saveBtn;
     private Button loadBtn;
+    private Button captureBtn;
 
     private TimetableView timetable;
     @Override
@@ -70,8 +71,9 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         clearBtn = v.findViewById(R.id.clear_btn);
         saveBtn = v.findViewById(R.id.save_btn);
         loadBtn = v.findViewById(R.id.load_btn);
-
+        captureBtn = v.findViewById(R.id.capture_btn);
         timetable = v.findViewById(R.id.timetable);
+
         if (DayofWeek() > 0 && DayofWeek() < 5){
         timetable.setHeaderHighlight(DayofWeek());}
         initView();
@@ -82,6 +84,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         clearBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
         loadBtn.setOnClickListener(this);
+        captureBtn.setOnClickListener(this);
 
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
@@ -111,6 +114,10 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.load_btn:
                 loadSavedData();
+                break;
+            case R.id.capture_btn:
+                MainActivity main = (MainActivity)getActivity();
+                main.mOnCaptureClick(timetable);
                 break;
         }
     }

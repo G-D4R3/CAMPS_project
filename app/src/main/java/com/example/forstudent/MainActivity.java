@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -32,6 +34,7 @@ import com.example.forstudent.BoxClass.Assignment_Model;
 import com.example.forstudent.BoxClass.Grade_Model;
 import com.example.forstudent.BoxClass.Schedule_Model;
 import com.example.forstudent.BoxClass.TestSub_Model;
+import com.example.forstudent.BoxClass.Timetable_Model;
 import com.example.forstudent.BoxHelperClass.AssignmentHelper;
 import com.example.forstudent.BoxHelperClass.GradeHelper;
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
@@ -40,6 +43,7 @@ import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Grade;
 import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
+import com.example.forstudent.DataClass.Timetable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
@@ -65,6 +69,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private Box<TestSub_Model> testBox;
     private Box<Schedule_Model> scheduleBox;
     private Box<Grade_Model> gradeBox;
+    private Box<Timetable_Model> timetableBox;
 
     //박스에 들어갈 객체 선언
     private UserData user;
@@ -73,12 +78,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private Schedule_Model schedule_model;
     private Grade_Model grade_model;
 
+
     //for storage
     ArrayList<Assignment> assignment = new ArrayList<>();
     ArrayList<Assignment> important = new ArrayList<>();
     ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
     ArrayList<Grade> grades = new ArrayList<>();
+    ArrayList<Timetable> timeTable = new ArrayList<Timetable>();
 
     //store things
     //dday count
@@ -487,12 +494,28 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     }
 
     /**** capture ****/
+
+    public static Bitmap viewToBitmap(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        if (view instanceof SurfaceView) {
+            SurfaceView surfaceView = (SurfaceView) view;
+            surfaceView.setZOrderOnTop(true);
+            surfaceView.draw(canvas);
+            surfaceView.setZOrderOnTop(false);
+            return bitmap;
+        } else {
+            //For ViewGroup & View
+            view.draw(canvas);
+            return bitmap;
+        }
+    }
     //캡쳐버튼클릭
     public void mOnCaptureClick(View v){
         //전체화면
-        View rootView = getWindow().getDecorView();
+        //View rootView = getWindow().getDecorView();
 
-        File screenShot = ScreenShot(rootView);
+        File screenShot = ScreenShot(v);
         if(screenShot!=null){
             //갤러리에 추가
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)));
@@ -677,6 +700,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         long time = ringDate.getTimeInMillis();
         alarmManager.setExact(AlarmManager.RTC_WAKEUP,time,pendingIntent);
     }
+
 
 
 

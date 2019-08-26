@@ -1,8 +1,6 @@
 package com.example.forstudent.BoxClass;
 
 
-import java.sql.Time;
-
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 
@@ -14,6 +12,8 @@ public class Timetable_Model {
     int hour;
     int minute;
     int dayOfWeek;
+
+
 
     String professor;
     String lectureRoom;
