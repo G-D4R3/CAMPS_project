@@ -8,18 +8,17 @@ import java.util.Calendar;
 public class Timetable{
 
     String classTitle="";
-
-    ArrayList <String> classPlace;
-
     String professorName="";
-
     ArrayList<Calendar> startTime;
     ArrayList<Calendar> endTime;
+    ArrayList <String> classPlace;
 
-    public Timetable() {
-        startTime = new ArrayList<Calendar>();
-        endTime = new ArrayList<Calendar>();
-        classPlace = new ArrayList<String>();
+    public Timetable(String classTitle, String professorName, ArrayList<Calendar> startTime, ArrayList<Calendar> endTime, ArrayList<String> classPlace) {
+        this.classTitle = classTitle;
+        this.professorName = professorName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.classPlace = classPlace;
     }
 
     public String getProfessorName() {
