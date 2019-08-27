@@ -49,7 +49,7 @@
     },
     {
       "id": "2:8882404112476802509",
-      "lastPropertyId": "7:3906485252010951606",
+      "lastPropertyId": "19:3388625370267745960",
       "name": "Timetable_Model",
       "properties": [
         {
@@ -57,28 +57,60 @@
           "name": "id"
         },
         {
-          "id": "2:8479368703350415218",
-          "name": "hour"
-        },
-        {
-          "id": "3:8732217643947738039",
-          "name": "minute"
-        },
-        {
-          "id": "4:795401831597020088",
-          "name": "dayOfWeek"
-        },
-        {
           "id": "5:1736169395749447739",
           "name": "professor"
         },
         {
-          "id": "6:1371639115846748380",
-          "name": "lectureRoom"
-        },
-        {
           "id": "7:3906485252010951606",
           "name": "subject"
+        },
+        {
+          "id": "8:6790938809767391569",
+          "name": "hour1"
+        },
+        {
+          "id": "9:3931766054516520687",
+          "name": "hour2"
+        },
+        {
+          "id": "10:5819379076464855311",
+          "name": "hour3"
+        },
+        {
+          "id": "11:5818681370555746363",
+          "name": "minute1"
+        },
+        {
+          "id": "12:5166765361818564650",
+          "name": "minute2"
+        },
+        {
+          "id": "13:4555982688841233422",
+          "name": "minute3"
+        },
+        {
+          "id": "14:7272523721771068896",
+          "name": "dayOfWeek1"
+        },
+        {
+          "id": "15:8323091971960034488",
+          "name": "dayOfWeek2"
+        },
+        {
+          "id": "16:3579947690863268861",
+          "name": "dayOfWeek3"
+        },
+        {
+          "id": "17:1076987520297438006",
+          "name": "lectureRoom1"
+        },
+        {
+          "id": "18:1232433491287222590",
+          "name": "lectrueRoom2"
+        },
+        {
+          "id": "19:3388625370267745960",
+          "name": "lectureRoom3"
         }
       ],
       "relations": []
@@ -261,7 +293,12 @@
   "modelVersionParserMinimum": 4,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    8479368703350415218,
+    8732217643947738039,
+    795401831597020088,
+    1371639115846748380
+  ],
   "retiredRelationUids": [],
   "version": 1
 }
