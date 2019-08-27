@@ -51,7 +51,7 @@
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/complete_add_schedule"
+                android:id="@+id/complete_add_timetable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -123,25 +123,42 @@
                 android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+]
 
-                <TextView
-                    android:id="@+id/pdate_1"
+                <Spinner
+                    android:id="@+id/day_spinner1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:spinnerMode="dialog"
+                    android:entries="@array/days"
+                    />
+
+                <!-- <TimePicker
+                    android:id="@+id/time_spinner1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:timePickerMode="spinner"></TimePicker> -->
+
+                <TextView
+                    android:id="@+id/start_time1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:fontFamily="@font/barun"
-                    android:text="시간" />
-
+                    android:text="10:00"
+                    />
                 <TextView
-                    android:id="@+id/pdate2_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:gravity="right"
-                    android:fontFamily="@font/barun"
-                    android:hint="추가하기" />
+                    android:textSize="20sp"
+                    android:text=" - "
+                    />
+                <TextView
+                    android:id="@+id/end_time1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="13:30"
+                    />
 
 
             </LinearLayout>
@@ -161,7 +178,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_margin= "10sp"
             android:layout_height="wrap_content"
@@ -173,24 +190,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/pdate_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/barun"
-                    android:text="시간" />
 
-                <TextView
-                    android:id="@+id/pdate2_2"
+                <Spinner
+                    android:id="@+id/day_spinner2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:gravity="right"
-                    android:fontFamily="@font/barun"
-                    android:hint="추가하기" />
+                    android:spinnerMode="dialog"
+                    android:entries="@array/days"
+                    />
+
+                <TimePicker
+                    android:id="@+id/time_spinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:timePickerMode="spinner"></TimePicker>
+
 
 
             </LinearLayout>
@@ -222,24 +236,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/pdate_3"
+                <Spinner
+                    android:id="@+id/day_spinner3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/barun"
-                    android:text="시간" />
+                    android:spinnerMode="dialog"
+                    android:entries="@array/days"
+                    />
 
-                <TextView
-                    android:id="@+id/pdate2_3"
+                <TimePicker
+                    android:id="@+id/time_spinner3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:gravity="right"
-                    android:fontFamily="@font/barun"
-                    android:hint="추가하기" />
+                    android:layout_height="match_parent"
+                    android:timePickerMode="spinner"></TimePicker>
 
 
             </LinearLayout>
@@ -257,7 +266,7 @@
                 android:fontFamily="@font/barun"
                 android:textSize="20sp" />
 
-        </LinearLayout>
+        </LinearLayout> -->
 
 
     </LinearLayout>

@@ -85,7 +85,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
     ArrayList<Grade> grades = new ArrayList<>();
-    ArrayList<Timetable> timeTable = new ArrayList<Timetable>();
+    ArrayList<Timetable> timeTables = new ArrayList<Timetable>();
 
     //store things
     //dday count
