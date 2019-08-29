@@ -93,6 +93,7 @@ public class AddNewTime extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -213,17 +214,17 @@ public class AddNewTime extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        //inflater.inflate(R.menu.menu_add_assignment,menu);
-        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_add_assignment,menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // int id = item.getItemId();
-        //MainActivity main = (MainActivity)getActivity();
-        //if (id == R.id.check_icon) {
+        int id = item.getItemId();
+        MainActivity main = (MainActivity)getActivity();
+        if (id == R.id.check_icon) {
 
-        //}
+        }
 
         return true;
     }
@@ -259,6 +260,8 @@ public class AddNewTime extends Fragment {
     public ArrayList<Calendar> getEndTime() {
         return endTime;
     }
+
+    /***** toolbar *****/
 
 
 }
