@@ -3,11 +3,13 @@ package com.example.forstudent;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,11 +43,14 @@ public class HomeFragmentSetup extends Fragment {
         View view = (View)inflater.inflate(R.layout.home_setup, container, false);
         TextView mLayout = (TextView)view.findViewById(R.id.layoutset);
         RadioGroup mAssignmentView = (RadioGroup)view.findViewById(R.id.AssignmentView);
+        TextView mLocation = (TextView)view.findViewById(R.id.setUniversity);
 
         select[0]=main.getUser().homeScheduleCheck;
         select[1]=main.getUser().homeClassCheck;
         select[2]=main.getUser().homeAssignmentCheck;
         select[3]=main.getUser().homeExamCheck;
+
+        mLocation.setText(main.getUser().name);
 
         assignmentViewCheck = main.getUser().getHomeAssignmentViewCheck();
         mAssignmentView.check(assignmentViewCheck);
@@ -124,6 +129,40 @@ public class HomeFragmentSetup extends Fragment {
                         main.homeFragment.mSetAssignment = true;
                         break;
                 }
+            }
+        });
+
+        mLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("학교 설정");
+                // Set up the input
+                final EditText input = new EditText(getContext());
+
+                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                dialog.setView(input);
+
+                // Set up the buttons
+                dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        main.getUser().name = input.getText().toString();
+                        main.getUserDataBox().put(main.getUser());
+                        mLocation.setText(input.getText().toString());
+                    }
+                });
+
+                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+
+                    }
+                });
+
+                dialog.show();
             }
         });
 
