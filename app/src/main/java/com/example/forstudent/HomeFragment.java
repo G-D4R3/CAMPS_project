@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment {
     MainActivity main;
 
     /*** tmp ***/
+    public boolean BAD_SCHOOL_NAME = false;
     /*** view ***/
     private TextView Dday;
     private TextView today;
@@ -381,7 +382,11 @@ public class HomeFragment extends Fragment {
 
     public void schoolNameDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("학교 이름을 입력해주세요");
+        if(BAD_SCHOOL_NAME) {
+            builder.setTitle("유효하지 않은 학교 이름입니다.\n다시 입력해 주세요");
+            BAD_SCHOOL_NAME = false;
+        }
+        else builder.setTitle("학교 이름을 입력해주세요");
 
         // Set up the input
         final EditText input = new EditText(getContext());

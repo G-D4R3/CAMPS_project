@@ -71,6 +71,12 @@ public class SchoolMap extends SupportMapFragment implements OnMapReadyCallback{
             addressList = geocoder.getFromLocationName(
                     schoolName, // 주소
                     1); // 최대 검색 결과 개수
+            if( addressList.size() == 0){
+                main.homeFragment.BAD_SCHOOL_NAME = true;
+                main.homeFragment.schoolNameDialog();
+                main.FragmentRemove(SchoolMap.this);
+                return;
+            }
             latitude = addressList.get(0).getLatitude();
             longitude = addressList.get(0).getLongitude();
         }

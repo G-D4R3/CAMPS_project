@@ -31,7 +31,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     private Button clearBtn;
     private Button saveBtn;
     private Button loadBtn;
-
+    private Button captureBtn;
     private TimetableView timetable;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         clearBtn = v.findViewById(R.id.clear_btn);
         saveBtn = v.findViewById(R.id.save_btn);
         loadBtn = v.findViewById(R.id.load_btn);
-
+        captureBtn = v.findViewById(R.id.capture_btn);
         timetable = v.findViewById(R.id.timetable);
         if (DayofWeek() > 0 && DayofWeek() < 5){
             timetable.setHeaderHighlight(DayofWeek());}
@@ -82,7 +82,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         clearBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
         loadBtn.setOnClickListener(this);
-
+        captureBtn.setOnClickListener(this);
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
@@ -97,10 +97,10 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        MainActivity main = (MainActivity)getActivity();
         switch (v.getId()){
             case R.id.add_btn:
                 AddNewClass addFragment = AddNewClass.newInstance();
-                MainActivity main = (MainActivity)getActivity();
                 main.FragmentAdd(addFragment);
                 /*Intent i = new Intent(getActivity(),EditActivity.class);
                 i.putExtra("mode",REQUEST_ADD);
@@ -115,7 +115,11 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
             case R.id.load_btn:
                 loadSavedData();
                 break;
+            case R.id.capture_btn:
+                main.mOnCaptureClick(timetable);
+                break;
         }
+
     }
 
     @Override
