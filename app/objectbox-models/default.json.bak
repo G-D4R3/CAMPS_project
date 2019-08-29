@@ -1,0 +1,304 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:1618800080196709582",
+      "lastPropertyId": "9:4182849995491721965",
+      "name": "Assignment_Model",
+      "properties": [
+        {
+          "id": "1:2158486503279865264",
+          "name": "id"
+        },
+        {
+          "id": "2:8199026578243101489",
+          "name": "subject"
+        },
+        {
+          "id": "3:3545045918260725528",
+          "name": "deadLineYear"
+        },
+        {
+          "id": "4:885081767229126702",
+          "name": "deadLineMonth"
+        },
+        {
+          "id": "5:3616347556034709636",
+          "name": "deadLineDay"
+        },
+        {
+          "id": "6:2768278646262807228",
+          "name": "deadLineHour"
+        },
+        {
+          "id": "7:2062391089455881069",
+          "name": "deadLineMinute"
+        },
+        {
+          "id": "8:3042062164006443802",
+          "name": "memo"
+        },
+        {
+          "id": "9:4182849995491721965",
+          "name": "flag"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:8882404112476802509",
+      "lastPropertyId": "19:3388625370267745960",
+      "name": "Timetable_Model",
+      "properties": [
+        {
+          "id": "1:4060035981435634278",
+          "name": "id"
+        },
+        {
+          "id": "5:1736169395749447739",
+          "name": "professor"
+        },
+        {
+          "id": "7:3906485252010951606",
+          "name": "subject"
+        },
+        {
+          "id": "8:6790938809767391569",
+          "name": "hour1"
+        },
+        {
+          "id": "9:3931766054516520687",
+          "name": "hour2"
+        },
+        {
+          "id": "10:5819379076464855311",
+          "name": "hour3"
+        },
+        {
+          "id": "11:5818681370555746363",
+          "name": "minute1"
+        },
+        {
+          "id": "12:5166765361818564650",
+          "name": "minute2"
+        },
+        {
+          "id": "13:4555982688841233422",
+          "name": "minute3"
+        },
+        {
+          "id": "14:7272523721771068896",
+          "name": "dayOfWeek1"
+        },
+        {
+          "id": "15:8323091971960034488",
+          "name": "dayOfWeek2"
+        },
+        {
+          "id": "16:3579947690863268861",
+          "name": "dayOfWeek3"
+        },
+        {
+          "id": "17:1076987520297438006",
+          "name": "lectureRoom1"
+        },
+        {
+          "id": "18:1232433491287222590",
+          "name": "lectrueRoom2"
+        },
+        {
+          "id": "19:3388625370267745960",
+          "name": "lectureRoom3"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:6502846389139463981",
+      "lastPropertyId": "9:7256885840293844086",
+      "name": "Schedule_Model",
+      "properties": [
+        {
+          "id": "1:1531485636979123211",
+          "name": "id"
+        },
+        {
+          "id": "2:4423029636580956792",
+          "name": "title"
+        },
+        {
+          "id": "3:4249321243573487329",
+          "name": "year"
+        },
+        {
+          "id": "4:3905397628684429943",
+          "name": "month"
+        },
+        {
+          "id": "5:6351558947706155682",
+          "name": "day"
+        },
+        {
+          "id": "6:4068669915334956232",
+          "name": "hour"
+        },
+        {
+          "id": "7:4445150816808587099",
+          "name": "minute"
+        },
+        {
+          "id": "8:8107102523490532438",
+          "name": "memo"
+        },
+        {
+          "id": "9:7256885840293844086",
+          "name": "important"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:7086171984539272173",
+      "lastPropertyId": "11:1096792928277448310",
+      "name": "TestSub_Model",
+      "properties": [
+        {
+          "id": "1:6017226218241018251",
+          "name": "id"
+        },
+        {
+          "id": "2:6487338516618559076",
+          "name": "Name"
+        },
+        {
+          "id": "3:7355703963895410815",
+          "name": "Year"
+        },
+        {
+          "id": "4:40880559135866595",
+          "name": "Month"
+        },
+        {
+          "id": "5:2687982598506873196",
+          "name": "Day"
+        },
+        {
+          "id": "6:8355081947441790001",
+          "name": "Place"
+        },
+        {
+          "id": "7:3093525790764265445",
+          "name": "startHour"
+        },
+        {
+          "id": "8:5204003577313269533",
+          "name": "startMinute"
+        },
+        {
+          "id": "9:3749315993087469019",
+          "name": "endHour"
+        },
+        {
+          "id": "10:8996288134479168640",
+          "name": "endMinute"
+        },
+        {
+          "id": "11:1096792928277448310",
+          "name": "Range"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:5322398851059366871",
+      "lastPropertyId": "10:8827715746114767999",
+      "name": "UserData",
+      "properties": [
+        {
+          "id": "1:4535713831557790918",
+          "name": "id"
+        },
+        {
+          "id": "2:5654230505125020863",
+          "indexId": "1:8122387358516719236",
+          "name": "USERNAME"
+        },
+        {
+          "id": "3:4554798643388704695",
+          "name": "lastDay"
+        },
+        {
+          "id": "4:1278730540913926624",
+          "name": "hello"
+        },
+        {
+          "id": "5:7289039874723216390",
+          "name": "homeScheduleCheck"
+        },
+        {
+          "id": "6:3512776209987349707",
+          "name": "homeClassCheck"
+        },
+        {
+          "id": "7:7391701686509007644",
+          "name": "homeAssignmentCheck"
+        },
+        {
+          "id": "8:2585545769344746763",
+          "name": "homeExamCheck"
+        },
+        {
+          "id": "9:5760294227776066219",
+          "name": "homeAssignementViewCheck"
+        },
+        {
+          "id": "10:8827715746114767999",
+          "name": "calcGradeCheck"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:1203137725882643405",
+      "lastPropertyId": "4:7100937305700122246",
+      "name": "Grade_Model",
+      "properties": [
+        {
+          "id": "1:4511366884849526446",
+          "name": "id"
+        },
+        {
+          "id": "2:2397355219268538428",
+          "name": "name"
+        },
+        {
+          "id": "3:8458432708919049673",
+          "name": "credit"
+        },
+        {
+          "id": "4:7100937305700122246",
+          "name": "grade"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "6:1203137725882643405",
+  "lastIndexId": "1:8122387358516719236",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    8479368703350415218,
+    8732217643947738039,
+    795401831597020088,
+    1371639115846748380
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

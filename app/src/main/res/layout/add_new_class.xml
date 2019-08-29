@@ -66,7 +66,7 @@
             android:id="@+id/className"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15sp"
+            android:layout_margin="10dp"
             android:editable="true"
             android:ems="10"
             android:hint="수업"
@@ -80,7 +80,7 @@
             android:id="@+id/professor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:editable="true"
             android:ems="10"
             android:hint="교수명"
@@ -88,186 +88,25 @@
             android:inputType="textShortMessage"
             android:fontFamily="@font/barun"
             android:textSize="20sp" />
-        <LinearLayout
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/margin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="20sp"
-                android:fontFamily="@font/barun"
-                android:text="  " />
+            android:hint="시간 및 장소"
+            android:layout_margin="10dp"/>
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:scrollbarDefaultDelayBeforeFade="400"
-                app:srcCompat="@mipmap/add" />
-        </LinearLayout>
-
-
-        <LinearLayout
+        <Button
+            android:id="@+id/addButton"
             android:layout_width="match_parent"
-            android:layout_margin= "10sp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="15dp"
+            android:background="#DADADA"
+            android:hint="시간 및 장소 추가" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-]
-
-                <Spinner
-                    android:id="@+id/day_spinner1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
-                    android:entries="@array/days"
-                    />
-
-                <!-- <TimePicker
-                    android:id="@+id/time_spinner1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:timePickerMode="spinner"></TimePicker> -->
-
-                <TextView
-                    android:id="@+id/start_time1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="10:00"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text=" - "
-                    />
-                <TextView
-                    android:id="@+id/end_time1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="13:30"
-                    />
-
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/location_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:editable="true"
-                android:ems="10"
-                android:hint="장소"
-                android:text=""
-                android:inputType="textShortMessage"
-                android:fontFamily="@font/barun"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-
-        <!-- <LinearLayout
+        <ListView
             android:layout_width="match_parent"
-            android:layout_margin= "10sp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <Spinner
-                    android:id="@+id/day_spinner2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
-                    android:entries="@array/days"
-                    />
-
-                <TimePicker
-                    android:id="@+id/time_spinner2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:timePickerMode="spinner"></TimePicker>
-
-
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/location_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:editable="true"
-                android:ems="10"
-                android:hint="장소"
-                android:text=""
-                android:inputType="textShortMessage"
-                android:fontFamily="@font/barun"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_margin= "10sp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/day_spinner3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dialog"
-                    android:entries="@array/days"
-                    />
-
-                <TimePicker
-                    android:id="@+id/time_spinner3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:timePickerMode="spinner"></TimePicker>
-
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/location_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:editable="true"
-                android:ems="10"
-                android:hint="장소"
-                android:text=""
-                android:inputType="textShortMessage"
-                android:fontFamily="@font/barun"
-                android:textSize="20sp" />
-
-        </LinearLayout> -->
-
+            android:id="@+id/timetable_list"></ListView>
 
     </LinearLayout>
 
