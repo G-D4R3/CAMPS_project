@@ -1,9 +1,7 @@
 package com.example.forstudent;
 
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,10 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,8 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.forstudent.DataClass.Assignment;
-import com.example.forstudent.DataClass.Timetable;
 import com.github.tlaabs.timetableview.Schedule;
 import com.github.tlaabs.timetableview.TimetableView;
 
@@ -97,6 +91,7 @@ public class AddNewClass extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -108,6 +103,7 @@ public class AddNewClass extends Fragment {
 
         /*** view load ***/
         View view = (View) inflater.inflate(R.layout.add_new_class, container, false);
+
         mLecture = (EditText) view.findViewById(R.id.className);
         mProfessor = (EditText) view.findViewById(R.id.professor);
         final TextView completeButton = (TextView) view.findViewById(R.id.complete_add_timetable);
@@ -174,9 +170,9 @@ public class AddNewClass extends Fragment {
     }
 
     /***** toolbar *****/
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
         inflater.inflate(R.menu.menu_add_assignment, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
@@ -187,6 +183,9 @@ public class AddNewClass extends Fragment {
         MainActivity main = (MainActivity) getActivity();
         if (id == R.id.check_icon) {
 
+            /*
+                여기에 완료 눌렀을 때 구현하셈
+             */
         }
 
         return true;
@@ -229,6 +228,8 @@ public class AddNewClass extends Fragment {
         else if (input.equals("토")) return 6;
         else return 0;
     }
+
+
 }
 
 
