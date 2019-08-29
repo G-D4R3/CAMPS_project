@@ -1,10 +1,14 @@
 package com.example.forstudent;
 
+import android.Manifest;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,6 +30,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -144,7 +150,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     final int SCHEDULE_ALARM_BASE   = 20000000;
     final int ASSIGNMENT_ALARM_BASE = 40000000;
     final int TEST_ALARM_BASE       = 60000000;
-
+    final static int STORAGE_PERMISSION_CODE =1;
 
 
 
@@ -153,6 +159,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Tutorial();
         //toolbarButtonState.add("SETTING_INVISIBLE");
 
 /*
@@ -256,7 +264,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         if(userDataBox.isEmpty()) {
 
             //user 생성
-            user = new UserData(id, "DEFAULT", new Date(), 99, true, true,  true,  true, R.id.viewAllAssign, R.id.radioButton2);
+            user = new UserData(id, "DEFAULT", new Date(), 99, true, true,  true,  true, R.id.viewAllAssign, R.id.radioButton2, true);
             //박스에 user 객체 저장
             userDataBox.put(user);
 
@@ -515,6 +523,19 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         //전체화면
         //View rootView = getWindow().getDecorView();
 
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("권한이 없습니다.");
+            dialog.setMessage("설정에서 권한을 설정해 주세요.");
+            dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            }).create().show();
+            return;
+        }
+
         File screenShot = ScreenShot(v);
         if(screenShot!=null){
             //갤러리에 추가
@@ -702,51 +723,41 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     }
 
 
+    private void Tutorial(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("저장소 권한 필요");
+                dialog.setMessage("권한이 필요합니다.");
+                dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AlertDialog.Builder notice = new AlertDialog.Builder(MainActivity.this);
+                        notice.setTitle("권한을 부여하지 않습니다.");
+                        notice.setMessage("나중에 설정에서 권한을 설정 할 수 있습니다.");
+                        notice.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-
-
-        //first make all invisible
-        for(int i=0;i<menu.size();i++){
-            menu.getItem(i).setVisible(false);
-        }
-        actionBar.setDisplayHomeAsUpEnabled(false);
-
-        //make visible that fragment need
-        for(String state : toolbarButtonState) {
-            switch(state){
-                case "SETTING":
-                    menu.getItem(0).setVisible(true);
-                    break;
-                case "CHECK":
-                    menu.getItem(1).setVisible(true);
-                    break;
-                case "BACK":
-                    actionBar.setDisplayHomeAsUpEnabled(true);
-
+                            }
+                        });
+                        dialog.dismiss();
+                    }
+                }).create().show();
+            }
+            else{
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
             }
         }
-        return true;
-    }*/
 
+    }
 
-    /*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.setting_icon) {
-
-            Toast.makeText(this, "홈아이콘 클릭", Toast.LENGTH_SHORT).show();
-            return true;
-
-         }
-            return super.onOptionsItemSelected(item);
-        }*/
 
 
 }

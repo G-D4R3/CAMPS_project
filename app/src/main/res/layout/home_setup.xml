@@ -132,8 +132,12 @@
                     android:fontFamily="@font/barun"
                     android:textSize="18sp"/>
 
-
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#505050" />
 
 
         </LinearLayout>

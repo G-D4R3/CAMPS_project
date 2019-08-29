@@ -26,7 +26,7 @@ public class UserData {
     @Index(type = IndexType.VALUE)
     String name;
 
-
+    boolean isFirstRun;
 
     Date lastDay;
 
@@ -42,17 +42,18 @@ public class UserData {
 
     }
     //생성자에 모든 요소들을 넣어줘야함. 당장 쓰지 않더라도 디폴트 값이라도 넣어줄 것.
-    public UserData(long id,String name,Date lastDay,int hello, boolean b0, boolean b1, boolean b2, boolean b3, int aCheck, int cCheck){
+    public UserData(long id,String name,Date lastDay,int hello, boolean b0, boolean b1, boolean b2, boolean b3, int aCheck, int cCheck, boolean isFirst){
         this.id = id;
         this.name = name;
         this.lastDay = lastDay;
-        this.hello  =hello;
-        this.homeAssignmentCheck=b0;
-        this.homeClassCheck=b1;
-        this.homeExamCheck=b2;
-        this.homeScheduleCheck=b3;
+        this.hello  = hello;
+        this.homeAssignmentCheck = b0;
+        this.homeClassCheck = b1;
+        this.homeExamCheck = b2;
+        this.homeScheduleCheck = b3;
         this.homeAssignementViewCheck = aCheck;
         this.calcGradeCheck = cCheck;
+        this.isFirstRun = isFirst;
     }
     public void setName(String name){
         this.name = name;
@@ -118,5 +119,13 @@ public class UserData {
 
     public int getCalcGradeCheck() {
         return calcGradeCheck;
+    }
+
+    public void setFirstRun(boolean isFirstRun){
+        this.isFirstRun = isFirstRun;
+    }
+
+    public boolean getFirstRun(){
+        return isFirstRun;
     }
 }
