@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/capture_icon"
+        android:icon="@mipmap/capture"
+        android:title="check_selections"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/add_icon"
+        android:icon="@mipmap/add"
+        android:title="check_selections"
+        app:showAsAction="always" />
+
+
+</menu>

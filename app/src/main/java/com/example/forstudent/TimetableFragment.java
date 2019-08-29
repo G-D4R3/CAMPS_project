@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,6 +39,7 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
     @Nullable
     @Override
@@ -165,6 +169,24 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         Toast.makeText(getActivity(),"불러오기 완료",Toast.LENGTH_SHORT).show();
     }
 
+    /***** toolbar *****/
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.timetable_menu,menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        MainActivity main = (MainActivity)getActivity();
+        if (id == R.id.add_icon) {
+
+        }
+        if( id == R.id.capture_icon){
+
+        }
+        return true;
+    }
 
 }
