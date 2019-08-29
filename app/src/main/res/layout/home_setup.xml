@@ -8,8 +8,12 @@
     android:background="#FFFFFF">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -24,38 +28,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <!--
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:id="@+id/cancel5"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/barun"
-                android:text="뒤로"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/setupTitle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="60dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/barun"
-                android:gravity="center"
-                android:text="설정"
-                android:textSize="25dp" />
-
-        </LinearLayout>
--->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -73,7 +45,8 @@
                 android:fontFamily="@font/barun"
                 android:gravity="center_vertical"
                 android:text="홈 화면 구성"
-                android:textSize="20sp" />
+                android:textColor="@color/layout_content_color"
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -88,7 +61,8 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/barun"
                 android:text="과제"
-                android:textSize="20sp" />
+                android:textColor="@color/layout_content_color"
+                android:textSize="18sp" />
 
 
             <RadioGroup
@@ -106,8 +80,8 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/barun"
                     android:text="중요한 과제만 표시"
-                    android:textColor="#505050"
-                    android:textSize="16sp" />
+                    android:textColor="@color/layout_content_color"
+                    android:textSize="14sp" />
 
                 <RadioButton
                     android:id="@+id/viewAllAssign"
@@ -116,15 +90,55 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/barun"
                     android:text="모두 표시"
-                    android:textColor="#505050"
-                    android:textSize="16sp" />
+                    android:textColor="@color/layout_content_color"
+                    android:textSize="14sp" />
             </RadioGroup>
+
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="#505050" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="4"
+                    android:layout_marginVertical="12dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="학교 설정"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/barun"
+                    android:textColor="@color/layout_content_color"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/setUniversity"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="6"
+                    android:layout_marginVertical="12dp"
+                    android:layout_marginRight="12dp"
+                    android:text="아주 대학교"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorAccent"
+                    android:fontFamily="@font/barun"
+                    android:textSize="18sp"/>
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
+
+
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
