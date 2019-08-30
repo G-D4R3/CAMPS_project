@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -72,7 +71,7 @@ public class AddNewClass extends Fragment {
     EditText mLectureRoom2;
     EditText mLectureRoom3;
 
-    Button add_button;
+    TextView add_button;
 
     LinearLayout l1;
     LinearLayout l2;
@@ -112,7 +111,7 @@ public class AddNewClass extends Fragment {
         Container2 = (LinearLayout) view.findViewById(R.id.asslayout);
         Container3 = (LinearLayout) view.findViewById(R.id.asslayout);
 
-        add_button = (Button) view.findViewById(R.id.addButton);
+        add_button = (TextView) view.findViewById(R.id.addButton);
 
         timetable = view.findViewById(R.id.timetable);
 

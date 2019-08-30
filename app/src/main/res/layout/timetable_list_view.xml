@@ -6,8 +6,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
-    android:background="@drawable/listview_border"
-    android:layout_height="100dp">
+    android:layout_height="30dp">
 
 
     <LinearLayout
@@ -23,52 +22,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="20dp"
             android:orientation="horizontal">
 
 
-            <Spinner
-                android:id="@+id/day_spinner2"
+            <TextView
+                android:id="@+id/timetable_day_of_weeK"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/days"
-                android:spinnerMode="dialog" />
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/barun"
+                android:gravity="center"
+                android:text="월"
+                android:textColor="@color/layout_content_color"
+                android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/start_time2"
+                android:id="@+id/timetable_time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10:00"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" - "
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/end_time2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="13:30"
-                android:textSize="20sp" />
+                android:layout_height="match_parent"
+                android:text="10:00 - 13:00"
+                android:fontFamily="@font/barun"
+                android:textColor="@color/layout_content_color"
+                android:textSize="16sp" />
 
 
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/location_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:editable="true"
-            android:ems="10"
-            android:fontFamily="@font/barun"
-            android:hint="장소"
-            android:inputType="textShortMessage"
-            android:text=""
-            android:textSize="20sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

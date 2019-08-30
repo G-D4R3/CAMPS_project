@@ -1,43 +1,36 @@
 package com.example.forstudent.ListViewAdapter;
 
-import android.app.TimePickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Timetable;
-import com.example.forstudent.MainActivity;
 import com.example.forstudent.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class TimeTableListAdapater extends BaseAdapter {
-    public ArrayList<Timetable> data = new ArrayList<>();
-    TextView mHeader;
+    public Timetable tt;
+    public ArrayList<Calendar> start;
+    public ArrayList<Calendar> end;
 
-    public TimeTableListAdapater(ArrayList<Timetable> input){
-        this.data = input;
+    public TimeTableListAdapater(Timetable input){
+        this.tt = input;
+        this.start = input.getStartTime();
+        this.end = input.getEndTime();
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        return start.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return data.get(position);
+        return start.get(position);
     }
 
     @Override
@@ -50,25 +43,40 @@ public class TimeTableListAdapater extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.timetable_list_view,parent, false);
 
-        TextView startTime2;
-        TextView endTime2;
+        TextView mTime;
+        TextView mDay;
 
-        Spinner day2;
+        mTime = (TextView)convertView.findViewById(R.id.timetable_time);
+        mDay = (TextView) convertView.findViewById(R.id.timetable_day_of_weeK);
 
-        EditText mLectureRoom2;
+        Calendar mStart = start.get(position);
+        Calendar mEnd = end.get(position);
 
-        startTime2 = (TextView)convertView.findViewById(R.id.start_time2);
-        endTime2 = (TextView)convertView.findViewById(R.id.end_time2);
-
-        day2 = (Spinner)convertView.findViewById(R.id.day_spinner2);
-
-        mLectureRoom2 = (EditText)convertView.findViewById(R.id.location_2);
-
-        Timetable tt = data.get(position);
+        mDay.setText(getDay(mStart.get(Calendar.DAY_OF_WEEK)));
+        mTime.setText(String.format("%d:%d - %d:%d", mStart.get(Calendar.HOUR), mStart.get(Calendar.MINUTE), mEnd.get(Calendar.HOUR), mEnd.get(Calendar.MINUTE)));
 
 
 
         return convertView;
+    }
+
+    private String getDay(int day){
+        switch(day){
+            case 1:
+                return "월";
+            case 2:
+                return "화";
+            case 3:
+                return "수";
+            case 4:
+                return "목";
+            case 5:
+                return "금";
+            case 6:
+                return "토";
+
+        }
+        return "일";
     }
 
 

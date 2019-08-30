@@ -1,7 +1,5 @@
 package com.example.forstudent.DataClass;
 
-import com.github.tlaabs.timetableview.Time;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -41,11 +39,11 @@ public class Timetable{
         return classPlace;
     }
 
-    public void setClassPlace_1(ArrayList<String> classPlace) {
+    public void setClassPlace(ArrayList<String> classPlace) {
         this.classPlace = classPlace;
     }
 
-    public ArrayList<Calendar> getStartTime1() {
+    public ArrayList<Calendar> getStartTime() {
         return startTime;
     }
 
@@ -57,7 +55,7 @@ public class Timetable{
         return endTime;
     }
 
-    public void setEndTime1(ArrayList<Calendar> endTime) {
+    public void setEndTime(ArrayList<Calendar> endTime) {
         this.endTime = endTime;
     }
 
