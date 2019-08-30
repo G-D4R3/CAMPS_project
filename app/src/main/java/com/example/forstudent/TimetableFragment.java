@@ -18,7 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.DataClass.Timetable;
 import com.github.tlaabs.timetableview.Schedule;
+import com.github.tlaabs.timetableview.Time;
 import com.github.tlaabs.timetableview.TimetableView;
 
 import java.util.ArrayList;
@@ -35,7 +37,12 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     private Button saveBtn;
     private Button loadBtn;
     private Button captureBtn;
-    private TimetableView timetable;
+    public TimetableView timetable;
+
+    //Sticker Class (NOT Schedule fragment class)
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +57,9 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         main.centerToolbarTitle.setText("");
 
         init(view);
+        timetable.add(main.stickers);
+
+
         return view;
     }
 
@@ -187,6 +197,24 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
 
         }
         return true;
+    }
+
+    /*** make sticker ***/
+    public void makeSticker(Timetable lecture){
+        MainActivity main = (MainActivity)getActivity();
+        for(Calendar start:lecture.getStartTime()){
+            int idx = lecture.getStartTime().indexOf(start);
+            Schedule schedule = new Schedule();
+            schedule.setClassTitle(lecture.getClassTitle());
+            schedule.setProfessorName(lecture.getProfessorName());
+            schedule.setStartTime(new Time(start.get(Calendar.HOUR),start.get(Calendar.MINUTE)));
+            schedule.setEndTime(new Time(lecture.getEndTime().get(idx).get(Calendar.HOUR),lecture.getEndTime().get(idx).get(Calendar.MINUTE)));
+            schedule.setDay(start.get(Calendar.DAY_OF_WEEK)-2);
+            schedule.setClassPlace(lecture.getClassPlace_1().get(idx));
+            main.stickers.add(schedule);
+        }
+        timetable.add(main.stickers);
+
     }
 
 }

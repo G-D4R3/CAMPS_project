@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.DataClass.Timetable;
 import com.github.tlaabs.timetableview.Schedule;
 import com.github.tlaabs.timetableview.TimetableView;
 
@@ -38,10 +39,11 @@ public class AddNewClass extends Fragment {
     String Professor;
     Calendar start_cal;
     Calendar end_cal;
+    int dayOfWeek;
+    ArrayList<Calendar> startTimes = new ArrayList<>();
+    ArrayList<Calendar> endTimes = new ArrayList<>();
+    ArrayList<String> lectureRooms = new ArrayList<>();
 
-    ArrayList<Calendar> startTime;
-    ArrayList<Calendar> endTime;
-    ArrayList<Calendar> dayOfWeek;
 
     String lectureRoom1;
     String LectureRoom2;
@@ -81,6 +83,7 @@ public class AddNewClass extends Fragment {
     LinearLayout Container2;
     LinearLayout Container3;
 
+    Timetable lecture;
 
     /*** flag ***/
     Boolean MOD = false;
@@ -98,7 +101,7 @@ public class AddNewClass extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         MainActivity main = (MainActivity) getActivity();
 
-        startTime = new ArrayList<Calendar>();
+
 
         /*** view load ***/
         View view = (View) inflater.inflate(R.layout.add_new_class, container, false);
@@ -122,6 +125,7 @@ public class AddNewClass extends Fragment {
             public void onClick(View v) {
                 AddNewTime addFragment = AddNewTime.newInstance();
                 MainActivity main = (MainActivity) getActivity();
+                addFragment.addNewClass = getInstance();
                 main.FragmentAdd(addFragment);
 
 
@@ -185,6 +189,12 @@ public class AddNewClass extends Fragment {
             /*
                 여기에 완료 눌렀을 때 구현하셈
              */
+            lecture = new Timetable(mLecture.getText().toString(),mProfessor.getText().toString(),startTimes,endTimes,lectureRooms);
+            main.timetableFragment.makeSticker(lecture);
+
+            main.FragmentRemove(AddNewClass.this);
+
+            System.out.println(lecture.toString());
         }
 
         return true;
@@ -201,17 +211,7 @@ public class AddNewClass extends Fragment {
 
     }
 
-    /*** make sticker ***/
-    /*private void makeSticker(){
-        ArrayList<Schedule> schedules = new ArrayList<Schedule>();
-        Schedule schedule = new Schedule();
-        schedule.setClassTitle("Data Structure"); // sets subject
-        schedule.setClassPlace("IT-601"); // sets place
-        schedule.setProfessorName("Won Kim"); // sets professor
-        schedule.setStartTime(new Time(10, 0)); // sets the beginning of class time (hour,minute)
-        schedule.setEndTime(new Time(13,30)); // sets the end of class time (hour,minute)
-        schedules.add(schedule);
-    } */
+
 
 
     /*** spinner ***/
@@ -227,7 +227,9 @@ public class AddNewClass extends Fragment {
         else if (input.equals("토")) return 6;
         else return 0;
     }
-
+    public AddNewClass getInstance(){
+        return this;
+    }
 
 }
 

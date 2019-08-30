@@ -19,6 +19,11 @@ public class Timetable{
         this.classPlace = classPlace;
     }
 
+    public Timetable(String classTitle, String professorName) {
+        this.classTitle = classTitle;
+        this.professorName = professorName;
+    }
+
     public String getProfessorName() {
         return professorName;
     }
@@ -60,8 +65,14 @@ public class Timetable{
     }
 
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Timetable{" +
+                "classTitle='" + classTitle + '\n' +
+                ", professorName='" + professorName + '\n' +
+                ", startTime=" + startTime + '\n' +
+                ", endTime=" + endTime + '\n' +
+                ", classPlace=" + classPlace + '\n' +
+                '}';
+    }
 }

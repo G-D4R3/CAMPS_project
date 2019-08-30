@@ -33,6 +33,7 @@ public class AddNewTime extends Fragment {
     MainActivity main;
     InputMethodManager input;
     Schedule schedule;
+    AddNewClass addNewClass;
 
     /*** tmp ***/
     String Lecture;
@@ -223,7 +224,13 @@ public class AddNewTime extends Fragment {
         int id = item.getItemId();
         MainActivity main = (MainActivity)getActivity();
         if (id == R.id.check_icon) {
-
+            //start_cal.set(Calendar.DAY_OF_WEEK,day2.getSelectedItemPosition());
+            //end_cal.set(Calendar.DAY_OF_WEEK,day2.getSelectedItemPosition());
+            System.out.println("AAA"+start_cal.get(Calendar.HOUR));
+            addNewClass.startTimes.add(start_cal);
+            addNewClass.endTimes.add(end_cal);
+            addNewClass.lectureRooms.add(mLectureRoom2.getText().toString());
+            main.FragmentRemove(AddNewTime.this);
         }
 
         return true;
@@ -238,12 +245,12 @@ public class AddNewTime extends Fragment {
         String input;
         input = s.getSelectedItem().toString();
 
-        if (input.equals("월")) return 1;
-        else if (input.equals("화")) return 2;
-        else if (input.equals("수")) return 3;
-        else if (input.equals("목")) return 4;
-        else if (input.equals("금")) return 5;
-        else if (input.equals("토")) return 6;
+        if (input.equals("월")) return 2;
+        else if (input.equals("화")) return 3;
+        else if (input.equals("수")) return 4;
+        else if (input.equals("목")) return 5;
+        else if (input.equals("금")) return 6;
+        else if (input.equals("토")) return 7;
         else return 0;
     }
 
