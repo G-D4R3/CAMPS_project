@@ -41,7 +41,17 @@
                 android:id="@+id/timetable_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
                 android:text="10:00 - 13:00"
+                android:fontFamily="@font/barun"
+                android:textColor="@color/layout_content_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/timetable_place"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="장소"
                 android:fontFamily="@font/barun"
                 android:textColor="@color/layout_content_color"
                 android:textSize="16sp" />

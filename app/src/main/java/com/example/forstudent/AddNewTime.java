@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,26 +43,16 @@ public class AddNewTime extends Fragment {
     ArrayList<Calendar> endTime;
     ArrayList<Calendar> dayOfWeek;
 
-    String lectureRoom2;
+    String lectureRoom;
 
 
     /*** view ***/
     Context context;
-    EditText mLecture;
-    EditText mProfessor;
 
-
-    TextView startTime2;
-    TextView endTime2;
-
-    Spinner day2;
-
-
-
-    EditText mLectureRoom2;
-
-
-    Button add_button;
+    TextView mStartTime;
+    TextView mEndTime;
+    Spinner mDay;
+    EditText mLectureRoom;
 
 
 
@@ -89,24 +78,22 @@ public class AddNewTime extends Fragment {
 
         /*** view load ***/
         View view = (View)inflater.inflate(R.layout.add_new_time, container, false);
-
         final TextView completeButton = (TextView) view.findViewById(R.id.complete_add_time);
-
-        startTime2 = (TextView)view.findViewById(R.id.start_time2);
-        endTime2 = (TextView)view.findViewById(R.id.end_time2);
-
-        day2 = (Spinner)view.findViewById(R.id.day_spinner2);
-
-        mLectureRoom2 = (EditText)view.findViewById(R.id.location_2);
-
+        mStartTime = (TextView)view.findViewById(R.id.start_time2);
+        mEndTime = (TextView)view.findViewById(R.id.end_time2);
+        mDay = (Spinner)view.findViewById(R.id.day_spinner2);
+        mLectureRoom = (EditText)view.findViewById(R.id.location_2);
         start_cal = Calendar.getInstance();
         end_cal = Calendar.getInstance();
 
-        day2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
+
+        mDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                start_cal.set(Calendar.DAY_OF_WEEK, spin(day2));
-                end_cal.set(Calendar.DAY_OF_WEEK, spin(day2));
+                start_cal.set(Calendar.DAY_OF_WEEK, spin(mDay));
+                end_cal.set(Calendar.DAY_OF_WEEK, spin(mDay));
             }
 
             @Override
@@ -115,7 +102,7 @@ public class AddNewTime extends Fragment {
             }
         });
 
-        startTime2.setOnClickListener(new View.OnClickListener() {
+        mStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog dialog = new TimePickerDialog(getContext(),listener, 10, 00, true);
@@ -125,14 +112,14 @@ public class AddNewTime extends Fragment {
             private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    startTime2.setText(hourOfDay+" : " + minute);
+                    mStartTime.setText(hourOfDay+" : " + minute);
                     start_cal.set(Calendar.HOUR, hourOfDay);
                     start_cal.set(Calendar.MINUTE, minute);
                 }
             };
         });
 
-        endTime2.setOnClickListener(new View.OnClickListener() {
+        mEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog dialog = new TimePickerDialog(getContext(),listener, 13, 30, true);
@@ -142,7 +129,7 @@ public class AddNewTime extends Fragment {
             private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    endTime2.setText(hourOfDay+" : " + minute);
+                    mEndTime.setText(hourOfDay+" : " + minute);
                     end_cal.set(Calendar.HOUR, hourOfDay);
                     end_cal.set(Calendar.MINUTE, minute);
                 }
@@ -154,22 +141,10 @@ public class AddNewTime extends Fragment {
 
                 startTime.add(start_cal);
                 endTime.add(end_cal);
+                lectureRoom = mLectureRoom.getText().toString();
 
-                lectureRoom2 = mLectureRoom2.getText().toString();
                 main.FragmentRemove(AddNewTime.this);
 
-                /* for (int i = 0; i < startTime.size(); i++){
-
-                }
-
-                ArrayList<Schedule> schedules = new ArrayList<Schedule>();
-                Schedule schedule = new Schedule();
-                schedule.setClassTitle("Data Structure"); // sets subject
-                schedule.setClassPlace("IT-601"); // sets place
-                schedule.setProfessorName("Won Kim"); // sets professor
-                schedule.setStartTime(new Time(10, 0)); // sets the beginning of class time (hour,minute)
-                schedule.setEndTime(new Time(13,30)); // sets the end of class time (hour,minute)
-                schedules.add(schedule);*/
 
             }
         });
@@ -182,7 +157,7 @@ public class AddNewTime extends Fragment {
         /***** toolbar *****/
         main.BACK_STACK=true;
         main.centerToolbarTitle.setText("과목 추가");
-       main.toolbar.setTitle("");
+        main.toolbar.setTitle("");
         main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,12 +182,10 @@ public class AddNewTime extends Fragment {
         int id = item.getItemId();
         MainActivity main = (MainActivity)getActivity();
         if (id == R.id.check_icon) {
-            //start_cal.set(Calendar.DAY_OF_WEEK,day2.getSelectedItemPosition());
-            //end_cal.set(Calendar.DAY_OF_WEEK,day2.getSelectedItemPosition());
-            System.out.println("AAA"+start_cal.get(Calendar.HOUR));
             addNewClass.startTimes.add(start_cal);
             addNewClass.endTimes.add(end_cal);
-            addNewClass.lectureRooms.add(mLectureRoom2.getText().toString());
+            addNewClass.lectureRooms.add(mLectureRoom.getText().toString());
+            addNewClass.adapter.notifyDataSetChanged();
             main.FragmentRemove(AddNewTime.this);
         }
 
@@ -239,8 +212,8 @@ public class AddNewTime extends Fragment {
 
     /*** getter ***/
 
-    public String getLectureRoom2() {
-        return lectureRoom2;
+    public String getLectureRoom() {
+        return lectureRoom;
     }
 
     public ArrayList<Calendar> getStartTime() {

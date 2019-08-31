@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Timetable;
+import com.example.forstudent.ListViewAdapter.TimeTableListAdapater;
 import com.github.tlaabs.timetableview.Schedule;
 import com.github.tlaabs.timetableview.TimetableView;
 
@@ -47,30 +49,28 @@ public class AddNewClass extends Fragment {
     Context context;
     EditText mLecture;
     EditText mProfessor;
+    TextView mTimeAdd;
+    ListView mTimeList;
+    TimeTableListAdapater adapter;
 
-    TextView add_button;
-
-
-
-    Timetable lecture;
 
     /*** flag ***/
     Boolean MOD = false;
 
     /*** Storage ***/
+    Timetable lecture;
+
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        main = (MainActivity) getActivity();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        MainActivity main = (MainActivity) getActivity();
-
-
 
         /*** view load ***/
         View view = (View) inflater.inflate(R.layout.add_new_class, container, false);
@@ -78,14 +78,27 @@ public class AddNewClass extends Fragment {
         mLecture = (EditText) view.findViewById(R.id.className);
         mProfessor = (EditText) view.findViewById(R.id.professor);
         final TextView completeButton = (TextView) view.findViewById(R.id.complete_add_timetable);
+        mTimeAdd = (TextView) view.findViewById(R.id.addButton);
+        mTimeList = (ListView)view.findViewById(R.id.timetable_time_list);
+        adapter = new TimeTableListAdapater(startTimes, endTimes, lectureRooms);
+        mTimeList.setAdapter(adapter);
 
-        add_button = (TextView) view.findViewById(R.id.addButton);
 
-        timetable = view.findViewById(R.id.timetable);
+        /***** toolbar *****/
+        main.BACK_STACK = true;
+        main.centerToolbarTitle.setText("과목 추가");
+        main.toolbar.setTitle("");
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // hideKey();
+                main.FragmentRemove(AddNewClass.this);
+            }
+        });
 
 
-        add_button.setOnClickListener(new View.OnClickListener() {
 
+        mTimeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddNewTime addFragment = AddNewTime.newInstance();
@@ -93,12 +106,12 @@ public class AddNewClass extends Fragment {
                 addFragment.addNewClass = getInstance();
                 main.FragmentAdd(addFragment);
 
-
             }
         });
 
 
         completeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 Lecture = mLecture.getText().toString();
                 Professor = mProfessor.getText().toString();
@@ -113,17 +126,10 @@ public class AddNewClass extends Fragment {
         });
 
 
-        /***** toolbar *****/
-        main.BACK_STACK = true;
-        main.centerToolbarTitle.setText("과목 추가");
-        main.toolbar.setTitle("");
-        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // hideKey();
-                main.FragmentRemove(AddNewClass.this);
-            }
-        });
+
+
+
+
         return view;
 
     }
@@ -163,7 +169,6 @@ public class AddNewClass extends Fragment {
         schedule.setProfessorName(mProfessor.getText().toString());
 
     }
-
 
 
 

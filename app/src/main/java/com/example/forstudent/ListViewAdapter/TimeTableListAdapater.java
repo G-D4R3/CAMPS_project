@@ -16,11 +16,12 @@ public class TimeTableListAdapater extends BaseAdapter {
     public Timetable tt;
     public ArrayList<Calendar> start;
     public ArrayList<Calendar> end;
+    public ArrayList<String> place;
 
-    public TimeTableListAdapater(Timetable input){
-        this.tt = input;
-        this.start = input.getStartTime();
-        this.end = input.getEndTime();
+    public TimeTableListAdapater(ArrayList<Calendar> start, ArrayList<Calendar> end, ArrayList<String> place){
+        this.start = start;
+        this.end = end;
+        this.place = place;
     }
 
     @Override
@@ -45,16 +46,19 @@ public class TimeTableListAdapater extends BaseAdapter {
 
         TextView mTime;
         TextView mDay;
+        TextView mPlace;
 
         mTime = (TextView)convertView.findViewById(R.id.timetable_time);
         mDay = (TextView) convertView.findViewById(R.id.timetable_day_of_weeK);
+        mPlace = (TextView)convertView.findViewById(R.id.timetable_place);
 
         Calendar mStart = start.get(position);
         Calendar mEnd = end.get(position);
+        String mRoom = place.get(position);
 
         mDay.setText(getDay(mStart.get(Calendar.DAY_OF_WEEK)));
-        mTime.setText(String.format("%d:%d - %d:%d", mStart.get(Calendar.HOUR), mStart.get(Calendar.MINUTE), mEnd.get(Calendar.HOUR), mEnd.get(Calendar.MINUTE)));
-
+        mTime.setText(String.format("%d:%2d - %d:%2d", mStart.get(Calendar.HOUR), mStart.get(Calendar.MINUTE), mEnd.get(Calendar.HOUR), mEnd.get(Calendar.MINUTE)));
+        mPlace.setText(mRoom);
 
 
         return convertView;
@@ -62,17 +66,17 @@ public class TimeTableListAdapater extends BaseAdapter {
 
     private String getDay(int day){
         switch(day){
-            case 1:
-                return "월";
             case 2:
-                return "화";
+                return "월";
             case 3:
-                return "수";
+                return "화";
             case 4:
-                return "목";
+                return "수";
             case 5:
-                return "금";
+                return "목";
             case 6:
+                return "금";
+            case 7:
                 return "토";
 
         }
