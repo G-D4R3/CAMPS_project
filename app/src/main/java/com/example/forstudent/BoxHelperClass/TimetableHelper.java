@@ -45,8 +45,8 @@ public class TimetableHelper {
             MainActivity.getInstance().getTimetableBox().put(lecture);
         }
     }
-    public static Timetable_Model getLecture(long id){
-        Timetable_Model timetable_model = (Timetable_Model) MainActivity.getInstance().getTimetableBox().get(id);
+    public static Timetable_Model getLecture(MainActivity main,long id){
+        Timetable_Model timetable_model = (Timetable_Model) main.getTimetableBox().get(id);
         return timetable_model;
     }
 }
