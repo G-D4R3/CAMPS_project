@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.forstudent.BoxClass.Timetable_Model;
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
 import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Event;
@@ -116,10 +115,7 @@ public class CalendarFragment extends Fragment{
         mUheader.setVisibility(View.GONE);
 
         if(!main.getTimetableBox().isEmpty()){
-            for(Object tmp:main.getTimetableBox().getAll()) {
-                Timetable_Model temp = (Timetable_Model) tmp;
-                System.out.println(temp.toString());
-            }
+
             for(Object tmp:main.timeTables) {
                 Timetable temp = (Timetable) tmp;
                 System.out.println(temp.toString());
