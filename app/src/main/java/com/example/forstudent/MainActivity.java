@@ -45,7 +45,6 @@ import com.example.forstudent.BoxHelperClass.AssignmentHelper;
 import com.example.forstudent.BoxHelperClass.GradeHelper;
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
 import com.example.forstudent.BoxHelperClass.TestSubHelper;
-import com.example.forstudent.BoxHelperClass.TimetableHelper;
 import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Grade;
 import com.example.forstudent.DataClass.Schedule;
@@ -312,7 +311,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         System.out.println("IN");
         //Timetable data load
         for(long i=1; i<=timetableBox.count(); i++){
-            timetable_models.add(TimetableHelper.getLecture(i));
+            timetable_models = new ArrayList<Timetable_Model>(timetableBox.getAll());
+            //timetable_models.add(TimetableHelper.getLecture(this,i));
         }
         String classTitle = "DEFAULT";
         String professor = "DEFAULT";
@@ -322,7 +322,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         if(!getTimetableBox().isEmpty()) {
             for (int i = 0; i < timetable_models.size(); i++) {
                 Timetable_Model model = timetable_models.get(i);
-
+                if(model == null) continue;
                 if (!model.getSubject().equals(classTitle)) {
                     if (i != 0) {
                         Timetable timetable = new Timetable(classTitle, professor, startTimes, endTimes, lectureRooms);

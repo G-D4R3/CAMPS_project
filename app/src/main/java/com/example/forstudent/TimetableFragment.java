@@ -64,7 +64,14 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         main.centerToolbarTitle.setText("");
 
         init(view);
-        timetable.add(main.stickers);
+
+            for (Object lecture : main.timeTables) {
+                Timetable lec = (Timetable) lecture;
+                makeSticker(lec);
+            }
+            timetable.add(main.stickers);
+
+
 
 
         return view;
