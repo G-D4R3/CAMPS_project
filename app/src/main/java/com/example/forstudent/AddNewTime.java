@@ -13,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -45,9 +44,7 @@ public class AddNewTime extends Fragment {
     ArrayList<Calendar> endTime;
     ArrayList<Calendar> dayOfWeek;
 
-    String lectureRoom1;
     String lectureRoom2;
-    String lectureRoom3;
 
 
     /*** view ***/
@@ -55,33 +52,19 @@ public class AddNewTime extends Fragment {
     EditText mLecture;
     EditText mProfessor;
 
-    TextView startTime1;
-    TextView endTime1;
+
     TextView startTime2;
     TextView endTime2;
-    TextView startTime3;
-    TextView endTime3;
 
-    TimePicker time1;
-    TimePicker time2;
-    TimePicker time3;
-    Spinner day1;
     Spinner day2;
-    Spinner day3;
 
-    EditText mLectureRoom1;
+
+
     EditText mLectureRoom2;
-    EditText mLectureRoom3;
+
 
     Button add_button;
 
-    LinearLayout l1;
-    LinearLayout l2;
-    LinearLayout l3;
-
-    LinearLayout Container1;
-    LinearLayout Container2;
-    LinearLayout Container3;
 
 
     /*** flag ***/

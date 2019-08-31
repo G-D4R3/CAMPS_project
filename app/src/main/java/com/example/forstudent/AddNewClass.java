@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,43 +43,14 @@ public class AddNewClass extends Fragment {
     ArrayList<String> lectureRooms = new ArrayList<>();
 
 
-    String lectureRoom1;
-    String LectureRoom2;
-    String LectureRoom3;
-
-
     /*** view ***/
     Context context;
     EditText mLecture;
     EditText mProfessor;
 
-    TextView startTime1;
-    TextView endTime1;
-    TextView startTime2;
-    TextView endTime2;
-    TextView startTime3;
-    TextView endTime3;
-
-    TimePicker time1;
-    TimePicker time2;
-    TimePicker time3;
-    Spinner day1;
-    Spinner day2;
-    Spinner day3;
-
-    EditText mLectureRoom1;
-    EditText mLectureRoom2;
-    EditText mLectureRoom3;
-
     TextView add_button;
 
-    LinearLayout l1;
-    LinearLayout l2;
-    LinearLayout l3;
 
-    LinearLayout Container1;
-    LinearLayout Container2;
-    LinearLayout Container3;
 
     Timetable lecture;
 
@@ -110,10 +79,6 @@ public class AddNewClass extends Fragment {
         mProfessor = (EditText) view.findViewById(R.id.professor);
         final TextView completeButton = (TextView) view.findViewById(R.id.complete_add_timetable);
 
-        Container1 = (LinearLayout) view.findViewById(R.id.asslayout);
-        Container2 = (LinearLayout) view.findViewById(R.id.asslayout);
-        Container3 = (LinearLayout) view.findViewById(R.id.asslayout);
-
         add_button = (TextView) view.findViewById(R.id.addButton);
 
         timetable = view.findViewById(R.id.timetable);
@@ -131,15 +96,6 @@ public class AddNewClass extends Fragment {
 
             }
         });
-
-        /*ArrayList<Schedule> schedules = new ArrayList<Schedule>();
-        Schedule schedule = new Schedule();
-        schedule.setClassTitle("Data Structure"); // sets subject
-        schedule.setClassPlace("IT-601"); // sets place
-        schedule.setProfessorName("Won Kim"); // sets professor
-        schedule.setStartTime(new Time(10, 0)); // sets the beginning of class time (hour,minute)
-        schedule.setEndTime(new Time(13, 30)); // sets the end of class time (hour,minute)
-        schedules.add(schedule);*/
 
 
         completeButton.setOnClickListener(new View.OnClickListener() {
@@ -185,10 +141,6 @@ public class AddNewClass extends Fragment {
         int id = item.getItemId();
         MainActivity main = (MainActivity) getActivity();
         if (id == R.id.check_icon) {
-
-            /*
-                여기에 완료 눌렀을 때 구현하셈
-             */
             lecture = new Timetable(mLecture.getText().toString(),mProfessor.getText().toString(),startTimes,endTimes,lectureRooms);
             main.timeTables.add(lecture);
             main.timetableFragment.makeSticker(lecture);
