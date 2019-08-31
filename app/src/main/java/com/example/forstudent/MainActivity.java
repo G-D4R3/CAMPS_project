@@ -134,6 +134,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     InputMethodManager keypad;
     private long time=0;
     public  boolean BACK_STACK = false;
+
     public interface OnBackPressedListener{
         public void OnBack();
     }
@@ -155,6 +156,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     final int TEST_ALARM_BASE       = 60000000;
     final static int STORAGE_PERMISSION_CODE =1;
 
+    static Uri timetableUri;
 
 
     final long id=77;
@@ -564,7 +566,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
              }
         String save = sdCardPath.getPath() + "/" + folder + "/" + filename;
 
-        File file = new File(Environment.getExternalStorageDirectory(), filename);//Pictures폴더 screenshot.png 파일
+        File file = new File(dirs, filename);//Pictures폴더 screenshot.jpg 파일
         FileOutputStream os = null;
         try{
             //filePath.mkdir();
@@ -576,13 +578,19 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             return null;
         }
 
+        setTimeTableUri(file);
         view.setDrawingCacheEnabled(false);
         return file;
     }
 
+    private void setTimeTableUri(File file) {
+        if(file.exists()){
+            timetableUri = Uri.fromFile(file);
+        }
+    }
+
 
     /**** alarm ****/
-
     public Calendar calcHourBefore(Calendar calendar,int amount){
         calendar.set(Calendar.SECOND,0);
 
@@ -597,6 +605,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         destDate.setTimeInMillis(destDateInMillis);
         return destDate;
     }
+
     public void alarmDelete(Object src){
         String className = src.getClass().getSimpleName();
         Calendar ringDate = null;
