@@ -45,6 +45,7 @@ import com.example.forstudent.BoxHelperClass.AssignmentHelper;
 import com.example.forstudent.BoxHelperClass.GradeHelper;
 import com.example.forstudent.BoxHelperClass.ScheduleHelper;
 import com.example.forstudent.BoxHelperClass.TestSubHelper;
+import com.example.forstudent.BoxHelperClass.TimetableHelper;
 import com.example.forstudent.DataClass.Assignment;
 import com.example.forstudent.DataClass.Grade;
 import com.example.forstudent.DataClass.Schedule;
@@ -67,8 +68,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     private TextView mTextMessage;
     public FragmentManager fragmentManager = getSupportFragmentManager();
 
-
-    ArrayList<com.github.tlaabs.timetableview.Schedule> stickers = new ArrayList<com.github.tlaabs.timetableview.Schedule>();
 
 
     /*****objectbox*****/
@@ -94,8 +93,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
     ArrayList<Grade> grades = new ArrayList<>();
-    ArrayList<Timetable> timeTables = new ArrayList<Timetable>();
-
+    ArrayList<Timetable> timeTables = new ArrayList<>();
+    ArrayList<Timetable_Model> timetable_models = new ArrayList<>();    // for merge models
+    ArrayList<com.github.tlaabs.timetableview.Schedule> stickers = new ArrayList<com.github.tlaabs.timetableview.Schedule>();
     //store things
     //dday count
     int year;
@@ -164,7 +164,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Tutorial();
         //toolbarButtonState.add("SETTING_INVISIBLE");
 
@@ -264,6 +263,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         testBox = ObjectBox.get().boxFor(TestSub_Model.class);
         scheduleBox = ObjectBox.get().boxFor(Schedule_Model.class);
         gradeBox = ObjectBox.get().boxFor(Grade_Model.class);
+        timetableBox = ObjectBox.get().boxFor(Timetable_Model.class);
 
         //test 유저 처음 저장 작업 (처음실행용)
         if(userDataBox.isEmpty()) {
@@ -309,9 +309,41 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         for(long i=1; i<=gradeBox.count(); i++){
             grades.add(GradeHelper.getGrade(i));
         }
+        System.out.println("IN");
+        //Timetable data load
+        for(long i=1; i<=timetableBox.count(); i++){
+            timetable_models.add(TimetableHelper.getLecture(i));
+        }
+        String classTitle = "DEFAULT";
+        String professor = "DEFAULT";
+        ArrayList<Calendar> startTimes=null;
+        ArrayList<Calendar> endTimes=null;
+        ArrayList<String> lectureRooms=null;
+        if(!getTimetableBox().isEmpty()) {
+            for (int i = 0; i < timetable_models.size(); i++) {
+                Timetable_Model model = timetable_models.get(i);
 
+                if (!model.getSubject().equals(classTitle)) {
+                    if (i != 0) {
+                        Timetable timetable = new Timetable(classTitle, professor, startTimes, endTimes, lectureRooms);
+                        timeTables.add(timetable);
+                    }
+                    classTitle = model.getSubject();
+                    professor = model.getProfessor();
+                    startTimes = new ArrayList<>();
+                    endTimes = new ArrayList<>();
+                    lectureRooms = new ArrayList<>();
+                }
+                startTimes.add(makeCalendar(model.getStart_hour(), model.getStart_minute(), model.getDayOfWeek()));
+                endTimes.add(makeCalendar(model.getEnd_hour(), model.getEnd_minute(), model.getDayOfWeek()));
+                lectureRooms.add(model.getLectureRoom());
+                if (i == timetable_models.size()-1) {
+                    Timetable timetable = new Timetable(classTitle, professor, startTimes, endTimes, lectureRooms);
+                    timeTables.add(timetable);
+                }
+            }
 
-
+        }
 
 
         /**********bottom navigation*********/
@@ -477,6 +509,9 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public Grade_Model getGrade(){
         return grade_model;
     }
+
+    /*** timetable ***/
+    public Box<Timetable_Model> getTimetableBox(){ return timetableBox;}
 
 
     /***********toolbar************/
@@ -734,7 +769,13 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         long time = ringDate.getTimeInMillis();
         alarmManager.setExact(AlarmManager.RTC_WAKEUP,time,pendingIntent);
     }
-
+    public Calendar makeCalendar(int hour, int minute, int dayOfWeek){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_WEEK,dayOfWeek);
+        cal.set(Calendar.HOUR,hour);
+        cal.set(Calendar.MINUTE,minute);
+        return cal;
+    }
 
     private void Tutorial(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

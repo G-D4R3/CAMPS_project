@@ -7,9 +7,9 @@ public class Timetable{
 
     String classTitle="";
     String professorName="";
-    ArrayList<Calendar> startTime;
-    ArrayList<Calendar> endTime;
-    ArrayList <String> classPlace;
+    public ArrayList<Calendar> startTime;
+    public ArrayList<Calendar> endTime;
+    public ArrayList <String> classPlace;
 
     public Timetable(String classTitle, String professorName, ArrayList<Calendar> startTime, ArrayList<Calendar> endTime, ArrayList<String> classPlace) {
         this.classTitle = classTitle;

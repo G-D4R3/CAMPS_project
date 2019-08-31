@@ -9,154 +9,118 @@ public class Timetable_Model {
     @Id(assignable = true)
     long id;
 
-    int hour1;
-    int hour2;
-    int hour3;
+    int start_hour;
+    int start_minute;
+    int end_hour;
+    int end_minute;
 
-    int minute1;
-    int minute2;
-    int minute3;
-
-    int dayOfWeek1;
-    int dayOfWeek2;
-    int dayOfWeek3;
+    int dayOfWeek;
 
 
     String professor;
     String subject;
 
-    String lectureRoom1;
-    String lectureRoom2;
-    String lectureRoom3;
+    String lectureRoom;
 
-    public Timetable_Model(long id, int hour1, int hour2, int hour3, int minute1, int minute2, int minute3, int dayOfWeek1, int dayOfWeek2, int dayOfWeek3, String professor, String subject, String lectureRoom1, String lectureRoom2, String lectureRoom3) {
+
+    public Timetable_Model(long id, int start_hour, int start_minute, int end_hour, int end_minute,  int dayOfWeek, String professor, String subject, String lectureRoom) {
         this.id = id;
-        this.hour1 = hour1;
-        this.hour2 = hour2;
-        this.hour3 = hour3;
-        this.minute1 = minute1;
-        this.minute2 = minute2;
-        this.minute3 = minute3;
-        this.dayOfWeek1 = dayOfWeek1;
-        this.dayOfWeek2 = dayOfWeek2;
-        this.dayOfWeek3 = dayOfWeek3;
+        this.start_hour = start_hour;
+        this.start_minute = start_minute;
+        this.end_hour = end_hour;
+        this.end_minute = end_minute;
+        this.dayOfWeek = dayOfWeek;
         this.professor = professor;
         this.subject = subject;
-        this.lectureRoom1 = lectureRoom1;
-        this.lectureRoom2 = lectureRoom2;
-        this.lectureRoom3 = lectureRoom3;
+        this.lectureRoom = lectureRoom;
     }
 
-    public void setHour1(int hour){
-        this.hour1 = hour;
+    public long getId() {
+        return id;
     }
 
-    public void setHour2(int hour) {
-        this.hour2 = hour;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setHour3(int hour){
-        this.hour3 = hour;
+
+    public int getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setMinute1(int minute){
-        this.minute1 = minute;
+    public void setDayOfWeek(int dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
-    public void setMinute2(int minute){
-        this.minute2 = minute;
-    }
-
-    public void setMinute3(int minute){
-        this.minute3 = minute;
-    }
-
-    public void setDayOfWeek1(int dayOfWeek){
-        this.dayOfWeek1 = dayOfWeek;
-    }
-
-    public void setDayOfWeek2(int dayOfWeek){
-        this.dayOfWeek2 = dayOfWeek;
-    }
-
-    public void setDayOfWeek3(int dayOfWeek){
-        this.dayOfWeek3 = dayOfWeek;
-    }
-
-    public void setProfessor(String professor){
-        this.professor = professor;
-    }
-
-    public void setLectureRoom1(String lectureRoom){
-        this.lectureRoom1 = lectureRoom;
-    }
-
-    public void setLectureRoom2(String lectureRoom){
-        this.lectureRoom2 = lectureRoom;
-    }
-
-    public void setLectureRoom3(String lectureRoom){
-        this.lectureRoom3 = lectureRoom;
-    }
-
-    public void setSubject(String subject){
-        this.subject = subject;
-
-    }
-
-    public int getHour1(){
-        return hour1;
-    }
-
-    public int getHour2(){
-        return hour2;
-    }
-
-    public int getHour3(){
-        return hour3;
-    }
-
-    public int getMinute1(){
-        return minute1;
-    }
-
-    public int getMinute2(){
-        return minute2;
-    }
-
-    public int getMinute3(){
-        return minute3;
-    }
-
-    public int getDayOfWeek1() {
-        return dayOfWeek1;
-    }
-
-    public int getDayOfWeek2() {
-        return dayOfWeek2;
-    }
-
-    public int getDayOfWeek3() {
-        return dayOfWeek3;
-    }
-
-    public String getProfessor(){
+    public String getProfessor() {
         return professor;
     }
 
-    public String getLectureRoom1(){
-        return lectureRoom1;
+    public void setProfessor(String professor) {
+        this.professor = professor;
     }
 
-    public String getLectureRoom2(){
-        return lectureRoom2;
-    }
-
-    public String getLectureRoom3(){
-        return lectureRoom3;
-    }
-
-    public String getSubject(){
+    public String getSubject() {
         return subject;
     }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getLectureRoom() {
+        return lectureRoom;
+    }
+
+    public void setLectureRoom(String lectureRoom) {
+        this.lectureRoom = lectureRoom;
+    }
+
+    public int getStart_hour() {
+        return start_hour;
+    }
+
+    public void setStart_hour(int start_hour) {
+        this.start_hour = start_hour;
+    }
+
+    public int getStart_minute() {
+        return start_minute;
+    }
+
+    public void setStart_minute(int start_minute) {
+        this.start_minute = start_minute;
+    }
+
+    public int getEnd_hour() {
+        return end_hour;
+    }
+
+    public void setEnd_hour(int end_hour) {
+        this.end_hour = end_hour;
+    }
+
+    public int getEnd_minute() {
+        return end_minute;
+    }
+
+    public void setEnd_minute(int end_minute) {
+        this.end_minute = end_minute;
+    }
+
+    @Override
+    public String toString() {
+        return "Timetable_Model{" + '\n' +
+                "id=" + id + '\n' +
+                ", start_hour=" + start_hour + '\n' +
+                ", start_minute=" + start_minute + '\n' +
+                ", end_hour=" + end_hour + '\n' +
+                ", end_minute=" + end_minute + '\n' +
+                ", dayOfWeek=" + dayOfWeek + '\n' +
+                ", professor='" + professor + '\n' +
+                ", subject='" + subject + '\n' +
+                ", lectureRoom='" + lectureRoom + '\n' +
+                '}';
+    }
 }
+

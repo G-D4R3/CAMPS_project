@@ -190,6 +190,7 @@ public class AddNewClass extends Fragment {
                 여기에 완료 눌렀을 때 구현하셈
              */
             lecture = new Timetable(mLecture.getText().toString(),mProfessor.getText().toString(),startTimes,endTimes,lectureRooms);
+            main.timeTables.add(lecture);
             main.timetableFragment.makeSticker(lecture);
 
             main.FragmentRemove(AddNewClass.this);

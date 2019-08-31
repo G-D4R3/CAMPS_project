@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.BoxHelperClass.TimetableHelper;
 import com.example.forstudent.DataClass.Timetable;
 import com.github.tlaabs.timetableview.Schedule;
 import com.github.tlaabs.timetableview.Time;
@@ -41,7 +42,13 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
 
     //Sticker Class (NOT Schedule fragment class)
 
+    saveData save;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        save = new saveData();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -216,5 +223,43 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         timetable.add(main.stickers);
 
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity main = (MainActivity)getActivity();
+        save.run();
+    }
+
+
+
+
+    private class saveData extends Thread{
+        public saveData(){
+
+        }
+
+        public void run(){
+            try{
+                MainActivity main = (MainActivity)getActivity();
+                main.getTimetableBox().removeAll();
+                int count =1 ;
+                for(int i=0; i<main.timeTables.size(); i++){
+                    Timetable lecture = (Timetable)main.timeTables.get(i);
+
+                        TimetableHelper helper = new TimetableHelper(0,lecture.getClassTitle(),lecture.getProfessorName(),lecture.classPlace,lecture.startTime,lecture.endTime);
+                        TimetableHelper.putLecture(helper);
+                        count ++;
+
+
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
 
 }
