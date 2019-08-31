@@ -19,15 +19,14 @@
 
         <TextView
             android:id="@+id/period4"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:layout_weight="6"
             android:textSize="14sp"
             android:textColor="@color/layout_title_color"
             android:fontFamily="@font/barun"
-            android:text="시간" />
+            android:text="10:00 - 11:30" />
 
         <TextView
             android:id="@+id/assign4"
@@ -36,10 +35,23 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textColor="@color/layout_content_color"
             android:text="수업"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/place4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="@color/layout_title_color"
+            android:fontFamily="@font/barun"
+            android:text="장소" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

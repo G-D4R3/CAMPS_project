@@ -21,9 +21,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.DataClass.Assignment;
+import com.example.forstudent.DataClass.HomeTimeTable;
 import com.example.forstudent.DataClass.Schedule;
 import com.example.forstudent.DataClass.TestSub;
+import com.example.forstudent.DataClass.Timetable;
 import com.example.forstudent.ListViewAdapter.HomeAssignmentAdapter;
+import com.example.forstudent.ListViewAdapter.HomeClassAdapter;
 import com.example.forstudent.ListViewAdapter.HomeExamAdapter;
 import com.example.forstudent.ListViewAdapter.HomeScheduleAdapter;
 
@@ -61,6 +64,7 @@ public class HomeFragment extends Fragment {
     ListView mAssignList;
     ListView mTestList;
     public HomeAssignmentAdapter assignmentAdapter;
+    public HomeClassAdapter homeClassAdapter;
     public HomeExamAdapter examAdapter;
     public HomeScheduleAdapter scheduleAdapter;
 
@@ -74,9 +78,10 @@ public class HomeFragment extends Fragment {
     static final long id = 77;
 
     public ArrayList<Assignment> ass = new ArrayList<>();
+    public ArrayList<Timetable> classes = new ArrayList<>();
+    public ArrayList<HomeTimeTable> homeTimeTables = new ArrayList<>();
     public ArrayList<TestSub> tests = new ArrayList<>();
     public ArrayList<Schedule> schedules = new ArrayList<>();
-
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -130,6 +135,10 @@ public class HomeFragment extends Fragment {
         mScheduleList.setAdapter(scheduleAdapter);
         listViewSetter.setListViewHeight(mScheduleList);
 
+        homeClassAdapter = new HomeClassAdapter(homeTimeTables);
+        mClassList.setAdapter(homeClassAdapter);
+        listViewSetter.setListViewHeight(mClassList);
+
         assignmentAdapter = new HomeAssignmentAdapter(ass);
         mAssignList.setAdapter(assignmentAdapter);
         listViewSetter.setListViewHeight(mAssignList);
@@ -139,7 +148,7 @@ public class HomeFragment extends Fragment {
         listViewSetter.setListViewHeight(mTestList);
 
         setListView();
-        setExist();
+        //setExist();
 
 
 
@@ -191,6 +200,7 @@ public class HomeFragment extends Fragment {
 
         //모두 불러옴
         schedules = main.schedules;
+        classes = main.timeTables;
 
         if(mSetAssignment==true){
             ass = main.assignment;
@@ -218,10 +228,24 @@ public class HomeFragment extends Fragment {
         schedules = new ArrayList(schedules.subList(position, size));
 
 
+        //classes
+        position=0;
+        size=classes.size();
+        homeTimeTables = new ArrayList<>();
+        for(Timetable tmp : classes){
+            for(int i=0; i<tmp.startTime.size(); i++){
+                if(tmp.getStartTime().get(i).get(Calendar.DAY_OF_WEEK)==today.get(Calendar.DAY_OF_WEEK)){
+                    HomeTimeTable htt = new HomeTimeTable(tmp.getClassTitle(), tmp.startTime.get(i), tmp.endTime.get(i), tmp.classPlace.get(i));
+                    homeTimeTables.add(htt);
+                }
+            }
+        }
+
+
+
         //assignment
         position=0;
         size = ass.size();
-
         for(int i=0; i<size; i++){
             datecount.dcalendar.set(ass.get(i).getPeriod().get(Calendar.YEAR), ass.get(i).getPeriod().get(Calendar.MONTH), ass.get(i).getPeriod().get(Calendar.DAY_OF_MONTH));
             rest = datecount.calcDday();
@@ -257,6 +281,14 @@ public class HomeFragment extends Fragment {
             }
             else{
                 mNoSchedule.setVisibility(View.VISIBLE);
+            }
+        }
+        if(layoutset[1]==true){
+            if(homeTimeTables.size()>0){
+                mNoClass.setVisibility(View.GONE);
+            }
+            else{
+                mNoClass.setVisibility(View.VISIBLE);
             }
         }
         if(layoutset[2]==true){
