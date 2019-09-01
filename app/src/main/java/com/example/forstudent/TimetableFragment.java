@@ -27,7 +27,7 @@ import com.github.tlaabs.timetableview.TimetableView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class TimetableFragment extends Fragment implements View.OnClickListener{
+public class TimetableFragment extends Fragment{
 
     private Context context;
     public static final int REQUEST_ADD = 1;
@@ -94,11 +94,6 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
 
     private void init(View v){
         this.context = getActivity();
-        addBtn = v.findViewById(R.id.add_btn);
-        clearBtn = v.findViewById(R.id.clear_btn);
-        saveBtn = v.findViewById(R.id.save_btn);
-        loadBtn = v.findViewById(R.id.load_btn);
-        captureBtn = v.findViewById(R.id.capture_btn);
         timetable = v.findViewById(R.id.timetable);
         if (DayofWeek() > 0 && DayofWeek() < 5){
             timetable.setHeaderHighlight(DayofWeek());}
@@ -106,11 +101,6 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initView(){
-        addBtn.setOnClickListener(this);
-        clearBtn.setOnClickListener(this);
-        saveBtn.setOnClickListener(this);
-        loadBtn.setOnClickListener(this);
-        captureBtn.setOnClickListener(this);
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
@@ -123,32 +113,6 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        MainActivity main = (MainActivity)getActivity();
-        switch (v.getId()){
-            case R.id.add_btn:
-                AddNewClass addFragment = AddNewClass.newInstance();
-                main.FragmentAdd(addFragment);
-                /*Intent i = new Intent(getActivity(),EditActivity.class);
-                i.putExtra("mode",REQUEST_ADD);
-                startActivityForResult(i,REQUEST_ADD);*/
-                break;
-            case R.id.clear_btn:
-                timetable.removeAll();
-                break;
-            case R.id.save_btn:
-                saveByPreference(timetable.createSaveData());
-                break;
-            case R.id.load_btn:
-                loadSavedData();
-                break;
-            case R.id.capture_btn:
-                main.mOnCaptureClick(timetable);
-                break;
-        }
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -205,10 +169,11 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
         int id = item.getItemId();
         MainActivity main = (MainActivity)getActivity();
         if (id == R.id.add_icon) {
-
+            AddNewClass addFragment = AddNewClass.newInstance();
+            main.FragmentAdd(addFragment);
         }
         if( id == R.id.capture_icon){
-
+            main.mOnCaptureClick(timetable);
         }
         return true;
     }

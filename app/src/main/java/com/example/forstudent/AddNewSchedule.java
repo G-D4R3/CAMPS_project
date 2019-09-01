@@ -46,8 +46,6 @@ public class AddNewSchedule extends Fragment {
 
         View view = (View) inflater.inflate(R.layout.add_new_schedule, container, false);
         final TextView dateText = (TextView) view.findViewById(R.id.schedule_date);
-        final TextView cancleButton = (TextView) view.findViewById(R.id.cancle_add_schedule);
-        //final TextView completeButton = (TextView) view.findViewById(R.id.complete_add_schedule);
         final TextView editDate = (TextView)view.findViewById(R.id.timeText);
         final LinearLayout layout = (LinearLayout) view.findViewById(R.id.schedule_layout);
         titleText = (EditText) view.findViewById(R.id.title);

@@ -77,7 +77,6 @@ public class AddNewClass extends Fragment {
 
         mLecture = (EditText) view.findViewById(R.id.className);
         mProfessor = (EditText) view.findViewById(R.id.professor);
-        final TextView completeButton = (TextView) view.findViewById(R.id.complete_add_timetable);
         mTimeAdd = (TextView) view.findViewById(R.id.addButton);
         mTimeList = (ListView)view.findViewById(R.id.timetable_time_list);
         adapter = new TimeTableListAdapater(startTimes, endTimes, lectureRooms);
@@ -108,23 +107,6 @@ public class AddNewClass extends Fragment {
 
             }
         });
-
-
-        completeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Lecture = mLecture.getText().toString();
-                Professor = mProfessor.getText().toString();
-                //timetable.add(schedules);
-
-                /* for (int i = 0; i < startTime.size(); i++){
-
-                }*/
-
-
-            }
-        });
-
 
 
 

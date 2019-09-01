@@ -66,7 +66,6 @@ public class AddNewAssignment extends Fragment {
 
         /***** view load *****/
         View view = (View)inflater.inflate(R.layout.add_new_assignment, container, false);
-        TextView mTitle = (TextView)view.findViewById(R.id.assTitle);
         mName = (EditText)view.findViewById(R.id.assName);
         TextView mDate = (TextView)view.findViewById(R.id.pdate2);
         mRange = (EditText)view.findViewById(R.id.Range3);
