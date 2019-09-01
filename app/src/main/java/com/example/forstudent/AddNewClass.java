@@ -1,6 +1,8 @@
 package com.example.forstudent;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -105,6 +108,30 @@ public class AddNewClass extends Fragment {
                 addFragment.addNewClass = getInstance();
                 main.FragmentAdd(addFragment);
 
+            }
+        });
+
+        mTimeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int pos = position;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setMessage("삭제하시겠습니까?");
+                dialog.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startTimes.remove(pos);
+                        endTimes.remove(pos);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.create().show();
             }
         });
 
