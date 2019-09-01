@@ -57,7 +57,7 @@ public class TimeTableListAdapater extends BaseAdapter {
         String mRoom = place.get(position);
 
         mDay.setText(getDay(mStart.get(Calendar.DAY_OF_WEEK)));
-        mTime.setText(String.format("%d:%2d - %d:%2d", mStart.get(Calendar.HOUR), mStart.get(Calendar.MINUTE), mEnd.get(Calendar.HOUR), mEnd.get(Calendar.MINUTE)));
+        mTime.setText(String.format("%d:%02d - %d:%02d", mStart.get(Calendar.HOUR_OF_DAY), mStart.get(Calendar.MINUTE), mEnd.get(Calendar.HOUR_OF_DAY), mEnd.get(Calendar.MINUTE)));
         mPlace.setText(mRoom);
 
 

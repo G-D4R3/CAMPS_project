@@ -76,9 +76,8 @@ public class AddNewTime extends Fragment {
         startTime = new ArrayList<Calendar>();
         endTime = new ArrayList<Calendar>();
 
-        /*** view load ***/
+        /***** view load *****/
         View view = (View)inflater.inflate(R.layout.add_new_time, container, false);
-        final TextView completeButton = (TextView) view.findViewById(R.id.complete_add_time);
         mStartTime = (TextView)view.findViewById(R.id.start_time2);
         mEndTime = (TextView)view.findViewById(R.id.end_time2);
         mDay = (Spinner)view.findViewById(R.id.day_spinner2);
@@ -86,6 +85,18 @@ public class AddNewTime extends Fragment {
         start_cal = Calendar.getInstance();
         end_cal = Calendar.getInstance();
 
+
+        /***** toolbar *****/
+        main.BACK_STACK=true;
+        main.centerToolbarTitle.setText("과목 추가");
+        main.toolbar.setTitle("");
+        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // hideKey();
+                main.FragmentRemove(AddNewTime.this);
+            }
+        });
 
 
 
@@ -136,35 +147,10 @@ public class AddNewTime extends Fragment {
             };
         });
 
-        completeButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-
-                startTime.add(start_cal);
-                endTime.add(end_cal);
-                lectureRoom = mLectureRoom.getText().toString();
-
-                main.FragmentRemove(AddNewTime.this);
-
-
-            }
-        });
 
 
 
 
-
-
-        /***** toolbar *****/
-        main.BACK_STACK=true;
-        main.centerToolbarTitle.setText("과목 추가");
-        main.toolbar.setTitle("");
-        main.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // hideKey();
-                main.FragmentRemove(AddNewTime.this);
-            }
-        });
         return view;
 
     }

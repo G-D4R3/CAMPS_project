@@ -118,7 +118,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/timetable_time_list"></ListView>
+            android:id="@+id/timetable_time_list"
+            android:divider="@null"></ListView>
 
     </LinearLayout>
 
