@@ -772,7 +772,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public Calendar makeCalendar(int hour, int minute, int dayOfWeek){
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_WEEK,dayOfWeek);
-        cal.set(Calendar.HOUR,hour);
+        cal.set(Calendar.HOUR_OF_DAY,hour);
         cal.set(Calendar.MINUTE,minute);
         return cal;
     }

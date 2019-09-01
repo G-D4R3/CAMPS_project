@@ -113,7 +113,7 @@ public class AddNewTime extends Fragment {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     mStartTime.setText(hourOfDay+" : " + minute);
-                    start_cal.set(Calendar.HOUR, hourOfDay);
+                    start_cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     start_cal.set(Calendar.MINUTE, minute);
                 }
             };
@@ -130,7 +130,7 @@ public class AddNewTime extends Fragment {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                     mEndTime.setText(hourOfDay+" : " + minute);
-                    end_cal.set(Calendar.HOUR, hourOfDay);
+                    end_cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     end_cal.set(Calendar.MINUTE, minute);
                 }
             };

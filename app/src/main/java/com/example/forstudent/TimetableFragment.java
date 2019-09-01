@@ -221,8 +221,8 @@ public class TimetableFragment extends Fragment implements View.OnClickListener{
             Schedule schedule = new Schedule();
             schedule.setClassTitle(lecture.getClassTitle());
             schedule.setProfessorName(lecture.getProfessorName());
-            schedule.setStartTime(new Time(start.get(Calendar.HOUR),start.get(Calendar.MINUTE)));
-            schedule.setEndTime(new Time(lecture.getEndTime().get(idx).get(Calendar.HOUR),lecture.getEndTime().get(idx).get(Calendar.MINUTE)));
+            schedule.setStartTime(new Time(start.get(Calendar.HOUR_OF_DAY),start.get(Calendar.MINUTE)));
+            schedule.setEndTime(new Time(lecture.getEndTime().get(idx).get(Calendar.HOUR_OF_DAY),lecture.getEndTime().get(idx).get(Calendar.MINUTE)));
             schedule.setDay(start.get(Calendar.DAY_OF_WEEK)-2);
             schedule.setClassPlace(lecture.getClassPlace_1().get(idx));
             main.stickers.add(schedule);
