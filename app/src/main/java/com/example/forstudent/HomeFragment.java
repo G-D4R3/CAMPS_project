@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment {
         listViewSetter.setListViewHeight(mTestList);
 
         setListView();
-        //setExist();
+        setExist();
 
 
 

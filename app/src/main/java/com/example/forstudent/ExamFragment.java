@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.forstudent.BoxHelperClass.TestSubHelper;
 import com.example.forstudent.DataClass.TestSub;
+import com.example.forstudent.DataClass.Timetable;
 import com.example.forstudent.ListViewAdapter.ExamListAdapter;
 
 import java.util.ArrayList;
@@ -295,21 +296,25 @@ public class ExamFragment extends Fragment{
                             @Override
                             public void run() {
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                                dialog.setTitle("과목 추가");
-                                dialog.setMessage("시험 추가");
-                                dialog.setNegativeButton("불러오기", new DialogInterface.OnClickListener() {
+                                dialog.setTitle("시험 추가");
+                                String[] menu = {"시간표에서 불러오기", "직접 추가하기"};
+
+                                dialog.setItems(menu, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
+                                        switch (which){
+                                            case 0:
+                                                loadTimeTableList();
+                                                break;
+                                            case 1:
+                                                dialog.dismiss();
+                                                addNewsub();
+                                                break;
+
+                                        }
                                     }
                                 });
-                                dialog.setPositiveButton("직접추가", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        addNewsub();
-                                    }
-                                });
+
                                 dialog.create();
                                 dialog.show();
                             }
@@ -333,7 +338,31 @@ public class ExamFragment extends Fragment{
                 break;
         }
 
-
         return super.onOptionsItemSelected(item);
     }
+
+    public void loadTimeTableList() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        dialog.setTitle("과목 목록");
+        ArrayList<Timetable> tt = main.timeTables;
+        int size = tt.size();
+        String[] list = new String[size];
+
+        for(int i=0; i<tt.size(); i++){
+            list[i] = tt.get(i).getClassTitle();
+        }
+
+        dialog.setItems(list, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                addNewExamSub mod = addNewExamSub.newInstance();
+                mod.LOAD = true;
+                mod.mName=list[which];
+                main.FragmentAdd(mod);
+            }
+        });
+        dialog.create().show();
+    }
+
+
 }

@@ -44,6 +44,7 @@ public class addNewExamSub extends Fragment {
 
     /*** flag ***/
     public boolean MOD = false;
+    public boolean LOAD = false;
     boolean DATE_PICKED = false;
     boolean START_PICKED = false;
 
@@ -122,6 +123,10 @@ public class addNewExamSub extends Fragment {
             mRange.setText(range);
             DATE_PICKED=true;
             START_PICKED=true;
+        }
+
+        if(LOAD==true){
+            mSubname.setText(mName);
         }
 
         /***** 날짜 설정 *****/
@@ -274,4 +279,7 @@ public class addNewExamSub extends Fragment {
         dialog.show();
     }
 
+    public void setName(String s) {
+        mSubname.setText(s);
+    }
 }

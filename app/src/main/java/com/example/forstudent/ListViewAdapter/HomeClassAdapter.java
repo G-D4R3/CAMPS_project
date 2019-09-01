@@ -20,17 +20,17 @@ public class HomeClassAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return 0;
+        return data.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return data.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class HomeClassAdapter extends BaseAdapter {
 
         HomeTimeTable htt = data.get(position);
 
-        mTime.setText(String.format("%d:%2d - %d:%2d", htt.startTime.get(Calendar.HOUR), htt.startTime.get(Calendar.MINUTE), htt.endTime.get(Calendar.HOUR), htt.endTime.get(Calendar.MINUTE)));
+        mTime.setText(String.format("%02d:%02d - %02d:%02d", htt.startTime.get(Calendar.HOUR_OF_DAY), htt.startTime.get(Calendar.MINUTE), htt.endTime.get(Calendar.HOUR_OF_DAY), htt.endTime.get(Calendar.MINUTE)));
         mClass.setText(htt.classTitle);
         mPlace.setText(htt.classPlace);
 
