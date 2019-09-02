@@ -427,7 +427,7 @@ public class CalendarFragment extends Fragment{
                 testList = main.testSub;
                 for(Schedule tmp:schedules){
                     //Event event = new Event(tmp.getTitle(),tmp.getDate().get(Calendar.HOUR),tmp.getDate().get(Calendar.MINUTE),tmp.getMemo(),2);
-                    tmp.setHour(tmp.getDate().get(Calendar.HOUR));
+                    tmp.setHour(tmp.getDate().get(Calendar.HOUR_OF_DAY));
                     tmp.setMinute(tmp.getDate().get(Calendar.MINUTE));
                     tmp.setType(2);
 
@@ -437,7 +437,7 @@ public class CalendarFragment extends Fragment{
                 for(Assignment tmp:assignmentList){
                     //Event event = new Event(tmp.getName(),tmp.getPeriod().get(Calendar.HOUR),tmp.getPeriod().get(Calendar.MINUTE),tmp.getMemo(),1);
                     tmp.setTitle(tmp.getName());
-                    tmp.setHour(tmp.getPeriod().get(Calendar.HOUR));
+                    tmp.setHour(tmp.getPeriod().get(Calendar.HOUR_OF_DAY));
                     tmp.setMinute(tmp.getPeriod().get(Calendar.MINUTE));
                     tmp.setType(1);
                     if(!events.contains(tmp)) events.add(tmp);
