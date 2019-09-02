@@ -70,6 +70,7 @@ public class TimetableFragment extends Fragment{
                 makeSticker(lec);
             }
             timetable.add(main.stickers);
+            main.stickers.clear();
 
 
 
@@ -223,6 +224,7 @@ public class TimetableFragment extends Fragment{
             }
         }
         timetable.add(main.stickers);
+        main.stickers.clear();
 
     }
     @Override
