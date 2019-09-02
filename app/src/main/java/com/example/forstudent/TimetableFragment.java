@@ -178,6 +178,34 @@ public class TimetableFragment extends Fragment{
         return true;
     }
 
+    /*** check sticker overlap ***/
+    public boolean checkOverlap(Schedule target){
+        ArrayList<Schedule> stickers = timetable.getAllSchedulesInStickers();
+        int tar_start_hour = target.getStartTime().getHour();
+        int tar_start_minute = target.getStartTime().getMinute();
+        int tar_start = tar_start_hour*60+tar_start_minute;
+        int tar_end_hour = target.getEndTime().getHour();
+        int tar_end_minute = target.getEndTime().getMinute();
+        int tar_end = tar_end_hour*60+tar_end_minute;
+        int tar_day_of_week = target.getDay();
+        for(Schedule tmp:stickers){
+            int ori_start_hour = tmp.getStartTime().getHour();
+            int ori_start_minute = tmp.getStartTime().getMinute();
+            int ori_start = ori_start_hour*60+ori_start_minute;
+            int ori_end_hour = tmp.getEndTime().getHour();
+            int ori_end_minute = tmp.getEndTime().getMinute();
+            int ori_end = ori_end_hour*60+ori_end_minute;
+            int ori_day_of_week = tmp.getDay();
+            if(tar_day_of_week == ori_day_of_week){
+                if((ori_end < tar_start && ori_start > tar_start) || (ori_end < tar_end && ori_start < tar_end) || (ori_end == tar_end) || (ori_start == tar_start)){
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
     /*** make sticker ***/
     public void makeSticker(Timetable lecture){
         MainActivity main = (MainActivity)getActivity();
@@ -190,7 +218,9 @@ public class TimetableFragment extends Fragment{
             schedule.setEndTime(new Time(lecture.getEndTime().get(idx).get(Calendar.HOUR_OF_DAY),lecture.getEndTime().get(idx).get(Calendar.MINUTE)));
             schedule.setDay(start.get(Calendar.DAY_OF_WEEK)-2);
             schedule.setClassPlace(lecture.getClassPlace_1().get(idx));
-            main.stickers.add(schedule);
+            if(!checkOverlap(schedule)) {
+                main.stickers.add(schedule);
+            }
         }
         timetable.add(main.stickers);
 
