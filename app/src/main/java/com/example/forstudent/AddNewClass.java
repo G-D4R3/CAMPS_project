@@ -158,7 +158,7 @@ public class AddNewClass extends Fragment {
         if (id == R.id.check_icon) {
             lecture = new Timetable(mLecture.getText().toString(),mProfessor.getText().toString(),startTimes,endTimes,lectureRooms);
             main.timeTables.add(lecture);
-            main.timetableFragment.makeSticker(lecture);
+            //main.timetableFragment.makeSticker(lecture);
 
             main.FragmentRemove(AddNewClass.this);
 
