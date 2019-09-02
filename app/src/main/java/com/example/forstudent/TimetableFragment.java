@@ -197,7 +197,7 @@ public class TimetableFragment extends Fragment{
             int ori_end = ori_end_hour*60+ori_end_minute;
             int ori_day_of_week = tmp.getDay();
             if(tar_day_of_week == ori_day_of_week){
-                if((ori_end < tar_start && ori_start > tar_start) || (ori_end < tar_end && ori_start < tar_end) || (ori_end == tar_end) || (ori_start == tar_start)){
+                if((ori_end > tar_start && ori_start < tar_start) || (ori_end > tar_end && ori_start < tar_end) || (ori_end == tar_end) || (ori_start == tar_start)){
                     return true;
                 }
             }
