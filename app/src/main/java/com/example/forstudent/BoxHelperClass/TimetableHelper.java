@@ -15,9 +15,9 @@ public class TimetableHelper {
             int idx = starttime.indexOf(start);
             Timetable_Model timetable_model = new Timetable_Model(
                     id,
-                    start.get(Calendar.HOUR),
+                    start.get(Calendar.HOUR_OF_DAY),
                     start.get(Calendar.MINUTE),
-                    endtime.get(idx).get(Calendar.HOUR),
+                    endtime.get(idx).get(Calendar.HOUR_OF_DAY),
                     endtime.get(idx).get(Calendar.MINUTE),
                     start.get(Calendar.DAY_OF_WEEK),
                     profressor,
