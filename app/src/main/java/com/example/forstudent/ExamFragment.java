@@ -20,7 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.BoxHelperClass.GradeHelper;
 import com.example.forstudent.BoxHelperClass.TestSubHelper;
+import com.example.forstudent.DataClass.Grade;
 import com.example.forstudent.DataClass.TestSub;
 import com.example.forstudent.DataClass.Timetable;
 import com.example.forstudent.ListViewAdapter.ExamListAdapter;
@@ -47,6 +49,7 @@ public class ExamFragment extends Fragment{
 
     /*** storage ***/
     ArrayList<TestSub> ExamList=new ArrayList<>();
+    ArrayList<Grade> grades = new ArrayList<>();
 
     /*** thread ***/
     loadData load;
@@ -184,6 +187,13 @@ public class ExamFragment extends Fragment{
         ExamList.remove(sub);
         Collections.sort(ExamList);
 
+        for(int i=0; i<grades.size(); i++){
+            if(grades.get(i).subject==sub.Name){
+                grades.remove(i);
+            }
+        }
+        save.run();
+
 
         if(ExamList.isEmpty()==true){
             titleDday="시험이 없습니다.";
@@ -260,6 +270,18 @@ public class ExamFragment extends Fragment{
                     TestSubHelper.putTestSub(helper);
                     i++;
                 }
+
+                main.getGradeBox().removeAll();
+                i=0;
+                for(Grade tmp : grades){
+                    GradeHelper helper = new GradeHelper((long)i+1, tmp.subject, tmp.credit, tmp.grade);
+                    GradeHelper.putGrade(helper);
+                    i++;
+                }
+
+
+
+
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -275,6 +297,7 @@ public class ExamFragment extends Fragment{
         public void run(){
             try{
                 ExamList = main.testSub;
+                grades = main.grades;
                 adapter = new ExamListAdapter(ExamList);
                 mlistView.setAdapter(adapter);
                 DateSet();
