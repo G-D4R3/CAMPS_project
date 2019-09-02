@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.forstudent.DataClass.Grade;
 import com.example.forstudent.DataClass.TestSub;
 
 import java.util.Calendar;
@@ -216,6 +217,11 @@ public class addNewExamSub extends Fragment {
             if(MOD==true){ //if this fragment is modify, then remove original object and add new one
                 main.alarmDelete(subject);
                 main.examFragment.ExamList.remove(subject);
+                for(int i=0; i<main.grades.size(); i++){
+                    if(main.grades.get(i)==mName){
+                        main.grades.remove(i);
+                    }
+                }
                 if(mRange.getText().toString().length()==0){
                     range = null;
                 }
@@ -232,6 +238,8 @@ public class addNewExamSub extends Fragment {
                 main.alarmSet(subject);
                 main.examFragment.ExamList.add(subject);
                 main.FragmentRemove(addNewExamSub.this);
+                Grade tmp = new Grade(subject.Name, 0, 4.5);
+                main.grades.add(tmp);
             }
             else{
                 if(mRange.getText().toString().length()==0){
@@ -256,7 +264,10 @@ public class addNewExamSub extends Fragment {
                     main.alarmSet(subject);
                     main.showActionBar();
                     main.FragmentRemove(addNewExamSub.this);
+                    Grade tmp = new Grade(subject.Name, 0, 4.5);
+                    main.grades.add(tmp);
                 }
+
             }
 
         }

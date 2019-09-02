@@ -12,7 +12,6 @@ public class Grade {
     public Grade(String sub, int credit, double grade){
         this.subject = sub;
         this.credit = credit;
-
         this.grade = grade;
     }
 

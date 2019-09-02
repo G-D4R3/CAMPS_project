@@ -180,8 +180,10 @@ public class ExamFragment extends Fragment{
     }
 
     public void removeSub(TestSub sub){
+
         ExamList.remove(sub);
         Collections.sort(ExamList);
+
 
         if(ExamList.isEmpty()==true){
             titleDday="시험이 없습니다.";
@@ -191,6 +193,7 @@ public class ExamFragment extends Fragment{
         }
 
         adapter.notifyDataSetChanged();
+
     }
 
     public void modifySub(TestSub sub){

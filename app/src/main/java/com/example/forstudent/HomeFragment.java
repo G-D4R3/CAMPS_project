@@ -248,7 +248,15 @@ public class HomeFragment extends Fragment {
 
         if(main.getUser().homeAssignementViewCheck==R.id.ImpOnly){ // just improtant
             position=0;
-            ass = main.important;
+            ArrayList<Assignment> tmp = main.assignment;
+            size = tmp.size();
+            ass = new ArrayList<>();
+
+            for(int i=0; i<size; i++){
+                if(tmp.get(i).flag==true){
+                    ass.add(tmp.get(i));
+                }
+            }
             size = ass.size();
             for(int i=0; i<size; i++){
                 datecount.dcalendar.set(ass.get(i).getPeriod().get(Calendar.YEAR), ass.get(i).getPeriod().get(Calendar.MONTH), ass.get(i).getPeriod().get(Calendar.DAY_OF_MONTH));

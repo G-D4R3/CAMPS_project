@@ -143,7 +143,7 @@ public class TodoFragment extends Fragment {
                             public void run() {
                                 Log.v("TodoFragment", "Item Clicked");
                                 try{
-                                    String name = adapter.data.get(position).Name;
+                                    String name = AssList.get(position).Name;
                                     String[] menu = {"중요도 표시","수정", "삭제"};
 
                                     AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
@@ -154,13 +154,12 @@ public class TodoFragment extends Fragment {
                                             switch (which) {
                                                 case 0:
                                                     Toast toast = Toast.makeText(getContext(),"중요도를 설정합니다.", Toast.LENGTH_SHORT);
-                                                    mImportant.setVisibility(View.VISIBLE);
-                                                    setImportance(adapter.data.get(pos));
+                                                    setImportance(AssList.get(pos));
                                                     setter.setListViewHeight(mImportant);
                                                     break;
                                                 case 1:
                                                     dialog.dismiss();
-                                                    ModifyAss(adapter.data.get(pos));
+                                                    ModifyAss(AssList.get(pos));
                                                     setView();
                                                     break;
                                                 case 2:
@@ -170,8 +169,8 @@ public class TodoFragment extends Fragment {
                                                     remove.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
-                                                            main.alarmDelete(adapter.data.get(pos));
-                                                            RemoveAss(adapter.data.get(pos));
+                                                            main.alarmDelete(AssList.get(pos));
+                                                            RemoveAss(AssList.get(pos));
                                                             mTitle.setText(title);
                                                             dialog.dismiss();
                                                             setView();
@@ -228,11 +227,8 @@ public class TodoFragment extends Fragment {
                                                 AssList.get(i).flag=false;
                                             }
                                         }
-                                        ImpList.remove(ImportantAdapter.data.get(position));
+                                        ImpList.remove(ImpList.get(position));
                                         ImportantAdapter.notifyDataSetChanged();
-                                        if(ImpList.size()==0){
-                                            mImportant.setVisibility(View.GONE);
-                                        }
                                         setter.setListViewHeight(mImportant);
                                     }
                                 });
@@ -313,13 +309,18 @@ public class TodoFragment extends Fragment {
         AssList.remove(a);
         ImpList.remove(a);
         Collections.sort(AssList);
+        Collections.sort(ImpList);
         if(AssList.size()==0){
             title = "남은 과제가 없습니다.";
         }
         else {
             title = String.format("남은 과제 : %d", AssList.size());
         }
+        if(ImpList.size()==0){
+            mImportant.setVisibility(View.GONE);
+        }
         adapter.notifyDataSetChanged();
+        ImportantAdapter.notifyDataSetChanged();
     }
 
     public void ModifyAss(Assignment a){
@@ -338,8 +339,9 @@ public class TodoFragment extends Fragment {
     public void setImportance(Assignment a){
         a.flag =true; //flag = 중요표시
         ImpList.add(a);
-        ImportantAdapter.notifyDataSetChanged();
+        Collections.sort(ImpList);
         mImportant.setVisibility(View.VISIBLE);
+        ImportantAdapter.notifyDataSetChanged();
     }
 
 

@@ -467,6 +467,7 @@ public class CalcGradeFragment extends Fragment{
                 GradeHelper gradeHelper = new GradeHelper((long)i+1, data.get(i).getSubject(),data.get(i).getCredit(),data.get(i).getGrade());
                 GradeHelper.putGrade(gradeHelper);
             }
+            main.grades=data; // 메인에 넣어주지 않으면 메인이 계속 onResume 상태라서 업데이트가 잘 안됨
             main.getUser().setCalcGradeCheck(radio);
             main.getUserDataBox().put(main.getUser());
         }

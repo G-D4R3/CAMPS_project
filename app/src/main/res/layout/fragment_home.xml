@@ -26,17 +26,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--
-            <ImageButton
-                android:id="@+id/setup"
-                android:layout_margin="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#FFFFFF"
-                android:layout_gravity="right"
-                android:src="@mipmap/setting"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />-->
 
             <TextView
                 android:id="@+id/Dday"
@@ -129,7 +118,7 @@
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/barun"
                     android:gravity="center_vertical"
-                    android:text="수업"
+                    android:text="오늘 수업"
                     android:textColor="@color/layout_title_color"
                     android:textSize="18sp" />
 
