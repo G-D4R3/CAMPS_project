@@ -268,7 +268,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         if(userDataBox.isEmpty()) {
 
             //user 생성
-            user = new UserData(id, "DEFAULT", new Date(), 99, true, true,  true,  true, R.id.viewAllAssign, R.id.radioButton2, true);
+            user = new UserData(id, "DEFAULT", new Date(), 99, true, true,  true,  true, R.id.viewAllAssign, R.id.cal45, true);
             //박스에 user 객체 저장
             userDataBox.put(user);
 

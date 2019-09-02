@@ -3,13 +3,15 @@ package com.example.forstudent;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -40,7 +42,6 @@ public class CalcGradeFragment extends Fragment{
     EditText[] subjects = new EditText[10];
     TextView mGrade;
     TextView mCredit;
-    RadioGroup mMethod;
 
     /*** flag ***/
     int radio;
@@ -71,6 +72,7 @@ public class CalcGradeFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -82,7 +84,6 @@ public class CalcGradeFragment extends Fragment{
         mGrade = (TextView)view.findViewById(R.id.grade);
         mCredit = (TextView)view.findViewById(R.id.grade_credit);
         mTable = (TableLayout)view.findViewById(R.id.grade_table);
-        mMethod = (RadioGroup)view.findViewById(R.id.grade_radio);
         ImageButton calcnow = (ImageButton)view.findViewById(R.id.button2);
         InputMethodManager imm = main.keypad;
 
@@ -97,25 +98,6 @@ public class CalcGradeFragment extends Fragment{
         });
 
 
-        /***** radio check. 4.3만점인지 4.5만점인지 *****/
-        mMethod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.radioButton: //4.3만점
-                        for(int i=0; i<10; i++){
-                            spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner43));
-                            radio = R.id.radioButton;
-                        }
-                        break;
-                    case R.id.radioButton2: //4.5만점
-                        for(int i=0; i<10; i++){
-                            spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner45));
-                            radio = R.id.radioButton2;
-                        }
-                }
-            }
-        });
 
         /***** grade list *****/
 
@@ -163,7 +145,7 @@ public class CalcGradeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(),0);
-                if(radio==R.id.radioButton2){
+                if(radio==R.id.cal45){
                     calc45();
                 }
                 else{
@@ -340,23 +322,22 @@ public class CalcGradeFragment extends Fragment{
         public void run(){
             data =  main.grades;
             radio = main.getUser().calcGradeCheck;
-            mMethod.check(radio);
 
             //저장된 라디오 버튼대로 스피너 세팅
             switch (radio){
-                case R.id.radioButton:
+                case R.id.cal43:
                     for(int i=0; i<10; i++){
                         spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner43));
                     }
                     break;
-                case R.id.radioButton2:
+                case R.id.cal45:
                     for(int i=0; i<10; i++){
                         spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner45));
                     }
             }
 
             for(int i=0; i<data.size(); i++){
-                if(radio==R.id.radioButton){
+                if(radio==R.id.cal43){
                     spinners[i].setSelection(setSelect43(data.get(i))); //spinner 아이템 세팅
                     String credit = Integer.toString(data.get(i).credit);
                     credits[i].setText(credit);
@@ -369,7 +350,7 @@ public class CalcGradeFragment extends Fragment{
                     subjects[i].setText(data.get(i).subject);
                 }
             }
-            if(radio==R.id.radioButton){
+            if(radio==R.id.cal43){
                 calc43();
             }
             else{
@@ -471,6 +452,38 @@ public class CalcGradeFragment extends Fragment{
             main.getUser().setCalcGradeCheck(radio);
             main.getUserDataBox().put(main.getUser());
         }
+    }
+
+
+    /***** toolbar *****/
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_calculate_grade, menu);
+        menu.findItem(radio).setChecked(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        MainActivity main = (MainActivity)getActivity();
+        item.setChecked(true);
+        if (id == R.id.cal43) {
+            for(int i=0; i<10; i++){
+                spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner43));
+                radio = R.id.cal43;
+            }
+        }
+        if(id == R.id.cal45){
+            for(int i=0; i<10; i++){
+                spinners[i].setAdapter(new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, spinner45));
+                radio = R.id.cal45;
+            }
+        }
+        main.getUser().calcGradeCheck = radio;
+        main.getUserDataBox().put(main.getUser());
+
+        return true;
     }
 
 
