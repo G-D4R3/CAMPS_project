@@ -35,7 +35,7 @@ public class UserData {
     boolean homeClassCheck;
     boolean homeAssignmentCheck;
     boolean homeExamCheck;
-    int homeAssignementViewCheck;
+    int homeAssignementViewCheck; //radio id
     int calcGradeCheck;
 
     public UserData(){

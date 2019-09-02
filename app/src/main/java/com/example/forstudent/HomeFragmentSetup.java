@@ -124,11 +124,14 @@ public class HomeFragmentSetup extends Fragment {
                 switch (checkedId){
                     case R.id.ImpOnly:
                         main.homeFragment.mSetAssignment = false;
+                        main.getUser().homeAssignementViewCheck=R.id.ImpOnly;
                         break;
                     case R.id.viewAllAssign:
                         main.homeFragment.mSetAssignment = true;
+                        main.getUser().homeAssignementViewCheck=R.id.viewAllAssign;
                         break;
                 }
+                main.getUserDataBox().put(main.getUser());
             }
         });
 

@@ -343,25 +343,44 @@ public class ExamFragment extends Fragment{
 
     public void loadTimeTableList() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-        dialog.setTitle("과목 목록");
         ArrayList<Timetable> tt = main.timeTables;
         int size = tt.size();
-        String[] list = new String[size];
 
-        for(int i=0; i<tt.size(); i++){
-            list[i] = tt.get(i).getClassTitle();
+        if(size==0){
+            dialog.setMessage("불러올 과목이 없습니다. 직접 추가할까요?");
+            dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    addNewsub();
+                }
+            });
+            dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.create().show();
         }
+        else{
+            dialog.setTitle("과목 목록");
+            String[] list = new String[size];
 
-        dialog.setItems(list, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                addNewExamSub mod = addNewExamSub.newInstance();
-                mod.LOAD = true;
-                mod.mName=list[which];
-                main.FragmentAdd(mod);
+            for(int i=0; i<tt.size(); i++){
+                list[i] = tt.get(i).getClassTitle();
             }
-        });
-        dialog.create().show();
+
+            dialog.setItems(list, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    addNewExamSub mod = addNewExamSub.newInstance();
+                    mod.LOAD = true;
+                    mod.mName=list[which];
+                    main.FragmentAdd(mod);
+                }
+            });
+            dialog.create().show();
+        }
     }
 
 

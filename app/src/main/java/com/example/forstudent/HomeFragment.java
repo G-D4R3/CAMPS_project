@@ -244,17 +244,36 @@ public class HomeFragment extends Fragment {
 
 
         //assignment
-        position=0;
-        size = ass.size();
-        for(int i=0; i<size; i++){
-            datecount.dcalendar.set(ass.get(i).getPeriod().get(Calendar.YEAR), ass.get(i).getPeriod().get(Calendar.MONTH), ass.get(i).getPeriod().get(Calendar.DAY_OF_MONTH));
-            rest = datecount.calcDday();
-            if(rest>=0){
-                position = i;
-                break;
+
+
+        if(main.getUser().homeAssignementViewCheck==R.id.ImpOnly){ // just improtant
+            position=0;
+            ass = main.important;
+            size = ass.size();
+            for(int i=0; i<size; i++){
+                datecount.dcalendar.set(ass.get(i).getPeriod().get(Calendar.YEAR), ass.get(i).getPeriod().get(Calendar.MONTH), ass.get(i).getPeriod().get(Calendar.DAY_OF_MONTH));
+                rest = datecount.calcDday();
+                if(rest>=0){
+                    position = i;
+                    break;
+                }
             }
+            ass = new ArrayList(ass.subList(position, size));
         }
-        ass = new ArrayList(ass.subList(position, size));
+        else{
+            position=0;
+            size = ass.size();
+            for(int i=0; i<size; i++){
+                datecount.dcalendar.set(ass.get(i).getPeriod().get(Calendar.YEAR), ass.get(i).getPeriod().get(Calendar.MONTH), ass.get(i).getPeriod().get(Calendar.DAY_OF_MONTH));
+                rest = datecount.calcDday();
+                if(rest>=0){
+                    position = i;
+                    break;
+                }
+            }
+            ass = new ArrayList(ass.subList(position, size));
+        }
+
 
 
         //exam
