@@ -27,8 +27,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="10dp">
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="10dp">
 
                 <TextView
                     android:id="@+id/grade"
@@ -63,10 +63,6 @@
                     android:scaleType="fitCenter"
                     app:srcCompat="@mipmap/enter" />
 
-
-
-
-
             </LinearLayout>
 
 
@@ -75,7 +71,7 @@
                 android:id="@+id/grade_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginHorizontal="5dp"
                 android:background="@drawable/listview_border"
                 android:stretchColumns="2">
