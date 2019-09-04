@@ -1,6 +1,8 @@
 package com.example.forstudent;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -105,9 +107,22 @@ public class TimetableFragment extends Fragment{
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
-                MainActivity main = (MainActivity)getActivity();
-                AddNewClass addFragment = AddNewClass.newInstance();
-                main.FragmentAdd(addFragment);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle(schedules.get(idx).getClassTitle());
+                String[] menu = {"수정", "삭제"};
+                dialog.setItems(menu, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case 0: //modify
+                                break;
+                            case 1: //remove
+                                break;
+                        }
+                    }
+                }).create().show();
+
+
                 /*
                 Intent i = new Intent(context, EditActivity.class);
 
@@ -135,6 +150,7 @@ public class TimetableFragment extends Fragment{
                     int idx = data.getIntExtra("idx",-1);
                     ArrayList<Schedule> item = (ArrayList<Schedule>)data.getSerializableExtra("schedules");
                     timetable.edit(idx,item);
+
                 }
                 /* Edit -> Delete */
                 else if(resultCode == EditActivity.RESULT_OK_DELETE){
