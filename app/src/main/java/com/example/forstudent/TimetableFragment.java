@@ -105,11 +105,16 @@ public class TimetableFragment extends Fragment{
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
+                MainActivity main = (MainActivity)getActivity();
+                AddNewClass addFragment = AddNewClass.newInstance();
+                main.FragmentAdd(addFragment);
+                /*
                 Intent i = new Intent(context, EditActivity.class);
+
                 i.putExtra("mode",REQUEST_EDIT);
                 i.putExtra("idx", idx);
                 i.putExtra("schedules", schedules);
-                startActivityForResult(i,REQUEST_EDIT);
+                startActivityForResult(i,REQUEST_EDIT);*/
             }
         });
     }
@@ -219,6 +224,7 @@ public class TimetableFragment extends Fragment{
             schedule.setEndTime(new Time(lecture.getEndTime().get(idx).get(Calendar.HOUR_OF_DAY),lecture.getEndTime().get(idx).get(Calendar.MINUTE)));
             schedule.setDay(start.get(Calendar.DAY_OF_WEEK)-2);
             schedule.setClassPlace(lecture.getClassPlace_1().get(idx));
+
             if(!checkOverlap(schedule)) {
                 main.stickers.add(schedule);
             }
