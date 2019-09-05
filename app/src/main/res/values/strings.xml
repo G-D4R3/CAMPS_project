@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ForStudent</string>
+    <string name="app_name">캠스</string>
     <string name="title_home">Home</string>
     <string name="title_timetable">Timetable</string>
     <string name="title_calendar">Calendar</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.forstudent">
+    package="com.CAMPS.camps">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -33,11 +33,11 @@
             android:value="AIzaSyACJZAr20RuJZWi2yEa0odXZP20HthKbVc" />
 
         <service
-            android:name=".AlarmService"
+            android:name="com.CAMPS.camps.AlarmService"
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name=".AlarmReceiver"
+        <receiver android:name="com.CAMPS.camps.AlarmReceiver"
             android:exported="true"
             tools:ignore="ExportedReceiver">
             <intent-filter>
@@ -46,7 +46,7 @@
         </receiver>
 
         <activity
-            android:name=".LoadingMain"
+            android:name="com.CAMPS.camps.LoadingMain"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,9 +55,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.CAMPS.camps.MainActivity"
             android:label="@string/app_name" />
-        <activity android:name=".EditActivity" />
+        <activity android:name="com.CAMPS.camps.EditActivity" />
     </application>
 
 </manifest>
