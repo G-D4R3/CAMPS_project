@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -163,6 +164,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Tutorial();
         //toolbarButtonState.add("SETTING_INVISIBLE");
 
@@ -779,7 +781,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
     private void Tutorial(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            //if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
                 AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                 dialog.setTitle("저장소 권한 필요");
                 dialog.setMessage("권한이 필요합니다.");
@@ -804,10 +806,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 }).create().show();
-            //}
-            //else{
-              //  ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-            //}
+            }
+            else{
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+            }
         }
 
     }

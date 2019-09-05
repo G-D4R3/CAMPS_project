@@ -62,6 +62,7 @@ public class TimetableFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timetable, container, false);
         MainActivity main = (MainActivity)getActivity();
+
         main.setActionBarTitle(" 시간표");
         main.centerToolbarTitle.setText("");
 
@@ -107,8 +108,11 @@ public class TimetableFragment extends Fragment{
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
+                MainActivity main = (MainActivity)getActivity();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle(schedules.get(idx).getClassTitle());
+                ArrayList<Schedule> schedule = timetable.getAllSchedulesInStickers();
+                System.out.println(schedule.size()+"::" + idx + " : "+schedule.get(idx).getClassTitle());
+                dialog.setTitle(schedule.get(idx).getClassTitle());
                 String[] menu = {"수정", "삭제"};
                 dialog.setItems(menu, new DialogInterface.OnClickListener() {
                     @Override
@@ -243,10 +247,12 @@ public class TimetableFragment extends Fragment{
 
             if(!checkOverlap(schedule)) {
                 main.stickers.add(schedule);
+
             }
+            timetable.add(main.stickers);
+            main.stickers.clear();
         }
-        timetable.add(main.stickers);
-        main.stickers.clear();
+
 
     }
     @Override
