@@ -28,7 +28,7 @@ public class  AssignmentHelper{
         int year = period.get(Calendar.YEAR);
         int month = period.get(Calendar.MONTH);
         int day = period.get(Calendar.DATE);
-        int hour = period.get(Calendar.HOUR);
+        int hour = period.get(Calendar.HOUR_OF_DAY);
         int minute = period.get(Calendar.MINUTE);
 
         Assignment_Model assignmentModel = (Assignment_Model) MainActivity.getInstance().getAssignmentBox().get(id);

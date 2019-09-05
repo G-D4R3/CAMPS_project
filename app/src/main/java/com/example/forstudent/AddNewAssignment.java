@@ -2,6 +2,7 @@ package com.example.forstudent;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,6 +70,7 @@ public class AddNewAssignment extends Fragment {
         View view = (View)inflater.inflate(R.layout.add_new_assignment, container, false);
         mName = (EditText)view.findViewById(R.id.assName);
         TextView mDate = (TextView)view.findViewById(R.id.pdate2);
+        TextView mTime = (TextView)view.findViewById(R.id.pdate4);
         mRange = (EditText)view.findViewById(R.id.Range3);
         input = main.keypad;
 
@@ -89,6 +92,7 @@ public class AddNewAssignment extends Fragment {
             DATE_CHECKED=true;
             mName.setText(ass.getName());
             Flag = ass.getFlag();
+            mTime.setText(String.format("%02d시 %02d분",ass.getPeriod().get(Calendar.HOUR_OF_DAY),ass.getPeriod().get(Calendar.MINUTE)));
             mDate.setText(String.format("%d월 %d일",ass.getPeriod().get(Calendar.MONTH)+1,ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
             mRange.setText(ass.getMemo());
         } //if문
@@ -106,7 +110,23 @@ public class AddNewAssignment extends Fragment {
                         period.set(year,month,dayOfMonth); //기한 설정
                         DATE_CHECKED=true; //flag true
                     }
-                },today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DATE));
+                },period.get(Calendar.YEAR), period.get(Calendar.MONTH), period.get(Calendar.DATE));
+                dialog.show();
+            }
+        });
+
+
+        mTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKey();
+                TimePickerDialog dialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        period.set(period.get(Calendar.YEAR), period.get(Calendar.MONTH), period.get(Calendar.DAY_OF_MONTH), hourOfDay, minute);
+                        mTime.setText(hourOfDay+"시 "+minute+"분");
+                    }
+                }, period.get(Calendar.HOUR_OF_DAY), period.get(Calendar.MINUTE), true);
                 dialog.show();
             }
         });

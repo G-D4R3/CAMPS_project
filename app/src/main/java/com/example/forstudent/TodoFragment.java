@@ -329,6 +329,7 @@ public class TodoFragment extends Fragment {
         fragment.MOD=true;
         fragment.Name=a.Name;
         fragment.range = a.Memo;
+        fragment.period = a.getPeriod();
         fragment.Date = String.format((a.Period.get(Calendar.MONTH)+1)+"월 "+a.Period.get(Calendar.DAY_OF_MONTH)+"일");
         main.FragmentAdd(fragment);
         adapter.notifyDataSetChanged();
