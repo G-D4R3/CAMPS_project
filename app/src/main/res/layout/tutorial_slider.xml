@@ -17,14 +17,14 @@
         android:fontFamily="@font/barun"
         android:textColor="#FFFFFF"
         android:text="시작하기  >"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
 
     <TextView
         android:id="@+id/tuto_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:textSize="24sp"
         android:gravity="center"
         android:fontFamily="@font/barun"
