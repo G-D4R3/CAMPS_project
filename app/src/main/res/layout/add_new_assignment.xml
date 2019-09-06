@@ -6,11 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="linearOnClick"
+
     android:background="#FFFFFF">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/border_color"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
