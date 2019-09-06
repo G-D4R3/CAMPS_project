@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#50BDE9">
+
+
+    <TextView
+        android:id="@+id/tuto_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:fontFamily="@font/barun"
+        android:textColor="#FFFFFF"
+        android:text="1.종강 날짜와 학교 지도 보기" />
+
+    <TextView
+        android:id="@+id/tuto_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:fontFamily="@font/barun"
+        android:textColor="#FFFFFF"
+        android:text="종강까지 얼마나 남았는지 알 수 있어요" />
+
+    <ImageView
+        android:id="@+id/tuto_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@mipmap/slide1" />
+
+    <TextView
+        android:id="@+id/tuto_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/barun"
+        android:textColor="#FFFFFF"
+        android:text="시작하기  >"
+        android:visibility="gone"/>
+
+
+</LinearLayout>
