@@ -16,8 +16,7 @@
         android:layout_marginRight="20dp"
         android:fontFamily="@font/barun"
         android:textColor="#FFFFFF"
-        android:text="시작하기  >"
-        android:visibility="invisible"/>
+        android:text="시작하기  >"/>
 
 
     <TextView

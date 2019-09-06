@@ -61,7 +61,7 @@ public class TutorialSlideAdapater extends PagerAdapter {
         mTitle.setText(titles[position]);
         mContent.setText(contents[position]);
         mImage.setImageResource(images[position]);
-        mStart.setVisibility(View.GONE);
+        mStart.setVisibility(View.INVISIBLE);
 
         if(position==4){
             mStart.setVisibility(View.VISIBLE);
