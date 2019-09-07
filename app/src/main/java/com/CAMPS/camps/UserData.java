@@ -37,12 +37,14 @@ public class UserData {
     boolean homeExamCheck;
     int homeAssignementViewCheck; //radio id
     int calcGradeCheck;
+    boolean AssignmentFull;
+    boolean ImportantAssignmentFull;
 
     public UserData(){
 
     }
     //생성자에 모든 요소들을 넣어줘야함. 당장 쓰지 않더라도 디폴트 값이라도 넣어줄 것.
-    public UserData(long id,String name,Date lastDay,int hello, boolean b0, boolean b1, boolean b2, boolean b3, int aCheck, int cCheck, boolean isFirst){
+    public UserData(long id,String name,Date lastDay,int hello, boolean b0, boolean b1, boolean b2, boolean b3, int aCheck, int cCheck, boolean isFirst, boolean aFull, boolean iFull){
         this.id = id;
         this.name = name;
         this.lastDay = lastDay;
@@ -54,6 +56,8 @@ public class UserData {
         this.homeAssignementViewCheck = aCheck;
         this.calcGradeCheck = cCheck;
         this.isFirstRun = isFirst;
+        this.AssignmentFull = aFull;
+        this.ImportantAssignmentFull = iFull;
     }
     public void setName(String name){
         this.name = name;
@@ -61,6 +65,22 @@ public class UserData {
 
     public String getName(){
         return name;
+    }
+
+    public boolean isAssignmentFull() {
+        return AssignmentFull;
+    }
+
+    public void setAssignmentFull(boolean assignmentFull) {
+        AssignmentFull = assignmentFull;
+    }
+
+    public boolean isImportantAssignmentFull() {
+        return ImportantAssignmentFull;
+    }
+
+    public void setImportantAssignmentFull(boolean importantAssignmentFull) {
+        ImportantAssignmentFull = importantAssignmentFull;
     }
 
     public void setLastDay(Date lastDay){

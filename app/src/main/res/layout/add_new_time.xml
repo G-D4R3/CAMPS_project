@@ -57,6 +57,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="시작"
                     android:textColor="@color/layout_title_color"
                     android:fontFamily="@font/barun"
@@ -76,6 +77,7 @@
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:text="끝"
+                    android:gravity="center"
                     android:textColor="@color/layout_title_color"
                     android:fontFamily="@font/barun"
                     android:textSize="18sp" />

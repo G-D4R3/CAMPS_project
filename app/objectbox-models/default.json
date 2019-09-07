@@ -189,7 +189,7 @@
     },
     {
       "id": "5:5322398851059366871",
-      "lastPropertyId": "11:4069387956212436456",
+      "lastPropertyId": "13:5191263100801048869",
       "name": "UserData",
       "properties": [
         {
@@ -236,6 +236,14 @@
         {
           "id": "11:4069387956212436456",
           "name": "isFirstRun"
+        },
+        {
+          "id": "12:5386568024138214212",
+          "name": "AssignmentFull"
+        },
+        {
+          "id": "13:5191263100801048869",
+          "name": "ImportantAssignmentFull"
         }
       ],
       "relations": []

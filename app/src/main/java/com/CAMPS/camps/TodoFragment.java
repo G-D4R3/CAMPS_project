@@ -50,8 +50,8 @@ public class TodoFragment extends Fragment {
     public ListViewSetter setter = new ListViewSetter();
 
     /*** flag ***/
-    Boolean mIvisible=true; //중요 표시 과제
-    Boolean mDvisible=true; //과제
+    boolean mIvisible=true; //중요 표시 과제
+    boolean mDvisible=true; //과제
 
     /*** storage ***/
     public ArrayList<Assignment> AssList = new ArrayList<Assignment>();
@@ -262,11 +262,12 @@ public class TodoFragment extends Fragment {
                     mIvisible=false;
                     mIhide.setText("더보기");
                 }
-               else{
+                else{
                     mImportant.setVisibility(View.VISIBLE);
                     mIvisible=true;
                     mIhide.setText("줄이기");
                 }
+                main.getUser().ImportantAssignmentFull = !mIvisible;
             }
         });
 
@@ -283,6 +284,7 @@ public class TodoFragment extends Fragment {
                     mDvisible=true;
                     mAhide.setText("줄이기");
                 }
+                main.getUser().AssignmentFull = !mDvisible;
             }
         });
 
@@ -393,6 +395,7 @@ public class TodoFragment extends Fragment {
                         i++;
                     }
                 }
+                main.getUserDataBox().put(main.getUser());
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -413,6 +416,30 @@ public class TodoFragment extends Fragment {
 
                 AssList = main.assignment;
                 ImpList = new ArrayList<>();
+
+                mDvisible = main.getUser().AssignmentFull;
+                mIvisible = main.getUser().ImportantAssignmentFull;
+
+                if(mIvisible==true){
+                    mImportant.setVisibility(View.GONE);
+                    mIvisible=false;
+                    mIhide.setText("더보기");
+                }
+                else{
+                    mImportant.setVisibility(View.VISIBLE);
+                    mIvisible=true;
+                    mIhide.setText("줄이기");
+                }
+                if(mDvisible==true){
+                    mlistView.setVisibility(View.GONE);
+                    mDvisible=false;
+                    mAhide.setText("더보기");
+                }
+                else{
+                    mlistView.setVisibility(View.VISIBLE);
+                    mDvisible=true;
+                    mAhide.setText("줄이기");
+                }
 
                 //중요한 과목은 Implist에 추가
                 for(Assignment tmp :AssList) {
