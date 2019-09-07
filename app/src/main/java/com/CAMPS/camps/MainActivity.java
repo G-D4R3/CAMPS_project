@@ -90,7 +90,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     //for storage
     ArrayList<Assignment> assignment = new ArrayList<>();
     ArrayList<Assignment> important = new ArrayList<>();
-    ArrayList<TestSub> testSub = new ArrayList<>();
+    public static ArrayList<TestSub> testSub = new ArrayList<>();
     ArrayList<Schedule> schedules = new ArrayList<>();
     ArrayList<Grade> grades = new ArrayList<>();
     ArrayList<Timetable> timeTables = new ArrayList<>();
@@ -156,7 +156,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     final int TEST_ALARM_BASE       = 60000000;
     final static int STORAGE_PERMISSION_CODE =1;
 
-    static Uri timetableUri;
+    public static Uri timetableUri;
 
 
     final long id=77;
@@ -302,6 +302,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         }
 
         //Exam data load
+        testSub = new ArrayList<>();
         for(long i=1; i<=testBox.count(); i++){
             testSub.add(TestSubHelper.getTestSub(i));
         }

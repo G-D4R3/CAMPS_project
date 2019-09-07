@@ -1,9 +1,12 @@
-package com.CAMPS.camps;
+package com.CAMPS.camps.Widget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
+
+import com.CAMPS.camps.MainActivity;
+import com.CAMPS.camps.R;
 
 /**
  * Implementation of App Widget functionality.
