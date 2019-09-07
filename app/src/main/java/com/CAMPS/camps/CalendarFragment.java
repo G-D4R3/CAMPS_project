@@ -110,10 +110,6 @@ public class CalendarFragment extends Fragment{
         //뷰설정
         ListViewSetter setter = new ListViewSetter();
 
-        setHeader();
-        mLheader.setVisibility(View.GONE);
-        mUheader.setVisibility(View.GONE);
-
         if(!main.getTimetableBox().isEmpty()){
 
             for(Object tmp:main.timeTables) {
@@ -166,6 +162,8 @@ public class CalendarFragment extends Fragment{
                                             break;
                                     }
                                 }
+                                upperSize = dayEvent.size();
+                                lowerSize = scheduleDayEvent.size();
                                 upperAdapter = new CalendarListAdapter(dayEvent);
                                 lowerAdapter = new CalendarListAdapter(scheduleDayEvent);
                                 //listView = view.findViewById(R.id.upperCalendarListView);
@@ -180,6 +178,10 @@ public class CalendarFragment extends Fragment{
                 }).start();
             }
         });
+
+        setHeader();
+        mLheader.setVisibility(View.GONE);
+        mUheader.setVisibility(View.GONE);
 
 
         //pick a list
@@ -421,7 +423,6 @@ public class CalendarFragment extends Fragment{
 
         public void run(){
             try{
-
                 schedules = main.schedules;
                 assignmentList = main.assignment;
                 testList = main.testSub;
@@ -430,9 +431,10 @@ public class CalendarFragment extends Fragment{
                     tmp.setHour(tmp.getDate().get(Calendar.HOUR_OF_DAY));
                     tmp.setMinute(tmp.getDate().get(Calendar.MINUTE));
                     tmp.setType(2);
+                    if(!events.contains(tmp)) {
+                        events.add(tmp);
+                    }
 
-                    if(!events.contains(tmp)) events.add(tmp);
-                    lowerSize++;
                 }
                 for(Assignment tmp:assignmentList){
                     //Event event = new Event(tmp.getName(),tmp.getPeriod().get(Calendar.HOUR),tmp.getPeriod().get(Calendar.MINUTE),tmp.getMemo(),1);
@@ -440,8 +442,9 @@ public class CalendarFragment extends Fragment{
                     tmp.setHour(tmp.getPeriod().get(Calendar.HOUR_OF_DAY));
                     tmp.setMinute(tmp.getPeriod().get(Calendar.MINUTE));
                     tmp.setType(1);
-                    if(!events.contains(tmp)) events.add(tmp);
-                    upperSize++;
+                    if(!events.contains(tmp)) {
+                        events.add(tmp);
+                    }
                 }
                 for(TestSub tmp:testList){
                     //Event event = new Event(tmp.getName(),tmp.getStartHour(),tmp.getStartMinute(),tmp.getRange(),3);
@@ -450,8 +453,9 @@ public class CalendarFragment extends Fragment{
                     tmp.setMinute(tmp.getStartMinute());
                     tmp.setMemo(tmp.getRange());
                     tmp.setType(3);
-                    if(!events.contains(tmp)) events.add(tmp);
-                    upperSize++;
+                    if(!events.contains(tmp)){
+                        events.add(tmp);
+                    }
                 }
 
             }

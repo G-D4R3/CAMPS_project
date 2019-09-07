@@ -61,6 +61,8 @@ public class TodoListAdapter extends BaseAdapter {
                     for(int i=0; i<main.todoFragment.AssList.size(); i++){
                         if(ass.equals(main.todoFragment.AssList.get(i))){
                             main.todoFragment.RemoveAss(ass);
+                            //main.todoFragment.title = String.format("남은 과제 : %d", main.todoFragment.AssList.size());
+                            //main.todoFragment.mTitle.setText(main.todoFragment.title);
                             break;
                         }
                     }
