@@ -1,23 +1,17 @@
 package com.CAMPS.camps.Widget;
 
-import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.Context;
-import android.widget.RemoteViews;
-
-import com.CAMPS.camps.MainActivity;
-import com.CAMPS.camps.R;
 
 /**
  * Implementation of App Widget functionality.
  */
 
 public class TimeTableWidget extends AppWidgetProvider {
-
+/*
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
         //Now testing
-       /* String folder = "Pictures";
+        String folder = "Pictures";
         String filename = "screenshot.jpg";
 
         File sdCardPath = Environment.getExternalStorageDirectory();
@@ -27,7 +21,7 @@ public class TimeTableWidget extends AppWidgetProvider {
         // Construct the RemoteViews object
 
 
-        views.setImageViewResource(R.id.timetableView,d);*/
+        views.setImageViewResource(R.id.timetableView,d);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.timetable_app_widget);
         views.setImageViewUri(R.id.timetableView, MainActivity.timetableUri);
         // Instruct the widget manager to update the widget
@@ -51,6 +45,6 @@ public class TimeTableWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
-
+*/
 
 }

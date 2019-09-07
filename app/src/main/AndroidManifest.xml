@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden"
         tools:ignore="GoogleAppIndexingWarning">
-        <receiver android:name=".Widget.TestWidget">
+       <!-- <receiver android:name=".Widget.TestWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -24,7 +24,7 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/test_widget_info" />
-        </receiver>
+        </receiver>-
         <receiver android:name=".Widget.TimeTableWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -33,7 +33,7 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/new_app_widget_info" />
-        </receiver>
+        </receiver>-->
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
