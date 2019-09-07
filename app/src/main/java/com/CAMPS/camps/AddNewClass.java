@@ -97,7 +97,11 @@ public class AddNewClass extends Fragment {
                 main.FragmentRemove(AddNewClass.this);
             }
         });
-
+        if(MOD){
+            main.centerToolbarTitle.setText("과목 수정");
+            mLecture.setText(Lecture);
+            mProfessor.setText(Professor);
+        }
 
 
         mTimeAdd.setOnClickListener(new View.OnClickListener() {

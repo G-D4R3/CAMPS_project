@@ -45,7 +45,8 @@ public class TimetableFragment extends Fragment{
     //Sticker Class (NOT Schedule fragment class)
 
     saveData save;
-
+    int lectureIdx=-1;
+    int internalIdx=0;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -105,6 +106,7 @@ public class TimetableFragment extends Fragment{
     }
 
     private void initView(){
+
         timetable.setOnStickerSelectEventListener(new TimetableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
@@ -117,8 +119,8 @@ public class TimetableFragment extends Fragment{
                 }
                 //dialog.setTitle(schedule.get(idx).getClassTitle());
 
-                int lectureIdx=-1;
-                int internalIdx=0;
+                lectureIdx=-1;
+                internalIdx=0;
                 for (int i =0;i<main.timeTables.size();i++){
                     lectureIdx += ((Timetable)main.timeTables.get(i)).startTime.size();
                     if(lectureIdx>=idx){
@@ -144,6 +146,7 @@ public class TimetableFragment extends Fragment{
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0: //modify
+                                modifyLecture(lectureIdx);
                                 break;
                             case 1: //remove
                                 break;
@@ -316,7 +319,22 @@ public class TimetableFragment extends Fragment{
         }
 
     }
+    public void modifyLecture(int lectureIdx){
+        MainActivity main = (MainActivity)getActivity();
+        AddNewClass addFragment = AddNewClass.newInstance();
 
+        Timetable target = (Timetable) main.timeTables.get(lectureIdx);
+        addFragment.lectureRooms = target.classPlace;
+        addFragment.startTimes = target.startTime;
+        addFragment.endTimes = target.endTime;
+        addFragment.Professor = target.getProfessorName();
+        addFragment.Lecture = target.getClassTitle();
+        addFragment.MOD=true;
+        main.FragmentAdd(addFragment);
+
+        //addTransparent();
+
+    }
 
 
 }
