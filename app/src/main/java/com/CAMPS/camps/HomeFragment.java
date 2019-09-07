@@ -226,6 +226,9 @@ public class HomeFragment extends Fragment {
             }
         } //오늘 날짜 이후 일정 제외
         schedules = new ArrayList(schedules.subList(position, size));
+        if(schedules.size()>4){
+            schedules = new ArrayList(schedules.subList(0,4));
+        }
 
 
         //classes

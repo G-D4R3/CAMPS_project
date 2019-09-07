@@ -51,89 +51,97 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/SectionHeader2"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_vertical"
-                    android:text="중요"
-                    android:textColor="@color/layout_title_color"
-                    android:textSize="18sp" />
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
 
-                <TextView
-                    android:id="@+id/hide2"
+                    <TextView
+                        android:id="@+id/SectionHeader2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:text="중요"
+                        android:textColor="@color/layout_title_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/hide2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center"
+                        android:text="줄이기"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <ListView
+                    android:id="@+id/importantAssignment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="7"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center"
-                    android:text="줄이기"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="12sp" />
+                    android:layout_height="wrap_content"
+                    android:divider="#FFFFFF"
+                    android:dividerHeight="3dp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/SectionHeader3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center_vertical"
+                        android:text="과제"
+                        android:textColor="@color/layout_title_color"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/hide3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:fontFamily="@font/barun"
+                        android:gravity="center"
+                        android:text="줄이기"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+
+
+                <ListView
+                    android:id="@+id/assignmentList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="#FFFFFF"
+                    android:dividerHeight="3dp" />
 
 
             </LinearLayout>
 
 
-            <ListView
-                android:id="@+id/importantAssignment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="#FFFFFF"
-                android:layout_marginHorizontal="5dp"
-                android:dividerHeight="3dp"/>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="10dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:id="@+id/SectionHeader3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center_vertical"
-                    android:text="과제"
-                    android:textColor="@color/layout_title_color"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/hide3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="7"
-                    android:fontFamily="@font/barun"
-                    android:gravity="center"
-                    android:text="줄이기"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="12sp" />
-
-
-            </LinearLayout>
-
-
-            <ListView
-                android:id="@+id/assignmentList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="#FFFFFF"
-                android:layout_marginHorizontal="5dp"
-                android:dividerHeight="3dp" />
         </LinearLayout>
 
 

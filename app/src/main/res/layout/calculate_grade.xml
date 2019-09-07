@@ -26,6 +26,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,24 +42,23 @@
                 <TextView
                     android:id="@+id/grade"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_weight="1"
                     android:fontFamily="@font/barun"
                     android:text="학점 : "
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/grade_credit"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_marginHorizontal="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/barun"
                     android:text="이수 : "
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/button2"
@@ -78,7 +78,7 @@
                 android:id="@+id/grade_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
                 android:stretchColumns="2">
 
@@ -96,7 +96,7 @@
                         android:fontFamily="@font/barun"
                         android:gravity="center"
                         android:text="학점"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="70dp"
@@ -106,7 +106,7 @@
                         android:fontFamily="@font/barun"
                         android:gravity="center"
                         android:text="이수"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -115,7 +115,7 @@
                         android:fontFamily="@font/barun"
                         android:gravity="center"
                         android:text="과목"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                 </TableRow>
 

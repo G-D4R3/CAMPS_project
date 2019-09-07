@@ -27,7 +27,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textColor="@color/layout_content_color"
             android:fontFamily="@font/barun"
             android:text="월.일" />
@@ -39,7 +39,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:gravity="center_vertical"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:layout_weight="1.5"
             android:fontFamily="@font/barun"
             android:textColor="@color/layout_content_color"

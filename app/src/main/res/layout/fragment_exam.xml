@@ -50,6 +50,7 @@
             <ListView
                 android:id="@+id/examlistView"
                 android:layout_marginHorizontal="5dp"
+                android:divider="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
