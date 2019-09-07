@@ -8,15 +8,25 @@ import android.widget.RemoteViews;
 /**
  * Implementation of App Widget functionality.
  */
+
 public class TimeTableWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
+        //Now testing
+       /* String folder = "Pictures";
+        String filename = "screenshot.jpg";
+
+        File sdCardPath = Environment.getExternalStorageDirectory();
+        String pathName = sdCardPath.getPath() + "/" + folder + "/" + filename;
+        Drawable d = Drawable.createFromPath(pathName);
 
         // Construct the RemoteViews object
+
+
+        views.setImageViewResource(R.id.timetableView,d);*/
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.timetable_app_widget);
         views.setImageViewUri(R.id.timetableView, MainActivity.timetableUri);
-
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
@@ -38,5 +48,6 @@ public class TimeTableWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
-}
 
+
+}
