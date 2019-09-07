@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFF"
-        app:column_count="6"
+        app:column_count="7"
         app:row_count="13"
         app:header_highlight_color="@color/colorAccent"
 

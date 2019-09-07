@@ -452,6 +452,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void internalFragmentRemove(Fragment fragment){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.remove(fragment);
+        fragmentManager.popBackStack();
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        navBar.setVisibility(View.VISIBLE);
+        transaction.commit();
+    }
     public void FragmentRemove(Fragment fragment){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.remove(fragment);

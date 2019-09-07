@@ -94,7 +94,7 @@ public class AddNewTime extends Fragment {
             @Override
             public void onClick(View v) {
                 // hideKey();
-                main.FragmentRemove(AddNewTime.this);
+                main.internalFragmentRemove(AddNewTime.this);
             }
         });
 

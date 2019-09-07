@@ -61,8 +61,11 @@ public class TimetableFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_timetable, container, false);
         MainActivity main = (MainActivity)getActivity();
+        View view;
+        if(isSaturday(main.timeTables))  view = inflater.inflate(R.layout.fragment_timetable_sat, container, false);
+        else view = inflater.inflate(R.layout.fragment_timetable, container, false);
+
 
         main.setActionBarTitle(" 시간표");
         main.centerToolbarTitle.setText("");
@@ -75,7 +78,6 @@ public class TimetableFragment extends Fragment{
             }
             timetable.add(main.stickers);
             main.stickers.clear();
-
 
 
 
@@ -113,10 +115,12 @@ public class TimetableFragment extends Fragment{
                 MainActivity main = (MainActivity)getActivity();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 ArrayList<Schedule> schedule = timetable.getAllSchedulesInStickers();
-                System.out.println( idx + " : "+schedule.get(idx).getClassTitle());
-                for(Schedule tmp:schedule){
-                    System.out.println(tmp.getClassPlace());
+                //System.out.println( idx + " : "+schedule.get(idx).getClassTitle());
+                ArrayList<Timetable> time = main.timeTables;
+                for(Timetable tmp: time){
+                    System.out.println(tmp.classPlace);
                 }
+/*
                 //dialog.setTitle(schedule.get(idx).getClassTitle());
 
                 lectureIdx=-1;
@@ -131,8 +135,8 @@ public class TimetableFragment extends Fragment{
                         break;
                     }
                 }
-                System.out.println("IDX:"+idx+"lec:"+lectureIdx);
-                Timetable timetable_tmp = (Timetable) main.timeTables.get(lectureIdx);
+                System.out.println("IDX:"+idx+"lec:"+lectureIdx);*/
+                Timetable timetable_tmp = (Timetable) main.timeTables.get(idx);
                 //System.out.println(timetable_tmp.classPlace.get(internalIdx));
 /*
                 for(int i =0;i<main.timeTables.size();i++){
@@ -146,9 +150,26 @@ public class TimetableFragment extends Fragment{
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case 0: //modify
-                                modifyLecture(lectureIdx);
+                                modifyLecture(idx);
                                 break;
                             case 1: //remove
+
+                                AlertDialog.Builder removeCheck = new AlertDialog.Builder(getContext());
+                                removeCheck.setMessage("삭제하시겠습니까?");
+                                removeCheck.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        main.timeTables.remove(idx);
+                                        addTransparent();
+                                    }
+                                });
+                                removeCheck.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                                removeCheck.create().show();
                                 break;
                         }
                     }
@@ -165,6 +186,14 @@ public class TimetableFragment extends Fragment{
             }
         });
     }
+
+
+    public void addTransparent(){
+        TransparentFragment addFragment = TransparentFragment.newInstance();
+        MainActivity main = (MainActivity)getActivity();
+        main.FragmentAdd(addFragment);
+    }
+
 
 
     @Override
@@ -277,11 +306,11 @@ public class TimetableFragment extends Fragment{
                 main.stickers.add(schedule);
 
             }
-            timetable.add(main.stickers);
-            main.stickers.clear();
+
         }
 
-
+        timetable.add(main.stickers);
+        main.stickers.clear();
     }
     @Override
     public void onStop() {
@@ -332,9 +361,16 @@ public class TimetableFragment extends Fragment{
         addFragment.MOD=true;
         main.FragmentAdd(addFragment);
 
-        //addTransparent();
+        //
 
     }
-
+    public boolean isSaturday(ArrayList<Timetable> timetables){
+        for(Timetable timetable:timetables){
+            for(Calendar date:timetable.startTime){
+                if(date.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY) return true;
+            }
+        }
+        return false;
+    }
 
 }
