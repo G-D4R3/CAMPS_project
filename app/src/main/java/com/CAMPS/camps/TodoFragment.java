@@ -34,7 +34,7 @@ public class TodoFragment extends Fragment {
     MainActivity main;
 
     /*** tmp ***/
-    String title = "남은 과제 수";
+    public String title = "남은 과제 수";
 
     /*** view ***/
     View view;
@@ -42,7 +42,7 @@ public class TodoFragment extends Fragment {
     public ListView mImportant;
     TodoListAdapter adapter;
     TodoListAdapter ImportantAdapter;
-    TextView mTitle;
+    public TextView mTitle;
     TextView mAssSec; //section header
     TextView mImpSec;
     TextView mIhide; //더보기 줄이기
@@ -230,8 +230,10 @@ public class TodoFragment extends Fragment {
                                             }
                                         }
                                         ImpList.remove(ImpList.get(position));
+                                        ImportantAdapter.data = ImpList;
                                         ImportantAdapter.notifyDataSetChanged();
                                         setter.setListViewHeight(mImportant);
+                                        mImportant.setAdapter(ImportantAdapter);
                                     }
                                 });
                                 dialog.setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -318,6 +320,7 @@ public class TodoFragment extends Fragment {
         else {
             title = String.format("남은 과제 : %d", AssList.size());
         }
+        mTitle.setText(title);
         if(ImpList.size()==0){
             mImportant.setVisibility(View.GONE);
         }
@@ -345,7 +348,9 @@ public class TodoFragment extends Fragment {
         ImpList.add(a);
         Collections.sort(ImpList);
         mImportant.setVisibility(View.VISIBLE);
+        ImportantAdapter.data=ImpList;
         ImportantAdapter.notifyDataSetChanged();
+        mImportant.setAdapter(ImportantAdapter);
     }
 
 
