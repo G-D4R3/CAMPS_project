@@ -126,7 +126,7 @@
                 android:id="@+id/Memo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="18dp"
                 android:text="메모"
                 android:textSize="20sp" />

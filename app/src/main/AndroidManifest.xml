@@ -5,20 +5,27 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
 
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateAlwaysHidden"
         tools:ignore="GoogleAppIndexingWarning">
-        <receiver android:name=".NewAppWidget">
+        <receiver android:name=".Widget.TestWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/test_widget_info" />
+        </receiver>
+        <receiver android:name=".Widget.TimeTableWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -33,11 +40,12 @@
             android:value="AIzaSyCwNrkDKAXkLxpFM36nAvLU4YgOUT3UO_Q"/>
 
         <service
-            android:name="com.CAMPS.camps.AlarmService"
+            android:name=".AlarmService"
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name="com.CAMPS.camps.AlarmReceiver"
+        <receiver
+            android:name=".AlarmReceiver"
             android:exported="true"
             tools:ignore="ExportedReceiver">
             <intent-filter>
@@ -46,7 +54,7 @@
         </receiver>
 
         <activity
-            android:name="com.CAMPS.camps.LoadingMain"
+            android:name=".LoadingMain"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,16 +62,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.CAMPS.camps.TutorialActivity"
-            android:theme="@style/SplashTheme">
-        </activity>
-
+            android:name=".TutorialActivity"
+            android:theme="@style/SplashTheme"></activity>
         <activity
-            android:name="com.CAMPS.camps.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" />
-        <activity android:name="com.CAMPS.camps.EditActivity" />
+        <activity android:name=".EditActivity" />
     </application>
 
 </manifest>
