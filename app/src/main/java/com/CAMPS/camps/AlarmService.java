@@ -59,14 +59,14 @@ public class AlarmService extends Service {
                 notificationManager.createNotificationChannel(notificationChannel);
             }
             notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), channelId)
-                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setSmallIcon(R.mipmap.launcher3)
                     .setContentTitle(title)
                     .setContentText(memo)
                     .setTicker("TICK")
                     .setContentIntent(pendingIntent);
         } else {
             notificationBuilder = new NotificationCompat.Builder(getApplicationContext()).
-                    setSmallIcon(R.drawable.ic_launcher_background)
+                    setSmallIcon(R.mipmap.launcher3)
                     .setContentTitle(title)
                     .setContentText(memo)
                     .setTicker("TICK")

@@ -111,8 +111,33 @@ public class TimetableFragment extends Fragment{
                 MainActivity main = (MainActivity)getActivity();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 ArrayList<Schedule> schedule = timetable.getAllSchedulesInStickers();
-                System.out.println(schedule.size()+"::" + idx + " : "+schedule.get(idx).getClassTitle());
-                dialog.setTitle(schedule.get(idx).getClassTitle());
+                System.out.println( idx + " : "+schedule.get(idx).getClassTitle());
+                for(Schedule tmp:schedule){
+                    System.out.println(tmp.getClassPlace());
+                }
+                //dialog.setTitle(schedule.get(idx).getClassTitle());
+
+                int lectureIdx=-1;
+                int internalIdx=0;
+                for (int i =0;i<main.timeTables.size();i++){
+                    lectureIdx += ((Timetable)main.timeTables.get(i)).startTime.size();
+                    if(lectureIdx>=idx){
+                        lectureIdx = i;
+                        internalIdx=((Timetable)main.timeTables.get(i)).startTime.size()-2-(lectureIdx-idx);
+                        if(i==0) internalIdx++;
+                        if(i==main.timeTables.size()-1) internalIdx--;
+                        break;
+                    }
+                }
+                System.out.println("IDX:"+idx+"lec:"+lectureIdx);
+                Timetable timetable_tmp = (Timetable) main.timeTables.get(lectureIdx);
+                //System.out.println(timetable_tmp.classPlace.get(internalIdx));
+/*
+                for(int i =0;i<main.timeTables.size();i++){
+                    Timetable timetable_temp= (Timetable) main.timeTables.get(i);
+                    System.out.println(i+" : "+timetable_temp.classPlace);
+                }*/
+                dialog.setTitle(timetable_tmp.getClassTitle());
                 String[] menu = {"수정", "삭제"};
                 dialog.setItems(menu, new DialogInterface.OnClickListener() {
                     @Override
