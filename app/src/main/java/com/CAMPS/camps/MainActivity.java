@@ -647,7 +647,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public void alarmDelete(Object src){
         String className = src.getClass().getSimpleName();
         Calendar ringDate = null;
-        Calendar alarmDate = null;
+        Calendar alarmDate = Calendar.getInstance();
 
         Assignment assignment;
         Schedule schedule;
@@ -663,7 +663,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             case "Assignment":
                 timeBefore = 24;
                 assignment = (Assignment) src;
-                alarmDate = assignment.getPeriod();
+                alarmDate.set(assignment.Period.get(Calendar.YEAR),assignment.Period.get(Calendar.MONTH), assignment.Period.get(Calendar.DAY_OF_MONTH), assignment.Period.get(Calendar.HOUR_OF_DAY), assignment.Period.get(Calendar.MINUTE));
                 title = "[과제] 내일 까지 "+assignment.Name+"가 있습니다.";
                 memo = assignment.Memo;
                 id = ASSIGNMENT_ALARM_BASE+todoFragment.AssList.indexOf(assignment)+1;
@@ -712,7 +712,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
     public void alarmSet(Object src){
         String className = src.getClass().getSimpleName();
         Calendar ringDate = null;
-        Calendar alarmDate = null;
+        Calendar alarmDate = Calendar.getInstance();
 
         Assignment assignment;
         Schedule schedule;
@@ -728,7 +728,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             case "Assignment":
                 timeBefore = 24;
                 assignment = (Assignment) src;
-                alarmDate = assignment.getPeriod();
+                alarmDate.set(assignment.Period.get(Calendar.YEAR),assignment.Period.get(Calendar.MONTH), assignment.Period.get(Calendar.DAY_OF_MONTH), assignment.Period.get(Calendar.HOUR_OF_DAY), assignment.Period.get(Calendar.MINUTE));
                 title = "[과제]";
                 memo = "내일 까지 "+assignment.Name+"가 있습니다.";
                 id = ASSIGNMENT_ALARM_BASE+todoFragment.AssList.indexOf(assignment)+1;

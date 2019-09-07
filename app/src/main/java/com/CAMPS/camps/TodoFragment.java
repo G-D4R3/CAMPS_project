@@ -102,6 +102,8 @@ public class TodoFragment extends Fragment {
         adapter.notifyDataSetChanged();
         ImportantAdapter.notifyDataSetChanged();
 
+
+
         /***** toolbar *****/
         main.setActionBarTitle(" 과제");
         main.centerToolbarTitle.setText("");
@@ -325,11 +327,12 @@ public class TodoFragment extends Fragment {
 
     public void ModifyAss(Assignment a){
         AddNewAssignment fragment = AddNewAssignment.newInstance();
+        System.out.println(a.Period.get(Calendar.HOUR_OF_DAY));
         fragment.ass = a;
         fragment.MOD=true;
         fragment.Name=a.Name;
         fragment.range = a.Memo;
-        fragment.period = a.getPeriod();
+        fragment.period = a.Period;
         fragment.Date = String.format((a.Period.get(Calendar.MONTH)+1)+"월 "+a.Period.get(Calendar.DAY_OF_MONTH)+"일");
         main.FragmentAdd(fragment);
         adapter.notifyDataSetChanged();

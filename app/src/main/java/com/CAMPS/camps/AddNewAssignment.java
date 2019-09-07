@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.CAMPS.camps.DataClass.Assignment;
 
 import java.util.Calendar;
+import java.util.Collections;
 
 public class AddNewAssignment extends Fragment {
 
@@ -92,7 +93,7 @@ public class AddNewAssignment extends Fragment {
             DATE_CHECKED=true;
             mName.setText(ass.getName());
             Flag = ass.getFlag();
-            mTime.setText(String.format("%02d시 %02d분",ass.getPeriod().get(Calendar.HOUR_OF_DAY),ass.getPeriod().get(Calendar.MINUTE)));
+            mTime.setText(String.format("%d시 %02d분",ass.getPeriod().get(Calendar.HOUR_OF_DAY),ass.getPeriod().get(Calendar.MINUTE)));
             mDate.setText(String.format("%d월 %d일",ass.getPeriod().get(Calendar.MONTH)+1,ass.getPeriod().get(Calendar.DAY_OF_MONTH)));
             mRange.setText(ass.getMemo());
         } //if문
@@ -123,7 +124,7 @@ public class AddNewAssignment extends Fragment {
                 TimePickerDialog dialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        period.set(period.get(Calendar.YEAR), period.get(Calendar.MONTH), period.get(Calendar.DAY_OF_MONTH), hourOfDay, minute);
+                        period.set(period.get(Calendar.YEAR), period.get(Calendar.MONTH), period.get(Calendar.DAY_OF_MONTH), hourOfDay, minute, 0);
                         mTime.setText(hourOfDay+"시 "+minute+"분");
                     }
                 }, period.get(Calendar.HOUR_OF_DAY), period.get(Calendar.MINUTE), true);
@@ -178,9 +179,12 @@ public class AddNewAssignment extends Fragment {
         MainActivity main = (MainActivity)getActivity();
         if (id == R.id.check_icon) {
             hideKey();
-            if (Flag == true) {
+            if(MOD==true){
                 main.alarmDelete(ass);
-                main.todoFragment.ImpList.remove(ass);
+                main.todoFragment.AssList.remove(ass);
+                if (Flag == true) {
+                    main.todoFragment.ImpList.remove(ass);
+                }
             }
 
             if (mName.getText().length() == 0 || DATE_CHECKED == false) {
@@ -189,13 +193,17 @@ public class AddNewAssignment extends Fragment {
 
             else {
                 ass = new Assignment(mName.getText().toString(), period, mRange.getText().toString(), Flag);
-                System.out.println(ass.toString());
+                //System.out.println(ass.getPeriod().get(Calendar.HOUR_OF_DAY));
                 main.todoFragment.AssList.add(ass);
                 main.alarmSet(ass);
                 main.todoFragment.setView();
                 if (Flag == true) {
                     main.todoFragment.ImpList.add(ass);
                 }
+                Collections.sort(main.todoFragment.AssList);
+                Collections.sort(main.todoFragment.ImpList);
+                main.todoFragment.adapter.notifyDataSetChanged();
+                main.todoFragment.ImportantAdapter.notifyDataSetChanged();
 
                 main.FragmentRemove(AddNewAssignment.this);
             }
