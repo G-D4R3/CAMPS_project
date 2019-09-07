@@ -643,6 +643,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         if(24<=amount) {
             calendar.set(Calendar.MINUTE,0);
             calendar.set(Calendar.HOUR,0);
+            calendar.set(Calendar.HOUR_OF_DAY,0);
         }
 
         long destDateInMillis = calendar.getTimeInMillis()-3600000*amount;
@@ -672,29 +673,32 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                 timeBefore = 24;
                 assignment = (Assignment) src;
                 alarmDate.set(assignment.Period.get(Calendar.YEAR),assignment.Period.get(Calendar.MONTH), assignment.Period.get(Calendar.DAY_OF_MONTH), assignment.Period.get(Calendar.HOUR_OF_DAY), assignment.Period.get(Calendar.MINUTE));
-                title = "[과제] 내일 까지 "+assignment.Name+"가 있습니다.";
-                memo = assignment.Memo;
+                title = "[과제]";
+                memo = "내일 까지 "+assignment.Name+"가 있습니다.";
                 id = ASSIGNMENT_ALARM_BASE+todoFragment.AssList.indexOf(assignment)+1;
                 break;
             case "Schedule":
-                timeBefore = 1;
+                timeBefore = 24;
                 schedule = (Schedule) src;
-                alarmDate = schedule.getDate();
-                title = "[일정] 1시간 후에 "+schedule.getTitle()+"이 있습니다.";
-                memo = schedule.getMemo();
+                //alarmDate = schedule.getDate();
+                alarmDate.set(schedule.getDate().get(Calendar.YEAR),schedule.getDate().get(Calendar.MONTH), schedule.getDate().get(Calendar.DAY_OF_MONTH), schedule.getDate().get(Calendar.HOUR_OF_DAY), schedule.getDate().get(Calendar.MINUTE));
+                title = "[일정]";
+                memo = "1시간 후에 "+schedule.getTitle()+"가 있습니다.";
                 id = SCHEDULE_ALARM_BASE+calendarFragment.schedules.indexOf(schedule)+1;
                 break;
             case "TestSub":
                 timeBefore = 24;
                 testSub = (TestSub) src;
                 alarmDate = testSub.getTestDate();
-                title = "[시함] 내일 "+testSub.Name+"시험이 있습니다.";
+                title = "[시험]";
+                memo = "내일 "+testSub.Name+"시험이 있습니다.";
                 id = TEST_ALARM_BASE+examFragment.ExamList.indexOf(testSub)+1;
                 break;
 
 
         }
         ringDate = calcHourBefore(alarmDate,timeBefore);
+
         if(ringDate.compareTo(Calendar.getInstance())==-1){
             return;
         }
@@ -742,9 +746,10 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                 id = ASSIGNMENT_ALARM_BASE+todoFragment.AssList.indexOf(assignment)+1;
                 break;
             case "Schedule":
-                timeBefore = 1;
+                timeBefore = 24;
                 schedule = (Schedule) src;
-                alarmDate = schedule.getDate();
+                alarmDate.set(schedule.getDate().get(Calendar.YEAR),schedule.getDate().get(Calendar.MONTH), schedule.getDate().get(Calendar.DAY_OF_MONTH), schedule.getDate().get(Calendar.HOUR_OF_DAY), schedule.getDate().get(Calendar.MINUTE));
+
                 title = "[일정]";
                 memo = "1시간 후에 "+schedule.getTitle()+"가 있습니다.";
                 id = SCHEDULE_ALARM_BASE+calendarFragment.schedules.indexOf(schedule)+1;

@@ -30,7 +30,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDFF7hN2Jz6FkpBUiM5LnsSAD6ExmOUImA"/>
+            android:value="AIzaSyCwNrkDKAXkLxpFM36nAvLU4YgOUT3UO_Q"/>
 
         <service
             android:name="com.CAMPS.camps.AlarmService"
