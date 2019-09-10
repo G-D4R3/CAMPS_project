@@ -127,7 +127,7 @@ public class AddNewAssignment extends Fragment {
                         period.set(period.get(Calendar.YEAR), period.get(Calendar.MONTH), period.get(Calendar.DAY_OF_MONTH), hourOfDay, minute, 0);
                         mTime.setText(hourOfDay+"시 "+minute+"분");
                     }
-                }, period.get(Calendar.HOUR_OF_DAY), period.get(Calendar.MINUTE), true);
+                }, period.get(Calendar.HOUR_OF_DAY), period.get(Calendar.MINUTE), false);
                 dialog.show();
             }
         });
