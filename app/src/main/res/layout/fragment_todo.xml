@@ -64,7 +64,7 @@
 
                     <TextView
                         android:id="@+id/SectionHeader2"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:fontFamily="@font/barun"
@@ -74,16 +74,16 @@
                         android:textColor="@color/layout_title_color"
                         android:textSize="18sp" />
 
-                    <TextView
+                    <ImageButton
                         android:id="@+id/hide2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="7"
-                        android:fontFamily="@font/barun"
-                        android:gravity="center"
-                        android:text="줄이기"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12sp" />
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="#FFFFFF"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@mipmap/more" />
 
 
                 </LinearLayout>
@@ -116,16 +116,16 @@
                         android:textColor="@color/layout_title_color"
                         android:textSize="18sp" />
 
-                    <TextView
+                    <ImageButton
                         android:id="@+id/hide3"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="7"
-                        android:fontFamily="@font/barun"
-                        android:gravity="center"
-                        android:text="줄이기"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="12sp" />
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="#FFFFFF"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@mipmap/more" />
 
 
                 </LinearLayout>
