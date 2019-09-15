@@ -26,6 +26,7 @@ import com.CAMPS.camps.DataClass.Grade;
 import com.CAMPS.camps.DataClass.TestSub;
 
 import java.util.Calendar;
+import java.util.Collections;
 
 public class addNewExamSub extends Fragment {
     /*** main ***/
@@ -120,7 +121,9 @@ public class addNewExamSub extends Fragment {
             mPlace.setText(subject.getPlace());
             mDate.setText((mMonth+1)+"월 "+mDay+"일");
             mStart.setText(mSHour+"시 "+mSMinute+"분");
-            mEnd.setText(mEHour+"시 "+mEMinute+"분");
+            if(mEHour != -1){
+                mEnd.setText(mEHour+"시 "+mEMinute+"분");
+            }
             mRange.setText(range);
             DATE_PICKED=true;
             START_PICKED=true;
@@ -236,8 +239,17 @@ public class addNewExamSub extends Fragment {
                 }
                 subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
                 main.alarmSet(subject);
+
                 main.examFragment.ExamList.add(subject);
                 main.FragmentRemove(addNewExamSub.this);
+
+                Collections.sort(main.examFragment.ExamList);
+                System.out.println("size : "+main.examFragment.ExamList.size());
+
+                main.examFragment.mDateSet = 0;
+                main.examFragment.DateSet();
+
+
                 Grade tmp = new Grade(subject.Name, 0, 4.5);
                 main.grades.add(tmp);
             }
@@ -261,9 +273,19 @@ public class addNewExamSub extends Fragment {
                 else{
                     subject = new TestSub(mSubname.getText().toString(),calendar,place,mSHour,mSMinute,mEHour,mEMinute,range);
                     main.examFragment.ExamList.add(subject);
+
                     main.alarmSet(subject);
+                    main.examFragment.mDateSet = 0;
+                    main.examFragment.DateSet();
+
+                    Collections.sort(main.examFragment.ExamList);
+
                     main.showActionBar();
                     main.FragmentRemove(addNewExamSub.this);
+
+
+                    System.out.println("size : "+main.examFragment.ExamList.size());
+
                     Grade tmp = new Grade(subject.Name, 0, 4.5);
                     main.grades.add(tmp);
                 }

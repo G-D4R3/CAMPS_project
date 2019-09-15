@@ -22,8 +22,13 @@ public class DateCount {
 
 
     public int calcDday(){
-        Today = tcalendar.getTimeInMillis()/(24*60*60*1000);
-        setday = dcalendar.getTimeInMillis()/(24*60*60*1000);
+        Calendar tmp1 = Calendar.getInstance();
+        tmp1.set(tcalendar.get(Calendar.YEAR), tcalendar.get(Calendar.MONTH), tcalendar.get(Calendar.DAY_OF_MONTH), 0,0);
+        Calendar tmp2 = Calendar.getInstance();
+        tmp2.set(dcalendar.get(Calendar.YEAR), dcalendar.get(Calendar.MONTH), dcalendar.get(Calendar.DAY_OF_MONTH), 0,0);
+
+        Today = tmp1.getTimeInMillis()/(24*60*60*1000);
+        setday = tmp2.getTimeInMillis()/(24*60*60*1000);
 
         left = (setday - Today);
         result = (int)left;

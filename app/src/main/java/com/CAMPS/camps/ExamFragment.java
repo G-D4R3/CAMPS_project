@@ -38,6 +38,7 @@ public class ExamFragment extends Fragment{
     /*** tmp ***/
     String titleDday = "D-day";
     DateCount count;
+    int mDateSet = 0;
 
     /*** view ***/
     View view;
@@ -174,18 +175,11 @@ public class ExamFragment extends Fragment{
     public void addNewsub(){ //nullcheck 필요? rangd null일 수 있음
         addNewExamSub add = addNewExamSub.newInstance();
         main.FragmentAdd(add);
-
-        if (ExamList.size() > 0) {
-            DateSet();
-        }
-        Collections.sort(ExamList);
-        adapter.notifyDataSetChanged();
     }
 
     public void removeSub(TestSub sub){
 
         ExamList.remove(sub);
-        Collections.sort(ExamList);
 
         for(int i=0; i<grades.size(); i++){
             if(grades.get(i).subject==sub.Name){
@@ -194,14 +188,10 @@ public class ExamFragment extends Fragment{
         }
         save.run();
 
-
-        if(ExamList.isEmpty()==true){
-            titleDday="시험이 없습니다.";
-        }
-        else{
-            DateSet(); //가장 빠른 시험 D-day 계산
-        }
-
+        Collections.sort(ExamList);
+        mDateSet = 0;
+        DateSet();
+        dday.setText(titleDday);
         adapter.notifyDataSetChanged();
 
     }
@@ -222,35 +212,36 @@ public class ExamFragment extends Fragment{
 
         main.FragmentAdd(mod);
 
-        Collections.sort(ExamList);
-        DateSet();
-
-        adapter.notifyDataSetChanged();
 
     }
 
     public void DateSet(){
-        if(ExamList.size()<=0){
+        if(ExamList.size() == 0 || mDateSet>=ExamList.size()){
             titleDday = "시험이 없습니다.";
         }
-        else{
-            boolean flag = true; //모두 날짜가 지난 시험인지 체크
-            for(TestSub tmp : ExamList){
-                count.dcalendar = tmp.TestDate;
-                count.calcDday();
-                if(count.result>=0){ //나중에 D-day일 경우 시간 계산 추가해야함
-                    flag = false;
-                    if(count.result == 0){
-                        titleDday = String.format("%s D-Day", tmp.Name);
-                    }
-                    else{
-                        titleDday = String.format("%s D-%d", tmp.Name, count.result);
-                    }
-                    break;
+        else if(ExamList.size()>0 && mDateSet<ExamList.size()){
+            TestSub tmp = ExamList.get(mDateSet);
+            count.dcalendar = tmp.TestDate;
+            int left = count.calcDday();
+            if(left>0){
+                titleDday = new String(tmp.Name+" D-"+left);
+            }
+            else if(left==0){
+                if(tmp.TestDate.getTimeInMillis()<count.tcalendar.getTimeInMillis()){
+                    //tmp = ExamList.get(++mDateSet);
+                    //titleDday = new String(tmp.Name+" D-day");
+                    mDateSet++;
+                    DateSet();
+                    return;
+                }
+                else{
+                    titleDday = new String(tmp.Name+" D-day");
                 }
             }
-            if(flag==true){
-                titleDday = "시험이 없습니다.";
+            else if(left<0){
+                mDateSet++;
+                DateSet();
+                return;
             }
         }
     }
@@ -300,6 +291,7 @@ public class ExamFragment extends Fragment{
                 grades = main.grades;
                 adapter = new ExamListAdapter(ExamList);
                 mlistView.setAdapter(adapter);
+                mDateSet = 0;
                 DateSet();
                 dday.setText(titleDday);
                 Collections.sort(ExamList);
