@@ -260,7 +260,9 @@ public class TimetableFragment extends Fragment{
         }
         return true;
     }
-
+    public TimetableFragment getInstance(){
+        return this;
+    }
     /*** check sticker overlap ***/
     public boolean checkOverlap(Schedule target){
         ArrayList<Schedule> stickers = timetable.getAllSchedulesInStickers();

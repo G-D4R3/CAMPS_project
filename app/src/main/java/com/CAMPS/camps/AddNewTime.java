@@ -1,7 +1,9 @@
 package com.CAMPS.camps;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -155,6 +157,40 @@ public class AddNewTime extends Fragment {
 
     }
 
+    public boolean checkOverlap(){
+        MainActivity main = (MainActivity)getActivity();
+        TimetableFragment timetableFragment = main.timetableFragment;
+        ArrayList<Schedule> stickers = timetableFragment.timetable.getAllSchedulesInStickers();
+        int tar_start_hour = start_cal.get(Calendar.HOUR_OF_DAY);
+        int tar_start_minute = start_cal.get(Calendar.MINUTE);
+        int tar_start = tar_start_hour*60+tar_start_minute;
+        int tar_end_hour = end_cal.get(Calendar.HOUR_OF_DAY);
+        int tar_end_minute = end_cal.get(Calendar.MINUTE);
+        int tar_end = tar_end_hour*60+tar_end_minute;
+        int tar_day_of_week = start_cal.get(Calendar.DAY_OF_WEEK)-2;
+        System.out.println(tar_end_hour+" "+ tar_end_minute);
+        for(Schedule tmp:stickers){
+            int ori_start_hour = tmp.getStartTime().getHour();
+            int ori_start_minute = tmp.getStartTime().getMinute();
+            int ori_start = ori_start_hour*60+ori_start_minute;
+            int ori_end_hour = tmp.getEndTime().getHour();
+            int ori_end_minute = tmp.getEndTime().getMinute();
+            int ori_end = ori_end_hour*60+ori_end_minute;
+            int ori_day_of_week = tmp.getDay();
+            System.out.println(ori_day_of_week);
+            if(tar_day_of_week == ori_day_of_week){
+                System.out.println(tar_start+":"+ori_start+"/"+tar_end+":"+ori_end);
+                if((ori_end > tar_start && ori_start < tar_start) || (ori_end > tar_end && ori_start < tar_end) || (ori_end == tar_end) || (ori_start == tar_start)){
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+
+
     /***** toolbar *****/
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -168,11 +204,31 @@ public class AddNewTime extends Fragment {
         int id = item.getItemId();
         MainActivity main = (MainActivity)getActivity();
         if (id == R.id.check_icon) {
-            addNewClass.startTimes.add(start_cal);
-            addNewClass.endTimes.add(end_cal);
-            addNewClass.lectureRooms.add(mLectureRoom.getText().toString());
-            addNewClass.adapter.notifyDataSetChanged();
-            main.FragmentRemove(AddNewTime.this);
+            if(checkOverlap()){
+                try{
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    dialog.setTitle("시간표 중복입니다.");
+                    dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.create();
+                    dialog.show();
+                }
+                catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+            else {
+                addNewClass.startTimes.add(start_cal);
+                addNewClass.endTimes.add(end_cal);
+                addNewClass.lectureRooms.add(mLectureRoom.getText().toString());
+                addNewClass.adapter.notifyDataSetChanged();
+                main.FragmentRemove(AddNewTime.this);
+            }
+
         }
 
         return true;
