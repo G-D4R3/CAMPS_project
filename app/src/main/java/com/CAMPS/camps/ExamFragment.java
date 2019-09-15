@@ -39,6 +39,7 @@ public class ExamFragment extends Fragment{
     String titleDday = "D-day";
     DateCount count;
     int mDateSet = 0;
+    int mTimeSet = 0;
 
     /*** view ***/
     View view;
@@ -189,8 +190,6 @@ public class ExamFragment extends Fragment{
         save.run();
 
         Collections.sort(ExamList);
-        mDateSet = 0;
-        DateSet();
         dday.setText(titleDday);
         adapter.notifyDataSetChanged();
 
@@ -227,16 +226,7 @@ public class ExamFragment extends Fragment{
                 titleDday = new String(tmp.Name+" D-"+left);
             }
             else if(left==0){
-                if(tmp.TestDate.getTimeInMillis()<count.tcalendar.getTimeInMillis()){
-                    //tmp = ExamList.get(++mDateSet);
-                    //titleDday = new String(tmp.Name+" D-day");
-                    mDateSet++;
-                    DateSet();
-                    return;
-                }
-                else{
-                    titleDday = new String(tmp.Name+" D-day");
-                }
+                TimeSet(mDateSet);
             }
             else if(left<0){
                 mDateSet++;
@@ -244,6 +234,22 @@ public class ExamFragment extends Fragment{
                 return;
             }
         }
+    }
+
+    public void TimeSet(int idx){
+        if(idx>=ExamList.size()){
+            titleDday = "시험이 없습니다.";
+            return;
+        }
+        TestSub tmp = ExamList.get(idx);
+        if(tmp.TestDate.getTimeInMillis()<count.tcalendar.getTimeInMillis()){
+            TimeSet(++idx);
+            return;
+        }
+        else{
+            titleDday = new String(tmp.Name+" D-day");
+        }
+        return;
     }
 
 

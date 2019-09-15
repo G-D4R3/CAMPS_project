@@ -25,7 +25,7 @@ public class TestSub extends Event implements Comparable<TestSub>{
 
     public TestSub(String name, Calendar calendar, String place, int starthour, int startminute, int endhour, int  endminute, String range){
         this.Name=name;
-        TestDate.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        TestDate.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH), starthour, startminute);
         this.Place = place;
         this.startHour = starthour;
         this.startMinute = startminute;

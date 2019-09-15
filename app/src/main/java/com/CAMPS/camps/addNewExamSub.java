@@ -246,10 +246,6 @@ public class addNewExamSub extends Fragment {
                 Collections.sort(main.examFragment.ExamList);
                 System.out.println("size : "+main.examFragment.ExamList.size());
 
-                main.examFragment.mDateSet = 0;
-                main.examFragment.DateSet();
-
-
                 Grade tmp = new Grade(subject.Name, 0, 4.5);
                 main.grades.add(tmp);
             }
