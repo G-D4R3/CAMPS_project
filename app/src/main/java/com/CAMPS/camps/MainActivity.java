@@ -690,7 +690,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             case "TestSub":
                 timeBefore = 24;
                 testSub = (TestSub) src;
-                alarmDate = testSub.getTestDate();
+                alarmDate.set(testSub.TestDate.get(Calendar.YEAR),testSub.TestDate.get(Calendar.MONTH), testSub.TestDate.get(Calendar.DAY_OF_MONTH), testSub.TestDate.get(Calendar.HOUR_OF_DAY), testSub.TestDate.get(Calendar.MINUTE));
                 title = "[시험]";
                 memo = "내일 "+testSub.Name+"시험이 있습니다.";
                 id = TEST_ALARM_BASE+examFragment.ExamList.indexOf(testSub)+1;
@@ -758,7 +758,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             case "TestSub":
                 timeBefore = 24;
                 testSub = (TestSub) src;
-                alarmDate = testSub.getTestDate();
+                alarmDate.set(testSub.TestDate.get(Calendar.YEAR),testSub.TestDate.get(Calendar.MONTH), testSub.TestDate.get(Calendar.DAY_OF_MONTH), testSub.TestDate.get(Calendar.HOUR_OF_DAY), testSub.TestDate.get(Calendar.MINUTE));
                 title = "[시험]";
                 memo = "내일 "+testSub.Name+"시험이 있습니다.";
                 id = TEST_ALARM_BASE+examFragment.ExamList.indexOf(testSub)+1;

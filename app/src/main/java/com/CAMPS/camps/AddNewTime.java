@@ -40,6 +40,8 @@ public class AddNewTime extends Fragment {
     String Professor;
     Calendar start_cal;
     Calendar end_cal;
+    boolean START_SET = false;
+    boolean END_SET = false;
 
     ArrayList<Calendar> startTime;
     ArrayList<Calendar> endTime;
@@ -128,6 +130,7 @@ public class AddNewTime extends Fragment {
                     mStartTime.setText(String.format("%02d:%02d", hourOfDay,minute));
                     start_cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     start_cal.set(Calendar.MINUTE, minute);
+                    START_SET = true;
                 }
             };
         });
@@ -145,6 +148,7 @@ public class AddNewTime extends Fragment {
                     mEndTime.setText(String.format("%02d:%02d", hourOfDay,minute));
                     end_cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     end_cal.set(Calendar.MINUTE, minute);
+                    END_SET = true;
                 }
             };
         });
@@ -204,7 +208,28 @@ public class AddNewTime extends Fragment {
         int id = item.getItemId();
         MainActivity main = (MainActivity)getActivity();
         if (id == R.id.check_icon) {
-            if(checkOverlap()){
+            if(!END_SET || !START_SET){
+
+                try{
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    if(!END_SET && START_SET)dialog.setTitle("끝나는 시간 설정이 완료되지 않았습니다.");
+                    if(END_SET && !START_SET)dialog.setTitle("시작하는 시간 설정이 완료되지 않았습니다.");
+                    if(!END_SET && !START_SET)dialog.setTitle("시간표 시간 설정이 완료되지 않았습니다.");
+                    dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.create();
+                    dialog.show();
+
+                }
+                catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+            else if(END_SET && START_SET && checkOverlap()){
                 try{
                     AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                     dialog.setTitle("시간표 중복입니다.");

@@ -160,16 +160,73 @@ public class AddNewClass extends Fragment {
         int id = item.getItemId();
         MainActivity main = (MainActivity) getActivity();
         if (id == R.id.check_icon) {
-            lecture = new Timetable(mLecture.getText().toString(),mProfessor.getText().toString(),startTimes,endTimes,lectureRooms);
-            main.timeTables.add(lecture);
-            //main.timetableFragment.makeSticker(lecture);
+            if(mLecture.getText().toString().equals("")){
+                try{
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    dialog.setTitle("강의 이름을 적어주세요.");
+                    dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.create();
+                    dialog.show();
+                }
+                catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+            else if(startTimes.isEmpty()){
+                try{
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    dialog.setTitle("강의 시간을 추가해 주세요.");
+                    dialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.create();
+                    dialog.show();
+                }
+                catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+            }
+            else {
+                int idx = isAlreadyExsit(mLecture.getText().toString());
+                if(idx != -1){
+                    Timetable origin = (Timetable)main.timeTables.get(idx);
+                    origin.getStartTime().addAll(startTimes);
+                    origin.getEndTime().addAll(endTimes);
+                    origin.getClassPlace_1().addAll(lectureRooms);
+                }
+                else
+                    lecture = new Timetable(mLecture.getText().toString(), mProfessor.getText().toString(), startTimes, endTimes, lectureRooms);
 
-            main.FragmentRemove(AddNewClass.this);
+                main.timeTables.add(lecture);
 
-            System.out.println(lecture.toString());
+                //main.timetableFragment.makeSticker(lecture);
+
+                main.FragmentRemove(AddNewClass.this);
+            }
+
         }
 
         return true;
+    }
+
+    public int isAlreadyExsit(String lectureName){
+        MainActivity main = (MainActivity) getActivity();
+        ArrayList<Timetable> timetables = main.timeTables;
+        int idx=0;
+        for(Timetable tmp:timetables){
+            if(tmp.getClassTitle().equals(lectureName))
+                return idx;
+            else idx ++;
+        }
+        return -1;
     }
 
     public static AddNewClass newInstance() {
