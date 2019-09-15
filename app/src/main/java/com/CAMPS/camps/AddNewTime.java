@@ -118,7 +118,7 @@ public class AddNewTime extends Fragment {
         mStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog dialog = new TimePickerDialog(getContext(),listener, 10, 00, true);
+                TimePickerDialog dialog = new TimePickerDialog(getContext(),listener, 10, 00, false);
                 dialog.show();
             }
 
@@ -135,7 +135,7 @@ public class AddNewTime extends Fragment {
         mEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog dialog = new TimePickerDialog(getContext(),listener, 13, 30, true);
+                TimePickerDialog dialog = new TimePickerDialog(getContext(),listener, 13, 30, false);
                 dialog.show();
             }
 

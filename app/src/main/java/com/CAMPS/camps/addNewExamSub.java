@@ -165,7 +165,7 @@ public class addNewExamSub extends Fragment {
                         mSMinute = minute;
                         START_PICKED=true; //flag true
                     }
-                },mSHour,mSMinute,true);
+                },mSHour,mSMinute,false);
                 timepick.show();
             }
         });
@@ -183,7 +183,7 @@ public class addNewExamSub extends Fragment {
                         mEHour = hourOfDay;
                         mEMinute = minute;
                     }
-                },mEHour,mEMinute,true);
+                },mEHour,mEMinute,false);
                 timepick.show();
             }
         });

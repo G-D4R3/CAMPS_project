@@ -107,7 +107,7 @@ public class AddNewSchedule extends Fragment {
                         minute = minutes;
                         TIME_PICKED = true;
                     }
-                }, hour, minute, true);
+                }, hour, minute, false);
                 timepick.show();
             }
 

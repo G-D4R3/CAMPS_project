@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,8 +46,8 @@ public class TodoFragment extends Fragment {
     public TextView mTitle;
     TextView mAssSec; //section header
     TextView mImpSec;
-    TextView mIhide; //더보기 줄이기
-    TextView mAhide;
+    ImageButton mIhide; //더보기 줄이기
+    ImageButton mAhide;
     public ListViewSetter setter = new ListViewSetter();
 
     /*** flag ***/
@@ -92,8 +93,8 @@ public class TodoFragment extends Fragment {
         mImportant = (ListView)view.findViewById(R.id.importantAssignment);
         mImpSec = (TextView)view.findViewById(R.id.SectionHeader2);
         mAssSec = (TextView)view.findViewById(R.id.SectionHeader3);
-        mIhide = (TextView)view.findViewById(R.id.hide2);
-        mAhide = (TextView)view.findViewById(R.id.hide3);
+        mIhide = (ImageButton)view.findViewById(R.id.hide2);
+        mAhide = (ImageButton)view.findViewById(R.id.hide3);
         adapter = new TodoListAdapter(AssList);
         ImportantAdapter = new TodoListAdapter(ImpList);
         Handler handler = new Handler();
@@ -260,12 +261,12 @@ public class TodoFragment extends Fragment {
                 if(mIvisible==true){
                     mImportant.setVisibility(View.GONE);
                     mIvisible=false;
-                    mIhide.setText("더보기");
+                    mIhide.setImageResource(R.mipmap.more);
                 }
                 else{
                     mImportant.setVisibility(View.VISIBLE);
                     mIvisible=true;
-                    mIhide.setText("줄이기");
+                    mIhide.setImageResource(R.mipmap.less);
                 }
                 main.getUser().ImportantAssignmentFull = !mIvisible;
             }
@@ -277,12 +278,12 @@ public class TodoFragment extends Fragment {
                 if(mDvisible==true){
                     mlistView.setVisibility(View.GONE);
                     mDvisible=false;
-                    mAhide.setText("더보기");
+                    mAhide.setImageResource(R.mipmap.more);
                 }
                 else{
                     mlistView.setVisibility(View.VISIBLE);
                     mDvisible=true;
-                    mAhide.setText("줄이기");
+                    mAhide.setImageResource(R.mipmap.less);
                 }
                 main.getUser().AssignmentFull = !mDvisible;
             }
@@ -423,22 +424,22 @@ public class TodoFragment extends Fragment {
                 if(mIvisible==true){
                     mImportant.setVisibility(View.GONE);
                     mIvisible=false;
-                    mIhide.setText("더보기");
+                    mIhide.setImageResource(R.mipmap.more);
                 }
                 else{
                     mImportant.setVisibility(View.VISIBLE);
                     mIvisible=true;
-                    mIhide.setText("줄이기");
+                    mIhide.setImageResource(R.mipmap.less);
                 }
                 if(mDvisible==true){
                     mlistView.setVisibility(View.GONE);
                     mDvisible=false;
-                    mAhide.setText("더보기");
+                    mAhide.setImageResource(R.mipmap.more);
                 }
                 else{
                     mlistView.setVisibility(View.VISIBLE);
                     mDvisible=true;
-                    mAhide.setText("줄이기");
+                    mAhide.setImageResource(R.mipmap.less);
                 }
 
                 //중요한 과목은 Implist에 추가
