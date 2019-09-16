@@ -57,6 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/Dday" />
 
             <LinearLayout
+                android:id="@+id/home_schedule_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -104,6 +105,7 @@
 
 
             <LinearLayout
+                android:id="@+id/home_class_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -146,6 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/home_assignment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
@@ -188,6 +191,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/home_exam_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"

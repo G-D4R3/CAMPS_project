@@ -11,8 +11,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -63,6 +65,12 @@ public class HomeFragment extends Fragment {
     ListView mClassList;
     ListView mAssignList;
     ListView mTestList;
+
+    LinearLayout mScheduleLayout;
+    LinearLayout mClassLayout;
+    LinearLayout mAssignmentLayout;
+    LinearLayout mExamLayout;
+
     public HomeAssignmentAdapter assignmentAdapter;
     public HomeClassAdapter homeClassAdapter;
     public HomeExamAdapter examAdapter;
@@ -100,6 +108,12 @@ public class HomeFragment extends Fragment {
         View view = (View) inflater.inflate(R.layout.fragment_home,container,false);
         Dday = (TextView)view.findViewById(R.id.Dday);
         today = (TextView)view.findViewById(R.id.Today);
+
+        /*** layout ***/
+        mScheduleLayout = (LinearLayout)view.findViewById(R.id.home_schedule_layout);
+        mClassLayout = (LinearLayout)view.findViewById(R.id.home_class_layout);
+        mAssignmentLayout = (LinearLayout)view.findViewById(R.id.home_assignment_layout);
+        mExamLayout = (LinearLayout)view.findViewById(R.id.home_exam_layout);
 
         /*** section header ***/
         mSchedule = (TextView)view.findViewById(R.id.home_schedule);
@@ -158,6 +172,57 @@ public class HomeFragment extends Fragment {
         main.invalidateOptionsMenu();
 
 
+
+
+        /***** navigationing  *****/
+        mScheduleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.navBar.setSelectedItemId(R.id.navigation_calendar);
+            }
+        });
+        mScheduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                main.navBar.setSelectedItemId(R.id.navigation_calendar);
+            }
+        });
+        mClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.navBar.setSelectedItemId(R.id.navigation_timetable);
+            }
+        });
+        mClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                main.navBar.setSelectedItemId(R.id.navigation_timetable);
+            }
+        });
+        mAssignmentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.navBar.setSelectedItemId(R.id.navigation_todo);
+            }
+        });
+        mAssignList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                main.navBar.setSelectedItemId(R.id.navigation_todo);
+            }
+        });
+        mExamLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.navBar.setSelectedItemId(R.id.navigation_exam);
+            }
+        });
+        mTestList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                main.navBar.setSelectedItemId(R.id.navigation_exam);
+            }
+        });
 
 
 

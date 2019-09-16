@@ -361,7 +361,6 @@ public class MainActivity<notesBox> extends AppCompatActivity {
                     case R.id.navigation_home:
                         transaction.replace(R.id.frame_layout, homeFragment,"Home Fragment").commitAllowingStateLoss();
                         break;
-
                     case R.id.navigation_timetable:
                         transaction.replace(R.id.frame_layout, timetableFragment, "Time Table Fragment").commitAllowingStateLoss();
                         break;
