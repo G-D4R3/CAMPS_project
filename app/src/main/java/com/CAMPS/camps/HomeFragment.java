@@ -193,6 +193,12 @@ public class HomeFragment extends Fragment {
                 main.navBar.setSelectedItemId(R.id.navigation_timetable);
             }
         });
+        mNoClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.navBar.setSelectedItemId(R.id.navigation_timetable);
+            }
+        });
         mClassList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -245,8 +251,6 @@ public class HomeFragment extends Fragment {
                         ((MainActivity)getActivity()).getUserDataBox().put(user);
 
                         user = (UserData) ((MainActivity)getActivity()).getUserDataBox().get(id);
-                        //System.out.println(user);
-                        //System.out.println((user.lastDay));
                     }
                 },datecount.dcalendar.get(Calendar.YEAR), datecount.dcalendar.get(Calendar.MONTH), datecount.dcalendar.get(Calendar.DATE));
                 datepick.show();
