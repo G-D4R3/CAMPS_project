@@ -26,6 +26,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -56,6 +57,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -592,6 +594,8 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             //갤러리에 추가
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)));
             System.out.println("HERE1"+screenShot.exists());
+
+            Toast.makeText(getApplicationContext(), "캡처가 완료되었습니다.", Toast.LENGTH_SHORT);
         }
     }
 
@@ -601,8 +605,11 @@ public class MainActivity<notesBox> extends AppCompatActivity {
         view.setDrawingCacheEnabled(true);  //화면에 뿌릴때 캐시를 사용하게 한다
 
         Bitmap screenBitmap = view.getDrawingCache();   //캐시를 비트맵으로 변환
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
-        String filename = "screenshot.jpg";
+        Date time = new Date();
+
+        String filename = format1.format(time);
 
         File sdCardPath = Environment.getExternalStorageDirectory();
         File dirs = new File(Environment.getExternalStorageDirectory(), folder);
