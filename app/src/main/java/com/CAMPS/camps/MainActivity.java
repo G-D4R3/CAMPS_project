@@ -589,13 +589,14 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             return;
         }
 
+
+
         File screenShot = ScreenShot(v);
         if(screenShot!=null){
             //갤러리에 추가
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)));
             System.out.println("HERE1"+screenShot.exists());
-
-            Toast.makeText(getApplicationContext(), "캡처가 완료되었습니다.", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "캡처가 완료되었습니다.", Toast.LENGTH_LONG);
         }
     }
 
@@ -609,7 +610,13 @@ public class MainActivity<notesBox> extends AppCompatActivity {
 
         Date time = new Date();
 
-        String filename = format1.format(time);
+        String ca = "camps_photo_";
+        String datetext = format1.format(time);
+        String j = ".jpg";
+
+        String result1 = ca.concat(datetext);
+
+        String filename = result1.concat(j);
 
         File sdCardPath = Environment.getExternalStorageDirectory();
         File dirs = new File(Environment.getExternalStorageDirectory(), folder);
