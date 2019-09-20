@@ -188,14 +188,19 @@ public class AddNewSchedule extends Fragment {
                 schedule = new Schedule(titleText.getText().toString(),calendar,memoText.getText().toString(),false);
                 //   System.out.println(schedule.toString());
             }
-            if(titleText.getText().toString().length()==0 || TIME_PICKED == false){
+            if(titleText.getText().toString().length()==0 ){
                 setYetDialog();
             }
             else{
+                if(TIME_PICKED == false){
+                    schedule.setImportant(true);
+                }
                 main.calendarFragment.schedules.add(schedule);
 
                 if(removeTarget != null) {
+
                     Schedule removeSchedule = (Schedule)removeTarget;
+                    schedule.setImportant(removeSchedule.isImportant());
                     main.alarmDelete(removeTarget);
                     main.calendarFragment.schedules.remove(removeTarget);
                     main.calendarFragment.events.remove(removeTarget);

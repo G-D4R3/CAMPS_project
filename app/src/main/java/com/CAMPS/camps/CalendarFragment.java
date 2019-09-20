@@ -406,7 +406,7 @@ public class CalendarFragment extends Fragment{
                 main.getScheduleBox().removeAll();
                 Collections.sort(schedules);
                 for(int i=0; i<schedules.size(); i++){
-                    ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),false);
+                    ScheduleHelper helper = new ScheduleHelper((long)i+1, schedules.get(i).getTitle(), schedules.get(i).getDate(), schedules.get(i).getMemo(),schedules.get(i).isImportant());
                     ScheduleHelper.putSchedule(helper);
                 }
             }
