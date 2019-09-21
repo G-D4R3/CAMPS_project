@@ -9,6 +9,7 @@ public class Schedule extends Event implements Comparable<Schedule>{
     String memo;
     boolean important;
 
+
     public Schedule(String title, Calendar date, String memo, boolean important) {
         this.title = title;
         this.date = date;

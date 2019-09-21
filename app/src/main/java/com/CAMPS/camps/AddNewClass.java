@@ -197,15 +197,18 @@ public class AddNewClass extends Fragment {
             else {
                 int idx = isAlreadyExsit(mLecture.getText().toString());
                 if(idx != -1){
-                    Timetable origin = (Timetable)main.timeTables.get(idx);
-                    origin.getStartTime().addAll(startTimes);
-                    origin.getEndTime().addAll(endTimes);
-                    origin.getClassPlace_1().addAll(lectureRooms);
+                    /*Timetable origin = (Timetable)main.timeTables.get(idx);
+                    for(int i = origin.getStartTime().size();i<startTimes.size()-1;i++) {
+                        origin.getStartTime().add(startTimes.get(i));
+                        origin.getEndTime().add(endTimes.get(i));
+                        origin.getClassPlace_1().add(lectureRooms.get(i));
+                    }*/
                 }
-                else
+                else{
                     lecture = new Timetable(mLecture.getText().toString(), mProfessor.getText().toString(), startTimes, endTimes, lectureRooms);
 
-                main.timeTables.add(lecture);
+                    main.timeTables.add(lecture);
+                }
 
                 //main.timetableFragment.makeSticker(lecture);
 

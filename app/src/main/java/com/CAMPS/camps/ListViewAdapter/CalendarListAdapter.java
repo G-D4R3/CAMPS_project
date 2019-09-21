@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.CAMPS.camps.DataClass.Event;
+import com.CAMPS.camps.DataClass.Schedule;
 import com.CAMPS.camps.DataClass.TestSub;
 import com.CAMPS.camps.R;
 
@@ -60,6 +61,8 @@ public class CalendarListAdapter extends BaseAdapter{
                 break;
             case 2:
                 icon.setText("일정");
+                Schedule tmp = (Schedule) event;
+                if(tmp.isImportant()) time.setVisibility(View.INVISIBLE);
                 break;
             case 3:
                 icon.setText("시험");
