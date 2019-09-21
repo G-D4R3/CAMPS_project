@@ -596,7 +596,7 @@ public class MainActivity<notesBox> extends AppCompatActivity {
             //갤러리에 추가
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)));
             System.out.println("HERE1"+screenShot.exists());
-            Toast.makeText(getApplicationContext(), "캡처가 완료되었습니다.", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "시간표 저장 완료", Toast.LENGTH_SHORT).show();
         }
     }
 
