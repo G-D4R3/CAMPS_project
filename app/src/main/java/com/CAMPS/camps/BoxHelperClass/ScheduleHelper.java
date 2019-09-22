@@ -27,6 +27,8 @@ public class ScheduleHelper {
         Schedule_Model schedule_model = (Schedule_Model) MainActivity.getInstance().getScheduleBox().get(id);
         return schedule_model.getImportant();
     }
+
+
     static Calendar getDate(long id){
         int year;
         int month;
