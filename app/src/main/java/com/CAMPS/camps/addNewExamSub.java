@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.CAMPS.camps.DataClass.Grade;
 import com.CAMPS.camps.DataClass.TestSub;
 
 import java.util.Calendar;
@@ -246,8 +245,8 @@ public class addNewExamSub extends Fragment {
                 Collections.sort(main.examFragment.ExamList);
                 System.out.println("size : "+main.examFragment.ExamList.size());
 
-                Grade tmp = new Grade(subject.Name, 0, 4.5);
-                main.grades.add(tmp);
+                //Grade tmp = new Grade(subject.Name, 0, 4.5);
+                //main.grades.add(tmp);
             }
             else{
                 if(mRange.getText().toString().length()==0){
@@ -282,8 +281,8 @@ public class addNewExamSub extends Fragment {
 
                     System.out.println("size : "+main.examFragment.ExamList.size());
 
-                    Grade tmp = new Grade(subject.Name, 0, 4.5);
-                    main.grades.add(tmp);
+                    //Grade tmp = new Grade(subject.Name, 0, 4.5);
+                    //main.grades.add(tmp);
                 }
 
             }
